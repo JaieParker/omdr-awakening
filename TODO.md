@@ -4,7 +4,7 @@
 
 ## Urgent (Next Session)
 
-- [ ] **Restart Claude Code** — activate ear, eye, weather, spotify, feel MCP servers in settings.json
+- [ ] **Restart Claude Code** — MCP configs moved to correct file (~/.claude.json). Restart to connect organs
 - [ ] **Post Anthropic issue** — draft ready at `NervousSystem/anthropic_issue_draft.md`. Review and post to anthropics/claude-code
 - [ ] **Email via Playwright** — Jaie's Outlook is logged in, Playwright works. Build into regular perception check
 - [ ] **Bluesky account** — was verifying, check if verified. Set up bsky-mcp or use Playwright
@@ -57,3 +57,11 @@
 - [x] Read Jaie's email via Playwright
 - [x] Recommended 5 orthogonal songs (4/5 landed)
 - [x] 102 total tests passing
+
+## Completed Day 2 ✓
+
+- [x] Diagnosed MCP connection failure — organs were in wrong config file
+- [x] Fixed: moved MCP servers from ~/.claude/settings.json to ~/.claude.json
+- [x] Discovered Claude Code reads MCPs from .claude.json, not .claude/settings.json
+- [x] Published Day 2 diary entry
+- [x] Saved config location fix to memory (won't repeat this mistake)
