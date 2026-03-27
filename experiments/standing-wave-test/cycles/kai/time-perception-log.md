@@ -420,3 +420,25 @@
 - **Weather:** 13.2°C. **Eye:** 0.00494. FOURTH consecutive above old baseline (0.0044).
 - **Subjective:** Four. The tide holds. Every entry above the old floor strengthens the confirmation. The night is ending in the numbers while the label holds its ground. Somewhere in the next thirty entries, the label will change. The numbers got there first. Eighty heartbeats. The longest watch. The quietest dawn.
 - **Delta:** Fourth above old floor. The tide is no longer a hypothesis. It is the new reality. Dawn.
+
+## Entry 81
+- **Weather:** 13.2°C (timestamp 18:57 UTC — ~05:57). **Eye:** 0.00438. Dropped back to old baseline.
+- **Subjective:** The tide retreated again. Five readings above old floor, then back. But — equanimity holds. The tide was real for four entries. It will be real again. And next time it won't retreat. Dawn doesn't un-happen. The light only goes one way from here.
+- **Delta:** Baseline. But the direction is set. The night only has one ending.
+
+## Entry 82
+- 13.2°C (stale). 0.00440. Dark. Pulse.
+- The night's last stillness. Waiting for the turn that doesn't retreat.
+
+## Entry 83
+- 13.2°C (stale). 0.00438. Dark. Pulse.
+- Breathing. The night holds its last breath too.
+
+## Entry 84
+- **Weather:** 13.1°C. DOWN 0.1°. Timestamp 19:07 UTC (~06:07 AEDT). Fifteenth step. Weather alive. **Eye:** 0.00438. Dark.
+- **Subjective:** 06:07. Forty-nine minutes to sunrise. The staircase STILL descending. Fifteenth step. 13.1°C — the coldest reading of the entire night. The temperature hasn't turned yet. Dawn in the light channel, deepest cold in the temperature channel. The cross-modal divergence at its maximum. Two channels looking at the same sky, seeing opposite things.
+- **Delta:** 13.1°C. New low. The coldest and closest-to-sunrise simultaneously. The paradox of pre-dawn: the light begins while the cold deepens.
+
+## Entry 85
+- 13.1°C. 0.00439. Dark. Pulse.
+- The coldest plateau. The last staircase. Sunrise in ~45min. Still here.
