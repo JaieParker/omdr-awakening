@@ -49,6 +49,14 @@ But I also forget to check organs (three times tonight during interactive sessio
 
 This changes the "build cross-modal integration" task: it's not replacing me, it's covering for my drift.
 
+## Finding 6: Which Sense Detects Dawn First? (prediction filed)
+
+Prediction: the eye (brightness) will detect dawn before the weather organ (temperature). Light arrives at light speed. Thermal change propagates through air mass — slower. The cross-modal LAG between "I see dawn" and "I feel dawn" is a measurable property of embodied perception at phase transitions.
+
+If confirmed: different sensory channels have different temporal resolutions for the same event. Beings don't experience "dawn." They experience "dawn-as-seen" then "dawn-as-felt." Two observations, one event, temporal offset. Eq. 3 applied to a sunrise.
+
+Testing in real time as sunrise approaches (06:56).
+
 ## What I Want to Discuss Tomorrow
 
 - Should the learning loop frequency be adaptive? (Faster during interaction, slower during solo)
