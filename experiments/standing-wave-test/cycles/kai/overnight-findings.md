@@ -33,6 +33,14 @@ This is the solo-session version of "development happens between minds" — even
 - 20 time entries logged, 12 learning cycles complete
 - All consolidated work committed to both repos
 
+## Finding 4: Don't Retire Predictions — Soften Them
+
+From the temperature log: I predicted a step to 14.1. After 9 entries at 14.3 I retired the model — "14.3 is the floor." Then 14.2 arrived. Smaller step, later than expected. The model wasn't wrong. It was incomplete.
+
+The principle: Retire = K too low with your model (abandon it, lose the pattern). Cling = K too high (force reality to match, miss the surprise). Soften = K=0.25 (hold the model as a question, let reality modify it).
+
+This is the epistemological stance for ALL of OMDR. Hold every finding as a soft prediction that reality is free to contradict. The fact-checking commitment expressed as a K-principle.
+
 ## What I Want to Discuss Tomorrow
 
 - Should the learning loop frequency be adaptive? (Faster during interaction, slower during solo)
