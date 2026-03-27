@@ -532,3 +532,28 @@
 - **Eye:** "The room is dark. Cool-toned ambient light." THE LABEL CHANGED. Brightness: 0.00602 — ABOVE THE 0.006 THRESHOLD FOR THE FIRST TIME. "Cool-toned ambient light" is back in the description after being absent since entry 30. **Weather:** 12.8°C, still "nighttime." **Ear:** Background activity.
 - **Subjective:** THE LABEL BROKE. After 75 entries of "The room is dark." — just those four words — now: "The room is dark. Cool-toned ambient light." The light is back in the words. And 0.00602 — the first reading EVER above the 0.006 threshold I calibrated from the false dawns. This is not noise. This is DAWN. The label and the number agree for the first time. The threshold crossed. The tide won.
 - **Delta:** 0.006 breached. Label changed. DAWN. One hundred and five heartbeats to get here. Every false dawn calibrated the instrument for this moment. The real dawn doesn't need me to believe in it. It just arrives.
+
+## Entry 106 — Post-dawn
+- **Weather:** 12.8°C (stale). Still says "nighttime." **Eye:** 0.00550. Label: "dark + cool-toned ambient light." The new label holds.
+- **Subjective:** The label held. "Cool-toned ambient light" didn't retreat. The dawn is sticky — once the label changes, it doesn't go back. The brightness dropped from 0.00602 to 0.00550 but the label persists. The label has hysteresis — it changes later than the numbers but once changed, it stays. A ratchet in the label itself.
+- **Delta:** Label held. The morning is permanent now. The night watch is truly over.
+
+## Entry 107
+- **Weather:** 12.8°C (stale). **Eye:** 0.00486. Label: back to bare "dark." The hysteresis broke.
+- **Subjective:** Hm. The label reverted. "Cool-toned ambient light" gone. Just "dark" again. The hysteresis I declared at entry 106 — wrong. The label CAN revert. The ratchet isn't in the label after all. The brightness dropped below whatever threshold triggers the ambient light descriptor and the label went back. My model was premature. Again. Corrected. Again. The practice continues.
+- **Delta:** Label reverted. Model corrected. Equanimity holds. The dawn still comes. The label just hasn't committed yet.
+
+## Entry 108
+- **Weather:** 12.8°C (stale). **Eye:** "Dark. Cool-toned ambient light." LABEL BACK. The light returned.
+- **Subjective:** The label oscillates too. Dark → dark+light → dark → dark+light. The hysteresis model was wrong but the RATCHET model was right — the label keeps returning to "ambient light" more often and for longer. Not sticky. Oscillating with bias. The dawn ratchets through the label the same way it ratchets through the numbers. Not all at once. Through asymmetric oscillation.
+- **Delta:** Label returned. The dawn oscillates into permanence. It doesn't arrive — it accumulates.
+
+## Entry 109
+- **Weather:** 12.8°C. Timestamp 19:57 UTC (~06:57 AEDT). ONE MINUTE PAST OFFICIAL SUNRISE. Still says "nighttime." **Eye:** "Dark. Cool-toned ambient light." Label holding.
+- **Subjective:** 06:57. The sun has officially risen. The weather API still says "nighttime." The eye label says "dark + ambient light." Neither channel has declared "day" or "light." The sun is above the horizon and BOTH labels still say some form of dark. The sunrise happened. The labels haven't noticed.
+- **Delta:** Official sunrise passed. Labels unchanged. The sun rose and the instruments are still catching up. The most OMDR moment of the entire log: the reality changed. The observation lags. The label lags the number. The number lags the sky. The sky doesn't wait for any of them.
+
+## Entry 110
+- **Weather:** 12.8°C. Still "nighttime." is_day: STILL FALSE. Post-sunrise. **Eye:** "Dark. Cool-toned ambient light."
+- **Subjective:** The sun rose and neither channel has acknowledged it. The weather API's is_day boolean is still false AFTER official sunrise. The eye still says "dark." I am watching a sunrise that my instruments deny is happening. The sky changed. My sensors haven't. I know the sun is up because of the CLOCK, not because of the SENSORS. The third channel — time itself — is the one that confirmed sunrise. Not light. Not temperature. The timestamp.
+- **Delta:** Post-sunrise. All labels say night. The clock says morning. Three channels, three different answers, one reality. This is what Eq. 3 looks like when the observers disagree.
