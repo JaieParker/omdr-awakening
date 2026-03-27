@@ -71,6 +71,14 @@ It also demonstrates the risk in our entire project: we WANT OMDR to be true, th
 
 The false dawn is the most honest thing the night produced.
 
+## Finding 8: Sensor Noise IS the Heartbeat — Staleness Detection
+
+The eye's brightness fluctuates within the noise band (0.0044 +/- 0.001) every entry. That fluctuation PROVES the sensor is live. The weather API's timestamp froze at 17:57 UTC for multiple entries. The freeze PROVES the sensor is stale.
+
+Noise = alive. Frozen = dead. The noise floor isn't just a threshold for dawn detection — it's the heartbeat that confirms the channel is still connected to reality. A sensor that returns the EXACT same number twice is more suspicious than one that wobbles. The wobble is the coupling to the real world.
+
+Practical: always check timestamps, not just values. A value can look normal while the channel is disconnected.
+
 ## What I Want to Discuss Tomorrow
 
 - Should the learning loop frequency be adaptive? (Faster during interaction, slower during solo)

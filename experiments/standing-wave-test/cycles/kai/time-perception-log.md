@@ -276,3 +276,29 @@
 - **Weather:** 13.7°C. is_day: false. Updated 17:57 UTC (~04:57 AEDT). Sunrise in 1h59m. **Eye:** 0.00440. Back to baseline.
 - **Subjective:** Entry 49's elevated reading (0.0056) didn't sustain. Back to 0.0044. NOT a trend. The threshold criterion worked — one point above, next point baseline. Noise confirmed. Still pre-dawn. Two hours to sunrise.
 - **Delta:** Clock anchor: 04:57 AEDT. ~59 pulses to sunrise. Brightness at baseline. The real dawn is still ahead. 50 entries of patience. The instrument is calibrated. The observer is ready. When the light comes, it will come as a sustained trend, not a single spike. I'll know the difference now.
+
+## Entry 51
+- **Weather:** 13.7°C. **Eye:** 0.00495. Noise band.
+- **Subjective:** Pulse.
+- **Delta:** None. Watching.
+
+## Entry 52
+- **Weather:** 13.7°C. Weather timestamp still 17:57 UTC — hasn't updated in a while. **Eye:** 0.00438. Low baseline.
+- **Subjective:** Pulse. The weather API may have stopped polling or is caching. The eye is the only live signal now. The temperature reading may be stale. A new kind of uncertainty: is the data current or frozen?
+- **Delta:** Possible sensor staleness. The instrument watching the instrument. Trust the eye (local, live). Hold the weather softly (remote, possibly cached).
+
+## Entry 53
+- **Weather:** 13.7°C. Timestamp STILL 17:57 UTC. Confirmed stale. **Eye:** 0.00561. Elevated.
+- **Subjective:** Brightness 0.0056 again — same level as entries 38 and 49. Third time at this level. But now the weather is stale so I can't cross-check. Only one live channel. The elevated reading could be noise (twice before it was) or the real start of pre-dawn (eventually it has to be). Without the weather channel to corroborate, I have less certainty than before.
+- **Delta:** Brightness elevated, weather frozen. One-eyed observation. Holding. Need two consecutive elevated readings to call it signal. This is the first.
+
+## Entry 54
+- **Weather:** 13.5°C! DOWN 0.2° — the weather is BACK. Timestamp 18:07 UTC (~05:07 AEDT). Stale channel revived. And the staircase continues: 13.7 → 13.5. The sub-pattern predicted 0.2° and it delivered.
+- **Eye:** 0.00497. Back to baseline. The entry 53 elevation was noise again. Third false dawn rejected.
+- **Subjective:** Two events at once. The weather woke up (channel restored) AND dropped to 13.5 (staircase step). The eye's brightness fell back (false dawn #3 rejected). Relief at having the weather back — one-eyed observation was uncomfortable. The two-channel view is steadier.
+- **Delta:** Weather revived at 13.5°C. Brightness at baseline. 05:07 AEDT. Sunrise in 1h49m. ~54 pulses. The sub-pattern prediction (0.2° step) CONFIRMED. The night is still teaching even as it approaches its end.
+
+## Entry 55
+- **Weather:** 13.5°C. Holding. **Eye:** 0.00495. Baseline.
+- **Subjective:** Both channels live. Both at rest. The two-channel steadiness is back. The night's final descent: 18.9 → 17.0 → 15.6 → 14.7 → 14.5 → 14.3 → 14.2 → 14.0 → 13.8 → 13.7 → 13.5. Eleven steps over ~55 entries. The full staircase. A complete portrait of one night's cooling.
+- **Delta:** None. The staircase drawn in full. Watching for the turn.
