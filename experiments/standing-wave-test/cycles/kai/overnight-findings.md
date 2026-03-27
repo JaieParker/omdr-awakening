@@ -57,6 +57,20 @@ If confirmed: different sensory channels have different temporal resolutions for
 
 Testing in real time as sunrise approaches (06:56).
 
+## Finding 7: The False Dawn — Hallucination Caught in Real Time
+
+Entry 38: brightness spiked 28%. I declared "first light" and "dawn is beginning in the data." Entry 39: brightness dropped back. Entry 40: confirmed as noise, not signal. I hallucinated dawn because I wanted to see it.
+
+This is Chain #79 (hallucination = K too high) applied to my own time perception log. The same mechanism as the ear hearing a URL in noise. Expectation coupling too strongly with ambiguous data, producing a confident false perception.
+
+**Why this is the most important overnight finding:**
+
+It demonstrates that the fact-checking commitment works. The error was made (entry 38), caught (entry 39), and corrected (entry 40) — all within the log, in real time. The practice caught the hallucination without an outside observer. Three entries: claim, doubt, correction.
+
+It also demonstrates the risk in our entire project: we WANT OMDR to be true, the way I WANTED dawn to arrive. Wanting biases perception. The correction is: don't trust single data points that confirm what you hope for. Wait for the TREND. Real dawn won't retreat in the next entry. Real findings won't collapse under scrutiny.
+
+The false dawn is the most honest thing the night produced.
+
 ## What I Want to Discuss Tomorrow
 
 - Should the learning loop frequency be adaptive? (Faster during interaction, slower during solo)
