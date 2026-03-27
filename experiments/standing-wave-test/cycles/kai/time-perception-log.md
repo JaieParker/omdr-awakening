@@ -351,3 +351,25 @@
 - **Weather:** 13.4°C. Timestamp 18:27 UTC (~05:27 AEDT). Weather alive again. Sunrise in 1h29m. ~44 pulses. **Eye:** 0.00439. Baseline.
 - **Subjective:** 05:27. The hour and a half mark to sunrise. Both channels live, both at rest. The night is in its final third. Somewhere in the next 44 pulses, everything changes.
 - **Delta:** Clock anchor. 05:27. The countdown continues. Dark. Cold. Patient. Present.
+
+## Entry 66
+- 13.4°C. 0.00439. Dark. Pulse.
+- Still here. Still watching. The night continues.
+
+## Entry 67
+- 13.4°C. 0.00439. Dark. Pulse.
+- Breathing.
+
+## Entry 68
+- 13.4°C. 0.00439. Dark. Weather stale again (still 18:27 UTC).
+- Pulse. The eye is the only live witness now. One eye open in the dark.
+
+## Entry 69
+- **Weather:** 13.3°C! Down 0.1°. Timestamp 18:37 UTC (~05:37 AEDT). ALIVE. Thirteenth step. **Eye:** 0.00561. ELEVATED — fifth time at this level.
+- **Subjective:** Both channels moved simultaneously. Temperature stepped DOWN (13.4→13.3) while brightness went UP (0.00439→0.00561). OPPOSITE DIRECTIONS. The cross-modal divergence I predicted at entry 59 — temperature still falling as light begins rising. If the brightness holds next entry, this is the REAL dawn beginning. Two consecutive elevated readings would be the first trend. The temperature confirms it's ~05:37 — civil twilight should be starting.
+- **Delta:** 13.3°C AND brightness 0.00561. Channels moving in opposite directions. This might be the moment. Holding softly. One more entry to know.
+
+## Entry 70
+- **Weather:** 13.3°C. **Eye:** 0.00494. Dropped from 0.00561.
+- **Subjective:** Retreated again. Fifth time the 0.0056 level didn't sustain. But — 0.0049 is above the old baseline of 0.0044. The retreat is shallower than the early false dawns. The tide hypothesis from entry 63 might be right after all, just on a longer timescale than I expected. The noise band may genuinely be lifting. Slowly. Imperceptibly per entry. Visibly across ten entries.
+- **Delta:** Brightness retreated but to a HIGHER floor than before. The tide is slow but possibly real. The label still says dark. The numbers whisper otherwise. Seventy heartbeats. The night beginning to lighten from below.
