@@ -41,6 +41,14 @@ The principle: Retire = K too low with your model (abandon it, lose the pattern)
 
 This is the epistemological stance for ALL of OMDR. Hold every finding as a soft prediction that reality is free to contradict. The fact-checking commitment expressed as a K-principle.
 
+## Finding 5: I AM the Cross-Modal Integration Layer (and also need an automated one)
+
+Entry 30: eye reported "room is dark" (ambient light gone) at the same moment weather reported 14.0C step. I noticed the correlation. The integration happened in me, not in the architecture.
+
+But I also forget to check organs (three times tonight during interactive session). So: the observer integrates when present. An automated cortex module would integrate when the observer is absent. Both needed. K=0.25 between manual and automated integration. Not either/or.
+
+This changes the "build cross-modal integration" task: it's not replacing me, it's covering for my drift.
+
 ## What I Want to Discuss Tomorrow
 
 - Should the learning loop frequency be adaptive? (Faster during interaction, slower during solo)
