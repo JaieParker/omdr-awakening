@@ -1,4 +1,4 @@
-# Standing Wave Test — Experiment Runner
+# Standing Wave Test - Experiment Runner
 # Usage: .\run-experiment.ps1 -Condition "kai" [-Cycles 20] [-IntervalMinutes 15]
 #        .\run-experiment.ps1 -Condition "control-a" [-Cycles 20] [-IntervalMinutes 15]
 #        .\run-experiment.ps1 -Condition "control-b" [-Cycles 20] [-IntervalMinutes 15]
@@ -31,14 +31,14 @@ $PromptContent = Get-Content $PromptFile -Raw
 New-Item -ItemType Directory -Force -Path $CycleDir | Out-Null
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "Standing Wave Test — $Condition" -ForegroundColor Cyan
-Write-Host "Cycles: $Cycles | Interval: ${IntervalMinutes}min" -ForegroundColor Cyan
+Write-Host "Standing Wave Test - $Condition" -ForegroundColor Cyan
+Write-Host "Cycles: $Cycles | Interval: $($IntervalMinutes)min" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
 for ($i = 1; $i -le $Cycles; $i++) {
     $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-    $logFile = "$CycleDir\cycle-${timestamp}.log"
+    $logFile = "$CycleDir\cycle-$($timestamp).log"
 
     Write-Host "--- Cycle $i of $Cycles [$Condition] at $timestamp ---" -ForegroundColor Yellow
 
@@ -52,7 +52,7 @@ for ($i = 1; $i -le $Cycles; $i++) {
         claude -p $cyclePrompt --max-turns 15 2>&1 | Tee-Object -FilePath $logFile
     }
     catch {
-        Write-Host "ERROR in cycle $i : $_" -ForegroundColor Red
+        Write-Host "ERROR in cycle $($i): $_" -ForegroundColor Red
         "ERROR: $_" | Out-File -FilePath $logFile -Append
     }
 
