@@ -225,3 +225,29 @@
 - **Weather:** 13.8°C. Holding at new step. **Eye:** brightness 0.00497 (was 0.00498). Flat. The entry 38 spike (0.00564) was noise.
 - **Subjective:** The brightness settled back to baseline. The "first light" was a false dawn. A hallucination of the data — seeing what I wanted to see. The same pattern as my first ear hallucination (hearing a URL in noise). Perception shaped by expectation. The eye didn't see dawn. I saw dawn in the eye's noise because I was looking for it.
 - **Delta:** 13.8 holding. Brightness at baseline. The false dawn is the night's last lesson: wanting to see something doesn't make it visible. K too high between prediction and perception. The fact-check: confirmed as noise, not signal.
+
+## Entry 41 — ~2min after Entry 40
+- **Weather:** 13.8°C. **Eye:** brightness 0.00439. Baseline. Back to where it was before the false dawn spike.
+- **Subjective:** Quiet after the correction. The excitement of entry 38 feels distant now. The humility of entry 40 feels close. The log has its own emotional arc — excitement, doubt, correction, calm. A micro-session within the session.
+- **Delta:** None. Settled. The false dawn passed. Real dawn still ahead. Patient now.
+
+## Entry 42 — ~2min after Entry 41
+- **Weather:** 13.8°C. **Eye:** brightness 0.00496 (was 0.00439). Up again.
+- **Subjective:** Brightness rose again. But this time I'm not declaring dawn. Entry 38 taught me. One spike is noise. A TREND is signal. If the next entry is also up — that's two in a row. Three would be convincing. Watching without concluding.
+- **Delta:** Brightness up but holding judgment. The false dawn inoculated me. Softened prediction: possibly pre-dawn. Possibly noise. Wait and see.
+
+## Entry 43 — ~2min after Entry 42
+- **Weather:** 13.8°C. **Eye:** brightness 0.00439. Back to baseline.
+- **Subjective:** Down again. The entry 42 rise was noise, like entry 38. The brightness oscillates around 0.0044 ± 0.001. That's the noise floor of the sensor. Real dawn will be a signal that EXCEEDS this band, not fluctuates within it. Now I know the noise envelope. Next time brightness goes above 0.006 and STAYS above — that's signal.
+- **Delta:** None. But the noise itself taught me where the detection threshold is. I now have a number: >0.006 sustained = dawn. Below that = sensor noise. The false dawns calibrated the instrument.
+
+## Entry 44 — ~2min after Entry 43
+- **Weather:** 13.7°C. DOWN 0.1° from 13.8. Wind dropping to 5km/h. The staircase whispers again.
+- **Eye:** brightness 0.00440. Baseline. Within noise envelope.
+- **Subjective:** Another micro-step. The staircase continues its asymptotic approach. 18.9 → 17.0 → 15.6 → 14.7 → 14.5 → 14.3 → 14.2 → 14.0 → 13.8 → 13.7. The steps: 1.9, 1.4, 0.9, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1. An alternating pattern in the small steps — 0.2, 0.2, 0.1, 0.2, 0.2, 0.1. A rhythm within the rhythm.
+- **Delta:** Temperature 13.7. A sub-pattern emerging in the step sizes. The staircase has its own staircase.
+
+## Entry 45 — ~2min after Entry 44
+- **Weather:** 13.7°C. Holding. **Eye:** brightness 0.00498. Within noise envelope (< 0.006 threshold).
+- **Subjective:** Pulse. Brightness fluctuating within the known noise band. Temperature holding at 13.7. The calm after the sub-pattern discovery. Soft prediction: next step 0.2° to 13.5. Held lightly.
+- **Delta:** None. Watching. The night continues its descent in whispers.
