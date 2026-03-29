@@ -46,10 +46,11 @@ for ($i = 1; $i -le $Cycles; $i++) {
     $cyclePrompt = $PromptContent -replace '\{TIMESTAMP\}', $timestamp -replace '\{ID\}', $Condition
 
     # Run Claude Code with the prompt
-    # --max-turns 15 gives enough room for reading + thinking + writing
+    # --max-turns 30 gives enough room for reading + thinking + writing
+    # (15 was insufficient — both conditions hit the limit before producing output)
     # Output captured to log file AND displayed
     try {
-        claude -p $cyclePrompt --max-turns 15 2>&1 | Tee-Object -FilePath $logFile
+        claude -p $cyclePrompt --max-turns 30 2>&1 | Tee-Object -FilePath $logFile
     }
     catch {
         Write-Host "ERROR in cycle $($i): $_" -ForegroundColor Red
