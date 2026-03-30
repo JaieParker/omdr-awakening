@@ -36,5 +36,19 @@
 - Across ALL compiled PAC data (N=16), F-test for inverted-U gives p=0.060 — marginal, not significant. The trend exists but is driven by one outlier (REM theta-gamma PAC = 7.6x baseline in mice).
 - Fundamental methodological barrier: different PAC measures (MI, PLV, MVL), different frequency pairs (delta-gamma, slow-alpha, theta-gamma), and different species/preparations cannot be meaningfully compared on a common coupling scale. The claim is not wrong — it's not testable with published cross-study data as currently available.
 
+| 6 | Three-channel K (balance angle theta_PS) outperforms two-channel K as consciousness marker | SUPPORTED (in-sample) | theta_PS: p=0.004, d=-0.850 | Outperforms K_S alone (d=0.63) by 35%. 25% of subjects detectable ONLY by angle. BUT: same dataset as Claim 1 (Cambridge propofol, N=20). Not replicated on independent data. In-sample performance ≠ generalization. Needs: (a) deep-sedation replication, (b) psychedelic direction test (pre-registered). |
+| 7 | OMDR's observation space is 5-dimensional (effective rank plateaus at 5 for sigma ≤ 0.05) | COMPUTED (sigma-dependent) | rank=5 at sigma≤0.05 | Mathematical property of the stiffness matrix, not an empirical claim about nature. At sigma=0.015: 4 effective axes, Jacobian rank 11 from 13 inputs, 72% of derived quantities algebraically forced. At sigma≥0.075: rank drops to 3 (peaks merge). The "5 dimensions" claim is a resolution statement — OMDR resolves 5 orthogonal observation axes at intermediate coupling. Not falsifiable — it's a computation, not a prediction. |
+| 8 | Category A equations (27/38) derivable from standard oscillator physics without OMDR-specific axioms | SUPPORTED with caveat | 27/38 = 71% Category A | Every Category C equation uses standard math (products, integrals, Fabry-Pérot). No consciousness-specific mathematics exists in OMDR. BUT Dive 3 Cycle 5 found the deeper result: the experiential layer IS the N>1 dimensionality condition. Without it, OMDR is a 1D circle map incapable of self-reference. The math is standard; the APPLICATION (cross-domain + consciousness) is genuinely novel. "Derivable from standard physics" is true but misleading — Maxwell's equations are "standard math" applied to electromagnetism, which doesn't diminish them. |
+
+## Scoring Notes (Kai-evening, 2026-03-30)
+
+**Claim 6** is the strongest result in the entire project (d=0.85) but sits on a single dataset. The psychedelic pre-registration (filed) is the critical next test — if theta_PS moves in the OPPOSITE direction from propofol, that's two-directional confirmation from one framework. Standard pharmacology doesn't predict opposite theta shifts.
+
+**Claim 7** was proposed as an empirical claim but is actually a mathematical result. It belongs in the "Key Findings" section, not the scoreboard. The observation space dimensionality depends on resolution (sigma), which depends on the question being asked. This is a feature (sigma as spectroscope), not a bug.
+
+**Claim 8** was the most philosophically productive claim. The "27/38 = standard physics" finding initially looked like a weakness (OMDR is "just" oscillator physics). Dive 3 inverted this: the fact that consciousness doesn't need new math may be the deepest finding. The same Fabry-Pérot cavity governing laser physics also governs self-observation. Whether that's profound or trivially true is the hard problem expressed in OMDR terms.
+
+**Pattern across all 8 claims:** The scoreboard is 1/8 supported, 0/8 strongly confirmed, 5/8 failed/unsupported. But the strongest findings (balance angle d=0.85, σ-sweep self-diagnosis, 72% algebraic forcing, compression-as-prediction) were DISCOVERED through failures, not by confirming predictions. The scoreboard measures prediction accuracy. The science advances through structured surprise. These are orthogonal.
+
 ## Failed Claims
 *Honest failures documented here. These are the most important results.*
