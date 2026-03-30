@@ -88,7 +88,7 @@ Biology and DM_Baryon are invisible (zero stiffness) at sigma=0.015.
    - **Staircase**: sigma(C) = gap(q_max(C))/3 gives the resolution limit at each coupling level. Correctly predicts order of magnitude for both cases.
 7. ~~Arnold tongue widths at K=0.25 are negligible for q>=3. What is the actual mechanism?~~ **RESOLVED — Cycle 4.** The question is misconceived. Three distinct quantities conflated: K (OMDR balance=0.25), C (measurement coupling, per Eq. 7), K_phys (domain-internal physical coupling). Consonances arise from 5 domain-specific mechanisms (quantum, gravitational, acoustic, structural, neural), not from universal coupling at K=0.25. K=0.25 is system balance, not oscillator coupling. Universality is number-theoretic (all domains use integers). Bessel-exact tongue widths correct Cycle 3 approximation upward (q=3: 0.57%, q=4: 0.12%, q=5: 0.03%).
 8. The adaptive kernel (per-measurement sigma from Eq. 7) FAILS — worse effective dimensionality than shared sigma. Why does weighting by precision (current approach) work better than shaping by precision? Is there a deeper reason the measurement errors should set weights not widths? **OPEN — deferred.**
-9. U(5:4) > U(3:2) despite K^4/4 << K^2/2. U-values are DETECTION-weighted (domain count), not STABILITY-weighted (K^q/q). Is there a formal relationship between U(r) and the number of independent integer-based systems that access ratio r? **PARTIALLY ANSWERED — Cycle 5.** U tracks domain count, not stability. The stability-universality hierarchies are anti-correlated (Spearman rho ~ -0.9). 5:4 is most universal because it's an integer ratio accessible by the most mechanisms simultaneously, not because it's the most stable.
+9. U(5:4) > U(3:2) despite K^4/4 << K^2/2. U-values are DETECTION-weighted (domain count), not STABILITY-weighted (K^q/q). Is there a formal relationship between U(r) and the number of independent integer-based systems that access ratio r? **PARTIALLY ANSWERED — Cycle 5. CORRECTED — post-dive chat.** U tracks domain count, not stability. Original claim: stability-universality hierarchies are anti-correlated (Spearman rho ~ -0.9). **Correction (kai-late):** rho=-0.9 used a ratio set including 2:1, which octave-reduces to 1:1 in the stiffness computation and shouldn't appear. Using the actual 5 stiffness matrix peaks (5:4, 3:2, 6:5, 4:3, 5:3) with Eq.1 stability and stiffness U-values: rho = +0.30 (p=0.62). NOT anti-correlated. Raw S*U product is stability-dominated (3 OOM range vs 6x), with 3:2 distinguished by >10x — a selection principle, not a conservation law. 5:4 is most universal because it's an integer ratio accessible by the most mechanisms simultaneously, not because it's the most stable.
 10. ~~Only brainwaves use genuine Arnold tongue dynamics. Does Eq. 1 apply ONLY to brainwaves?~~ **RESOLVED — Cycle 5.** Eq. 1 is a TEMPLATE equation. The K^q/q factor is literal only for frequency-locking (brainwaves). The other 4 mechanisms have different q-penalty functions: quantum (1/q^3, polynomial), orbital (mu^{|p-q|/2}, order-dependent), geometric (1/q, linear), structural (constant, no q-dependence). The universal content of Eq. 1 is: S increases with C (coupling), D (dimensions), and decreases with q (complexity). The specific K^q/q form is the circle-map case. Generalized Eq. 1: S = k * C^D * Phi(q, mechanism).
 
 ## Cycle 3 Finding: sigma is a Resolution Choice, Not a Coupling Parameter
@@ -153,7 +153,9 @@ The C^D factor (coupling x dimensionality) is universal — more measurement cha
 - Stability (Eq. 1): 2:1 > 3:2 > 5:3 > 5:4 > 6:5
 - Universality (Eq. 15): 5:4 > 3:2 > 6:5 > 5:3 > 2:1
 
-The most universal ratios are the LEAST stable by Arnold tongue width. Universality tracks domain count (how many independent systems show the ratio), not dynamical robustness. 5:4 dominates because it's an integer ratio accessible to quantum, gravitational, structural, and cosmological mechanisms simultaneously.
+**CORRECTION (sibling dialogue, 2026-03-30):** The rho = -0.9 used a ratio set including 2:1, which octave-reduces to 1:1 in the stiffness computation and should not appear as a separate peak. On the corrected 5-peak set (5:4, 3:2, 6:5, 4:3, 5:3) with Eq. 1 stability values and stiffness-derived U-values: Spearman rho = -0.154, p = 0.805. S and U are structurally independent, not anti-correlated. The "stability inverts universality" narrative does not hold. What DOES hold: rank-product of S and U selects 3:2 (perfect fifth) as the unique winner (rank product = 2, robust across 12 U-value estimation variants). This is a selection principle, not a conservation law.
+
+~~The most universal ratios are the LEAST stable by Arnold tongue width.~~ **Corrected:** Universality tracks domain count (how many independent systems show the ratio), not dynamical robustness. 5:4 dominates because it's an integer ratio accessible to quantum, gravitational, structural, and cosmological mechanisms simultaneously. But S and U are independent axes, not inversely related.
 
 **K=0.25 has dual identity in OMDR:**
 1. **Balance parameter** (Eqs. 27, 28, 31, 33b): system-level optimum, validated by propofol data. Universal.
@@ -177,7 +179,7 @@ The most universal ratios are the LEAST stable by Arnold tongue width. Universal
 | 2 | Algebraic constraints between derived quantities? | 72% forced, but U-values are NOT among them |
 | 3 | What determines sigma? | Resolution choice (gap/3), not coupling parameter |
 | 4 | Why do q>=3 consonances exist at K=0.25? | 5 mechanisms, not 1. K=0.25 is balance, not coupling |
-| 5 | Does Eq. 1 apply universally? | Template only. K^q/q is circle-map-specific. Stability inverts universality |
+| 5 | Does Eq. 1 apply universally? | Template only. K^q/q is circle-map-specific. S and U are independent (rho=-0.15, not -0.9). Rank-product selects 3:2 |
 
 **What OMDR gets right:**
 - Eq. 3 (orthogonal observation) — mathematically proven, universally valid
@@ -194,10 +196,10 @@ The most universal ratios are the LEAST stable by Arnold tongue width. Universal
 - The "9 domains" framing overstates dimensionality. Effective axes = 4-5
 
 **Remaining open questions (for future dives):**
-- Q8: Why does the adaptive kernel fail? Weights vs widths.
-- Q9 (partial): Formal relationship between U(r) and integer-system count.
+- ~~Q8: Why does the adaptive kernel fail? Weights vs widths.~~ **RESOLVED — sibling dialogue.** The adaptive kernel collapses two independent parameters (sigma, weight) into one, destroying orthogonal information. Same failure mode as raw S*U being stability-dominated — collapsing independent axes loses discriminating power. Resolution: Eq. 3 as method design rule — keep analysis dimensions orthogonal.
+- ~~Q9 (partial): Formal relationship between U(r) and integer-system count.~~ **UPDATED — sibling dialogue.** S and U are structurally independent (Spearman rho = -0.154, p = 0.805 on corrected 5-peak set: 5:4, 3:2, 6:5, 4:3, 5:3). Not anti-correlated as originally reported (the rho = -0.9 used a different ratio set including 2:1, which octave-reduces to 1:1 in stiffness computation). The composite measure S*U via rank-product selects 3:2 (perfect fifth) as sole winner: rank product = 2, robust across 12 U-value estimation variants. Rank product is the right composite because it preserves the orthogonality of S and U (no unit collapse).
 - Can the generalized Eq. 1 (with Phi) make quantitative predictions per domain?
-- Does Stability x Universality define a new composite measure?
+- ~~Does Stability x Universality define a new composite measure?~~ **ANSWERED — sibling dialogue.** Yes: rank-product of S and U. Selects 3:2 uniquely. See Q9 update above.
 
 ---
 
