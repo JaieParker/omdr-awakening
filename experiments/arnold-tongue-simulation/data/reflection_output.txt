@@ -1,0 +1,165 @@
+======================================================================
+LENS 1: NORMAL -- What the data shows directly
+======================================================================
+
+Known ratio spectrum (accessibility):
+  6:5     2 domains  ##
+  5:4    10 domains  ##########
+  4:3    10 domains  ##########
+  3:2    12 domains  ############
+  8:5     1 domains  #
+  5:3     6 domains  ######
+  7:4     1 domains  #
+  2:1     6 domains  ######
+
+3:2 is the most universal ratio (12 domains).
+8:5 and 7:4 are domain-exclusive (1 domain each).
+
+======================================================================
+LENS 2: OMDR -- What the consonance hierarchy predicts
+======================================================================
+
+Prediction: accessibility ~ 1/q^2 (Arnold tongue width)
+
+  6:5  predicted=  1.9  actual= 2  ratio=1.04  [match]
+  5:4  predicted=  3.0  actual=10  ratio=3.33  [OVER]
+  4:3  predicted=  5.3  actual=10  ratio=1.88  [OVER]
+  3:2  predicted= 12.0  actual=12  ratio=1.00  [match]
+  8:5  predicted=  1.9  actual= 1  ratio=0.52  [match]
+  5:3  predicted=  5.3  actual= 6  ratio=1.12  [match]
+  7:4  predicted=  3.0  actual= 1  ratio=0.33  [UNDER]
+  2:1  predicted= 48.0  actual= 6  ratio=0.12  [UNDER]
+
+MAPPING DOWN -- Farey mediants predict sub-structure:
+
+  Between 6:5 and 5:4 -> 11:9 (1.2222)  PREDICTED -- not yet observed
+  Between 5:4 and 4:3 -> 9:7 (1.2857)  PREDICTED -- not yet observed
+  Between 4:3 and 3:2 -> 7:5 (1.4000)  PREDICTED -- not yet observed
+  Between 3:2 and 8:5 -> 11:7 (1.5714)  PREDICTED -- not yet observed
+  Between 8:5 and 5:3 -> 13:8 (1.6250)  PREDICTED -- not yet observed
+  Between 5:3 and 7:4 -> 12:7 (1.7143)  PREDICTED -- not yet observed
+  Between 7:4 and 2:1 -> 9:5 (1.8000)  PREDICTED -- not yet observed
+
+MAPPING UP -- Meta-domain structure:
+
+  physics    <-> biology   : 23.6 deg  (~212/9)
+  physics    <-> cognition : 22.0 deg  (~22)
+  biology    <-> cognition : 30.7 deg  (~307/10)
+
+Meta-angle ratios:
+  physics-biology / biology-cognition = 1.303 ~ 9/7 (1.4%)
+  physics-cognition / biology-cognition = 1.395 ~ 7/5 (0.3%)
+
+======================================================================
+LENS 3: ORTHOGONAL OMDR -- The REFLECTION
+======================================================================
+
+The Fabry-Perot reflection: what is bright becomes dark, dark becomes bright.
+Rare ratios = bright in reflection = high novelty = where discoveries wait.
+
+  6:5    Original: ##           ( 2)   Reflection: ***********  (11)
+  5:4    Original: ##########   (10)   Reflection: ***          ( 3)
+  4:3    Original: ##########   (10)   Reflection: ***          ( 3)
+  3:2    Original: ############ (12)   Reflection: *            ( 1)
+  8:5    Original: #            ( 1)   Reflection: ************ (12)
+  5:3    Original: ######       ( 6)   Reflection: *******      ( 7)
+  7:4    Original: #            ( 1)   Reflection: ************ (12)
+  2:1    Original: ######       ( 6)   Reflection: *******      ( 7)
+
+======================================================================
+FINDINGS -- What the reflection reveals
+======================================================================
+
+FINDING 1: Three VOID domains predicted
+
+  Void A: Biological 7:4
+    A biological system that locks to the harmonic seventh.
+    7:4 = 1.75 -- this IS a heartbeat ratio candidate.
+    Resting heart rate ~60bpm. Respiratory rate ~15bpm. Ratio = 4:1.
+    BUT: heart rate variability modes? HRV low-freq/high-freq ~ 1.5-2.5.
+    If HRV LF/HF at K=0.25 locks to 7:4 = 1.75 -- that fills the void.
+
+  Void B: Physical 8:5
+    A physics system that locks to the minor sixth.
+    8:5 = 1.600 -- close to golden ratio phi = 1.618.
+    Phi appears in phyllotaxis, quasicrystals, Penrose tilings.
+    But phi is IRRATIONAL -- it is the anti-resonance, the Yin band.
+    8:5 is the RATIONAL APPROXIMANT of phi (Fibonacci convergent).
+    Prediction: quasicrystal diffraction peaks sit at 8:5 not phi.
+    The physics community assumes phi. OMDR predicts 8:5.
+
+  Void C: The FOURTH domain type
+    Physics, biology, cognition form a 3-vertex simplex.
+    A tetrahedron (4 vertices) is the minimal 3D solid.
+    The fourth vertex is orthogonal to all three existing types.
+
+    Ratios in Farey(8) NOT observed in ANY domain:
+      1:1 = 1.0000  (Farey sum 2)
+
+FINDING 2: The reflection IS the sacred geometry
+
+  The vesica piscis = two circles (domains) intersecting.
+  The mandorla = shared ratios.
+  Biology IS the mandorla (no exclusive ratios).
+  The Flower of Life = iterated vesica = all domain pairs.
+  Each intersection generates structure (equilateral triangle = 3 bands).
+  The voids in the Flower of Life are the unobserved ratios.
+  Sacred geometry IS the N-dimensional domain map projected to 2D.
+
+FINDING 3: The three bands map to the three domain types
+
+  Band 1 (Frequency/Information) <-> Physics (measures frequencies)
+  Band 2 (Pattern/Coupling)      <-> Biology (couples frequencies into organisms)
+  Band 3 (Self-aware/Integration) <-> Cognition (observes the coupling)
+
+  AND: the angles between meta-domains should equal the angles between bands.
+  If bands are orthogonal (90 deg), and biology is the mandorla,
+  then the meta-domain triangle should show biology equidistant from both.
+
+  physics    <-> biology   : 23.6 deg
+  physics    <-> cognition : 22.0 deg
+  biology    <-> cognition : 30.7 deg
+
+FINDING 4: Mapping up reveals the generating equation
+
+  Domain -> Meta-domain -> Band -> OMDR principle
+  Each level is a projection of the one above.
+  Eq. 3 (orthogonal observation) IS the meta-meta-domain.
+  The entire hierarchy collapses to: two observers + resonance -> structure.
+  That is the vesica piscis. The first figure of sacred geometry.
+  The SIMPLEST possible generator produces the ENTIRE hierarchy.
+
+FINDING 5: Mapping down predicts specific ratios to search for
+
+  Farey mediants not yet observed (predicted sub-structure):
+    11:9 = 1.2222
+      Search in: fine structure, nuclear binding, molecular spectra
+    9:7 = 1.2857
+      Search in: fine structure, nuclear binding, molecular spectra
+    7:5 = 1.4000
+      Search in: brainwave sub-bands, musical intervals, orbital periods
+    11:7 = 1.5714
+      Search in: brainwave sub-bands, musical intervals, orbital periods
+    13:8 = 1.6250
+      Search in: brainwave sub-bands, musical intervals, orbital periods
+    12:7 = 1.7143
+      Search in: biological rhythms, developmental timing, metabolic rates
+    9:5 = 1.8000
+      Search in: biological rhythms, developmental timing, metabolic rates
+
+======================================================================
+REFLECTION COMPLETE
+======================================================================
+
+The N-dimensional map has three layers:
+  DOWN: Farey mediants predict unobserved sub-ratios
+  HERE: 12 domains, 8 ratios, self-consonant geometry
+  UP:   3 meta-domains mapping to 3 bands mapping to Eq. 3
+
+The reflection (Fabry-Perot inverse) says:
+  Bright spots (rare ratios) are where discoveries concentrate
+  7:4 in biology and 8:5 in physics are the highest-value targets
+  The fourth domain type uses ratios we have not observed anywhere
+  Sacred geometry IS the 2D projection of this N-dimensional structure
+
+The generator: Two circles. One intersection. Everything else is overtones.
