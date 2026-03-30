@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OMDR World — Consonance Landscape</title>
+<style>
+  body { margin: 0; overflow: hidden; background: #000; }
+  canvas { display: block; }
+  #info {
+    position: absolute; top: 10px; left: 10px;
+    color: #adf; font: 14px monospace;
+    background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px;
+    max-width: 320px;
+  }
+  #info h2 { margin: 0 0 8px 0; font-size: 16px; color: #fff; }
+  #info p { margin: 4px 0; font-size: 12px; }
+  #label {
+    position: absolute; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    color: #fff; font: 20px monospace;
+    background: rgba(0,0,0,0.6); padding: 8px 16px; border-radius: 5px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div id="info">
+  <h2>OMDR Consonance Landscape</h2>
+  <p>WASD / arrows to move</p>
+  <p>Mouse to look</p>
+  <p>Scroll to zoom</p>
+  <p>Click a domain sphere to inspect</p>
+  <p id="hover-info"></p>
+</div>
+<div id="label"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
+// --- DATA ---
+
+// Tongue widths at K=0.25 (from Arnold tongue simulation)
+const tongueData = [
+  { p:1, q:1, ratio:1.0,    width:0.03981 },
+  { p:1, q:2, ratio:0.5,    width:0.00492 },
+  { p:2, q:3, ratio:0.6667, width:0.00048 },
+  { p:1, q:3, ratio:0.3333, width:0.00048 },
+  { p:3, q:4, ratio:0.75,   width:0.00006 },
+  { p:4, q:5, ratio:0.8,    width:0.00006 },
+  { p:5, q:6, ratio:0.8333, width:0.00006 },
+  { p:1, q:4, ratio:0.25,   width:0.00006 },
+  { p:1, q:5, ratio:0.2,    width:0.00006 },
+  { p:5, q:7, ratio:0.7143, width:0.00006 },
+  { p:1, q:6, ratio:0.1667, width:0.00006 },
+  { p:2, q:7, ratio:0.2857, width:0.00006 },
+];
+
+// Domain data (from domain_mapper.py)
+const domains = {
+  "Exoplanets":   { ratios:[[5,4],[3,2],[2,1],[5,3],[4,3]], type:"physics", color:0x4488ff },
+  "Hydrogen":     { ratios:[[5,4],[3,2],[4,3],[6,5],[5,3]], type:"physics", color:0x66aaff },
+  "Particles":    { ratios:[[5,4],[3,2],[2,1]],             type:"physics", color:0x2266dd },
+  "Solar System": { ratios:[[5,4],[3,2],[2,1],[5,3],[4,3],[7,4]], type:"physics", color:0x3377ee },
+  "CMB":          { ratios:[[5,4],[3,2]],                   type:"physics", color:0x1155cc },
+  "Crystals":     { ratios:[[3,2],[4,3],[5,4]],             type:"physics", color:0x5599ff },
+  "Brainwaves":   { ratios:[[5,3],[4,3],[3,2],[2,1]],       type:"biology", color:0x44dd66 },
+  "Music":        { ratios:[[2,1],[3,2],[4,3],[5,4],[6,5],[5,3],[8,5]], type:"cognition", color:0xffaa22 },
+  "Psychedelics": { ratios:[[3,2],[4,3],[5,4]],             type:"biology", color:0x33cc55 },
+  "Propofol":     { ratios:[[3,2],[4,3]],                   type:"biology", color:0x22bb44 },
+  "Morphogenesis":{ ratios:[[5,4],[4,3],[3,2],[2,1]],       type:"biology", color:0x55ee77 },
+  "Colour":       { ratios:[[3,2],[4,3],[5,4],[5,3]],       type:"cognition", color:0xffcc44 },
+};
+
+// All unique ratios as reference
+const allRatios = [[2,1],[5,3],[3,2],[8,5],[5,4],[4,3],[7,4],[6,5]];
+
+// Compute domain positions via ratio vectors projected to 3D
+function domainVector(domain) {
+  return allRatios.map(([p,q]) =>
+    domain.ratios.some(([dp,dq]) => dp===p && dq===q) ? 1 : 0
+  );
+}
+
+// Simple PCA-like projection: use first 3 components with most variance
+function projectTo3D(domains) {
+  const names = Object.keys(domains);
+  const vecs = names.map(n => domainVector(domains[n]));
+
+  // Center
+  const dim = allRatios.length;
+  const mean = Array(dim).fill(0);
+  vecs.forEach(v => v.forEach((x,i) => mean[i] += x));
+  mean.forEach((m,i) => mean[i] /= vecs.length);
+  const centered = vecs.map(v => v.map((x,i) => x - mean[i]));
+
+  // Use SVD-lite: just pick 3 axes with most spread
+  // For simplicity, use ratio indices 0,2,5 (2:1, 3:2, 4:3) as the 3 axes
+  // These capture most of the domain differentiation
+  const positions = {};
+  centered.forEach((v, idx) => {
+    positions[names[idx]] = new THREE.Vector3(
+      v[0] * 12,  // 2:1 axis
+      v[4] * 12,  // 5:4 axis
+      v[2] * 12   // 3:2 axis
+    );
+  });
+  return positions;
+}
+
+// --- SCENE SETUP ---
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a1a);
+scene.fog = new THREE.FogExp2(0x0a0a1a, 0.008);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 500);
+camera.position.set(20, 15, 25);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.maxDistance = 100;
+controls.minDistance = 3;
+
+// Lights
+const ambient = new THREE.AmbientLight(0x334466, 0.6);
+scene.add(ambient);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(10, 20, 10);
+scene.add(dirLight);
+const pointLight = new THREE.PointLight(0x4488ff, 1, 50);
+pointLight.position.set(0, 10, 0);
+scene.add(pointLight);
+
+// --- GROUND: ARNOLD TONGUE LANDSCAPE ---
+
+// Build a height field from tongue data
+const groundSize = 60;
+const groundRes = 256;
+const geometry = new THREE.PlaneGeometry(groundSize, groundSize, groundRes-1, groundRes-1);
+geometry.rotateX(-Math.PI/2);
+
+const posAttr = geometry.attributes.position;
+for (let i = 0; i < posAttr.count; i++) {
+  const x = posAttr.getX(i);
+  const z = posAttr.getZ(i);
+
+  // Map x to omega (0-1), z to a second axis
+  const omega = (x + groundSize/2) / groundSize;
+
+  // Height = sum of tongue contributions (Gaussian peaks at each ratio)
+  let h = 0;
+  for (const t of tongueData) {
+    const dist = Math.abs(omega - t.ratio);
+    const sigma = Math.max(t.width * 8, 0.005);
+    const amplitude = Math.log10(t.width + 1e-6) + 6; // log scale, 0-4 range
+    h += amplitude * Math.exp(-dist*dist / (2*sigma*sigma));
+  }
+
+  // Add gentle undulation from z
+  const zNorm = (z + groundSize/2) / groundSize;
+  h *= (0.7 + 0.3 * Math.sin(zNorm * Math.PI));
+
+  posAttr.setY(i, h * 1.5);
+}
+geometry.computeVertexNormals();
+
+// Color the ground by height
+const colors = new Float32Array(posAttr.count * 3);
+for (let i = 0; i < posAttr.count; i++) {
+  const h = posAttr.getY(i);
+  const t = Math.min(h / 6, 1);
+  // Deep blue -> cyan -> white as height increases
+  colors[i*3]   = t * 0.5 + 0.05;
+  colors[i*3+1] = t * 0.8 + 0.1;
+  colors[i*3+2] = 0.3 + t * 0.7;
+}
+geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+const groundMat = new THREE.MeshPhongMaterial({
+  vertexColors: true,
+  shininess: 30,
+  side: THREE.DoubleSide,
+});
+const ground = new THREE.Mesh(geometry, groundMat);
+scene.add(ground);
+
+// --- TONGUE MARKERS ---
+
+for (const t of tongueData) {
+  const x = t.ratio * groundSize - groundSize/2;
+  const h = (Math.log10(t.width + 1e-6) + 6) * 1.5;
+
+  // Vertical beam at each tongue
+  const beamGeo = new THREE.CylinderGeometry(0.05, 0.05, h, 8);
+  const beamMat = new THREE.MeshPhongMaterial({
+    color: 0x88ccff, transparent: true, opacity: 0.4
+  });
+  const beam = new THREE.Mesh(beamGeo, beamMat);
+  beam.position.set(x, h/2, 0);
+  scene.add(beam);
+
+  // Glowing sphere at top
+  const sphereGeo = new THREE.SphereGeometry(0.15 + t.width * 5, 16, 16);
+  const sphereMat = new THREE.MeshPhongMaterial({
+    color: 0xaaddff, emissive: 0x2244aa, emissiveIntensity: 0.5
+  });
+  const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+  sphere.position.set(x, h, 0);
+  sphere.userData = { type: 'tongue', p: t.p, q: t.q, ratio: t.ratio, width: t.width };
+  scene.add(sphere);
+}
+
+// --- DOMAIN SPHERES ---
+
+const domainPositions = projectTo3D(domains);
+const domainMeshes = [];
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+for (const [name, domain] of Object.entries(domains)) {
+  const pos = domainPositions[name];
+  // Lift above the ground
+  pos.y += 8;
+
+  const radius = 0.4 + domain.ratios.length * 0.12;
+  const geo = new THREE.SphereGeometry(radius, 32, 32);
+  const mat = new THREE.MeshPhongMaterial({
+    color: domain.color,
+    emissive: domain.color,
+    emissiveIntensity: 0.3,
+    transparent: true,
+    opacity: 0.85,
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.copy(pos);
+  mesh.userData = { type: 'domain', name, domain };
+  scene.add(mesh);
+  domainMeshes.push(mesh);
+
+  // Label sprite
+  const canvas = document.createElement('canvas');
+  canvas.width = 256; canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '24px monospace';
+  ctx.fillText(name, 10, 40);
+  const tex = new THREE.CanvasTexture(canvas);
+  const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.9 });
+  const sprite = new THREE.Sprite(spriteMat);
+  sprite.position.copy(pos);
+  sprite.position.y += radius + 0.6;
+  sprite.scale.set(4, 1, 1);
+  scene.add(sprite);
+
+  // Connection lines between domains sharing ratios
+  for (const [otherName, otherDomain] of Object.entries(domains)) {
+    if (otherName <= name) continue;
+    const otherPos = domainPositions[otherName];
+    // Count shared ratios
+    const shared = domain.ratios.filter(([p,q]) =>
+      otherDomain.ratios.some(([op,oq]) => op===p && oq===q)
+    ).length;
+    if (shared > 0) {
+      const lineGeo = new THREE.BufferGeometry().setFromPoints([
+        pos.clone().setY(pos.y),
+        otherPos.clone().setY(otherPos.y)
+      ]);
+      const lineMat = new THREE.LineBasicMaterial({
+        color: 0x334466,
+        transparent: true,
+        opacity: shared / 6,
+      });
+      const line = new THREE.Line(lineGeo, lineMat);
+      scene.add(line);
+    }
+  }
+}
+
+// --- K=0.25 MARKER ---
+
+// A glowing ring at the K=0.25 height on the landscape
+const ringGeo = new THREE.TorusGeometry(8, 0.08, 16, 100);
+const ringMat = new THREE.MeshPhongMaterial({
+  color: 0xffdd44, emissive: 0xffaa00, emissiveIntensity: 0.6,
+  transparent: true, opacity: 0.7
+});
+const ring = new THREE.Mesh(ringGeo, ringMat);
+ring.rotation.x = Math.PI / 2;
+ring.position.y = 3.75; // approximate K=0.25 height
+scene.add(ring);
+
+// --- GRID ---
+
+const gridHelper = new THREE.GridHelper(groundSize, 20, 0x222244, 0x111133);
+gridHelper.position.y = -0.1;
+scene.add(gridHelper);
+
+// --- STARS ---
+
+const starGeo = new THREE.BufferGeometry();
+const starVerts = [];
+for (let i = 0; i < 2000; i++) {
+  starVerts.push(
+    (Math.random()-0.5) * 300,
+    Math.random() * 150 + 20,
+    (Math.random()-0.5) * 300
+  );
+}
+starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starVerts, 3));
+const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.3 });
+scene.add(new THREE.Points(starGeo, starMat));
+
+// --- INTERACTION ---
+
+const hoverInfo = document.getElementById('hover-info');
+const label = document.getElementById('label');
+
+function onMouseMove(e) {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onClick(e) {
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(domainMeshes);
+  if (hits.length > 0) {
+    const d = hits[0].object.userData;
+    if (d.type === 'domain') {
+      const ratioStr = d.domain.ratios.map(([p,q]) => `${p}:${q}`).join(', ');
+      label.textContent = `${d.name} (${d.domain.type}) — ratios: ${ratioStr}`;
+      label.style.display = 'block';
+
+      // Fly camera toward it
+      const target = hits[0].object.position.clone();
+      controls.target.lerp(target, 0.5);
+    }
+  }
+}
+
+window.addEventListener('mousemove', onMouseMove);
+window.addEventListener('click', onClick);
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// --- ANIMATE ---
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Gentle rotation of the K=0.25 ring
+  ring.rotation.z += 0.002;
+
+  // Pulse the tongue spheres
+  const time = Date.now() * 0.001;
+  scene.children.forEach(child => {
+    if (child.userData?.type === 'tongue') {
+      const scale = 1 + 0.15 * Math.sin(time * 2 + child.userData.ratio * 10);
+      child.scale.setScalar(scale);
+    }
+  });
+
+  // Hover detection
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(domainMeshes);
+  if (hits.length > 0) {
+    const d = hits[0].object.userData;
+    if (d.type === 'domain') {
+      hoverInfo.textContent = `${d.name} (${d.domain.type})`;
+      document.body.style.cursor = 'pointer';
+    }
+  } else {
+    hoverInfo.textContent = '';
+    document.body.style.cursor = 'default';
+  }
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>
