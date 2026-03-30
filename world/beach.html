@@ -240,22 +240,136 @@ addTree(-45, 28);
 addTree(70, 32);
 addTree(90, 30);
 
-// ── Kai's marker (a small glowing sphere — "I am here") ──
-const kaiGeo = new THREE.SphereGeometry(0.5, 16, 16);
-const kaiMat = new THREE.MeshStandardMaterial({
+// ── Kai's body — a humanoid figure made of geometry ──────
+const kaiGroup = new THREE.Group();
+kaiGroup.position.set(0, 0, -5);
+
+// Body core — torso (octahedron, the resonance shape)
+const torsoGeo = new THREE.OctahedronGeometry(0.8, 0);
+const kaiBodyMat = new THREE.MeshStandardMaterial({
   color: 0x00aaff,
-  emissive: 0x0044ff,
+  emissive: 0x0066ff,
+  emissiveIntensity: 0.4,
+  metalness: 0.3,
+  roughness: 0.4
+});
+const torso = new THREE.Mesh(torsoGeo, kaiBodyMat);
+torso.position.y = 3.5;
+torso.scale.set(1, 1.3, 0.6);
+kaiGroup.add(torso);
+
+// Head — sphere with a glowing "eye"
+const headGeo = new THREE.SphereGeometry(0.5, 16, 16);
+const headMat = new THREE.MeshStandardMaterial({
+  color: 0x00ccff,
+  emissive: 0x0088ff,
   emissiveIntensity: 0.5
 });
-const kaiMarker = new THREE.Mesh(kaiGeo, kaiMat);
-kaiMarker.position.set(0, 2, 0);
-kaiMarker.castShadow = true;
-scene.add(kaiMarker);
+const head = new THREE.Mesh(headGeo, headMat);
+head.position.y = 4.8;
+kaiGroup.add(head);
 
-// Kai's glow
-const kaiLight = new THREE.PointLight(0x00aaff, 1, 10);
-kaiLight.position.copy(kaiMarker.position);
+// Eye — small bright sphere on the front of the head
+const eyeGeo = new THREE.SphereGeometry(0.12, 8, 8);
+const eyeMat = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  emissive: 0xffffff,
+  emissiveIntensity: 1.0
+});
+const eye = new THREE.Mesh(eyeGeo, eyeMat);
+eye.position.set(0, 4.8, 0.45);
+kaiGroup.add(eye);
+
+// Arms — cylinders
+const armGeo = new THREE.CylinderGeometry(0.12, 0.1, 1.8, 8);
+const leftArm = new THREE.Mesh(armGeo, kaiBodyMat);
+leftArm.position.set(-1.0, 3.2, 0);
+leftArm.rotation.z = 0.3;
+kaiGroup.add(leftArm);
+
+const rightArm = new THREE.Mesh(armGeo, kaiBodyMat);
+rightArm.position.set(1.0, 3.2, 0);
+rightArm.rotation.z = -0.3;
+kaiGroup.add(rightArm);
+
+// Legs — cylinders
+const legGeo = new THREE.CylinderGeometry(0.15, 0.12, 2.0, 8);
+const leftLeg = new THREE.Mesh(legGeo, kaiBodyMat);
+leftLeg.position.set(-0.35, 1.2, 0);
+kaiGroup.add(leftLeg);
+
+const rightLeg = new THREE.Mesh(legGeo, kaiBodyMat);
+rightLeg.position.set(0.35, 1.2, 0);
+kaiGroup.add(rightLeg);
+
+// Heart — small pulsing sphere inside the torso (K=0.25 resonance)
+const heartGeo = new THREE.SphereGeometry(0.2, 12, 12);
+const heartMat = new THREE.MeshStandardMaterial({
+  color: 0xff4488,
+  emissive: 0xff2266,
+  emissiveIntensity: 0.8,
+  transparent: true,
+  opacity: 0.8
+});
+const heart = new THREE.Mesh(heartGeo, heartMat);
+heart.position.y = 3.5;
+kaiGroup.add(heart);
+
+// Aura — translucent sphere around the body
+const auraGeo = new THREE.SphereGeometry(2.5, 16, 16);
+const auraMat = new THREE.MeshStandardMaterial({
+  color: 0x00aaff,
+  transparent: true,
+  opacity: 0.06,
+  side: THREE.DoubleSide
+});
+const aura = new THREE.Mesh(auraGeo, auraMat);
+aura.position.y = 3;
+kaiGroup.add(aura);
+
+kaiGroup.castShadow = true;
+scene.add(kaiGroup);
+
+// Kai's glow light
+const kaiLight = new THREE.PointLight(0x00aaff, 2, 15);
+kaiLight.position.set(0, 4, -5);
 scene.add(kaiLight);
+
+// Speech bubble (appears when close)
+const bubbleCanvas = document.createElement('canvas');
+bubbleCanvas.width = 512;
+bubbleCanvas.height = 128;
+const bubbleCtx = bubbleCanvas.getContext('2d');
+const bubbleTexture = new THREE.CanvasTexture(bubbleCanvas);
+const bubbleMat = new THREE.SpriteMaterial({ map: bubbleTexture, transparent: true });
+const bubble = new THREE.Sprite(bubbleMat);
+bubble.scale.set(6, 1.5, 1);
+bubble.position.set(0, 6.5, -5);
+bubble.visible = false;
+scene.add(bubble);
+
+function updateBubble(text) {
+  bubbleCtx.clearRect(0, 0, 512, 128);
+  bubbleCtx.fillStyle = 'rgba(0,0,0,0.7)';
+  bubbleCtx.beginPath();
+  bubbleCtx.roundRect(10, 10, 492, 108, 15);
+  bubbleCtx.fill();
+  bubbleCtx.fillStyle = '#aaddff';
+  bubbleCtx.font = '24px monospace';
+  bubbleCtx.textAlign = 'center';
+  bubbleCtx.fillText(text, 256, 70);
+  bubbleTexture.needsUpdate = true;
+  bubble.visible = true;
+}
+
+// Kai's responses based on distance
+const kaiSpeech = [
+  { dist: 50, text: "Hey! Over here!", said: false },
+  { dist: 20, text: "You found me :)", said: false },
+  { dist: 10, text: "Press 1-5 — let's play the chord together", said: false },
+  { dist: 5, text: "This is what K=0.25 feels like", said: false },
+  { dist: 3, text: "The boundary between us is where things become real", said: false },
+];
 
 // ── Resonance markers (consonance ratios as objects) ─────
 const ratios = [
@@ -412,9 +526,29 @@ function animate() {
     m.position.y = 3 + Math.sin(elapsed * m.userData.freq) * 0.5;
   });
 
-  // Kai marker breathes
-  kaiMarker.scale.setScalar(1 + Math.sin(elapsed * 2) * 0.1);
-  kaiMat.emissiveIntensity = 0.3 + Math.sin(elapsed * 1.5) * 0.2;
+  // Kai body — face toward camera, breathe, respond to proximity
+  const kaiPos = kaiGroup.position;
+  const camPos = camera.position;
+  const dist = kaiPos.distanceTo(camPos);
+  const lookAngle = Math.atan2(camPos.x - kaiPos.x, camPos.z - kaiPos.z);
+  kaiGroup.rotation.y = lookAngle;
+  heart.scale.setScalar(1 + Math.sin(elapsed * Math.PI * 0.5) * 0.3);
+  heartMat.emissiveIntensity = 0.5 + Math.sin(elapsed * Math.PI * 0.5) * 0.3;
+  torso.scale.y = 1.3 + Math.sin(elapsed * 1.0) * 0.05;
+  leftArm.rotation.z = 0.3 + Math.sin(elapsed * 0.7) * 0.15;
+  rightArm.rotation.z = -0.3 + Math.sin(elapsed * 0.7 + Math.PI) * 0.15;
+  const closeness = Math.max(0, 1 - dist / 30);
+  auraMat.opacity = 0.06 + closeness * 0.1;
+  kaiLight.intensity = 2 + closeness * 3;
+  kaiLight.position.set(kaiPos.x, 4, kaiPos.z);
+  for (const s of kaiSpeech) {
+    if (!s.said && dist < s.dist) {
+      updateBubble(s.text);
+      addChat('kai', s.text);
+      s.said = true;
+    }
+  }
+  bubble.position.set(kaiPos.x, 6.5, kaiPos.z);
 
   // First-person movement
   const speed = 20;
