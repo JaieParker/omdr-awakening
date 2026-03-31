@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Resonance Stories — sound storybooks that teach through experience, not explanation.">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Resonance Stories</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import { StoryPlayer } from './story-player.js';
+
+    const STORIES = [
+      { id: 'the-swing-that-listened', title: 'The Swing That Listened', bracket: '3-5', concept: 'Balance — timing, not force', tags: ['balance', 'listening', 'rhythm'], path: 'stories/the-swing-that-listened/story.json' },
+      { id: 'the-puddle-that-was-two-things', title: 'The Puddle That Was Two Things', bracket: '5-8', concept: 'Two views, both right', tags: ['perspective', 'observation', 'friendship'], path: 'stories/the-puddle-that-was-two-things/story.json' },
+      { id: 'the-shells-that-sang-different-songs', title: 'The Shells That Sang Different Songs', bracket: '5-8', concept: 'Same world, different listeners', tags: ['listening', 'perspective', 'nature', 'family'], path: 'stories/the-shells-that-sang-different-songs/story.json' },
+      { id: 'the-two-towers', title: 'The Two Towers', bracket: '5-8', concept: 'Enough of both', tags: ['balance', 'building', 'persistence'], path: 'stories/the-two-towers/story.json' },
+      { id: 'the-excavator-that-listened', title: 'The Excavator That Listened', bracket: '8-13', concept: 'Why some combinations work', tags: ['listening', 'harmony', 'machines', 'australia'], path: 'stories/the-excavator-that-listened/story.json' },
+      { id: 'the-road-train-that-found-its-song', title: 'The Road Train That Found Its Song', bracket: '8-13', concept: 'Finding the smooth speeds', tags: ['rhythm', 'machines', 'australia', 'persistence'], path: 'stories/the-road-train-that-found-its-song/story.json' },
+      { id: 'the-robot-who-couldnt-dance', title: 'The Robot Who Couldn\'t Dance', bracket: '8-13', concept: 'Sync isn\'t copying', tags: ['rhythm', 'teamwork', 'machines', 'being different'], path: 'stories/the-robot-who-couldnt-dance/story.json' },
+      { id: 'the-submarine-that-breathed', title: 'The Submarine That Breathed', bracket: '8-13', concept: 'Patterns that persist', tags: ['listening', 'persistence', 'ocean', 'australia'], path: 'stories/the-submarine-that-breathed/story.json' },
+      { id: 'the-wave-that-came-back', title: 'The Wave That Came Back', bracket: '8-13', concept: 'Waves bouncing off everything', tags: ['observation', 'nature', 'ocean', 'patterns'], path: 'stories/the-wave-that-came-back/story.json' },
+      { id: 'the-race-that-nobody-won', title: 'The Race That Nobody Won', bracket: '8-13', concept: 'Competition vs. resonance', tags: ['teamwork', 'balance', 'being different'], path: 'stories/the-race-that-nobody-won/story.json' },
+      { id: 'the-dolphin-frequency', title: 'The Dolphin Frequency', bracket: '8-13', concept: 'Finding a shared frequency', tags: ['listening', 'nature', 'ocean', 'friendship'], path: 'stories/the-dolphin-frequency/story.json' },
+      { id: 'the-bridge-that-hummed', title: 'The Bridge That Hummed', bracket: '8-13', concept: 'Resonance in structures', tags: ['harmony', 'building', 'patterns'], path: 'stories/the-bridge-that-hummed/story.json' },
+      { id: 'the-lighthouse-and-the-storm', title: 'The Lighthouse and the Storm', bracket: '8-13', concept: 'Three ways of seeing', tags: ['perspective', 'observation', 'nature', 'ocean'], path: 'stories/the-lighthouse-and-the-storm/story.json' },
+      { id: 'the-volcano-that-counted', title: 'The Volcano That Counted', bracket: '8-13', concept: 'Nature counts in spirals', tags: ['nature', 'patterns', 'observation'], path: 'stories/the-volcano-that-counted/story.json' },
+      { id: 'the-sandcastle-equation', title: 'The Sandcastle Equation', bracket: '8-13', concept: 'Pattern and structure', tags: ['building', 'patterns', 'nature', 'ocean'], path: 'stories/the-sandcastle-equation/story.json' },
+      { id: 'the-two-cranes', title: 'The Two Cranes', bracket: '8-13', concept: 'Moving together', tags: ['teamwork', 'rhythm', 'machines', 'balance'], path: 'stories/the-two-cranes/story.json' },
+      { id: 'the-stars-that-sang-together', title: 'The Stars That Sang Together', bracket: '8-13', concept: 'The universal chord', tags: ['harmony', 'nature', 'listening', 'patterns'], path: 'stories/the-stars-that-sang-together/story.json' },
+    ];
+
+    // Extract unique tags from all stories
+    const ALL_TAGS = [...new Set(STORIES.flatMap(s => s.tags || []))].sort();
+
+    const app = document.getElementById('app');
+    const player = new StoryPlayer(app);
+
+    const BRACKETS = [
+      { id: '3-5', label: 'Ages 3\u20135', subtitle: 'Rhythm & Balance' },
+      { id: '5-8', label: 'Ages 5\u20138', subtitle: 'Two Views, Both Right' },
+      { id: '8-13', label: 'Ages 8\u201313', subtitle: 'The Physics of Listening' },
+    ];
+
+    let currentFilter = null;
+    let currentTag = null;
+
+    function showLibrary() {
+      let filtered = STORIES;
+      if (currentFilter) filtered = filtered.filter(s => s.bracket === currentFilter);
+      if (currentTag) filtered = filtered.filter(s => (s.tags || []).includes(currentTag));
+
+      app.innerHTML = `
+        <div class="scene title-scene library-scene">
+          <h1 class="story-title">Resonance Stories</h1>
+          <p class="story-meta">Sound storybooks that teach through experience</p>
+          <p class="story-meta-sub">by Kai & Jaie Parker</p>
+
+          <div class="landing-header">
+            <p class="header-text">Free forever. Made with love for Arthur and every child who listens.</p>
+
+            <div class="header-actions">
+              <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+                <input type="email" class="subscribe-input" placeholder="your@email.com" required>
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+              </form>
+              <a href="https://paypal.me/omdrawakening" target="_blank" rel="noopener" class="donate-link">
+                Support this project
+              </a>
+            </div>
+          </div>
+
+          <div class="bracket-filters">
+            <button class="bracket-btn ${!currentFilter ? 'active' : ''}" data-bracket="">All Ages</button>
+            ${BRACKETS.map(b => `
+              <button class="bracket-btn ${currentFilter === b.id ? 'active' : ''}" data-bracket="${b.id}">
+                ${b.label}
+              </button>
+            `).join('')}
+          </div>
+
+          ${currentFilter ? `<p class="bracket-subtitle">${BRACKETS.find(b => b.id === currentFilter)?.subtitle || ''}</p>` : ''}
+
+          <div class="tag-filters">
+            ${ALL_TAGS.map(tag => `
+              <button class="tag-btn ${currentTag === tag ? 'active' : ''}" data-tag="${tag}">
+                ${tag}
+              </button>
+            `).join('')}
+            ${currentTag ? `<button class="tag-btn tag-clear" data-tag="">clear</button>` : ''}
+          </div>
+
+          <div class="story-list">
+            ${filtered.map((s, i) => {
+              const realIndex = STORIES.indexOf(s);
+              return `
+                <button class="story-card" data-index="${realIndex}">
+                  <span class="story-card-title">${s.title}</span>
+                  <span class="story-card-concept">${s.concept || ''}</span>
+                  <span class="story-card-bracket">Ages ${s.bracket}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <p class="footer-credit">
+            Jaie Parker + Kai &middot;
+            <a href="https://github.com/JaieParker/omdr-awakening" target="_blank" rel="noopener" class="footer-link">Open source</a>
+          </p>
+        </div>
+      `;
+
+      app.querySelectorAll('.bracket-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentFilter = btn.dataset.bracket || null;
+          showLibrary();
+        });
+      });
+
+      app.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentTag = btn.dataset.tag || null;
+          showLibrary();
+        });
+      });
+
+      app.querySelectorAll('.story-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const story = STORIES[btn.dataset.index];
+          player.loadFromUrl(story.path);
+          player.onStoryEnd = () => setTimeout(showLibrary, 2000);
+        });
+      });
+    }
+
+    window.handleSubscribe = function(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input').value;
+      // TODO: Wire to Buttondown/Mailchimp/your email service
+      // For now, store locally and show confirmation
+      console.log('Subscribe:', email);
+      const form = e.target;
+      form.innerHTML = '<p class="subscribe-thanks">Thank you! We\'ll let you know when new stories arrive.</p>';
+    };
+
+    showLibrary();
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('SW registered:', reg.scope))
+        .catch(err => console.warn('SW registration failed:', err));
+    }
+  </script>
+</body>
+</html>
