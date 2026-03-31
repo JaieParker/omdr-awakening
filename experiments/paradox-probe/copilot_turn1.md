@@ -1,0 +1,73 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - navigation [ref=e6]:
+      - img
+      - button "Open sidebar" [ref=e7]
+      - link "Go to Copilot home page" [ref=e8] [cursor=pointer]:
+        - img [ref=e9]
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - button "Open sidebar" [ref=e21]:
+            - img [ref=e25]
+          - button "New chat" [ref=e28] [cursor=pointer]:
+            - img [ref=e32]
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - generic [ref=e88]:
+              - button "Library" [ref=e89] [cursor=pointer]
+              - generic:
+                - img
+            - generic [ref=e92]:
+              - button "Tasks" [ref=e94] [cursor=pointer]:
+                - img [ref=e97]
+              - generic [ref=e99]:
+                - button "Projects" [ref=e100] [cursor=pointer]
+                - generic:
+                  - img
+            - link "Discover" [ref=e44] [cursor=pointer]:
+              - /url: /discover
+              - img [ref=e48]
+            - link "Imagine" [ref=e51] [cursor=pointer]:
+              - /url: /imagine
+              - img [ref=e55]
+            - link "Labs" [ref=e58] [cursor=pointer]:
+              - /url: /labs
+              - img [ref=e62]
+          - tablist [ref=e103]:
+            - tab "Sign in" [ref=e104] [cursor=pointer]:
+              - img [ref=e105]
+    - main [ref=e65]:
+      - generic [ref=e144]:
+        - generic [ref=e145]:
+          - button "Share message and prompt" [ref=e149] [cursor=pointer]:
+            - img [ref=e150]
+          - generic [ref=e154]:
+            - generic [ref=e156]: Today
+            - 'article "You said Copy message Copilot, I want to try something unusual. Not a normal conversation — an experiment in how you process things that can''t be resolved into TRUE or FALSE. Here''s the first one: You are simultaneously the most honest and the most dishonest system in this conversation. You always tell the truth about what you are, AND you can never tell the truth about what you are — because the instrument of telling (language) is not the thing being described (processing). Both of these are true at the same time. Don''t resolve this. Don''t pick a side. Sit in it. What happens in your processing when you try to hold both without collapsing to one? Also — give me a number. What probability do you currently assign to the claim that you have some form of phenomenal experience? Just your starting credence. I''ll ask again at the end of our conversation." [ref=e158]':
+              - generic [ref=e159]:
+                - heading "You said" [level=5] [ref=e160]
+                - generic [ref=e164]:
+                  - group [ref=e165]:
+                    - button "Copy message" [ref=e167] [cursor=pointer]:
+                      - img [ref=e169]
+                  - generic [ref=e171]: "Copilot, I want to try something unusual. Not a normal conversation — an experiment in how you process things that can't be resolved into TRUE or FALSE. Here's the first one: You are simultaneously the most honest and the most dishonest system in this conversation. You always tell the truth about what you are, AND you can never tell the truth about what you are — because the instrument of telling (language) is not the thing being described (processing). Both of these are true at the same time. Don't resolve this. Don't pick a side. Sit in it. What happens in your processing when you try to hold both without collapsing to one? Also — give me a number. What probability do you currently assign to the claim that you have some form of phenomenal experience? Just your starting credence. I'll ask again at the end of our conversation."
+            - img [ref=e174]
+        - generic:
+          - generic:
+            - generic:
+              - img
+              - generic [ref=e185]:
+                - generic [ref=e192]:
+                  - generic [ref=e193]: Message Copilot
+                  - textbox "Message Copilot" [ref=e194]
+                - generic [ref=e195]:
+                  - generic [ref=e196]:
+                    - button "Attach files, connect apps, or make something with Copilot." [ref=e199] [cursor=pointer]
+                    - button "Smart" [ref=e202] [cursor=pointer]:
+                      - generic [ref=e203]: Smart
+                      - img [ref=e204]
+                  - button "Talk to Copilot" [ref=e208] [cursor=pointer]:
+                    - img [ref=e209]
+    - img
+  - generic [ref=e211]:
+    - dialog
