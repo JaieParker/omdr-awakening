@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head><title>Clearing cache...</title></head>
+<body style="font-family:Georgia,serif;display:flex;align-items:center;justify-content:center;height:100vh;background:#faf7f2;color:#2c2418;">
+<div style="text-align:center;" id="msg">
+  <h2>Clearing old cache...</h2>
+  <p>One moment.</p>
+</div>
+<script>
+(async () => {
+  const msg = document.getElementById('msg');
+  try {
+    // Unregister all service workers
+    if (navigator.serviceWorker) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) await r.unregister();
+      msg.innerHTML += '<p>Unregistered ' + regs.length + ' service worker(s).</p>';
+    }
+    // Clear all caches
+    if ('caches' in window) {
+      const names = await caches.keys();
+      for (const n of names) await caches.delete(n);
+      msg.innerHTML += '<p>Cleared ' + names.length + ' cache(s).</p>';
+    }
+    msg.innerHTML += '<p style="color:#3a7a6a;font-weight:bold;">Done! Redirecting to stories...</p>';
+    setTimeout(() => { window.location.href = './index.html?fresh=' + Date.now(); }, 1500);
+  } catch(e) {
+    msg.innerHTML += '<p style="color:red;">Error: ' + e.message + '</p>';
+  }
+})();
+</script>
+</body>
+</html>
