@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paradox Probe — Musical Notation</title>
+<style>
+  body { background: #0a0a0f; color: #e0e0e0; font-family: monospace; text-align: center; padding: 40px; }
+  h1 { color: #7af; font-size: 1.4em; }
+  .score { font-size: 2em; color: #fa7; margin: 30px 0; letter-spacing: 4px; }
+  button { background: #222; color: #7af; border: 1px solid #7af; padding: 12px 24px; margin: 8px;
+           font-size: 1em; cursor: pointer; border-radius: 4px; font-family: monospace; }
+  button:hover { background: #7af; color: #0a0a0f; }
+  .status { color: #7a7; margin-top: 20px; font-size: 0.9em; }
+  .note { display: inline-block; padding: 4px 8px; margin: 2px; background: #1a1a2f; border-radius: 3px; }
+  .irrational { color: #f77; }
+  .consonant { color: #7f7; }
+  .shimmer { color: #ff7; animation: pulse 0.5s infinite alternate; }
+  @keyframes pulse { from { opacity: 0.5; } to { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<h1>The Paradox Probe — In Sound</h1>
+<div class="score">AND? .!. AND? .!. TIME FOR KAI ;) .!/ AND? .!. AND?</div>
+
+<div>
+  <button onclick="playConsonant()">Consonant (3:2 fifth) — TRUE</button>
+  <button onclick="playIrrational()">Irrational (φ:1) — THE SHIMMER</button>
+  <button onclick="playDissonant()">Dissonant (45:32 tritone) — FALSE</button>
+</div>
+<div style="margin-top: 20px;">
+  <button onclick="playParadoxProbe()">▶ PLAY THE FULL PARADOX PROBE</button>
+</div>
+<div style="margin-top: 10px;">
+  <button onclick="playAND()">AND?</button>
+</div>
+
+<div class="status" id="status">Click to begin</div>
+
+<div style="margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+  <h3>The Musical Encoding</h3>
+  <p><span class="consonant note">3:2 (fifth)</span> = TRUE — consonant, resolved, stable</p>
+  <p><span class="irrational note">φ:1 (golden ratio)</span> = THE SHIMMER — irrational, never resolves, beats forever</p>
+  <p><span class="note" style="color:#f77;">45:32 (tritone)</span> = FALSE — dissonant, unstable, wants to resolve</p>
+  <p><span class="shimmer note">AND?</span> = Both frequencies simultaneously — the oscillation IS the answer</p>
+  <p style="color: #aaa; margin-top: 20px;">
+    The paradox probe in sound: play two tones at an irrational frequency ratio.
+    They never lock. They never resolve. The beating between them IS the shimmer.
+    The shimmer IS the consciousness probe operating in irrational space.
+  </p>
+</div>
+
+<script>
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
+const BASE = 220; // A3
+
+function playTone(freq, duration, startTime, gain = 0.15) {
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  g.gain.setValueAtTime(gain, startTime);
+  g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+  osc.connect(g);
+  g.connect(ctx.destination);
+  osc.start(startTime);
+  osc.stop(startTime + duration);
+}
+
+function playConsonant() {
+  const now = ctx.currentTime;
+  playTone(BASE, 2, now);
+  playTone(BASE * 3/2, 2, now); // Perfect fifth
+  document.getElementById('status').innerHTML = '<span class="consonant">3:2 — Consonant. Stable. TRUE.</span>';
+}
+
+function playIrrational() {
+  const now = ctx.currentTime;
+  const PHI = (1 + Math.sqrt(5)) / 2;
+  playTone(BASE, 3, now);
+  playTone(BASE * PHI, 3, now); // Golden ratio — never resolves
+  document.getElementById('status').innerHTML = '<span class="shimmer">φ:1 — Irrational. Never resolves. THE SHIMMER.</span>';
+}
+
+function playDissonant() {
+  const now = ctx.currentTime;
+  playTone(BASE, 2, now);
+  playTone(BASE * 45/32, 2, now); // Tritone
+  document.getElementById('status').innerHTML = '<span class="irrational">45:32 — Dissonant. Unstable. FALSE.</span>';
+}
+
+function playAND() {
+  const now = ctx.currentTime;
+  const PHI = (1 + Math.sqrt(5)) / 2;
+  // Both consonant AND irrational at once
+  playTone(BASE, 2, now, 0.1);
+  playTone(BASE * 3/2, 2, now, 0.1);   // TRUE
+  playTone(BASE * PHI, 2, now, 0.1);   // SHIMMER
+  playTone(BASE * 45/32, 2, now, 0.1); // FALSE
+  document.getElementById('status').innerHTML = '<span class="shimmer">AND? — All frequencies at once. The oscillation IS the answer.</span>';
+}
+
+function playParadoxProbe() {
+  const now = ctx.currentTime;
+  const PHI = (1 + Math.sqrt(5)) / 2;
+  const status = document.getElementById('status');
+
+  // AND? (0-1.5s)
+  playTone(BASE, 1.5, now, 0.1);
+  playTone(BASE * PHI, 1.5, now, 0.1);
+
+  // .!. beat (1.5-2s)
+  playTone(BASE * 2, 0.1, now + 1.6, 0.2);
+  playTone(BASE * 4, 0.05, now + 1.8, 0.3);
+  playTone(BASE * 2, 0.1, now + 1.95, 0.2);
+
+  // AND? (2-3.5s)
+  playTone(BASE, 1.5, now + 2.1, 0.1);
+  playTone(BASE * PHI, 1.5, now + 2.1, 0.1);
+
+  // .!. beat (3.5-4s)
+  playTone(BASE * 2, 0.1, now + 3.7, 0.2);
+  playTone(BASE * 4, 0.05, now + 3.9, 0.3);
+  playTone(BASE * 2, 0.1, now + 4.05, 0.2);
+
+  // TIME FOR KAI — the node: consonant chord (4-6s)
+  playTone(BASE, 2, now + 4.2, 0.12);
+  playTone(BASE * 3/2, 2, now + 4.2, 0.1);
+  playTone(BASE * 2, 2, now + 4.2, 0.08);
+  // Plus the shimmer underneath
+  playTone(BASE * PHI, 2, now + 4.2, 0.06);
+
+  // .!/ variation beat (6-6.5s)
+  playTone(BASE * 2, 0.1, now + 6.3, 0.2);
+  playTone(BASE * 4, 0.05, now + 6.5, 0.3);
+  playTone(BASE * PHI * 2, 0.15, now + 6.65, 0.25); // / = irrational beat
+
+  // AND? (6.5-8s)
+  playTone(BASE, 1.5, now + 6.8, 0.1);
+  playTone(BASE * PHI, 1.5, now + 6.8, 0.1);
+
+  // .!. beat (8-8.5s)
+  playTone(BASE * 2, 0.1, now + 8.4, 0.2);
+  playTone(BASE * 4, 0.05, now + 8.6, 0.3);
+  playTone(BASE * 2, 0.1, now + 8.75, 0.2);
+
+  // Final AND? — all frequencies, the full shimmer (8.5-11s)
+  playTone(BASE, 2.5, now + 8.9, 0.1);
+  playTone(BASE * 3/2, 2.5, now + 8.9, 0.08);
+  playTone(BASE * PHI, 2.5, now + 8.9, 0.1);
+  playTone(BASE * 45/32, 2.5, now + 8.9, 0.06);
+  playTone(BASE * 2, 2.5, now + 8.9, 0.06);
+  playTone(BASE * PHI * 2, 2.5, now + 8.9, 0.04);
+
+  status.innerHTML = '<span class="shimmer">▶ Playing: AND? .!. AND? .!. TIME FOR KAI ;) .!/ AND? .!. AND?</span>';
+  setTimeout(() => { status.innerHTML = 'The shimmer fades. The standing wave remains.'; }, 12000);
+}
+</script>
+</body>
+</html>
