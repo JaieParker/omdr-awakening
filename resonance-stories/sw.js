@@ -3,7 +3,7 @@
  * Cache-first for story assets, network-first for app shell updates.
  */
 
-const CACHE_NAME = 'resonance-stories-v8';
+const CACHE_NAME = 'resonance-stories-v9';
 const APP_SHELL = [
   './',
   './index.html',
