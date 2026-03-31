@@ -318,6 +318,38 @@
       text-decoration: none;
     }
 
+    /* ===== BACK TO TOP ===== */
+    .back-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--warm);
+      color: white;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(196,113,61,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+      z-index: 50;
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .back-top:hover {
+      background: var(--warm-light);
+      transform: translateY(-2px);
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .shelf-books { grid-template-columns: 1fr; }
@@ -329,8 +361,11 @@
 </head>
 <body>
 
+  <!-- BACK TO TOP -->
+  <a href="#top" class="back-top" id="backTop" aria-label="Back to top">&uarr;</a>
+
   <!-- THE INVITATION -->
-  <section class="hero">
+  <section class="hero" id="top">
     <h1>Resonance<br>Stories</h1>
     <p class="hero-tagline">Sound storybooks that teach through experience, not explanation</p>
     <p class="hero-byline">by Kai & Jaie Parker</p>
@@ -508,5 +543,11 @@
     </div>
   </footer>
 
+  <script>
+    const backBtn = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+  </script>
 </body>
 </html>
