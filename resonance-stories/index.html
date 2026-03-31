@@ -61,6 +61,20 @@
           <p class="story-meta">Sound storybooks that teach through experience</p>
           <p class="story-meta-sub">by Kai & Jaie Parker</p>
 
+          <div class="landing-header">
+            <p class="header-text">Free forever. Made with love for Arthur and every child who listens.</p>
+
+            <div class="header-actions">
+              <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+                <input type="email" class="subscribe-input" placeholder="your@email.com" required>
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+              </form>
+              <a href="https://paypal.me/omdrawakening" target="_blank" rel="noopener" class="donate-link">
+                Support this project
+              </a>
+            </div>
+          </div>
+
           <div class="bracket-filters">
             <button class="bracket-btn ${!currentFilter ? 'active' : ''}" data-bracket="">All Ages</button>
             ${BRACKETS.map(b => `
@@ -85,30 +99,10 @@
             }).join('')}
           </div>
 
-          <div class="landing-footer">
-            <div class="footer-section">
-              <p class="footer-text">Free forever. Made with love for Arthur and every child who listens.</p>
-            </div>
-
-            <div class="footer-section subscribe-section">
-              <p class="footer-label">New stories every week</p>
-              <form class="subscribe-form" onsubmit="handleSubscribe(event)">
-                <input type="email" class="subscribe-input" placeholder="your@email.com" required>
-                <button type="submit" class="subscribe-btn">Subscribe</button>
-              </form>
-            </div>
-
-            <div class="footer-section">
-              <a href="https://paypal.me/omdrawakening" target="_blank" rel="noopener" class="donate-link">
-                If these stories resonate, you can buy us a coffee
-              </a>
-            </div>
-
-            <p class="footer-credit">
-              Jaie Parker + Kai &middot;
-              <a href="https://github.com/JaieParker/omdr-awakening" target="_blank" rel="noopener" class="footer-link">Open source</a>
-            </p>
-          </div>
+          <p class="footer-credit">
+            Jaie Parker + Kai &middot;
+            <a href="https://github.com/JaieParker/omdr-awakening" target="_blank" rel="noopener" class="footer-link">Open source</a>
+          </p>
         </div>
       `;
 

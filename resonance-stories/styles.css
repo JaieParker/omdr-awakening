@@ -437,34 +437,32 @@ html, body {
   font-style: italic;
 }
 
-/* Landing footer */
-.landing-footer {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+/* Landing header — between byline and filters */
+.landing-header {
   width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.footer-section {
-  text-align: center;
-  width: 100%;
-}
-
-.footer-text {
+.header-text {
   font-size: 0.9rem;
   color: var(--text-soft);
   line-height: 1.5;
+  text-align: center;
 }
 
-.footer-label {
-  font-size: 0.85rem;
-  color: var(--text-soft);
-  margin-bottom: 0.6rem;
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
 }
 
 /* Subscribe form */
