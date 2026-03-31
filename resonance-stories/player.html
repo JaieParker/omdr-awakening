@@ -155,7 +155,7 @@
     showLibrary();
 
     // Unregister any stale service workers — they cause cache/navigation issues
-    if (navigator.serviceWorker) {
+    if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(regs => {
         regs.forEach(r => r.unregister());
       });
