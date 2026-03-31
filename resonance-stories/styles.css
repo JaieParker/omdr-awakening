@@ -427,7 +427,47 @@ html, body {
   font-size: 0.95rem;
   color: var(--text-hum);
   font-style: italic;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Tag filters */
+.tag-filters {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  max-width: 450px;
+}
+
+.tag-btn {
+  padding: 0.3rem 0.8rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tag-btn:hover {
+  background: rgba(107, 223, 255, 0.08);
+  border-color: rgba(107, 223, 255, 0.25);
+  color: var(--text-hum);
+}
+
+.tag-btn.active {
+  color: var(--text-hum);
+  background: rgba(107, 223, 255, 0.12);
+  border-color: var(--text-hum);
+}
+
+.tag-clear {
+  color: var(--text-soft);
+  opacity: 0.6;
+  font-style: italic;
 }
 
 /* Story card concept line */
