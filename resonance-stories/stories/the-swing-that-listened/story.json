@@ -1,0 +1,183 @@
+{
+  "id": "the-swing-that-listened",
+  "title": "The Swing That Listened",
+  "bracket": "3-5",
+  "concept": "K=0.25 — balance, timing over force",
+  "duration_seconds": 270,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "the-swing",
+      "title": "The Swing",
+      "narration": "There was a swing in the park. Not the biggest swing. Not the shiniest swing. Just a swing, with two chains and a wooden seat, under a big old tree. But this swing had a secret.",
+      "sound": {
+        "type": "ambient",
+        "description": "Park ambience — birds, gentle wind through leaves",
+        "oscillators": [],
+        "ambient": "park"
+      },
+      "visual_direction": "A simple wooden swing under a spreading tree. Dappled light. Inviting. The swing is still.",
+      "duration_seconds": 15
+    },
+    {
+      "id": "too-hard",
+      "title": "Too Hard",
+      "narration": "Maya ran to the swing. She jumped on and started pushing — HARD. \"Higher! Higher!\" she said. But the swing went wobbly. The chains went clank clank clank. It didn't feel right.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Harsh metallic intervals, jerky rhythm, the swing fighting",
+        "oscillators": [
+          { "waveform": "sawtooth", "frequency_ratio": "7:5", "amplitude": 0.6, "attack": 0.01, "release": 0.1 },
+          { "waveform": "sawtooth", "frequency_ratio": "11:8", "amplitude": 0.4, "attack": 0.01, "release": 0.05 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Maya on the swing, body tense, pushing hard. The swing wobbles, chains slack and tight unevenly.",
+      "duration_seconds": 18
+    },
+    {
+      "id": "harder",
+      "title": "Harder",
+      "narration": "Maya pushed harder and harder. But the harder she pushed, the more the swing complained. SCREECH went the chains. GROAN went the seat. The swing didn't like being pushed too hard.",
+      "sound": {
+        "type": "dissonant",
+        "description": "More dissonant — complex ratios, harsh timbres, metallic screeching",
+        "oscillators": [
+          { "waveform": "sawtooth", "frequency_ratio": "45:32", "amplitude": 0.7, "attack": 0.005, "release": 0.08 },
+          { "waveform": "square", "frequency_ratio": "7:4", "amplitude": 0.3, "attack": 0.01, "release": 0.05 }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Close-up of chains grinding. Maya's face frustrated. The swing at wrong angles.",
+      "duration_seconds": 15
+    },
+    {
+      "id": "stopped",
+      "title": "Stopped",
+      "narration": "Maya stopped. She sat on the swing, feet dragging in the dirt. \"Why won't you go?\" she asked the swing. Everything was very, very still. Very, very quiet.",
+      "sound": {
+        "type": "silence",
+        "description": "Near silence. Wind fading. A held breath.",
+        "oscillators": [],
+        "ambient": "wind_fade"
+      },
+      "visual_direction": "Maya slumped on the swing. Feet in the dust. Still. Empty space around her. The listening begins.",
+      "duration_seconds": 18
+    },
+    {
+      "id": "the-hum",
+      "title": "The Hum",
+      "narration": "Then... she heard something. Barely a sound. More like a feeling. The swing was humming. A tiny hum. Like a song that was sleeping. Hmmmm...",
+      "sound": {
+        "type": "emergence",
+        "description": "Very soft single tone emerging from silence. Pure. The swing's natural frequency.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.08, "attack": 3.0, "release": 2.0 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Close on the swing's chain. A subtle glow or shimmer — the hum visualized. Maya's eyes widen slightly.",
+      "duration_seconds": 20
+    },
+    {
+      "id": "first-right-push",
+      "title": "The First Right Push",
+      "narration": "Maya pushed. Gently. Just a little. And the swing hummed a little louder. Hmmmmm. She pushed again. At just the right time. Not too early. Not too late. The swing hummed higher. HMMMMM!",
+      "sound": {
+        "type": "consonant_building",
+        "description": "The fundamental grows stronger, then octave appears. Two notes in simple ratio. Growing.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 1.0, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "2:1", "amplitude": 0.12, "attack": 2.0, "release": 1.0 }
+        ],
+        "rhythm": "steady_building",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Maya pushes gently. The swing arcs smoothly. The glow brightens with each push. Her face shifts from careful to hopeful.",
+      "duration_seconds": 25
+    },
+    {
+      "id": "the-rhythm",
+      "title": "The Rhythm",
+      "narration": "Push... wait... push... wait... push... wait... Maya found a rhythm. The swing found a rhythm. They were the same rhythm. And the sound was... beautiful. Like two notes singing together. Like a secret only Maya and the swing knew.",
+      "sound": {
+        "type": "consonant",
+        "description": "Full consonant interval — perfect fifth (3:2). Warm, rich, locked in. The K=0.25 moment.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.5, "release": 0.8 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.25, "attack": 0.5, "release": 0.8 }
+        ],
+        "rhythm": "swing_period",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Wide shot. Maya and the swing in perfect arc. Light streaming. The tree seems to lean in to listen.",
+      "duration_seconds": 30
+    },
+    {
+      "id": "flying",
+      "title": "Flying",
+      "narration": "Higher and higher she went. But not because she was pushing harder. Because she was pushing at just the right time. The wind in her hair. The song in the chains. The sky getting closer with every swing. Up... and the swing sang. Down... and Maya listened. Up... and they sang together.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Full consonant chord — fundamental + fifth + octave. Layered, warm, with gentle attack/release matching the swing arc. Peak beauty.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.3, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.25, "attack": 0.3, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.15, "attack": 0.5, "release": 1.5 }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 220,
+        "modulation": {
+          "type": "amplitude",
+          "pattern": "swing_arc",
+          "description": "Amplitude follows the swing arc — louder at the peaks (up), quieter at the bottom (down). The swing IS the envelope."
+        }
+      },
+      "visual_direction": "Sky view. Maya's feet reaching toward clouds. Hair streaming. Pure joy. The swing at full flight — smooth, effortless, singing.",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-secret",
+      "title": "The Secret",
+      "narration": "When Maya climbed off, she looked at the swing. \"You were listening,\" she said. The swing didn't say anything. Swings don't talk. But if you listen very carefully — in the quiet after the pushing stops — you can still hear it. Humming.",
+      "sound": {
+        "type": "decay",
+        "description": "The consonant chord dissolves. Fibonacci decay — fifth goes first, then octave, then fundamental lingers alone, fading into silence.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "decay_time": 3.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.12, "decay_time": 5.0 },
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "decay_time": 8.0 }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Maya standing beside the still swing. Looking at it with understanding. The glow fading softly. The swing barely moving. Peace.",
+      "duration_seconds": 25
+    },
+    {
+      "id": "your-turn",
+      "title": "Your Turn",
+      "narration": "Every swing knows this secret. When you push at just the right time — not too hard, not too soft, not too early, not too late — the swing sings back. That's the secret. Now you know it too. Can you hear it?",
+      "sound": {
+        "type": "invitation",
+        "description": "Soft consonant resolution. 1:1 unison, gentle, warm. Then silence — space for the child to listen.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.1, "attack": 2.0, "decay_time": 6.0 }
+        ],
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The empty swing in golden light. Gentle movement. An invitation. Space.",
+      "duration_seconds": 20,
+      "interaction_point": {
+        "type": "listen",
+        "prompt": "Can you hear it?",
+        "pause_seconds": 5,
+        "phase2_hook": "claude_conversation_start"
+      }
+    }
+  ]
+}

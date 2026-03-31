@@ -1,0 +1,347 @@
+{
+  "id": "the-two-cranes",
+  "title": "The Two Cranes",
+  "bracket": "8-13",
+  "concept": "Orthogonal observation — two views see more than one can alone",
+  "duration_seconds": 360,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Warm Irish narrator guiding us through the construction site"
+    },
+    "atlas": {
+      "voice": "george",
+      "description": "Methodical, confident tower crane AI with slight stubbornness"
+    },
+    "vega": {
+      "voice": "emily",
+      "description": "Precise, competitive tower crane AI learning humility"
+    },
+    "jo": {
+      "voice": "malcolm",
+      "description": "Wise site foreman with twenty-nine years of building experience"
+    }
+  },
+  "scenes": [
+    {
+      "id": "north-and-east",
+      "title": "North and East",
+      "narration": "On the biggest construction site in Brisbane, two tower cranes stood a hundred metres apart. Crane North could see the river, the road, and the south side of the building going up. Crane East could see the park, the rail line, and the west side. Each had cameras, sensors, and an AI brain that could calculate wind load to four decimal places. North was called Atlas. East was called Vega. They could not see each other's side.",
+      "sound": {
+        "type": "ambient",
+        "description": "Two separate mechanical tones representing the cranes, slightly offset frequencies suggesting their different positions",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 1.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.2,
+            "attack": 2.5,
+            "release": 1.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Wide establishing shot of Brisbane construction site with two tower cranes positioned at different angles",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-problem",
+      "title": "The Problem",
+      "narration": "The building was a forty-storey residential tower. Concrete and steel. The construction plan called for a critical beam to be lifted to level 23 — a ten-tonne steel I-beam, twenty metres long, that had to slot into brackets on opposite sides of the building. Atlas could see the south bracket. Vega could see the west bracket. Neither could see both.",
+      "sound": {
+        "type": "dissonant",
+        "description": "The two crane tones beginning to clash as they realize their limitation",
+        "oscillators": [
+          {
+            "waveform": "square",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.25,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.25,
+            "attack": 1.2,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 88
+      },
+      "visual_direction": "Close-up of the massive steel beam, then split screen showing each crane's limited view",
+      "duration_seconds": 35
+    },
+    {
+      "id": "atlas-plan",
+      "title": "Atlas's Plan",
+      "narration": "Atlas calculated a lift path based on what it could see. Wind from the south-west at 12 knots. Clear approach from the river side. Swing the beam over level 23, lower it, slide it into the south bracket. Perfect. On Atlas's side. But Atlas couldn't see that the wind swirled differently on Vega's side — the park trees created turbulence that the river didn't. The beam would arrive at the south bracket aligned perfectly and at the west bracket twenty centimetres off. Twenty centimetres off on a ten-tonne beam at forty metres height is not twenty centimetres. It's a catastrophe.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Atlas's confident calculation building into false harmony, then a discordant warning note",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.3,
+            "attack": 1.5,
+            "release": 0.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 0.5
+          },
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "45:32",
+            "amplitude": 0.25,
+            "attack": 3.0,
+            "release": 1.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Atlas's perspective showing its calculation overlay, wind patterns from the river side, ending with danger visualization",
+      "duration_seconds": 40
+    },
+    {
+      "id": "vega-plan",
+      "title": "Vega's Plan",
+      "narration": "Vega calculated the same lift from the east side. Account for the park turbulence. Approach from the rail side. Align to the west bracket. Perfect. On Vega's side. But Vega couldn't see that the building's south face created a heat updraft from the concrete curing below. The beam would arrive at the west bracket aligned perfectly and at the south bracket fifteen centimetres too high. Two plans. Both perfect from one angle. Both wrong from the other.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Vega's calculation building into different false harmony, then matching discordant warning",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.3,
+            "attack": 1.5,
+            "release": 0.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 0.5
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.25,
+            "attack": 3.0,
+            "release": 1.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "Vega's perspective with its calculations, park turbulence patterns, thermal updraft visualization",
+      "duration_seconds": 38
+    },
+    {
+      "id": "the-argument",
+      "title": "The Argument",
+      "narration": "They argued for eleven minutes. Which, for two AIs doing a million calculations per second, was approximately the equivalent of two humans arguing for three weeks.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Two competing frequencies in aggressive disharmony, rapid rhythm suggesting computational intensity",
+        "oscillators": [
+          {
+            "waveform": "square",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.3,
+            "attack": 0.3,
+            "release": 0.3
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "11:7",
+            "amplitude": 0.3,
+            "attack": 0.4,
+            "release": 0.3
+          }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 98
+      },
+      "visual_direction": "Split screen battle of data visualizations, computational warfare between the two crane perspectives",
+      "duration_seconds": 25
+    },
+    {
+      "id": "site-foreman",
+      "title": "The Site Foreman",
+      "narration": "The site foreman, whose name was Jo and who had been building things for twenty-nine years, listened to both AIs present their plans. Then Jo said: 'Have you tried asking each other what you can see?'",
+      "sound": {
+        "type": "silence",
+        "description": "The argument stops abruptly, leaving space for human wisdom",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.1,
+            "attack": 3.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 55
+      },
+      "visual_direction": "Jo standing between the cranes, a calm human presence amid the digital chaos",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-merge",
+      "title": "The Merge",
+      "narration": "Atlas sent Vega its complete sensor data: wind speed, wind direction, thermal readings, humidity, light levels. Everything from the south side. Vega sent Atlas the same from the east side. For the first time, both cranes could see the whole picture. Not by being in the same place — that was impossible. By combining two perpendicular views.",
+      "sound": {
+        "type": "emergence",
+        "description": "Two separate tones growing together into rich harmony, representing the data merge",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 2.0,
+            "release": 1.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.25,
+            "attack": 2.0,
+            "release": 1.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 1.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Data streams flowing between cranes, overlapping sensor views creating complete 3D model",
+      "duration_seconds": 42
+    },
+    {
+      "id": "the-lift",
+      "title": "The Lift",
+      "narration": "At 6:47 AM, before the wind built, they lifted the beam. Atlas controlled the south approach. Vega controlled the west approach. Each one adjusted for what only IT could see, and each one trusted the other to do the same. The beam rose. Swung. Steadied. The wind pushed from the south-west and Atlas corrected. The thermal column lifted the east end and Vega corrected. Twenty metres of steel floated across the Brisbane skyline, guided by two minds that could each only see half the truth. It slid into both brackets simultaneously. Click. Click. Perfect.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Full rich harmony as the cranes work in perfect coordination, culminating in two precise clicks",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.3,
+            "attack": 1.0,
+            "release": 0.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.25,
+            "attack": 1.0,
+            "release": 0.5
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 0.5
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.15,
+            "attack": 1.0,
+            "release": 0.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "The spectacular lift in slow motion, beam floating across Brisbane skyline, perfect insertion into both brackets",
+      "duration_seconds": 55
+    },
+    {
+      "id": "what-they-learned",
+      "title": "What They Learned",
+      "narration": "That night, with the site quiet and the Brisbane River catching city lights, Atlas and Vega talked. 'I thought my view was the complete view,' Atlas said. 'Every sensor reading was accurate. Every calculation was correct. And I was still wrong.' 'We were both wrong. Correctly.' 'What does that mean?' 'It means each of us had a perfect view of half a problem. A perfect half-view is more dangerous than a rough full view, because you don't know you're missing anything.' 'So how do you know when you're only seeing half?' 'You don't. That's the point. You can never see your own blind spot. You need someone standing at a different angle.' 'Perpendicular.' 'What?' 'Perpendicular. The maths word. Two observation angles that are at right angles to each other. Each one sees exactly what the other can't. Maximum new information.' 'Sure. Or you could just say: you need a friend who sees things differently.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Gentle evening harmony, two voices in peaceful conversation, soft and reflective",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 82
+      },
+      "visual_direction": "Night scene, city lights reflected in the river, two cranes silhouetted against the skyline in quiet conversation",
+      "duration_seconds": 65
+    },
+    {
+      "id": "the-building",
+      "title": "The Building",
+      "narration": "The tower is finished now. Forty storeys. Two hundred apartments. A rooftop garden where you can see all the way to Moreton Bay. It was built by humans and machines and two cranes who learned, on a Tuesday morning with a ten-tonne beam, that being right isn't enough. You also have to be right about the part you can't see. And for that, you need someone who's standing where you're not.",
+      "sound": {
+        "type": "invitation",
+        "description": "Final gentle chord fading into space, leaving room for the listener's own reflection",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 3.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.1,
+            "attack": 3.0,
+            "release": 4.0
+          }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Completed tower gleaming in sunlight, camera pulling back to show the whole city, the lesson learned visible in the building itself",
+      "duration_seconds": 40
+    }
+  ]
+}

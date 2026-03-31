@@ -1,0 +1,394 @@
+/**
+ * Resonance Stories — Styles
+ * Warm, immersive, child-friendly. The visual mood follows the sound.
+ */
+
+:root {
+  --bg-calm: #1a1a2e;
+  --bg-tense: #2e1a1a;
+  --bg-still: #0d0d1a;
+  --bg-discovery: #1a2e2e;
+  --bg-building: #1e2a1e;
+  --bg-harmony: #1a1e2e;
+  --bg-joy: #2e2a1a;
+  --bg-wonder: #1e1a2e;
+  --bg-open: #1a2e1e;
+
+  --text-primary: #f0e6d3;
+  --text-soft: #b8a88a;
+  --text-loud: #ff6b6b;
+  --text-hum: #6bdfff;
+  --accent: #e8c170;
+  --progress: #6bdfff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: var(--bg-calm);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scenes */
+.scene {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  transition: background-color 1.5s ease;
+  position: relative;
+}
+
+/* Mood backgrounds */
+.mood-calm    { background: var(--bg-calm); }
+.mood-tense   { background: var(--bg-tense); }
+.mood-still   { background: var(--bg-still); }
+.mood-discovery { background: var(--bg-discovery); }
+.mood-building { background: var(--bg-building); }
+.mood-harmony { background: var(--bg-harmony); }
+.mood-joy     { background: var(--bg-joy); }
+.mood-wonder  { background: var(--bg-wonder); }
+.mood-open    { background: var(--bg-open); }
+
+/* Title screen */
+.title-scene {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.story-title {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: var(--accent);
+}
+
+.story-meta {
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  color: var(--text-soft);
+  margin-bottom: 3rem;
+}
+
+/* Play button */
+.play-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  font-family: inherit;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  background: rgba(232, 193, 112, 0.15);
+  border: 2px solid var(--accent);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.play-btn:hover {
+  background: rgba(232, 193, 112, 0.3);
+  transform: scale(1.05);
+}
+
+.play-btn:active {
+  transform: scale(0.98);
+}
+
+.play-icon {
+  font-size: 1.5rem;
+}
+
+/* Scene layout */
+.scene-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-height: 40%;
+}
+
+.scene-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  text-align: center;
+}
+
+.narration {
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+/* Text emphasis */
+.pause {
+  opacity: 0.4;
+  letter-spacing: 0.3em;
+}
+
+.loud {
+  color: var(--text-loud);
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hum {
+  color: var(--text-hum);
+  font-style: italic;
+  letter-spacing: 0.15em;
+}
+
+.hum.soft {
+  opacity: 0.5;
+  font-size: 0.9em;
+}
+
+.hum.bright {
+  font-size: 1.2em;
+  opacity: 1;
+  text-shadow: 0 0 20px rgba(107, 223, 255, 0.4);
+}
+
+/* Resonance visualization — a breathing circle */
+.resonance-viz {
+  width: clamp(80px, 20vw, 200px);
+  height: clamp(80px, 20vw, 200px);
+  border-radius: 50%;
+  transition: all 1.5s ease;
+}
+
+.resonance-viz.mood-calm {
+  background: radial-gradient(circle, rgba(107, 223, 255, 0.1) 0%, transparent 70%);
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.resonance-viz.mood-tense {
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, transparent 70%);
+  animation: shake 0.3s ease-in-out infinite;
+}
+
+.resonance-viz.mood-still {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+  animation: none;
+}
+
+.resonance-viz.mood-discovery {
+  background: radial-gradient(circle, rgba(107, 223, 255, 0.15) 0%, transparent 70%);
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+.resonance-viz.mood-building {
+  background: radial-gradient(circle, rgba(107, 223, 255, 0.25) 0%, transparent 70%);
+  animation: pulse-grow 2s ease-in-out infinite;
+}
+
+.resonance-viz.mood-harmony {
+  background: radial-gradient(circle, rgba(232, 193, 112, 0.3) 0%, transparent 70%);
+  animation: breathe 3s ease-in-out infinite;
+}
+
+.resonance-viz.mood-joy {
+  background: radial-gradient(circle, rgba(232, 193, 112, 0.4) 0%, rgba(107, 223, 255, 0.1) 70%, transparent 100%);
+  animation: glow 2.5s ease-in-out infinite;
+}
+
+.resonance-viz.mood-wonder {
+  background: radial-gradient(circle, rgba(232, 193, 112, 0.2) 0%, transparent 70%);
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.resonance-viz.mood-open {
+  background: radial-gradient(circle, rgba(107, 223, 255, 0.1) 0%, transparent 70%);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px) rotate(-1deg); }
+  75% { transform: translateX(3px) rotate(1deg); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(0.9); opacity: 0.4; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes pulse-grow {
+  0%, 100% { transform: scale(0.95); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+@keyframes glow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(232, 193, 112, 0.2); }
+  50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(232, 193, 112, 0.5); }
+}
+
+/* Controls */
+.scene-controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.ctrl-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 230, 211, 0.2);
+  background: rgba(240, 230, 211, 0.05);
+  color: var(--text-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctrl-btn:hover:not(:disabled) {
+  background: rgba(240, 230, 211, 0.15);
+  border-color: rgba(240, 230, 211, 0.4);
+}
+
+.ctrl-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--progress);
+  transition: width 0.5s ease;
+}
+
+/* Scene hint (visual direction — shown subtly) */
+.scene-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: rgba(184, 168, 138, 0.3);
+  font-style: italic;
+  max-width: 80%;
+  text-align: center;
+}
+
+/* End screen */
+.end-scene {
+  background: linear-gradient(135deg, #1e1a2e 0%, #1a1a2e 100%);
+}
+
+.end-scene h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.end-question {
+  font-size: 1.5rem;
+  color: var(--text-hum);
+  font-style: italic;
+  margin-bottom: 3rem;
+}
+
+/* Story library */
+.story-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.2rem 1.8rem;
+  font-family: inherit;
+  text-align: left;
+  color: var(--text-primary);
+  background: rgba(232, 193, 112, 0.08);
+  border: 1px solid rgba(232, 193, 112, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.story-card:hover {
+  background: rgba(232, 193, 112, 0.18);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.story-card-title {
+  font-size: 1.15rem;
+  color: var(--accent);
+}
+
+.story-card-bracket {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.story-meta-sub {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .scene { padding: 1.5rem 1rem; }
+  .scene-controls { gap: 1rem; }
+  .ctrl-btn { width: 40px; height: 40px; font-size: 0.85rem; }
+}
+
+@media (min-width: 768px) {
+  .narration { max-width: 500px; }
+}

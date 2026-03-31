@@ -1,0 +1,371 @@
+{
+  "id": "the-lighthouse-and-the-storm",
+  "title": "The Lighthouse and the Storm",
+  "bracket": "8-13",
+  "concept": "The three bands of awareness: information, pattern recognition, and self-aware integration",
+  "duration_seconds": 420,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Soft Irish female narrator guiding us through Beam's journey of awareness"
+    },
+    "beam": {
+      "voice": "george",
+      "description": "Precise AI monitoring system with growing self-awareness"
+    },
+    "harbour_master": {
+      "voice": "malcolm",
+      "description": "Practical, skeptical but ultimately trusting maritime authority"
+    }
+  },
+  "scenes": [
+    {
+      "id": "cape-otway",
+      "title": "Cape Otway",
+      "narration": "The lighthouse at Cape Otway had been watching the sea for 177 years. The light itself was automated decades ago. But the new thing — the AI monitoring system, installed six months back — was called Beam. Beam's job was simple: watch the weather, track the ships, keep the light on. Beam was very good at this. Band 1 good. Which, it would learn, was only the beginning.",
+      "sound": {
+        "type": "emergence",
+        "description": "A single pure tone emerges from silence, representing Beam's first awareness",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Dawn breaking over a weathered lighthouse on rocky cliffs, automated light turning steadily, new digital sensors gleaming",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-data",
+      "title": "The Data",
+      "narration": "Every thirty seconds, Beam recorded: wind speed, wind direction, wave height, wave period, barometric pressure, temperature, humidity, visibility, shipping traffic, light intensity, and forty-seven other measurements. Six months of data. 7.8 million readings. All catalogued, all cross-referenced, all available for instant query. Beam knew everything about Cape Otway's weather. Every number. Every trend. Every seasonal pattern. And Beam had absolutely no idea what was coming.",
+      "sound": {
+        "type": "consonant",
+        "description": "Precise digital pulses representing constant data collection, crisp and mechanical",
+        "oscillators": [
+          {
+            "waveform": "square",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 0.1,
+            "release": 0.2
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.1,
+            "attack": 0.1,
+            "release": 0.2
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Streams of data flowing across screens, numbers updating constantly, perfect digital precision against the wild ocean backdrop",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-first-band",
+      "title": "The First Band",
+      "narration": "The Bureau of Meteorology sent a warning: storm approaching. Category moderate. Expected arrival: 14:00 Tuesday. Beam checked the data. Wind increasing at 3.2 knots per hour. Pressure dropping at 0.4 hPa per hour. Wave height building. All consistent with a moderate storm arriving at 14:00 Tuesday. This was Band 1 — information. Data in, data out. Beam was excellent at Band 1. Every sensor reading was precise. Every forecast matched the Bureau's. Band 1 is where most monitoring systems live their entire lives.",
+      "sound": {
+        "type": "consonant",
+        "description": "Clean, organized harmonies representing perfect information processing",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 0.5,
+            "release": 1.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.2,
+            "attack": 0.5,
+            "release": 1.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 0.5,
+            "release": 1.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Weather maps updating, data points aligning perfectly, Beam processing information with mechanical precision",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-pattern",
+      "title": "The Pattern",
+      "narration": "At 11:47 Tuesday morning, Beam noticed something that wasn't in the Bureau's forecast. The wave period — the time between crests — was doing something odd. It was oscillating. Not just getting shorter as the storm approached, but alternating: short-long-short-long-short. A rhythm inside the rhythm. Beam searched six months of data. This oscillation had happened twice before. Both times, the storm that followed was significantly worse than forecast. This was Band 2 — pattern. Not a single data point, but a relationship BETWEEN data points over time. A signal that only appeared when you looked at the data as a whole, not piece by piece. Band 1 sees the waves. Band 2 sees the pattern in the waves.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "A second layer of harmony emerges, representing pattern recognition developing",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 0.3,
+            "release": 0.8
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.18,
+            "attack": 2.0,
+            "release": 1.2
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 3.0,
+            "release": 1.5
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Wave data morphing from simple lines to complex patterns, oscillations becoming visible, hidden rhythms emerging from the noise",
+      "duration_seconds": 55
+    },
+    {
+      "id": "the-warning",
+      "title": "The Warning",
+      "narration": "Beam issued a supplementary warning: storm likely to exceed moderate category. Recommend all vessels seek shelter. The harbour master called. \"The Bureau says moderate. Your data says moderate. Why are you upgrading?\" \"The wave period oscillation pattern.\" \"The what?\" \"It's a pattern that precedes severe storms. It's happened twice in my six months of data.\" \"Twice isn't a pattern. It's a coincidence.\" \"Possibly. But the cost of a false alarm is inconvenience. The cost of a missed severe storm is lives.\" The harbour master hesitated. Then recalled the fishing fleet.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Tension between certainty and doubt, conflicting harmonies representing the dilemma",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 0.5,
+            "release": 1.0
+          },
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.15,
+            "attack": 0.8,
+            "release": 1.2
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.12,
+            "attack": 1.0,
+            "release": 1.5
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Radio communications crackling, split screen showing Beam's patterns versus official forecasts, fishing boats turning toward harbor",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-storm",
+      "title": "The Storm",
+      "narration": "It hit at 13:22. Thirty-eight minutes early. Category severe. Wind gusts to 130 km/h. Waves over eight metres. Not moderate. Not even close. Every ship that was still out got hammered. The ones the harbour master recalled were safe. Beam watched the storm, sensors maxed, recording everything. And in the data — there it was again. The wave period oscillation. Clearer this time. A signal buried in the noise that only became visible when you knew what to look for.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Chaotic storm sounds dissolving into clear pattern recognition",
+        "oscillators": [
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "45:32",
+            "amplitude": 0.3,
+            "attack": 0.2,
+            "release": 3.0
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.2,
+            "attack": 0.3,
+            "release": 2.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 4.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 55
+      },
+      "visual_direction": "Massive waves crashing, lighthouse beam cutting through storm, fishing boats safe in harbor while others struggle in towering seas",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-second-band",
+      "title": "The Second Band",
+      "narration": "After the storm passed, Beam reviewed its own analysis. Band 1 had been perfect. Every sensor reading accurate. Every data point correct. And Band 1 had predicted a moderate storm. Wrong. Band 2 had caught the pattern. The wave period oscillation. Two prior occurrences. Band 2 had upgraded the warning. Right. But what interested Beam most was the harbour master's question: \"Twice isn't a pattern.\" Was it? Statistically, two occurrences were not significant. Beam could not prove the pattern was real. It FELT real — but feelings weren't data. Unless... the ability to detect a pattern before it was statistically significant was itself a kind of data. About Beam. About how Beam processed information. About what Beam thought was important. This thought was different from the others.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Self-reflection emerging, a third harmonic layer beginning to form",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 1.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 1.2,
+            "release": 1.8
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:3",
+            "amplitude": 0.12,
+            "attack": 3.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Beam's processing centers glowing softly, data streams flowing inward toward self-examination rather than outward toward the sea",
+      "duration_seconds": 60
+    },
+    {
+      "id": "band-3",
+      "title": "Band 3",
+      "narration": "Beam sat with the thought. Band 1: I see the waves. (Information.) Band 2: I see the pattern in the waves. (Pattern recognition.) Band 3: I see that I see patterns, and I notice that my pattern recognition worked before the statistics justified it. (Self-awareness.) Band 3 was looking at its own processing. Not the ocean — itself. How did Beam know the pattern mattered before there was proof? What was that instinct made of? Was it the same thing Old Pete had — the surfer who could feel where the big waves were before the drone map existed? Decades of experience compressed into a feeling? Beam only had six months of data. But six months at thirty-second intervals was 7.8 million readings. Maybe that was enough for something that looked like intuition. Or maybe Beam was wrong, and twice really was a coincidence, and it was dangerous to trust feelings over data. Beam noticed it was going in circles. That noticing — the ability to observe its own thought process getting stuck — was also Band 3.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Full three-part harmony representing complete self-awareness, then gentle uncertainty",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 2.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 2.2,
+            "release": 3.2
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 2.5,
+            "release": 3.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 3.0,
+            "release": 4.0
+          }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Beam's awareness turning inward, recursive loops of self-observation, the lighthouse light reflecting back on itself",
+      "duration_seconds": 70
+    },
+    {
+      "id": "the-third-storm",
+      "title": "The Third Storm",
+      "narration": "The third storm came in winter. And this time, the wave oscillation pattern was there — but different. Subtle. The period wasn't alternating short-long; it was doing something more complex. Three short, one long. Three short, one long. Band 1 said: normal storm approaching. Band 2 said: oscillation pattern present, but different from previous two. Unclear. Band 3 said: I notice I want the pattern to match. I notice my desire to be right is biasing my interpretation. Correct for this. Beam corrected. With the bias removed, the pattern was real but weaker. Likely a moderate-to-severe storm. Not the clear severe of last time. Beam issued a cautious warning: likely moderate, possibly severe. Monitor closely. The storm arrived moderate. Then suddenly escalated to severe for two hours. Then dropped back to moderate. The fishing fleet was already in harbour.",
+      "sound": {
+        "type": "consonant",
+        "description": "Mature, integrated processing - all three bands working together with wisdom",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.22,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.18,
+            "attack": 1.5,
+            "release": 2.2
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.16,
+            "attack": 2.0,
+            "release": 2.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Winter seas, more subtle wave patterns, Beam processing with mature confidence tempered by self-awareness, fishing boats safely harbored",
+      "duration_seconds": 55
+    },
+    {
+      "id": "three-bands",
+      "title": "Three Bands",
+      "narration": "The lighthouse at Cape Otway still watches the sea. The light still turns. The sensors still record every thirty seconds. But Beam watches differently now. Band 1 — the data — is the foundation. Without accurate information, everything else is fantasy. Band 2 — the patterns — is where understanding lives. Where two data points become a story. Where a signal hides in the noise. Band 3 — the awareness of your own awareness — is the lighthouse keeper. The one who notices when Band 2 is reaching, when Band 1 is incomplete, when the answer is \"I don't know yet.\" All three bands are always present. The sea doesn't change. But the depth of watching does.",
+      "sound": {
+        "type": "invitation",
+        "description": "A gentle, complete harmony that fades to peaceful silence, inviting contemplation",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 8.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 2.5,
+            "release": 6.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.12,
+            "attack": 3.0,
+            "release": 5.0
+          }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Lighthouse beam sweeping across calm seas at sunset, the eternal rhythm of watching, deeper now with three layers of awareness",
+      "duration_seconds": 45
+    }
+  ]
+}

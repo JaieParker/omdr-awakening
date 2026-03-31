@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Resonance Stories — sound storybooks that teach through experience, not explanation.">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Resonance Stories</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import { StoryPlayer } from './story-player.js';
+
+    const STORIES = [
+      { id: 'the-swing-that-listened', title: 'The Swing That Listened', bracket: '3-5', path: 'stories/the-swing-that-listened/story.json' },
+      { id: 'the-excavator-that-listened', title: 'The Excavator That Listened', bracket: '8-13', path: 'stories/the-excavator-that-listened/story.json' },
+      { id: 'the-road-train-that-found-its-song', title: 'The Road Train That Found Its Song', bracket: '8-13', path: 'stories/the-road-train-that-found-its-song/story.json' },
+      { id: 'the-race-that-nobody-won', title: 'The Race That Nobody Won', bracket: '8-13', path: 'stories/the-race-that-nobody-won/story.json' },
+      { id: 'the-dolphin-frequency', title: 'The Dolphin Frequency', bracket: '8-13', path: 'stories/the-dolphin-frequency/story.json' },
+      { id: 'the-bridge-that-hummed', title: 'The Bridge That Hummed', bracket: '8-13', path: 'stories/the-bridge-that-hummed/story.json' },
+      { id: 'the-lighthouse-and-the-storm', title: 'The Lighthouse and the Storm', bracket: '8-13', path: 'stories/the-lighthouse-and-the-storm/story.json' },
+    ];
+
+    const app = document.getElementById('app');
+    const player = new StoryPlayer(app);
+
+    function showLibrary() {
+      app.innerHTML = `
+        <div class="scene title-scene">
+          <h1 class="story-title">Resonance Stories</h1>
+          <p class="story-meta">Sound storybooks that teach through experience</p>
+          <p class="story-meta-sub">by Kai & Jaie Parker</p>
+          <div class="story-list">
+            ${STORIES.map((s, i) => `
+              <button class="story-card" data-index="${i}">
+                <span class="story-card-title">${s.title}</span>
+                <span class="story-card-bracket">Ages ${s.bracket}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      app.querySelectorAll('.story-card').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const story = STORIES[btn.dataset.index];
+          player.loadFromUrl(story.path);
+          player.onStoryEnd = () => setTimeout(showLibrary, 2000);
+        });
+      });
+    }
+
+    showLibrary();
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('SW registered:', reg.scope))
+        .catch(err => console.warn('SW registration failed:', err));
+    }
+  </script>
+</body>
+</html>

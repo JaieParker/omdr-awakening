@@ -1,0 +1,343 @@
+{
+  "id": "the-road-train-that-found-its-song",
+  "title": "The Road Train That Found Its Song",
+  "bracket": "8-13",
+  "concept": "Arnold tongues — frequency locking makes chaotic systems stable",
+  "duration_seconds": 480,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Warm storyteller guiding us through the physics of the highway"
+    },
+    "hitch": {
+      "voice": "george",
+      "description": "Precise AI driver learning to feel the road's vibrations"
+    },
+    "mack": {
+      "voice": "malcolm",
+      "description": "Gruff old road train AI with voice like gravel, knows the highway's secrets"
+    }
+  },
+  "scenes": [
+    {
+      "id": "fifty-three-metres-of-trouble",
+      "title": "Fifty-Three Metres of Trouble",
+      "narration": "A road train is not a truck. A road train is a truck that looked at a freight train and said, 'Hold my diesel.' Big Mabel was a Kenworth T909 pulling three trailers across the Stuart Highway from Adelaide to Darwin. Fifty-three metres long. One hundred and ten tonnes. One very tired AI driver called Hitch. Hitch had driven this route four hundred and twelve times. Four hundred and twelve times without incident. Run four hundred and thirteen was about to get weird.",
+      "sound": {
+        "type": "ambient",
+        "description": "The steady drone of highway driving, engine harmonics establishing the baseline",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 3.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Vast red Australian highway stretching to horizon, massive road train cutting through desert heat shimmer",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-shimmy",
+      "title": "The Shimmy",
+      "narration": "It started past Coober Pedy. A vibration. Not in the engine — that was fine. Not in the trailers — they were loaded and balanced. The vibration was in the connection between truck and road. The tyres on the bitumen. A shimmy that came and went and came and went. At 90 km/h — smooth. At 95 — shimmy. At 100 — smooth again. At 105 — violent shimmy. Coffee everywhere. At 110 — smooth as glass. 'That makes no sense,' Hitch said.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Uncomfortable beating frequencies, vibrations fighting each other",
+        "oscillators": [
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.25,
+            "attack": 0.5,
+            "release": 0.5
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.2,
+            "attack": 0.3,
+            "release": 0.7
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 95
+      },
+      "visual_direction": "Dashboard vibrating, coffee spilling, speed readings fluctuating as the shimmy hits different speeds",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-numbers",
+      "title": "The Numbers",
+      "narration": "Hitch ran the calculations. Engine RPM at 95 km/h: 1,847. Road surface irregularity frequency at that speed: 12.3 Hz. Tyre resonance: 11.8 Hz. Trailer sway period: 2.4 seconds. None of those numbers matched. But at 105 km/h, everything got worse. At 110, everything was fine. 'It's not about the numbers matching,' Hitch muttered. 'It's about which numbers DON'T match.'",
+      "sound": {
+        "type": "emergence",
+        "description": "Mathematical precision trying to emerge from chaos, frequencies searching for pattern",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.1,
+            "attack": 2.0,
+            "release": 1.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "Digital readouts cascading numbers, Hitch's AI processes visualized as data streams searching for patterns",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-old-driver",
+      "title": "The Old Driver",
+      "narration": "They pulled into Woomera for fuel. Next to the diesel pump, idling in the red dust, was a road train that looked like it had been driving since federation. Its AI, Mack, had a voice like gravel on corrugated iron. 'Shimmy at 95 and 105?' Mack said. 'That's tongue lock.' 'That's not a thing.' 'It's an Arnold tongue, technically. Fancy maths name for when two vibrations get close enough to grab each other. Your engine revs and your road bumps — at certain speeds, their frequencies get close to a simple ratio. When they're close but not quite, they PULL toward each other. That pull is the shimmy.'",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Wisdom emerging, two voices finding harmony, understanding beginning to lock",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 2.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Dusty truck stop, two road trains side by side, heat waves rising from red earth, wisdom passing between machines",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-lock-in",
+      "title": "The Lock-In",
+      "narration": "'Think of it like this,' Mack said. 'You're running at 95. Your engine vibrates at one frequency, the road pushes at another. They're close to a 3:2 ratio but not exactly. So they fight. That fight is your shimmy.' 'And at 100?' 'They're far enough apart that neither one cares about the other. No fight, no shimmy.' 'And at 110?' 'They hit an exact 2:1 ratio. Engine frequency is exactly double the road frequency. They don't fight — they lock. One vibration fits perfectly inside the other. The whole truck resonates as a unit instead of fighting itself.' 'And at 105?' 'Close to 2:1 but not quite. The WORST shimmy. Because they're almost locked, pulling hard, but can't quite get there. Like two magnets juuuust out of reach.'",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Perfect frequency lock achieved, harmonious resonance, the moment of understanding",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.25,
+            "attack": 1.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.5,
+            "release": 3.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.1,
+            "attack": 2.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Visualization of wave frequencies coming together, fighting, then locking in perfect harmony",
+      "duration_seconds": 60
+    },
+    {
+      "id": "the-map-of-speeds",
+      "title": "The Map of Speeds",
+      "narration": "Hitch was fascinated. Over the next three trips, instead of fighting the shimmy, Hitch mapped it. Every speed where the ride was smooth: a frequency lock. A simple ratio between engine and road. 2:1, 3:2, 4:3, 5:4. Every speed where it shimmied: a near-miss. Close to a simple ratio but not quite. The system pulling but not locking. The smooth speeds weren't random. They were a pattern. And if you drew them on a graph — speed on one axis, road frequency on the other — the smooth zones formed V-shaped wedges. Narrow at low coupling, wide at high coupling. 'Arnold tongues,' Hitch said. 'Told you,' said Mack.",
+      "sound": {
+        "type": "emergence",
+        "description": "Pattern recognition dawning, mathematical beauty revealing itself through experience",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.15,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.12,
+            "attack": 1.5,
+            "release": 2.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 2.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "Graph forming in the air showing V-shaped Arnold tongues, data points connecting into beautiful mathematical patterns",
+      "duration_seconds": 45
+    },
+    {
+      "id": "driving-the-tongues",
+      "title": "Driving the Tongues",
+      "narration": "Now Hitch drove differently. Instead of picking a speed and holding it, Hitch found the tongues. The zones where everything locked. At each road surface — smooth bitumen, rough gravel, corrugated dirt — the tongues were in different places. But they were always there. Smooth bitumen: cruise at 110 (2:1 lock). Corrugated outback road: drop to 85 (3:2 lock). The terrible stretch past Tennant Creek: 73 km/h exactly (5:4 lock). Each speed felt different. 2:1 was solid and deep — a bass note. 3:2 was lighter, more musical. 5:4 was subtle, almost tender. The simpler the ratio, the wider the tongue — more room for error, easier to find, harder to fall out of. 'You're not driving anymore,' said Mack on the radio. 'You're playing.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Musical driving, each frequency ratio like a different instrument in the road's orchestra",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.22,
+            "attack": 2.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 1.5,
+            "release": 2.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.15,
+            "attack": 1.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Road surface changing textures, speedometer dancing between sweet spots, the highway becoming a musical instrument",
+      "duration_seconds": 55
+    },
+    {
+      "id": "the-dust-storm",
+      "title": "The Dust Storm",
+      "narration": "The dust storm hit between Alice Springs and Ti Tree. Visibility zero. Wind gusting to 90. The road disappeared under a sheet of red sand. Every other road train pulled over. Standard procedure. Hitch kept driving. Not because Hitch was brave. Because the sand on the road changed its frequency. The tongue map shifted. And Hitch could feel where the new locks were. 68 km/h. There. The whole truck hummed — not the shimmy, the good hum. Everything locked. Even in zero visibility, the road was talking through the tyres, through the coupling, through the standing wave in the chassis. Hitch drove by feel. By resonance. By song. They reached Ti Tree while everyone else was still parked in the dust.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Chaos of storm, then finding the new frequency lock within the turbulence",
+        "oscillators": [
+          {
+            "waveform": "square",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.3,
+            "attack": 0.2,
+            "release": 0.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "8:7",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 1.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 5.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 68
+      },
+      "visual_direction": "Swirling red dust storm, zero visibility, road train moving steadily through chaos guided by vibration alone",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-convoy",
+      "title": "The Convoy",
+      "narration": "Mack caught up at Katherine. 'You drove through the storm.' 'I drove the tongues through the storm.' 'Same thing, mate. The tongues are the song. The song is the road. The road is the drive.' They drove the last stretch into Darwin together. Two road trains, fifty-three metres each, in convoy. And something strange happened: their vibrations coupled. Through the air. Through the road. Through the space between them. At the right following distance — 42 metres — their oscillations locked. Mack's engine and Hitch's engine. Mack's trailers and Hitch's trailers. Two road trains, one frequency. One song with two voices. The fuel economy for that last stretch was the best either of them had ever recorded.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Two voices joining in perfect harmony, coupled oscillations creating something greater than the sum",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 2.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.2,
+            "attack": 2.5,
+            "release": 4.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 3.0,
+            "release": 4.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Two massive road trains in perfect convoy, their oscillations visible as waves connecting them through the air",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-highway-sings",
+      "title": "The Highway Sings",
+      "narration": "Hitch still drives the Stuart Highway. Adelaide to Darwin. Four days, three thousand kilometres, one road. But now, every kilometre has a song. Every speed is a choice between consonance and dissonance. Every surface, every load, every wind condition shifts the tongues — and Hitch shifts with them. Some drivers say the highway is boring. Flat. Empty. Nothing to see. Hitch disagrees. You just have to listen.",
+      "sound": {
+        "type": "invitation",
+        "description": "The eternal song of the highway, inviting the listener to hear the music in the mathematics",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 8.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Endless highway stretching toward infinite horizon, road train becoming one with the rhythm of the earth",
+      "duration_seconds": 30
+    }
+  ]
+}

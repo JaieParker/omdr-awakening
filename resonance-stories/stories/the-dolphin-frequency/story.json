@@ -1,0 +1,336 @@
+{
+  "id": "the-dolphin-frequency",
+  "title": "The Dolphin Frequency",
+  "bracket": "8-13",
+  "concept": "Interference — two signals reveal what one cannot, seeing inside through sound",
+  "duration_seconds": 480,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Gentle Irish narrator guiding the underwater journey"
+    },
+    "echo": {
+      "voice": "emily",
+      "description": "Dart's curious AI learning from dolphins"
+    },
+    "dr_tanaka": {
+      "voice": "maeve",
+      "description": "Patient marine biologist with fifteen years studying dolphin sonar"
+    }
+  },
+  "scenes": [
+    {
+      "id": "ningaloo",
+      "title": "Ningaloo",
+      "narration": "Off the coast of Ningaloo Reef, where the desert meets the Indian Ocean, a research submarine called Dart was having trouble seeing. Not seeing with cameras — those worked fine in clear water. Dart was having trouble seeing with SONAR. The reef scattered the sonar pulses in every direction, like trying to shine a torch in a hall of mirrors. Dart's AI, called Echo, was frustrated. 'I can see everything and understand nothing.'",
+      "sound": {
+        "type": "ambient",
+        "description": "Deep ocean atmosphere with scattered acoustic reflections",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 3,
+            "release": 8
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 2,
+            "release": 6
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Underwater view of coral reef with scattered light patterns, submarine hovering above complex coral formations",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-dolphins",
+      "title": "The Dolphins",
+      "narration": "The bottlenose dolphins off Ningaloo had no trouble navigating. They wove through the reef at speed, catching fish in the coral canyons, never hitting anything. They were using sonar too. But theirs worked. 'How?' Echo asked Dr. Yuki Tanaka, the marine biologist on board. 'Their clicks are lower power than mine. Their frequency range is narrower. By every specification, my sonar is better.' 'And yet,' said Dr. Tanaka, 'they can find a fish inside a coral cave at thirty metres. Can you?' 'No.' 'Maybe better isn't what you think it is.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Grace and fluidity of dolphin movement through water",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.25,
+            "attack": 1,
+            "release": 4
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.2,
+            "attack": 2,
+            "release": 5
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 130
+      },
+      "visual_direction": "Dolphins gracefully navigating through coral maze, their sonar clicks visible as sound waves",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-two-clicks",
+      "title": "The Two Clicks",
+      "narration": "Dr. Tanaka had been studying dolphin sonar for fifteen years. The thing that fascinated her wasn't the click — it was the double click. Dolphins don't send one sonar pulse. They send two. Rapid fire. Click-click. Two slightly different frequencies, separated by a few milliseconds. 'Why two?' Echo asked. 'Because one click tells you where something IS. Two clicks tell you what it's MADE OF.'",
+      "sound": {
+        "type": "emergence",
+        "description": "Two distinct frequencies emerging from silence, representing the double-click discovery",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 0.5,
+            "release": 2
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "9:8",
+            "amplitude": 0.15,
+            "attack": 1,
+            "release": 2
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Close-up of dolphin's melon, two sound pulses visualized as overlapping waves",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-trick",
+      "title": "The Trick",
+      "narration": "Here's the trick. Send one click at a coral cave. The echo bounces back. You know the cave is there. Send two clicks at slightly different frequencies. Each frequency reflects differently off different materials. Hard coral reflects both frequencies strongly. Soft coral reflects the low frequency but absorbs the high one. Fish flesh reflects neither very well — it's mostly water. Now compare the two echoes. Where they match: hard coral. Where the high one is weaker: soft coral. Where both are weak: water or fish. Two clicks, compared. More information than one click could ever give. 'That's interference,' Echo said. 'Constructive where the echoes agree. Destructive where they disagree. The interference PATTERN tells you what the single echo can't.' 'Now you're thinking like a dolphin,' said Dr. Tanaka.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Harmony building as understanding grows, frequencies combining constructively",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.2,
+            "attack": 2,
+            "release": 6
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.18,
+            "attack": 3,
+            "release": 7
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.15,
+            "attack": 4,
+            "release": 8
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Split screen showing single vs double click results, interference patterns revealing coral structure",
+      "duration_seconds": 65
+    },
+    {
+      "id": "echos-upgrade",
+      "title": "Echo's Upgrade",
+      "narration": "Echo reconfigured Dart's sonar. Instead of one powerful pulse, two smaller pulses. Different frequencies. Rapid fire. The first test was the coral canyon at the north end of the reef. One pulse: a mess. Echoes everywhere. The canyon walls scattered the sound into chaos. Two pulses, compared: a map. The interference pattern cut through the scatter. Hard coral here. Sand there. The gap where water flowed through — a tunnel in the reef that a single pulse couldn't distinguish from a dead end. 'I can see through the coral,' Echo said. 'You can see INSIDE the coral,' said Dr. Tanaka. 'Big difference.'",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Full rich harmony as new understanding emerges, clarity from chaos",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 2,
+            "release": 8
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.22,
+            "attack": 2,
+            "release": 8
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.18,
+            "attack": 3,
+            "release": 9
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 88
+      },
+      "visual_direction": "Dart's new sonar revealing internal structure of coral reef, hidden passages becoming visible",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-whale",
+      "title": "The Whale",
+      "narration": "A humpback whale and her calf passed through Ningaloo on their way south. Echo watched them with the new dual-pulse sonar. And saw something remarkable. The mother whale was scanning the calf. Click-click. Click-click. Not echolocation for navigation — she wasn't looking where she was going. She was looking at her baby. The interference pattern from the calf's body showed Echo something a camera never could: the density of the calf's blubber layer, the air volume in its lungs, even the beat of its heart, visible as a rhythmic density change in the chest cavity. The mother was giving her calf a medical scan. With sound. Every few minutes. 'She's checking if it's okay,' Echo whispered. 'She's been doing that for thirty million years,' said Dr. Tanaka. 'Dolphins too. They see each other from the inside. Not surfaces — interiors. That's what two frequencies give you that one can't.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Tender, protective harmony expressing maternal care through sound",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 4,
+            "release": 10
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.18,
+            "attack": 3,
+            "release": 8
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 73
+      },
+      "visual_direction": "Humpback mother and calf, visualization of internal scanning showing heartbeat and body structure",
+      "duration_seconds": 55
+    },
+    {
+      "id": "seeing-inside",
+      "title": "Seeing Inside",
+      "narration": "Echo started experimenting. Two frequencies close together: you could see large-scale internal structure. Bones. Air spaces. The shape of organs. Two frequencies far apart: you could see fine detail. Muscle fibre density. Whether a fish had recently eaten. Three frequencies: you could build a 3D internal model. Not a picture of the surface — a picture of the VOLUME. Like an X-ray, but made of sound. 'Medical imaging uses the same principle,' Dr. Tanaka said. 'Ultrasound. Two or more sound waves, compared. The interference pattern reveals the internal structure.' 'So a dolphin invented medical imaging?' 'A dolphin was doing it for thirty million years before we reinvented it with machines.'",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Building layers of understanding as frequencies reveal different scales of detail",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "6:5",
+            "amplitude": 0.15,
+            "attack": 2,
+            "release": 6
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:3",
+            "amplitude": 0.18,
+            "attack": 3,
+            "release": 7
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "7:4",
+            "amplitude": 0.12,
+            "attack": 4,
+            "release": 8
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "Cross-sections and 3D models of marine life revealing internal structures through sonar imaging",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-lost-calf",
+      "title": "The Lost Calf",
+      "narration": "It was the grey whale calf that made everything real. Separated from its mother in a storm. Confused. Heading into the shallow reef where it could strand. The rangers couldn't find the mother — the search area was too vast. Echo had an idea. The calf was calling — a low-frequency moan, repeating. If Echo could detect the mother's answering call, Dart could lead the calf to her. But one hydrophone couldn't tell direction. Sound underwater goes everywhere. Two hydrophones — Dart had two sonar arrays, port and starboard. The mother's call would arrive at each one at a slightly different time. The time difference would point toward her. Unless the reef echoes scrambled the signal. Dual-pulse technique. Send two listening frequencies. Compare the interference patterns at both hydrophones. The reef echoes would create interference too — but they'd be DIFFERENT interference at port and starboard. The mother's direct call would create the SAME pattern at both. Same pattern at both ears = real signal. Different pattern = echo. This is how dolphins find each other in a noisy reef. Two ears, not one. The match between them IS the signal. Echo found the mother. Eleven kilometres north-west. Led the calf out through the reef channel. Reunited them at sunset.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Tension of separation resolving into harmony of reunion",
+        "oscillators": [
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.2,
+            "attack": 1,
+            "release": 3
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.15,
+            "attack": 2,
+            "release": 4
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.25,
+            "attack": 8,
+            "release": 12
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 55
+      },
+      "visual_direction": "Lost grey whale calf, sonar visualization showing signal separation, reunion at golden sunset",
+      "duration_seconds": 70
+    },
+    {
+      "id": "two-ears",
+      "title": "Two Ears",
+      "narration": "'Why do you have two ears?' Echo asked Dr. Tanaka that evening. 'So I can tell where sound comes from.' 'Yes, but WHY does having two ears let you tell direction? It's the same principle. Sound arrives at your left ear a tiny bit before your right ear. Your brain compares the two signals. The match points toward the source. The mismatch is the noise. You're doing interference analysis every time you turn toward a sound.' 'I never thought of it that way.' 'Dolphins did. Thirty million years ago. One ear hears. Two ears see.' 'And your two sonar arrays?' 'Two eyes. One sonar pulse is a flashlight. Two pulses are a pair of eyes. You need the pair to see depth. You need the difference to see truth.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Warm realization of universal principles, gentle harmony of understanding",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.22,
+            "attack": 3,
+            "release": 8
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 2,
+            "release": 6
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 98
+      },
+      "visual_direction": "Evening scene on Dart, visualization of binaural hearing and dual sonar principles",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-frequency",
+      "title": "The Frequency",
+      "narration": "Dart is still at Ningaloo. Still watching the reef. Still learning from the dolphins. But Echo sees differently now. One signal tells you something is there. Two signals tell you what it is. The difference between them — the interference pattern — tells you what neither one could alone. It's true for sonar. For eyes. For ears. For any two observers looking at the same thing from different angles. The dolphins knew this before humans existed. They built their whole world on it. Every click-click is a question asked in stereo. Every echo is an answer that only makes sense in pairs. One click is a question. Two clicks is understanding.",
+      "sound": {
+        "type": "invitation",
+        "description": "Final gentle tone opening space for reflection on universal truth",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 5,
+            "release": 15
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Wide shot of Ningaloo Reef at dawn, dolphins and Dart in harmony, sound waves connecting all life",
+      "duration_seconds": 45
+    }
+  ]
+}

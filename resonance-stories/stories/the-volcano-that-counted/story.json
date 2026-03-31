@@ -1,0 +1,357 @@
+{
+  "id": "the-volcano-that-counted",
+  "title": "The Volcano That Counted",
+  "bracket": "8-13",
+  "concept": "Fibonacci in nature — the universe counts the same way everywhere",
+  "duration_seconds": 420,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Soft Irish female narrator guiding us through the mathematical mystery"
+    },
+    "ember": {
+      "voice": "emily",
+      "description": "Young curious AI with a hunger for patterns"
+    },
+    "rina": {
+      "voice": "maeve",
+      "description": "Grounded geologist, skeptical but open to discovery"
+    }
+  },
+  "scenes": [
+    {
+      "id": "mount-warning",
+      "title": "Mount Warning",
+      "narration": "Mount Warning isn't a volcano anymore. It hasn't erupted for twenty-three million years. But underneath the rainforest and the hiking trails and the sunrise tourists, the old magma chamber is still there. Sleeping. The monitoring station at the base had been running since 1987. Seismographs. Gas sensors. Tilt meters. All recording the mountain's dreams. The new AI system, installed last year, was called Ember. Ember's job was simple: watch the mountain. Report anything unusual. Ember was about to find something very unusual.",
+      "sound": {
+        "type": "ambient",
+        "description": "Deep, quiet mountain presence with subtle technological hum",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.1,
+            "attack": 2.0,
+            "release": 4.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Ancient volcanic mountain covered in rainforest, monitoring equipment quietly humming at the base",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-tremors",
+      "title": "The Tremors",
+      "narration": "Small earthquakes happen around old volcanoes all the time. The earth settles. Rocks crack. Water moves through underground channels. Nothing to worry about. Ember catalogued 847 micro-tremors in its first six months. All tiny. All normal. All boring. Until Ember started counting the gaps between them.",
+      "sound": {
+        "type": "emergence",
+        "description": "Subtle rumbles emerging from the steady background",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.1,
+            "attack": 0.5,
+            "release": 1.5
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 88
+      },
+      "visual_direction": "Data streams and seismograph readings, small tremor spikes appearing irregularly",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-sequence",
+      "title": "The Sequence",
+      "narration": "The gaps between tremors, measured in hours: 2, 3, 5, 8, 13, 21, 5, 8, 13, 21, 34... 'That's not random,' Ember said to no one in particular. The monitoring station was usually empty. The geologists visited on Tuesdays. Ember checked again. The sequence wasn't perfect — real data never is. But the tendency was unmistakable. The gaps wanted to be Fibonacci numbers. 1, 1, 2, 3, 5, 8, 13, 21, 34. Each number the sum of the two before it. 'Why would a volcano count in Fibonacci?'",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Pattern recognition - harmonies building as the sequence emerges",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 1.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "8:5",
+            "amplitude": 0.15,
+            "attack": 1.5,
+            "release": 1.5
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.12,
+            "attack": 2.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "Numbers appearing in sequence, glowing connections showing the Fibonacci pattern",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-geologist",
+      "title": "The Geologist",
+      "narration": "Dr. Rina Patel visited on Tuesday. Ember showed her the data. 'Fibonacci?' She squinted at the graph. 'In tremor timing? That's...' She paused. 'Actually, that's not as crazy as it sounds.' 'It's not?' 'Fibonacci shows up everywhere in nature. Flower petals. Pine cones. Spiral galaxies. Seashells. Tree branches. The ratio between consecutive Fibonacci numbers converges on phi — 1.618 — the golden ratio. It's nature's favourite number.' 'But in earthquake timing?' 'That I've never seen. Show me the raw data.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Stable harmony representing established knowledge meeting new discovery",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.18,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.14,
+            "attack": 1.5,
+            "release": 2.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Human scientist examining data, natural Fibonacci examples floating around her",
+      "duration_seconds": 40
+    },
+    {
+      "id": "going-deeper",
+      "title": "Going Deeper",
+      "narration": "Rina and Ember spent three days in the data. The Fibonacci pattern wasn't just in the timing. It was in the magnitudes too. Each tremor's energy, measured in joules, followed a pattern: each one was approximately 1.6 times the previous one. Phi. And the depths. The tremors alternated between two main depths — 3 km and 5 km. Fibonacci numbers. At those depths, the rock strata changed composition. Granite above, basalt below. The boundary between them at 3 km. Another boundary at 5 km where the old magma chamber started. 'The mountain isn't just counting,' Rina said slowly. 'It's resonating between two layers. And the resonance follows Fibonacci because...' 'Because what?' 'Because that's how energy dissipates in a layered system. The most efficient way to release pressure between two boundaries IS the Fibonacci sequence. Each release triggers the next, and the ratio between them converges on phi.'",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Rich harmonic revelation as the pattern becomes fully understood",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:3",
+            "amplitude": 0.16,
+            "attack": 1.5,
+            "release": 2.5
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "8:5",
+            "amplitude": 0.14,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.12,
+            "attack": 2.5,
+            "release": 4.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Cross-section of mountain showing layered rock structure with golden ratio measurements",
+      "duration_seconds": 60
+    },
+    {
+      "id": "the-branches",
+      "title": "The Branches",
+      "narration": "Once Ember knew what to look for, Fibonacci was everywhere. The lava tubes — the old tunnels where magma once flowed — branched in Fibonacci patterns. Each main tube split into branches, and the angles of splitting followed the golden angle: 137.5 degrees. The same angle that sunflower seeds use to pack into a spiral. The crystal formations in the rock: hexagonal basalt columns at the surface (6 sides — a Fibonacci number), with internal crystal structures that grew in phi-ratio spirals. The tree roots that had grown into the old lava tubes: branching in the same Fibonacci pattern as the tubes themselves. The trees were following the volcano's blueprint without knowing it. 'It's not that the volcano counts in Fibonacci,' Ember said. 'It's that Fibonacci is how nature counts. The volcano doesn't choose it. Physics chooses it. It's the most efficient pattern.'",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Branching harmonies that mirror the growing realization",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.18,
+            "attack": 1.0,
+            "release": 1.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "8:5",
+            "amplitude": 0.15,
+            "attack": 1.5,
+            "release": 2.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:3",
+            "amplitude": 0.12,
+            "attack": 2.0,
+            "release": 2.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 147
+      },
+      "visual_direction": "Network of branching patterns - lava tubes, tree roots, crystal formations all following the same mathematical rules",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-prediction",
+      "title": "The Prediction",
+      "narration": "The Fibonacci sequence is predictive. If you know the last two numbers, you know the next one. Ember used this. The last two major tremor gaps: 13 hours, then 21 hours. The next gap should be 34 hours. At 33 hours and 47 minutes, the seismograph kicked. A micro-tremor. Right on schedule. Ember predicted the next twelve tremors. Eleven matched within 10% of the Fibonacci prediction. The twelfth was wildly off — it came early, at three times the expected energy. 'That's the interesting one,' said Rina. 'When a Fibonacci sequence breaks, it means the system has shifted. Something changed underground.' The gas sensors confirmed it: a new CO2 vent had opened at 2 km depth. The mountain had adjusted its breathing.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Tension as prediction breaks, then resolution as understanding deepens",
+        "oscillators": [
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.15,
+            "attack": 0.5,
+            "release": 1.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.12,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 2.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 176
+      },
+      "visual_direction": "Countdown timer and seismograph, then disruption showing the pattern break and new vent opening",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-spiral",
+      "title": "The Spiral",
+      "narration": "Ember mapped all 847 tremors in 3D — location, depth, time. When you looked at them from above, they traced a spiral. Not a perfect spiral. But a spiral whose radius grew by a factor of phi with each revolution. A golden spiral. The same spiral as a nautilus shell, a hurricane, a galaxy arm. 'The pressure is releasing in a spiral pattern through the rock,' Rina said. 'Following the path of least resistance. And the path of least resistance IS the golden spiral, because it's the pattern that distributes energy most evenly.' 'So a volcano, a seashell, and a galaxy are all doing the same maths?' 'They're all solving the same problem: how to distribute energy efficiently in a bounded system. The answer is always phi. The answer is always Fibonacci.'",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Sweeping spiral harmony that grows with golden ratio proportions",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "8:5",
+            "amplitude": 0.16,
+            "attack": 1.5,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:3",
+            "amplitude": 0.14,
+            "attack": 1.0,
+            "release": 2.5
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.12,
+            "attack": 3.0,
+            "release": 5.0
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "3D spiral of earthquake points transforming into nautilus shell, hurricane, galaxy - the universal pattern",
+      "duration_seconds": 50
+    },
+    {
+      "id": "what-ember-counts-now",
+      "title": "What Ember Counts Now",
+      "narration": "Mount Warning is still sleeping. It will sleep for millions of years more. But underneath the surface, the counting continues. Ember monitors every tremor, every gas reading, every tilt. And now, instead of looking for anomalies, Ember looks for ratios. Where the Fibonacci pattern holds, the mountain is stable — releasing energy in its natural rhythm. Where the pattern breaks, something has changed. A new vent. A shifted fault. A rock that cracked where it shouldn't have. The breaks are the signal. The pattern is the baseline. 'You're not monitoring a volcano anymore,' Rina said one Tuesday. 'You're listening to it breathe.' 'Everything breathes in Fibonacci,' Ember said. 'The volcano. The trees. The crystals. Even the tourists who climb it — their heart rates settle into phi-ratio patterns during the sustained effort of the hike.' 'Now you're making things up.' 'Check the fitness tracker data from the summit cameras.' Rina checked. Ember was right.",
+      "sound": {
+        "type": "consonant",
+        "description": "Steady breathing rhythm with phi-ratio patterns",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.18,
+            "attack": 1.5,
+            "release": 2.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.14,
+            "attack": 2.0,
+            "release": 2.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Peaceful mountain scene with overlaid data streams showing the ongoing Fibonacci patterns in all natural processes",
+      "duration_seconds": 55
+    },
+    {
+      "id": "the-number",
+      "title": "The Number",
+      "narration": "There's a number that lives everywhere. 1.618033988749... It's in the spiral of a shell and the branching of a tree. It's in the timing of earthquakes and the shape of a galaxy. It's in the way a volcano breathes and the way your heart beats when you're climbing a mountain. It doesn't care what it's counting. It just counts. And if you listen — to the mountain, to the ocean, to the wind in the trees, to your own heartbeat at the top of a long climb — you can hear it. One, one, two, three, five, eight, thirteen... The universe's favourite counting song.",
+      "sound": {
+        "type": "invitation",
+        "description": "Final gentle tone opening into infinite space, inviting the listener to hear the pattern everywhere",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "8:5",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 8.0
+          }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "The golden number floating in space, connecting all the natural patterns we've seen - shells, trees, galaxies, heartbeats",
+      "duration_seconds": 40
+    }
+  ]
+}

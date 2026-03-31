@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- A swing: two chains + seat, with sound waves radiating -->
+  <rect width="512" height="512" rx="64" fill="#1a1a2e"/>
+
+  <!-- Tree branch -->
+  <path d="M100 80 Q256 60 412 80" stroke="#8b7355" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+  <!-- Chains -->
+  <line x1="180" y1="80" x2="200" y2="320" stroke="#e8c170" stroke-width="4" stroke-dasharray="8 4"/>
+  <line x1="332" y1="80" x2="312" y2="320" stroke="#e8c170" stroke-width="4" stroke-dasharray="8 4"/>
+
+  <!-- Seat -->
+  <rect x="190" y="320" width="132" height="16" rx="8" fill="#e8c170"/>
+
+  <!-- Sound waves — consonant arcs -->
+  <path d="M256 280 Q300 260 256 240" stroke="#6bdfff" stroke-width="2" fill="none" opacity="0.3"/>
+  <path d="M256 280 Q320 250 256 220" stroke="#6bdfff" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M256 280 Q340 240 256 200" stroke="#6bdfff" stroke-width="2" fill="none" opacity="0.7"/>
+
+  <!-- Child silhouette (simple circle + body) -->
+  <circle cx="256" cy="360" r="20" fill="#f0e6d3"/>
+  <path d="M240 380 Q256 420 272 380" stroke="#f0e6d3" stroke-width="4" fill="none"/>
+</svg>

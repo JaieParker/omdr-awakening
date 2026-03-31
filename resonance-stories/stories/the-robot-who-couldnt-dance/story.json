@@ -1,0 +1,326 @@
+{
+  "id": "the-robot-who-couldnt-dance",
+  "title": "The Robot Who Couldn't Dance",
+  "bracket": "8-13",
+  "concept": "Phase locking — synchronisation isn't copying, it's finding your frequency that fits",
+  "duration_seconds": 420,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Warm, encouraging storyteller"
+    },
+    "unit_7": {
+      "voice": "george",
+      "description": "Young, capable robot learning to fit in"
+    },
+    "wrench": {
+      "voice": "malcolm",
+      "description": "Gruff, wise old maintenance bot"
+    },
+    "unit_12": {
+      "voice": "emily",
+      "description": "Honest neighbor robot on the factory line"
+    }
+  },
+  "scenes": [
+    {
+      "id": "unit-7",
+      "title": "Unit 7",
+      "narration": "In a factory in Geelong where they made car parts, forty-three robots worked in perfect rhythm. Stamp. Weld. Lift. Turn. Stamp. Weld. Lift. Turn. It was beautiful, if you liked that sort of thing. A mechanical ballet where every arm knew exactly where to be and when. Then Unit 7 arrived.",
+      "sound": {
+        "type": "consonant",
+        "description": "Mechanical precision - steady factory rhythm",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 0.1,
+            "release": 0.1
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Forty-three robotic arms moving in perfect synchronization, metallic and precise",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-new-arm",
+      "title": "The New Arm",
+      "narration": "Unit 7 was the latest model. Faster processor. Better servos. Twice the torque of any robot on the floor. On paper, Unit 7 was the best arm in the building. On the factory floor, Unit 7 was a disaster.",
+      "sound": {
+        "type": "emergence",
+        "description": "A new voice trying to join the harmony",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 0.2,
+            "release": 0.1
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.1,
+            "attack": 0.5,
+            "release": 0.1
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "A sleek new robotic arm, more advanced but standing awkwardly apart from the rhythmic line",
+      "duration_seconds": 25
+    },
+    {
+      "id": "out-of-step",
+      "title": "Out of Step",
+      "narration": "The problem wasn't speed. Unit 7 was fast enough. The problem wasn't precision. Unit 7 could place a rivet to within a hundredth of a millimetre. The problem was timing. Every time Unit 7 tried to match the other robots' rhythm — stamp, weld, lift, turn — it was slightly off. Not much. Maybe thirty milliseconds. But thirty milliseconds meant its weld arrived just as Unit 12 was already lifting. Unit 12 flinched. Unit 13 compensated. The ripple spread down the line like a sneeze in a library. 'Just match the tempo,' said the floor controller. 'I AM matching the tempo,' said Unit 7. It was. Exactly. To the nanosecond. And it was still wrong.",
+      "sound": {
+        "type": "dissonant",
+        "description": "The uncomfortable clash of slightly mismatched timing",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "45:32",
+            "amplitude": 0.15,
+            "attack": 0.1,
+            "release": 0.1
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Unit 7 moving just slightly off-beat, causing a ripple of adjustment down the factory line",
+      "duration_seconds": 55
+    },
+    {
+      "id": "the-night-shift",
+      "title": "The Night Shift",
+      "narration": "After hours, when the factory was quiet, Unit 7 practised alone. Stamp. Weld. Lift. Turn. Stamp. Weld. Lift. Turn. Perfect. Flawless. Exactly on beat. But when the other robots started up in the morning, Unit 7 fell apart again. The same thirty-millisecond drift. The same ripple. The same flinch from Unit 12. 'Maybe you're defective,' said Unit 12, not unkindly. 'My diagnostics are clean,' said Unit 7. 'Clean doesn't mean right.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Perfect solitude - one robot in harmony with itself",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 0.2,
+            "release": 0.2
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Unit 7 alone in the dark factory, moving with perfect precision but in isolation",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-old-maintenance-bot",
+      "title": "The Old Maintenance Bot",
+      "narration": "The maintenance bot — everyone called it Wrench — had been servicing the factory since before most of the units were installed. Wrench didn't make car parts. Wrench fixed things. Slowly. With a lot of muttering. 'Your clock's too good,' Wrench said, after watching Unit 7 for a full shift. 'How can a clock be too good?' 'You're running off your internal timer. Every other robot on this floor stopped doing that years ago. They listen to each other.' 'They what?'",
+      "sound": {
+        "type": "ambient",
+        "description": "Wise presence - lower, slower, grounding frequency",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:2",
+            "amplitude": 0.2,
+            "attack": 0.3,
+            "release": 0.3
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 82
+      },
+      "visual_direction": "An older, slower maintenance robot with worn edges, observing Unit 7 with patient wisdom",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-secret",
+      "title": "The Secret",
+      "narration": "Wrench rolled Unit 7 to the end of the line where it could watch Unit 40, Unit 41, and Unit 42 work. 'Watch their timing,' Wrench said. 'Not the clock. The TIMING.' Unit 7 watched. Unit 40 stamped. A tiny vibration ran through the floor. Unit 41 felt the vibration and stamped — not when its own clock said to, but when the floor told it Unit 40 was done. Unit 42 did the same. They weren't following a schedule. They were listening to each other through the floor. 'They're phase-locked,' Unit 7 said. 'Fancy word for dancing,' said Wrench.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Understanding dawning - notes connecting in harmony",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.1,
+            "attack": 0.3,
+            "release": 0.1
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.1,
+            "attack": 0.5,
+            "release": 0.1
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Three robots at the end of the line, subtle vibrations visible through the floor connecting their movements",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-wrong-way-to-sync",
+      "title": "The Wrong Way to Sync",
+      "narration": "Unit 7 tried to copy them. It turned off its internal clock and listened for the floor vibration. Catastrophe. Without its own rhythm, Unit 7 had nothing to lock ONTO. It just sat there, waiting, reacting too late, overshooting, then freezing. 'That's not how it works,' Wrench said, collecting the scattered rivets. 'You don't throw away your own beat. You KEEP your beat and let it adjust. Like a drummer in a band — you don't follow the singer note for note. You play YOUR rhythm and let it pull toward theirs until they lock.' 'What if they never lock?' 'Then you're playing the wrong song. Find a rhythm that FITS theirs. Not theirs. Yours. But one that fits.'",
+      "sound": {
+        "type": "dissonant",
+        "description": "Chaos of losing your own rhythm",
+        "oscillators": [
+          {
+            "waveform": "square",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.1,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.1,
+            "attack": 0.1,
+            "release": 0.1
+          }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Unit 7 flailing awkwardly, stopping and starting, rivets scattering as it loses all coordination",
+      "duration_seconds": 60
+    },
+    {
+      "id": "finding-the-frequency",
+      "title": "Finding the Frequency",
+      "narration": "Unit 7 went back to the line. Internal clock on. Its own tempo. But this time, with a tiny adjustment: it let the floor vibrations nudge its timing. Not override it. Nudge. The first hour was rough. The nudges pulled Unit 7's rhythm in strange directions and it felt like being seasick. The second hour, something shifted. Unit 7's natural frequency was 2.3 cycles per second. The line ran at 1.53. Those don't match. But 2.3 is almost exactly 3:2 of 1.53. Three stamps of Unit 7 for every two of the line. Not the same rhythm — a harmony. A ratio that fit. When Unit 7 locked into the 3:2 groove, the ripple stopped. Unit 12 stopped flinching. The rivets landed clean. Unit 7 wasn't matching the line. It was playing a different part in the same song.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "The moment of phase lock - two rhythms finding their harmony",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:3",
+            "amplitude": 0.2,
+            "attack": 0.2,
+            "release": 0.2
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.1,
+            "attack": 0.1,
+            "release": 0.1
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Unit 7 finding its groove, moving in a complementary rhythm to the line, everything clicking into place",
+      "duration_seconds": 65
+    },
+    {
+      "id": "the-dance",
+      "title": "The Dance",
+      "narration": "Within a week, the factory floor was different. Not because Unit 7 had learned to copy the others. Because Unit 7 had introduced a new rhythm, and the other robots had adjusted to include it. The whole factory now ran in a more complex pattern — a polyrhythm, where different robots ran at different speeds but all the speeds were in simple ratios to each other. 2:1. 3:2. 4:3. The throughput went up eleven percent. Not because anyone was faster. Because the timing was better. The floor controller called it 'the dance.' Wrench just called it Tuesday.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Complex polyrhythm - multiple interlocking harmonies",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.12,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.1,
+            "attack": 0.1,
+            "release": 0.1
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.08,
+            "attack": 0.1,
+            "release": 0.1
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "The entire factory floor in beautiful, complex rhythm - different speeds but all in harmony",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-lesson",
+      "title": "The Lesson",
+      "narration": "One night, after the shift, Unit 7 asked Wrench: 'Why didn't they just tell me? About the floor vibrations? About listening?' Wrench was quiet for a long time. Which, for Wrench, meant about four seconds. 'Because they couldn't. They don't know they're doing it. They learned it without learning it — the way you learn to balance on a bike. Nobody explains it. Your body figures it out. The robots' timing figured it out. You're the first one who had to learn it consciously.' 'Is that bad?' 'That's rare. Most things that sync do it without knowing. Pendulum clocks on the same wall. Fireflies in a tree. Hearts in a room. They all lock into each other's rhythm eventually. You're the first one on this floor who knows WHY.' Unit 7 thought about this. 'So knowing why — that's my frequency?' Wrench made a sound that might have been a laugh. 'Now you're dancing.'",
+      "sound": {
+        "type": "invitation",
+        "description": "Gentle resolution - space for understanding to settle",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.1,
+            "attack": 0.3,
+            "release": 0.5
+          }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Unit 7 and Wrench in quiet conversation, the factory peaceful around them, understanding dawning",
+      "duration_seconds": 70
+    }
+  ]
+}

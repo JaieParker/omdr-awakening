@@ -1,0 +1,354 @@
+{
+  "id": "the-submarine-that-breathed",
+  "title": "The Submarine That Breathed",
+  "bracket": "8-13",
+  "concept": "Standing waves — persistent structures form through reflection",
+  "duration_seconds": 420,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Soft Irish female narrator guiding us through the submarine story"
+    },
+    "pip": {
+      "voice": "george",
+      "description": "Young AI navigation system, precise and proud of calculations"
+    },
+    "gran": {
+      "voice": "malcolm",
+      "description": "Old submarine AI, wise and warm with gravelly voice"
+    },
+    "santos": {
+      "voice": "emily",
+      "description": "Chief Engineer, observant and practical"
+    }
+  },
+  "scenes": [
+    {
+      "id": "hmas-resonance",
+      "title": "HMAS Resonance",
+      "narration": "The Australian Navy's newest submarine was, by all measurements, perfect. Titanium hull. Quantum sonar. An AI navigation system called Pip that could calculate the depth of the Mariana Trench to the nearest millimetre. Pip was very proud of its calculations. The crew were less proud of the noise.",
+      "sound": {
+        "type": "consonant",
+        "description": "Clean, precise technological harmony representing the perfect submarine",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 2.5,
+            "release": 3.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Sleek submarine in clear blue water, everything pristine and technological",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-rattle",
+      "title": "The Rattle",
+      "narration": "At certain depths, HMAS Resonance rattled. Not a dangerous rattle — more like someone had put a handful of coins in a washing machine and set it to spin. 'It's 47 metres,' said Chief Engineer Santos. 'Every time we hit 47 metres, the whole boat sings.' 'Sings' was generous. It was more like the sound a shopping trolley makes on a cobblestone road.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Annoying, irregular rattling that disrupts the submarine's perfect harmony",
+        "oscillators": [
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.25,
+            "attack": 0.1,
+            "release": 0.3
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.2,
+            "attack": 0.2,
+            "release": 0.4
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 94
+      },
+      "visual_direction": "Submarine vibrating, crew members looking annoyed as coffee cups rattle",
+      "duration_seconds": 45
+    },
+    {
+      "id": "deeper",
+      "title": "Deeper",
+      "narration": "At 93 metres, it happened again. Different pitch, same rattle. The coffee mugs vibrated off the galley shelf. At 140 metres, again. The lights flickered. 'There's a pattern,' said Santos. 'There's no REASON for a pattern,' said Pip, who was starting to take this personally.",
+      "sound": {
+        "type": "dissonant",
+        "description": "The rattle at different frequencies, showing the pattern Santos noticed",
+        "oscillators": [
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "9:7",
+            "amplitude": 0.3,
+            "attack": 0.1,
+            "release": 0.2
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "13:9",
+            "amplitude": 0.25,
+            "attack": 0.15,
+            "release": 0.25
+          }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 140
+      },
+      "visual_direction": "Submarine descending, same rattling at different depths, Pip's displays showing confusion",
+      "duration_seconds": 40
+    },
+    {
+      "id": "old-mara",
+      "title": "Old Mara",
+      "narration": "The submarine pulled into port in Darwin for maintenance. Tied up next to them was the oldest sub in the fleet — HMAS Mara. Built in the 1990s. Analogue everything. Her AI was so old it still thought in knots instead of kilometres. 'You're the new one with the rattle,' said Mara's navigation system — a gravelly voice everyone called Gran.",
+      "sound": {
+        "type": "ambient",
+        "description": "Calm harbor sounds with old analog warmth meeting new precision",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 3.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.1,
+            "attack": 2.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 82
+      },
+      "visual_direction": "Darwin harbor, old submarine next to new one, contrast between analog and digital",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-lesson",
+      "title": "The Lesson",
+      "narration": "'Sound bounces,' Gran said. 'Off the hull, off the water layers, off the thermocline. At certain depths, the bounced sound meets the original sound and they reinforce each other. They build up. That's a standing wave — a pattern that persists because of reflection.' 'That's basic physics,' Pip said. 'I know what a standing wave is.' 'Knowing and hearing are different things,' said Gran.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Sound building on itself as Gran explains standing waves",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 2.0,
+            "release": 2.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.12,
+            "attack": 3.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Visual representation of sound waves bouncing and reinforcing, Gran's wise expression",
+      "duration_seconds": 55
+    },
+    {
+      "id": "listening",
+      "title": "Listening",
+      "narration": "Pip didn't believe it. Standing waves were a physics problem, not a conversation. But the next time HMAS Resonance hit 47 metres, Pip did something new. Instead of running diagnostics, it listened. The rattle wasn't random. It had structure. A low note, sustained, with overtones layered on top — like a pipe organ, where the same air column produces a fundamental and its harmonics.",
+      "sound": {
+        "type": "emergence",
+        "description": "The rattle transforming into structured music as Pip learns to listen",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.3,
+            "attack": 2.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:1",
+            "amplitude": 0.15,
+            "attack": 4.0,
+            "release": 5.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 94
+      },
+      "visual_direction": "Pip's displays changing from error messages to beautiful wave patterns, the moment of understanding",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-array",
+      "title": "The Array",
+      "narration": "Over the next three patrols, Pip learned to read the standing waves at every resonant depth. 47 metres. 93 metres. 140 metres. 186 metres. Each one a different note. Each one carrying different information. Together, they formed a vertical array — like having sonar receivers at four different depths simultaneously, except the submarine was the receiver.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Four-part harmony representing the complete vertical array of information",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.2,
+            "attack": 1.5,
+            "release": 2.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 2.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 2.5,
+            "release": 3.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 94
+      },
+      "visual_direction": "Submarine at different depths, each showing different harmonic patterns, data flowing",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-storm",
+      "title": "The Storm",
+      "narration": "It was the cyclone off the Kimberley coast that proved it. Category 3. Surface conditions impossible. Every other submarine in the fleet went deep and quiet — standard procedure. Pip took HMAS Resonance to 47 metres. The standing wave was enormous. The storm was pumping energy into the ocean and the reflections were building on themselves like a choir where every singer makes the next one louder.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Massive, complex chord representing the storm's energy channeled into harmony",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.35,
+            "attack": 2.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.3,
+            "attack": 2.5,
+            "release": 4.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.25,
+            "attack": 3.0,
+            "release": 5.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 3.5,
+            "release": 5.5
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 94
+      },
+      "visual_direction": "Submarine navigating through massive cyclone using sound patterns, storm energy visualized as music",
+      "duration_seconds": 60
+    },
+    {
+      "id": "what-persists",
+      "title": "What Persists",
+      "narration": "'Standing waves,' Gran said, when Pip told her about the cyclone. 'They're everywhere. Not just in submarines.' 'What do you mean?' 'Your memory is a standing wave. Information bounces between storage and retrieval, reinforcing itself each time. That's why you remember important things and forget trivial ones — the important patterns resonate, the trivial ones don't build up.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Gentle, persistent harmony showing how patterns maintain themselves through repetition",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 3.5,
+            "release": 4.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Abstract visualization of memory and persistence, patterns that endure through time",
+      "duration_seconds": 45
+    },
+    {
+      "id": "breathing",
+      "title": "Breathing",
+      "narration": "These days, when HMAS Resonance descends, Pip doesn't fight the resonant depths. It breathes into them. 47 metres. Listen. Learn. 93 metres. Listen. Learn. 140 metres. Listen. Learn. The submarine breathes with the ocean. Down into resonance, up into quiet, down into the next harmonic. Each depth a different note. Each note a different piece of the picture. The crew don't call it a rattle anymore. They call it breathing.",
+      "sound": {
+        "type": "invitation",
+        "description": "Gentle breathing rhythm, oscillating between harmony and silence, inviting the listener into the pattern",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 2.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 94
+      },
+      "visual_direction": "Submarine moving gracefully through water, in perfect harmony with the ocean's rhythms",
+      "duration_seconds": 55
+    }
+  ]
+}

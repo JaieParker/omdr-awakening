@@ -1,0 +1,330 @@
+{
+  "id": "the-wave-that-came-back",
+  "title": "The Wave That Came Back",
+  "bracket": "8-13",
+  "concept": "Reflection and interference — when waves bounce off boundaries, they create patterns with simple ratios forming the strongest points",
+  "duration_seconds": 420,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Soft Irish female narrator guiding us through Zara's discovery"
+    },
+    "zara": {
+      "voice": "emily",
+      "description": "Curious young girl who maps the waves"
+    },
+    "dad": {
+      "voice": "george",
+      "description": "Marine biologist, precise but caring"
+    },
+    "pete": {
+      "voice": "malcolm",
+      "description": "Experienced surfer with intuitive wisdom"
+    },
+    "judge": {
+      "voice": "malcolm",
+      "description": "Retired oceanographer connecting beach to universe"
+    }
+  },
+  "scenes": [
+    {
+      "id": "zaras-wall",
+      "title": "Zara's Wall",
+      "narration": "Zara's favourite beach had a problem. Someone had built a sea wall. Not a big one — just a low concrete wall along the back of the beach to stop the dunes washing away. The engineers said it would protect the sand. Zara thought it had ruined the waves.",
+      "sound": {
+        "type": "ambient",
+        "description": "Ocean waves meeting a hard boundary, the natural rhythm disrupted",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "A beautiful beach with an unwelcome concrete wall cutting across it",
+      "duration_seconds": 25
+    },
+    {
+      "id": "before-and-after",
+      "title": "Before and After",
+      "narration": "Before the wall, the waves at Zara's beach were long and smooth. They rolled in from the Indian Ocean, broke evenly across the sandbar, and fizzed up the beach in clean white lines. Perfect for bodyboarding. After the wall, the waves were chaos. They still rolled in from the ocean, but now they hit the wall, bounced back, and crashed into the NEXT wave coming in. Some spots had waves twice as high. Other spots had no waves at all — just flat, confused water.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Waves colliding and interfering, creating chaotic overlapping patterns",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 0.5,
+            "release": 1.5
+          },
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.2,
+            "attack": 0.8,
+            "release": 1.2
+          }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Split view: smooth waves before, chaotic interference patterns after",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-quiet-spots",
+      "title": "The Quiet Spots",
+      "narration": "Zara's dad set up a camera on the dune and filmed the beach for an hour. When they watched it sped up, the pattern was obvious. Every incoming wave hit the wall and bounced back. The reflected wave was the same shape as the original, but going the other direction. Where the peaks of the reflected wave met the peaks of the incoming wave — BOOM. Double height. The water leaped up like it had been startled. But where the peak of one met the trough of the other — nothing. They cancelled each other out. Flat water. A quiet spot.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "The interference pattern revealing itself, order emerging from chaos",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 2.0,
+            "release": 1.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.5,
+            "release": 1.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Time-lapse camera view showing wave interference patterns becoming clear",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-map",
+      "title": "The Map",
+      "narration": "Despite herself, Zara was curious. She borrowed her dad's drone and flew it over the beach at low tide. From above, the pattern was beautiful. Lines of high waves alternated with lines of calm. They weren't random — they formed a grid, like a chessboard made of water. The spacing depended on the wavelength of the incoming waves. The wall is a mirror, Zara realised. The waves bounce off it and create a pattern with themselves.",
+      "sound": {
+        "type": "consonant",
+        "description": "Clear geometric patterns, mathematical beauty revealed",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 1.5,
+            "release": 1.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 147
+      },
+      "visual_direction": "Drone's-eye view revealing the beautiful grid pattern of interference",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-surfers-secret",
+      "title": "The Surfer's Secret",
+      "narration": "Old Pete had been surfing this beach for forty years. He didn't care about the wall. He didn't care about interference patterns. But Zara noticed something: Pete always surfed in the same spots. And they were exactly where her map showed constructive interference — the double-height waves. Pete shrugged when she asked how he knew. You just feel it after a while. Some spots work. Some don't. Zara showed him the drone footage. Pete stared at it for a long time. Well, he said. That would've saved me about thirty years of trial and error.",
+      "sound": {
+        "type": "consonant",
+        "description": "Intuitive wisdom meeting scientific understanding",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.18,
+            "attack": 1.2,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "Old Pete on his board, perfectly positioned at the interference sweet spots",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-second-wall",
+      "title": "The Second Wall",
+      "narration": "The council built a second sea wall. Ninety metres down the beach, at an angle. Now there were TWO mirrors. Waves bounced off both walls, creating reflected waves in two different directions. The interference pattern went from a simple grid to something that looked like the inside of a kaleidoscope. Some spots now had waves THREE times normal height — where the original wave and BOTH reflections all peaked together. Other spots had triple cancellation. Dead calm. You could float there in a cyclone swell and barely feel a ripple.",
+      "sound": {
+        "type": "emergence",
+        "description": "Complexity building as multiple reflections create richer patterns",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 2.5,
+            "release": 1.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 1.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.1,
+            "attack": 3.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Kaleidoscopic interference patterns from two walls creating complex beauty",
+      "duration_seconds": 35
+    },
+    {
+      "id": "zaras-discovery",
+      "title": "Zara's Discovery",
+      "narration": "Zara mapped the new pattern. It took a week of drone flights and a lot of her dad's graph paper. The map revealed something she hadn't expected: the triple-constructive spots — the monster waves — sat at exactly the points where the distances from both walls formed simple ratios. 2:1. 3:2. 4:3. The same ratios as music, her dad said, when she showed him. That's not possible, Zara replied. Waves on a beach aren't music. Interference is interference, he explained. The physics doesn't care whether it's sound waves in air or water waves on sand. The ratios that reinforce are the same ratios that make a chord. Zara looked at her map. The high-wave spots were the consonant notes. The dead spots were the dissonant ones. Her beach was playing a chord.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "The full chord revealed - perfect harmonic ratios in space and sound",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 1.5,
+            "release": 2.5
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.15,
+            "attack": 2.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.12,
+            "attack": 2.5,
+            "release": 1.5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Mathematical beauty as the harmonic ratios overlay the wave patterns",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-bodyboard-championship",
+      "title": "The Bodyboard Championship",
+      "narration": "The annual Scarborough Beach bodyboarding championship was in three weeks. Zara had entered every year since she was six. She'd never placed higher than twelfth. This year, she had a map. While the other competitors fought for the obvious big waves — the ones everyone could see — Zara waited. She'd memorised the interference pattern. She knew exactly where the constructive spots would form before they formed. Wave comes in. Bounces off the north wall. Bounces off the south wall. All three peaks meet... right... HERE. Zara was there. Every time.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Building excitement and precision as Zara uses her knowledge",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.22,
+            "attack": 0.8,
+            "release": 1.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.18,
+            "attack": 1.2,
+            "release": 1.2
+          }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Competition day - Zara perfectly positioned while others struggle",
+      "duration_seconds": 40
+    },
+    {
+      "id": "what-the-judge-said",
+      "title": "What the Judge Said",
+      "narration": "Zara came second. Pete came first, because Pete had forty years of feel in his bones and didn't need a map. But the judge — a retired oceanographer — pulled Zara aside after the prize-giving. You were reading the interference pattern, he said. It wasn't a question. My dad's a marine biologist, Zara said, like that explained anything. The judge smiled. Do you know this works everywhere? Not just beaches. Sound in a concert hall bounces off the walls and creates the same patterns. Radio signals bounce off buildings. Even light — every colour you see is an interference pattern. Everything is waves bouncing off mirrors? Zara asked. Everything is waves bouncing off everything, he replied. Mirrors just make it obvious.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Universal understanding - the same patterns everywhere",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 1.5,
+            "release": 2.5
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.12,
+            "attack": 1.0,
+            "release": 2.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "The judge connecting Zara's beach discovery to the universal patterns",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-third-wall",
+      "title": "The Third Wall",
+      "narration": "The council is talking about a third wall. Zara can't wait.",
+      "sound": {
+        "type": "invitation",
+        "description": "Open ending, anticipation of even more complex patterns to explore",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 1.0,
+            "release": 4.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Zara looking out at the beach, imagining even more complex interference patterns",
+      "duration_seconds": 15
+    }
+  ]
+}

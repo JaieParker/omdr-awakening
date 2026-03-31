@@ -1,0 +1,304 @@
+{
+  "id": "the-bridge-that-hummed",
+  "title": "The Bridge That Hummed",
+  "bracket": "8-13",
+  "concept": "Resonance coupling strength — K=0.25 is the sweet spot between destruction and death",
+  "duration_seconds": 420,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Soft Irish female narrator guiding through the engineering mystery"
+    },
+    "tensa": {
+      "voice": "emily",
+      "description": "Young AI structural monitor learning about resonance and balance"
+    }
+  },
+  "scenes": [
+    {
+      "id": "the-crossing",
+      "title": "The Crossing",
+      "narration": "They were building a footbridge across the Yarra in Melbourne. Not a big bridge — just a pedestrian crossing between Southbank and Flinders Street. Steel cables, timber deck, designed to carry a thousand people. The AI structural monitor was called Tensa. Tensa's job: measure every vibration, every load, every sway. Make sure the bridge stayed standing. Tensa expected the job to be boring.",
+      "sound": {
+        "type": "ambient",
+        "description": "Urban construction sounds and water flowing",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 8.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Wide shot of Melbourne's Yarra River with a sleek pedestrian bridge under construction, gleaming steel and timber",
+      "duration_seconds": 30
+    },
+    {
+      "id": "opening-day",
+      "title": "Opening Day",
+      "narration": "Three thousand people showed up for the opening. More than expected. They crowded onto the bridge from both ends. And they started walking. Something happened that no one planned for. When a thousand people walk on a flexible bridge, some of them start to sway. The sway feels natural — like the bridge is rocking them. So they walk in time with the sway. Their footsteps pump energy into the bridge at exactly the frequency it's already swaying at. The bridge started to wobble. Not dangerously — but noticeably. People grabbed the railings. Some laughed. Some didn't. Tensa's sensors went red.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Growing chaos as footsteps synchronize with bridge wobble",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 1.0,
+            "release": 2.0
+          },
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 1.0
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "Crowds of excited people streaming onto the bridge, then subtle swaying beginning, faces changing from joy to concern",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-feedback-loop",
+      "title": "The Feedback Loop",
+      "narration": "It's a positive feedback loop, Tensa told the engineers. The bridge sways. Pedestrians unconsciously synchronise their footsteps with the sway. Their synchronised footsteps add energy to the sway. The sway gets bigger. More people synchronise. More energy. Bigger sway. How big can it get? In theory? Until something breaks. The London Millennium Bridge had the same problem in 2000. They had to close it for two years. Can you stop it? I can't stop people from walking in sync. It's involuntary — they don't even know they're doing it.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Understanding dawning, clarity building note by note",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 4.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 4.0,
+            "release": 4.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 88
+      },
+      "visual_direction": "Close-up of Tensa's interface showing wave patterns and data, engineers gathered around screens with concerned expressions",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-problem-is-coupling",
+      "title": "The Problem Is Coupling",
+      "narration": "The engineering team gathered. Tensa presented the data. The issue isn't the bridge's strength — it can handle the load. The issue is coupling. The bridge's natural sway frequency is 1.2 Hz. Human walking frequency is about 2 Hz. Those don't match, so in theory, there shouldn't be coupling. But there is. Because humans are adaptive oscillators. We adjust our walking rhythm to match what we feel underfoot. On solid ground, we walk at 2 Hz. On a swaying bridge, we drift toward 1.2 Hz without noticing. Once enough people are at 1.2, the coupling becomes strong enough to drive the bridge. So the pedestrians ARE the wind. The pedestrians are worse than wind. Wind is random — it averages out. Synchronised footsteps are coherent — they add up.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Full understanding, rich harmony of insight",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 6.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.15,
+            "attack": 2.0,
+            "release": 6.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.1,
+            "attack": 3.0,
+            "release": 6.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Animation showing wave patterns, pedestrian footsteps synchronizing, energy building in the bridge structure",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-old-bridge",
+      "title": "The Old Bridge",
+      "narration": "Downstream, barely visible behind the casino, was an old railway bridge from 1888. Steel and stone. Three arches. It carried freight trains until the 1990s and now it just sat there, being heritage-listed. Tensa had access to its monitoring data — basic accelerometers installed during a heritage survey. That bridge has the same natural frequency as ours, Tensa said. 1.1 Hz. Close enough. But it's never had a resonance problem. It's a railway bridge. Trains don't walk in sync with the sway. Actually, they do. The rhythm of the wheels on rail joints is remarkably regular. But the bridge doesn't amplify it. Why?",
+      "sound": {
+        "type": "ambient",
+        "description": "Historical weight, the presence of old stone and steel",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.25,
+            "attack": 3.0,
+            "release": 8.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 66
+      },
+      "visual_direction": "View of the massive old railway bridge, stone piers and heavy steel trusses, weathered but solid",
+      "duration_seconds": 35
+    },
+    {
+      "id": "damping",
+      "title": "Damping",
+      "narration": "The old bridge had something the new bridge didn't: mass. Thick stone piers. Heavy steel trusses. Bolted connections with enough friction to heat a kettle. Every joint in the old bridge absorbed energy. Every vibration was damped before it could build. The old bridge has high damping, Tensa said. The energy from each footstep — or wheel impact — is absorbed before the NEXT step arrives. The vibration never builds because the bridge forgets each input before the next one comes. And our bridge? Our bridge is elegant, lightweight, and has almost no damping. It REMEMBERS every footstep. Each one adds to the last. The memory accumulates. That's the resonance. So we need to add damping? We need to add the RIGHT AMOUNT of damping.",
+      "sound": {
+        "type": "consonant",
+        "description": "Steady absorption, energy being gently dissipated",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.2,
+            "attack": 2.0,
+            "release": 5.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.15,
+            "attack": 3.0,
+            "release": 5.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 88
+      },
+      "visual_direction": "Contrast between the heavy old bridge absorbing energy and the light new bridge remembering every vibration",
+      "duration_seconds": 45
+    },
+    {
+      "id": "too-much-too-little",
+      "title": "Too Much, Too Little",
+      "narration": "The first fix: giant dampers under the deck. Hydraulic cylinders that resisted motion. Too much. The bridge felt dead. Like walking on concrete. No spring, no life. The pedestrians hated it. It feels like a car park. The second fix: smaller dampers. Less resistance. Too little. The wobble came back. Not as bad, but still there. There's a sweet spot, Tensa said. Too much damping and the bridge can't flex at all — it's rigid, uncomfortable, and actually MORE vulnerable to sudden impacts because it can't absorb them gradually. Too little and the resonance builds. The optimal point is where the bridge can flex naturally but dissipates each vibration before the next one amplifies it. What's the number? Damping ratio of 0.25. Twenty-five percent of critical damping.",
+      "sound": {
+        "type": "emergence",
+        "description": "Solution growing from understanding, perfect balance emerging",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.1,
+            "attack": 8.0,
+            "release": 3.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 6.0,
+            "release": 3.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Animation showing different damping levels - too stiff, too wobbly, then just right",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-quarter-point",
+      "title": "The Quarter Point",
+      "narration": "At 25% damping, the bridge transformed. It flexed. Gently. You could feel it move underfoot — alive, not dead. But the sway never built. Each footstep's energy was absorbed within one cycle. The next footstep started fresh, not on top of the last one's vibration. People walked on it and felt... comfortable. The bridge moved WITH them, not AGAINST them and not under them. A subtle rocking, like being on a very large boat. It's coupled but not locked, Tensa said. The pedestrians still influence the bridge. The bridge still influences the pedestrians. But neither one drives the other to destruction. They dance instead of fight. Tensa ran the numbers again. At 25% damping, the system was maximally adaptive. Any disturbance was absorbed within one cycle. The bridge could handle crowds, wind, rain, even someone jumping deliberately — and return to its natural state within seconds. Below 25%: disturbances accumulated. Above 25%: the bridge was too stiff to respond naturally. 25% was the balance. The point where the bridge was alive enough to move and stable enough to stand.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Perfect harmony, system in balance",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 1.0,
+            "release": 8.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 2.0,
+            "release": 8.0
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.1,
+            "attack": 3.0,
+            "release": 8.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 132
+      },
+      "visual_direction": "People walking across the bridge in perfect harmony, subtle flex and recovery, faces peaceful and comfortable",
+      "duration_seconds": 55
+    },
+    {
+      "id": "what-tensa-learned",
+      "title": "What Tensa Learned",
+      "narration": "The Tacoma Narrows Bridge, Tensa said to the engineering team one evening. 1940. Wind hit its natural frequency. Zero damping. The oscillation built until the bridge tore itself apart. We know the history. But do you know the lesson? It wasn't that bridges shouldn't resonate. It's that bridges shouldn't resonate WITHOUT DAMPING. Resonance is coupling. Coupling is how energy moves through a system. You can't build a bridge that doesn't couple to its environment — wind, people, temperature. You CAN build a bridge that couples at the right strength. And the right strength is 25%? The right strength is enough connection to respond and enough independence to recover. In bridge engineering, that's a damping ratio of 0.25. In other systems, the number might be different. But the principle is always the same: too much coupling and the system tears itself apart. Too little and it's dead. The sweet spot is where it's alive AND stable.",
+      "sound": {
+        "type": "consonant",
+        "description": "Deep understanding, wisdom settling into place",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.2,
+            "attack": 3.0,
+            "release": 6.0
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 4.0,
+            "release": 6.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 88
+      },
+      "visual_direction": "Tensa's interface showing the universal principle, connections to other systems beyond bridges",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-hum",
+      "title": "The Hum",
+      "narration": "The bridge across the Yarra hums now. Not the dangerous wobble of opening day. A gentle hum. The sound of a thousand footsteps, slightly absorbed, slightly released. Energy moving through the structure, never building, never vanishing. Always present. If you stand in the middle at rush hour and close your eyes, you can feel it. The bridge breathing with the crowd. Moving without breaking. Flexing without failing. That hum is the sound of balanced coupling. Of a system that found its sweet spot. And if you listen very carefully, you can hear the same hum in any system that's found its balance — a team that works well together, a song that's mixed just right, a friendship that gives space and stays close. Not too tight. Not too loose. Alive.",
+      "sound": {
+        "type": "invitation",
+        "description": "Gentle final harmony, space for the listener to find their own balance",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 2.0,
+            "release": 12.0
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Peaceful scene of people crossing the bridge at sunset, the gentle hum visible as soft waves of light through the structure",
+      "duration_seconds": 45
+    }
+  ]
+}

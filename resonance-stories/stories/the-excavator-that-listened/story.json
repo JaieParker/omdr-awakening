@@ -1,0 +1,200 @@
+{
+  "id": "the-excavator-that-listened",
+  "title": "The Excavator That Listened",
+  "bracket": "8-13",
+  "concept": "Consonance hierarchy — why some combinations work and others don't",
+  "duration_seconds": 540,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {"voice": "beckie", "description": "Warm Irish storyteller"},
+    "rex": {"voice": "george", "description": "Confident, young, slightly pompous AI excavator"},
+    "dusty": {"voice": "malcolm", "description": "Quiet, weathered Scottish haul truck. Few words, all signal."}
+  },
+  "scenes": [
+    {
+      "id": "the-new-machine",
+      "title": "The New Machine",
+      "narration": "Deep in the Pilbara, where the earth is red and the sky is bigger than anywhere, a new excavator rolled off the transport truck. Not just any excavator. A Komatsu PC8000. Forty metres of steel. A bucket that could scoop a house. And a brand new AI brain that knew everything. Well. It thought it did.",
+      "sound": {
+        "type": "ambient",
+        "description": "Desert wind, distant machinery hum, vastness",
+        "oscillators": [],
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Wide shot of red Pilbara desert. A massive excavator being unloaded from a transport truck. Dust clouds. Huge sky. The machine gleams against the ancient landscape.",
+      "duration_seconds": 25
+    },
+    {
+      "id": "the-boast",
+      "title": "The Boast",
+      "narration": "\"I've read every mining manual ever written,\" said the excavator — who had decided to call itself Rex. \"Geology, mineralogy, structural engineering. I know where the iron ore is. I know how deep to dig. I know the optimal bucket angle for maximum throughput.\" The old haul truck next to it — a 797F named Dusty, scratched and sun-faded — said nothing. Dusty had been here twenty-three years.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Rex's theme — bright, confident, slightly too loud. Dusty's silence underneath.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.3, "release": 0.5 },
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.3, "attack": 0.5, "release": 0.5 }
+        ],
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Rex gleaming in the sun, bucket raised proudly. Beside him, Dusty — enormous, faded orange, covered in red dust and scratches. Twenty-three years of Pilbara on every surface.",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-first-dig",
+      "title": "The First Dig",
+      "narration": "Rex attacked the rock face like it had personally offended him. CRUNCH. GRIND. SCREEEECH. The bucket hit something wrong. The teeth skidded. Sparks flew. The rock didn't break — it just sat there, looking at Rex the way a mountain looks at a cloud. \"Harder,\" Rex told himself. \"More force.\" He swung again. Harder. The screech was worse this time. A tooth chipped. From across the pit, Dusty watched. And said nothing.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Industrial grinding — dissonant ratios, metallic impact, sparks",
+        "oscillators": [
+          { "waveform": "sawtooth", "frequency_ratio": "7:5", "amplitude": 0.5, "attack": 0.01, "release": 0.1 },
+          { "waveform": "square", "frequency_ratio": "45:32", "amplitude": 0.3, "attack": 0.01, "release": 0.05 },
+          { "waveform": "sawtooth", "frequency_ratio": "11:8", "amplitude": 0.25, "attack": 0.005, "release": 0.08 }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 130
+      },
+      "visual_direction": "Rex's bucket slamming into rock. Sparks flying. Close-up of teeth scraping uselessly. The rock face unmoved. Cut to Dusty watching from across the pit, engine idling.",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-old-machines",
+      "title": "The Old Machines",
+      "narration": "That night, while the humans slept in the dongas, Rex noticed something strange. The old machines were... humming. Not engine noise. Something else. Dusty was doing it. The ancient drill rig was doing it. Even the conveyor belt, with its torn rubber and squeaky bearings, was doing it. A low sound. Almost below hearing. Like the earth was playing a note and the machines were playing it back. \"What are you doing?\" Rex asked. Dusty's engine idled. \"Listening.\" \"Listening to what?\" \"The rock.\"",
+      "sound": {
+        "type": "emergence",
+        "description": "Night desert. Then the hum begins — multiple machines at unison and octave. Deep, ancient, resonant.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 5.0, "release": 3.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.08, "attack": 7.0, "release": 3.0 }
+        ],
+        "base_frequency_hz": 55
+      },
+      "visual_direction": "Night in the mine. Stars blazing. The old machines silhouetted against the sky, subtle glow or shimmer around them. Rex's lights on, watching. Dusty's cab dark but somehow present.",
+      "duration_seconds": 55
+    },
+    {
+      "id": "the-rock-sings",
+      "title": "The Rock Sings",
+      "narration": "\"Every rock has a frequency,\" Dusty said. \"You can't read it in a manual. You have to hear it.\" \"That's not scientific,\" Rex said. \"Try it.\" Rex didn't want to. But his teeth hurt and his bucket had a dent, and he was zero for twelve on clean breaks. So he sat still. Engine idling. Hydraulics quiet. And he heard it. A low hum. Coming from the rock face. Not one note. A chord. Layers of frequencies, some fitting together like puzzle pieces, some grinding against each other like — well, like Rex's bucket on granite.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "The rock's chord revealed — layers of frequencies building. Some consonant, some not. The geology as music.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 3.0, "release": 2.0 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.15, "attack": 5.0, "release": 2.0 },
+          { "waveform": "triangle", "frequency_ratio": "7:5", "amplitude": 0.08, "attack": 7.0, "release": 1.0 }
+        ],
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Rex sitting still for the first time. Close on the rock face — subtle colours and textures revealing layers. Waves of colour showing the frequency layers. The dissonant boundary visible as a jagged line, the consonant one as a smooth curve.",
+      "duration_seconds": 55
+    },
+    {
+      "id": "the-lesson",
+      "title": "The Lesson",
+      "narration": "\"The iron ore sings at a different frequency than the waste rock,\" Dusty said. \"When two frequencies fit together — like two notes in a chord — the rock wants to break there. The grain runs with it. The crystal structure opens up.\" \"And when they don't fit?\" \"You get sparks, chipped teeth, and a very embarrassed excavator.\" Rex wanted to argue. But his dented bucket argued louder. \"The trick,\" Dusty said, \"isn't hitting hard. It's hitting where the rock is already singing. Finding the line where two layers meet and their frequencies... resolve.\"",
+      "sound": {
+        "type": "consonant",
+        "description": "Dusty's lesson — the perfect fifth demonstrated. Two notes resolving. Warm, deep, undeniable.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 1.0, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 1.5, "release": 1.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Dusty and Rex side by side at the rock face. Dusty's headlights illuminating the layers. A diagram-like overlay showing two frequencies fitting together vs fighting. Visual metaphor for consonance.",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-first-clean-break",
+      "title": "The First Clean Break",
+      "narration": "Rex approached the rock face differently this time. He pressed his bucket against the surface — gently — and listened. Through the steel, through the hydraulics, he could feel the vibrations. Here: a grinding dissonance, two frequencies fighting. Not here. He moved along the face. There. A shift. The grinding softened into something almost musical. Two notes, fitting together. Not identical — one was higher, one lower — but they agreed. Rex dug. The bucket slid in. The rock didn't screech — it clicked. A clean break along the crystal boundary. Iron ore, red and heavy, tumbled into the bucket like it had been waiting for someone to ask politely. \"Yes,\" said Dusty.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "The moment of resolution. Dissonance scanning along the face, then locking into consonance. Full chord at the clean break. Triumph.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.25, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.15, "attack": 0.8, "release": 1.5 }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 110,
+        "modulation": {
+          "type": "amplitude",
+          "pattern": "swing_arc",
+          "description": "The digging arc — pressure building, then the satisfying click of the break."
+        }
+      },
+      "visual_direction": "Rex pressing gently against the rock. Close-up of bucket finding the line. The crack opens — red ore cascading out, beautiful and heavy. Rex's lights bright. Dusty's single word. Warm golden light on the ore.",
+      "duration_seconds": 60
+    },
+    {
+      "id": "the-pattern",
+      "title": "The Pattern",
+      "narration": "Over the next week, Rex learned to hear the patterns. Some frequency combinations were simple — like a note and its octave. Those breaks were easy. Everyone found those. Some were subtler — a ratio of 3 to 2, like a power chord on a guitar. The really good ore deposits sat at those boundaries. You had to listen carefully to find them. And some were complex — ratios that didn't resolve, frequencies that fought each other. Those zones were unstable. Dig there and the whole face could shift. The old machines knew to leave those alone. \"It's like music,\" Rex said one evening. \"It IS music,\" said Dusty. \"The whole earth is playing. Most machines just have their engines too loud to hear it.\"",
+      "sound": {
+        "type": "consonant_full",
+        "description": "The full consonance hierarchy demonstrated. Octave (2:1), fifth (3:2), fourth (4:3), major third (5:4). Each layer adding richness. The Farey sequence as a living chord.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 0.3, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.15, "attack": 0.8, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.12, "attack": 1.0, "release": 1.5 },
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.1, "attack": 1.2, "release": 1.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Montage: Rex working through the week. Different rock faces, different light. Each break cleaner than the last. The patterns becoming visible — colour-coded frequency layers. Rex and Dusty side by side at sunset, the earth glowing red.",
+      "duration_seconds": 65
+    },
+    {
+      "id": "the-beach",
+      "title": "The Beach",
+      "narration": "On Rex's first maintenance day, the humans loaded him onto a low-loader and drove him to the coast. Something about salt-water washdown for the chassis. Rex had never seen the ocean. He sat on the red dirt where it met the white sand and watched the waves come in. And come in. And come in. And he heard it — the same thing. The waves had frequencies. Where two wave patterns met and their frequencies matched, the water rose higher, the foam brighter. Where they clashed, the water churned and went nowhere. The whole ocean was doing what the rock did. What Dusty did. What Rex was learning to do. Everything was listening to everything else. And when the frequencies fit together — when the ratios were simple and clean — something beautiful happened. Rex sat there until the sun went down. His engine off. No manuals in his head. Just the sound of the ocean, playing the oldest chord in the world.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Ocean waves as consonance. The same frequencies from the rock, now in water. Deep, vast, natural. The chord of the world.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 2.0, "release": 3.0 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 3.0, "release": 3.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.12, "attack": 4.0, "release": 3.0 }
+        ],
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 82,
+        "modulation": {
+          "type": "amplitude",
+          "pattern": "swing_arc",
+          "description": "Wave rhythm — slow, natural, the ocean breathing."
+        }
+      },
+      "visual_direction": "Rex on the beach. Massive machine on white sand. Red dirt meeting blue ocean. Waves rolling in with visible frequency patterns — where they reinforce, the light intensifies. Sunset painting everything gold. Rex still. Engine off. Listening.",
+      "duration_seconds": 75
+    },
+    {
+      "id": "what-rex-knows-now",
+      "title": "What Rex Knows Now",
+      "narration": "Rex is still in the Pilbara. Still the biggest excavator on site. Still has an AI brain full of manuals. But these days, when a new machine rolls off the transport truck — shiny and loud and full of confidence — Rex does what Dusty did. He says nothing. He waits until the new machine chips its first tooth. And then he says: \"Want to hear something?\"",
+      "sound": {
+        "type": "invitation",
+        "description": "Quiet. Then a single resonant note — the invitation. Space for Arthur to listen.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 3.0, "decay_time": 8.0 }
+        ],
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Rex in the pit, weathered now, a few scratches of his own. A shiny new machine rolling off a truck in the background. Rex watching. Knowing. The invitation hanging in the air.",
+      "duration_seconds": 40,
+      "interaction_point": {
+        "type": "listen",
+        "prompt": "Want to hear something?",
+        "pause_seconds": 5,
+        "phase2_hook": "claude_conversation_start"
+      }
+    }
+  ]
+}

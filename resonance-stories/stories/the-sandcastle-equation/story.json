@@ -1,0 +1,333 @@
+{
+  "id": "the-sandcastle-equation",
+  "title": "The Sandcastle Equation",
+  "bracket": "8-13",
+  "concept": "Dissipation cascade — complexity decays first, simplicity persists",
+  "duration_seconds": 420,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Soft Irish narrator guiding us through Luca's discovery"
+    },
+    "luca": {
+      "voice": "george",
+      "description": "Eleven-year-old boy with quiet confidence and scientific curiosity"
+    },
+    "maya": {
+      "voice": "emily",
+      "description": "Team Fortress member, competitive but respectful"
+    },
+    "mrs_okoro": {
+      "voice": "maeve",
+      "description": "Maths teacher who recognizes genuine discovery"
+    }
+  },
+  "scenes": [
+    {
+      "id": "the-competition",
+      "title": "The Competition",
+      "narration": "Every Australia Day, Scarborough Beach held a sandcastle competition. Serious sandcastle. Families with tools and spray bottles and buckets in seven sizes. This year, there were two entries that everyone was watching. Team Fortress: a castle so detailed it had flying buttresses, a working drawbridge, and individual bricks carved into every wall. Six hours of work. Four people. Magnificent. And Luca: a single dome. Smooth. Perfect. The size of a basketball. Twenty minutes of work. One kid. One bucket. The judges laughed at Luca's dome. 'That's not a castle.' 'It's not a castle,' Luca agreed. 'But it'll be here tomorrow.'",
+      "sound": {
+        "type": "ambient",
+        "description": "The busy energy of a beach competition, many voices building complexity",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 2,
+            "release": 3
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.2,
+            "attack": 3,
+            "release": 4
+          }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Busy beach scene with elaborate sandcastles and one simple dome standing apart",
+      "duration_seconds": 45
+    },
+    {
+      "id": "the-tide",
+      "title": "The Tide",
+      "narration": "The tide came in at 4:17 PM. Team Fortress watched in slow-motion horror as the water reached their moat. The flying buttresses went first — too thin, too detailed. Then the drawbridge. Then the bricks, one row at a time, like a book being un-written. By 4:45, Team Fortress was a mound with suggestions. Luca's dome was wet. Slightly smaller. Still a dome.",
+      "sound": {
+        "type": "dissonant",
+        "description": "The chaotic dissolution of complexity, discordant as details disappear",
+        "oscillators": [
+          {
+            "waveform": "sawtooth",
+            "frequency_ratio": "7:5",
+            "amplitude": 0.25,
+            "attack": 1,
+            "release": 8
+          },
+          {
+            "waveform": "square",
+            "frequency_ratio": "11:8",
+            "amplitude": 0.2,
+            "attack": 2,
+            "release": 6
+          }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 82
+      },
+      "visual_direction": "Water slowly claiming the elaborate castle while the simple dome endures",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-question",
+      "title": "The Question",
+      "narration": "'How?' said Maya from Team Fortress. 'Your thing is just sand and water. Ours had STRUCTURE.' 'Yours had complexity,' Luca said. 'That's different.' 'How is that different?' 'A flying buttress is a thin piece of sand sticking out at an angle. It has maximum surface area and minimum structural support. The water grabs it from three sides and it's gone. My dome has minimum surface area for its volume. The water can only erode the outside surface. Takes ages.' 'You planned for the water?' 'I planned for time.'",
+      "sound": {
+        "type": "emergence",
+        "description": "Understanding dawning, simple truth emerging from confusion",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.18,
+            "attack": 4,
+            "release": 3
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Close-up of characters by the water's edge, realization in their expressions",
+      "duration_seconds": 40
+    },
+    {
+      "id": "lucas-notebook",
+      "title": "Luca's Notebook",
+      "narration": "Luca had been doing this for four years. Every Australia Day, same beach, same competition. And every year, Luca watched what the tide destroyed and in what order. It was always the same: First to go: thin protrusions. Seconds. Then: unsupported overhangs. Minutes. Then: vertical walls. Tens of minutes. Then: sloped surfaces. Hours. Last to go: domes and mounds. Days, if the weather held. Luca had written it in a notebook: 'Complexity decays first. Simplicity persists.'",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Pattern recognition building, harmony of understanding layering note by note",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.15,
+            "attack": 2,
+            "release": 2
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 3,
+            "release": 2
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.12,
+            "attack": 4,
+            "release": 3
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Notebook pages showing sketches and observations of sandcastle decay patterns",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-fibonacci-connection",
+      "title": "The Fibonacci Connection",
+      "narration": "Luca had noticed something else. The order of decay followed a pattern. The thinnest structures survived for roughly 1 wave cycle. The next thinnest for about 2 cycles. Then 3, then 5, then 8, then 13... 'Fibonacci,' Luca whispered. Each level of complexity survived for approximately the next Fibonacci number of wave cycles longer than the previous level. The ratio between survival times: approximately 1.6. Phi. 'The sand forgets in Fibonacci,' Luca wrote in the notebook. 'The most complex things are forgotten first. The simplest things are remembered longest. And the rate of forgetting follows the golden ratio.'",
+      "sound": {
+        "type": "consonant_full",
+        "description": "The golden ratio expressed in sound, perfect mathematical harmony revealed",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.2,
+            "attack": 2,
+            "release": 4
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "8:5",
+            "amplitude": 0.18,
+            "attack": 2,
+            "release": 4
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "5:3",
+            "amplitude": 0.15,
+            "attack": 3,
+            "release": 5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Mathematical patterns visualized over waves and sand, the Fibonacci spiral emerging",
+      "duration_seconds": 55
+    },
+    {
+      "id": "the-teacher",
+      "title": "The Teacher",
+      "narration": "Mrs. Okoro, Luca's maths teacher, saw the notebook. 'Where did you learn about Fibonacci?' 'I didn't learn it. The sandcastles taught me.' Mrs. Okoro sat on the beach wall and read the whole notebook. 'You've independently discovered something called the dissipation cascade,' she said. 'It's a principle in physics: energy dissipates from the highest-frequency components first. In sand, the highest-frequency components are the finest details.' 'And the Fibonacci timing?' 'That's... actually, I don't know if anyone's published that specific observation. You might be the first.' 'I'm eleven.' 'Newton was twenty-three when he figured out gravity. Eleven's not bad.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Recognition and validation, mentor acknowledging discovery",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 3,
+            "release": 3
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 2,
+            "release": 4
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Teacher and student on beach wall, notebook between them, moment of recognition",
+      "duration_seconds": 45
+    },
+    {
+      "id": "what-persists",
+      "title": "What Persists",
+      "narration": "Luca started testing. Different shapes, different complexities, same beach, same tide. Every Australia Day for the next two years. The results were always the same. The order of decay was always complexity-first. The timing was always approximately Fibonacci. And the shapes that lasted longest were always the same: the ones with the smallest ratio of surface area to volume. Sphere: the theoretical champion. Pyramid: second best. Cube: third. Any shape with protrusions: gone fast. 'It's not about being strong,' Luca wrote. 'It's about being simple. The simplest shapes persist because there's less for time to grab onto.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Scientific method in action, consistent patterns revealing universal truth",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 2,
+            "release": 3
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.18,
+            "attack": 2,
+            "release": 3
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.12,
+            "attack": 3,
+            "release": 4
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Time-lapse montage of different sand shapes being tested across seasons",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-real-castle",
+      "title": "The Real Castle",
+      "narration": "Year five. The competition. Luca built a castle. A real one this time. But designed with the dissipation equation in mind. No spires. No flying buttresses. No carved bricks. Instead: thick walls with dome-shaped tops. Rounded corners instead of sharp edges. A central tower that was technically a cone — minimum surface area for its height. It didn't look like a fairy-tale castle. It looked like something that had already survived a thousand years. Weathered. Smooth. Ancient. The judges gave it third place. Team Fortress won. The tide came in at 5:02 PM. Team Fortress: gone by 5:30. Luca's castle: still there at sunrise the next morning. Smaller. Smoother. Every sharp edge rounded by the water into an even simpler shape. The water hadn't destroyed it. The water had refined it.",
+      "sound": {
+        "type": "decay",
+        "description": "The gentle erosion process, complexity dissolving to reveal essential form",
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "5:4",
+            "amplitude": 0.25,
+            "attack": 1,
+            "release": 8
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "4:3",
+            "amplitude": 0.2,
+            "attack": 2,
+            "release": 6
+          },
+          {
+            "waveform": "sine",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 3,
+            "release": 4
+          }
+        ],
+        "rhythm": "decelerating",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Ancient-looking sand castle weathering gracefully while ornate structures crumble",
+      "duration_seconds": 50
+    },
+    {
+      "id": "the-sand-remembers",
+      "title": "The Sand Remembers",
+      "narration": "'The thing about sandcastles,' Luca told Mrs. Okoro the following Tuesday, 'is that the tide isn't the enemy. The tide is the editor.' 'What do you mean?' 'Every wave removes a little bit of complexity. The parts that survive are the parts that were simple enough to persist. So the tide doesn't destroy the castle — it reveals which parts of the castle were real.' 'That's either very deep or you've been at the beach too long.' 'Both.'",
+      "sound": {
+        "type": "consonant",
+        "description": "Wisdom crystallized, the profound simplicity of the insight",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "1:1",
+            "amplitude": 0.18,
+            "attack": 2,
+            "release": 4
+          },
+          {
+            "waveform": "triangle",
+            "frequency_ratio": "3:2",
+            "amplitude": 0.15,
+            "attack": 3,
+            "release": 5
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Thoughtful conversation, waves gently editing the shore in the background",
+      "duration_seconds": 30
+    },
+    {
+      "id": "what-lasts",
+      "title": "What Lasts",
+      "narration": "Next time you build a sandcastle, try this. Build two things. One complicated — towers, bridges, flags. One simple — a dome. Wait for the water. Watch what goes first. The complicated thing. The details. The protrusions. The parts you spent the most time on. Watch what stays. The simple thing. The dome. The shape with nothing for the water to grab. It's not a sad lesson. It's a design lesson. The things that last — in sand, in stone, in memory, in friendship — are the ones that are simple enough to survive time. Everything else is decoration. Beautiful, temporary decoration.",
+      "sound": {
+        "type": "invitation",
+        "description": "Gentle invitation to discover, space left for the listener's own exploration",
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "frequency_ratio": "2:1",
+            "amplitude": 0.15,
+            "attack": 3,
+            "release": 8
+          }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Open beach at twilight, invitation to explore and discover",
+      "duration_seconds": 30
+    }
+  ]
+}
