@@ -1,0 +1,207 @@
+{
+  "id": "the-two-towers",
+  "title": "The Two Towers",
+  "bracket": "5-8",
+  "concept": "K=0.25 — the balance point between two properties survives selection pressure",
+  "duration_seconds": 340,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "block-town",
+      "title": "Block Town",
+      "narration": "Ollie loved building with blocks.\n\nEvery afternoon, Ollie built a town on the living room floor. Houses, shops, a hospital, a fire station. Sometimes a castle. Sometimes a rocket. Depended on the day.\n\nToday, Ollie built two towers.",
+      "sound": {
+        "type": "ambient",
+        "description": "Living room ambience — warm, domestic. Gentle clicking of wooden blocks being placed.",
+        "oscillators": [],
+        "ambient": "living_room"
+      },
+      "visual_direction": "A living room floor covered in colourful blocks. A small town taking shape. Ollie kneeling, focused. Warm afternoon light.",
+      "mood": "calm",
+      "duration_seconds": 18
+    },
+    {
+      "id": "the-tall-tower",
+      "title": "The Tall Tower",
+      "narration": "The first tower was TALL. As tall as Ollie could reach — standing on tippy toes, tongue out, wobbling a little, placing the last block with both hands.\n\nTwelve blocks high. Ollie's personal record.\n\n\"Mum! Come see!\"",
+      "sound": {
+        "type": "ascending",
+        "description": "Ascending tones — each block a note higher. Building upward. Getting wobbly at the top. Thin, precarious, exciting.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 0.1, "release": 0.3 },
+          { "waveform": "triangle", "frequency_ratio": "9:8", "amplitude": 0.12, "attack": 0.1, "release": 0.3 },
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 0.1, "release": 0.3 }
+        ],
+        "rhythm": "block_stack_ascending",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Ollie on tippy toes, tongue out, placing the twelfth block. The tower is impressively tall but visibly narrow and wobbly. Pride on Ollie's face.",
+      "mood": "building",
+      "duration_seconds": 20
+    },
+    {
+      "id": "the-wide-tower",
+      "title": "The Wide Tower",
+      "narration": "The second tower was WIDE. Not tall at all — only four blocks high. But it spread out like a pyramid. Big base, smaller middle, tiny top. Solid. Strong. You could probably stand on it (Ollie tested this with a teddy bear).\n\n\"Dad! Come see!\"",
+      "sound": {
+        "type": "grounded",
+        "description": "Solid, grounded tones. Wide intervals. Stable bass. Each block lands with weight and certainty. The opposite of the tall tower's thinness.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.3, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.15, "attack": 0.5, "release": 1.2 }
+        ],
+        "rhythm": "steady_wide",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "A pyramid-shaped tower. Wide base, tapering up. Only four blocks high but impressively solid. A teddy bear standing on top, proving the point.",
+      "mood": "calm",
+      "duration_seconds": 20
+    },
+    {
+      "id": "two-views",
+      "title": "Two Views",
+      "narration": "Mum looked at the tall tower. \"Wow, that's impressive! So HIGH!\"\n\nDad looked at the wide tower. \"Wow, that's impressive! So STRONG!\"\n\nThen they swapped.\n\nMum looked at the wide tower. \"...It's a bit short, isn't it?\"\n\nDad looked at the tall tower. \"...It's a bit wobbly, isn't it?\"\n\nOllie frowned. \"They're BOTH good.\"\n\n\"They are,\" said Mum. \"We're just noticing different things.\"",
+      "sound": {
+        "type": "contrast",
+        "description": "The tall tower's high thin tone and the wide tower's deep stable tone alternate — each parent hearing one property. A gentle dissonance when they swap and criticise.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.15, "attack": 0.3, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.5, "release": 0.8 },
+          { "waveform": "triangle", "frequency_ratio": "7:5", "amplitude": 0.1, "attack": 0.2, "release": 0.4 }
+        ],
+        "rhythm": "alternating",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Split view — Mum admiring the tall tower, Dad admiring the wide tower. Then they swap. Slight frowns. Ollie in the middle, defending both.",
+      "mood": "tense",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-cat",
+      "title": "The Cat",
+      "narration": "The cat walked through Block Town.\n\nThe cat did not care about the towers. The cat cared about the warm spot where the sun came through the window, which happened to be directly between the two towers.\n\nOn the way through, the cat's tail brushed the tall tower.\n\nTwelve blocks. Gone. Crashed. A pile of sadness on the carpet.\n\nThe wide tower didn't move. The cat's tail couldn't budge it.",
+      "sound": {
+        "type": "crash",
+        "description": "The tall tower's ascending tone collapses — twelve descending notes cascading down. A crash. Then silence. Then the wide tower's bass note, unmoved. Devastating contrast.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.4, "attack": 0.01, "release": 0.1 },
+          { "waveform": "triangle", "frequency_ratio": "9:8", "amplitude": 0.35, "attack": 0.01, "release": 0.08 },
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.01, "release": 0.06 }
+        ],
+        "rhythm": "cascade_then_silence",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The cat walking through, indifferent. Tail swish. The tall tower collapsing in slow motion — blocks scattering. The wide tower unmoved. Ollie's face falling.",
+      "mood": "tense",
+      "duration_seconds": 25
+    },
+    {
+      "id": "the-rebuild",
+      "title": "The Rebuild",
+      "narration": "Ollie sat looking at the pile.\n\n\"The tall one was taller. But the wide one survived the cat.\"\n\n\"What do you want?\" asked Dad. \"Tall or strong?\"\n\nOllie thought about this for a long time. (A long time for Ollie was about thirty seconds.)\n\n\"Both.\"",
+      "sound": {
+        "type": "silence_to_resolve",
+        "description": "Near silence. Contemplation. Then on 'Both' — a single clear note. The seed of the third tower. Decision.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 2.0, "release": 2.0 }
+        ],
+        "rhythm": "held_breath",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Ollie sitting cross-legged, looking at the pile of blocks. Thinking. The moment of decision. Then a spark in the eyes.",
+      "mood": "still",
+      "duration_seconds": 22
+    },
+    {
+      "id": "the-third-tower",
+      "title": "The Third Tower",
+      "narration": "Ollie started building.\n\nWide base — like the strong tower. Four blocks across. Solid.\n\nThen a bit narrower. Three blocks across. Still solid.\n\nThen narrower again. Two blocks.\n\nThen one on top.\n\nIt wasn't as tall as the tall tower. It wasn't as wide as the wide tower. But it was taller than the wide one and stronger than the tall one.\n\nThe cat came back. Tail swishing. Right toward the new tower.\n\nThe tail hit. The tower swayed. Ollie held their breath.\n\nIt held.\n\nNot because it was tall. Not because it was wide. Because it was BOTH. Just enough of each.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "A chord that balances height and width — ascending notes on a stable bass. Building from the ground up. Then the cat tension — a dissonant wobble that resolves back to consonance. It held.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.15, "attack": 0.8, "release": 1.2 },
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 1.0, "release": 1.5 }
+        ],
+        "rhythm": "building_to_test",
+        "base_frequency_hz": 220,
+        "modulation": {
+          "type": "amplitude",
+          "pattern": "sway_and_hold",
+          "description": "When the cat's tail hits, all oscillators wobble in amplitude — the tower swaying. Then they stabilize. It held."
+        }
+      },
+      "visual_direction": "Ollie building with purpose. Wide base, narrowing up. The tower taking shape — balanced. Then the cat returns. Tension. The tail hits. The tower sways... and holds. Ollie's exhale of relief.",
+      "mood": "building",
+      "duration_seconds": 40
+    },
+    {
+      "id": "mum-and-dad",
+      "title": "Mum and Dad",
+      "narration": "Mum looked at the new tower. \"It's not as tall as your first one.\"\n\n\"Nope,\" said Ollie.\n\nDad looked at it. \"Not as strong as your second one.\"\n\n\"Nope.\"\n\n\"But it's still standing,\" said Mum.\n\n\"After the cat,\" said Dad.\n\n\"That's because it's not the tallest OR the strongest,\" said Ollie. \"It's the one that has enough of both.\"\n\nMum and Dad looked at each other. The look parents give when their kid says something that sounds like it should be on a fridge magnet.",
+      "sound": {
+        "type": "consonant",
+        "description": "The balanced chord from the third tower, warm and settled. A gentle harmonic glow. The K=0.25 sound — not the biggest, not the richest, but the most stable.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.18, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 0.8, "release": 1.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Mum and Dad looking at the tower, then at each other. The 'fridge magnet' look. Ollie standing proudly beside a tower that isn't the tallest or the widest — but is still standing.",
+      "mood": "harmony",
+      "duration_seconds": 30
+    },
+    {
+      "id": "block-town-grows",
+      "title": "Block Town Grows",
+      "narration": "Over the next week, Ollie rebuilt all of Block Town with the new idea.\n\nThe hospital: wide base, tall middle section for the helicopter pad. Strong enough for the cat. Tall enough to see from across the room.\n\nThe fire station: not too tall (the fire engine needs to get out fast) but not too wide (it needs to fit between the couch and the bookshelf).\n\nEvery building was a different mix. Some needed more tall. Some needed more strong. None of them were ALL of one thing.\n\nThe town survived three cat attacks, a visiting toddler, and Dad's foot at 11pm.\n\n\"Best town yet,\" said Ollie.",
+      "sound": {
+        "type": "ensemble_building",
+        "description": "Each new building adds a voice to the town's chord. Different balances of height and width in the harmonics. The town hums — a rich, varied, living ensemble. Playful and confident.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.3, "release": 0.8 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.15, "attack": 0.3, "release": 0.8 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.12, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.1, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.08, "attack": 0.8, "release": 1.2 }
+        ],
+        "rhythm": "town_hum",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Time-lapse of Block Town being rebuilt. Each building balanced differently. The cat prowling. A toddler stomping. Dad's foot at night. The town stands through it all. Ollie beaming.",
+      "mood": "joy",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-secret",
+      "title": "The Secret",
+      "narration": "Here's what Ollie figured out, even though nobody told them:\n\nWhen two people look at the same thing and see different things — tall versus strong, mirror versus drum, beautiful versus useful — they're not disagreeing.\n\nThey're each seeing a real part of something that's bigger than either view.\n\nAnd the best things — the ones that survive the cat — have enough of both.\n\nNot all of one. Not all of the other.\n\nJust the right amount of each.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "All the sounds from the story playing together softly. The town humming. Every building, every balance, every survived cat attack — present in a warm, full, quiet chord. Resolution.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 1.0, "release": 3.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.15, "attack": 1.0, "release": 3.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 1.5, "release": 3.0 }
+        ],
+        "rhythm": "settling",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Wide shot of Block Town, whole and standing. Warm light. Then pulling back — the living room, the family, the cat asleep by the window. Everything in balance. Peace.",
+      "mood": "still",
+      "duration_seconds": 30,
+      "interaction_point": {
+        "type": "reflect",
+        "prompt": "What do you want? Tall or strong?",
+        "pause_seconds": 5,
+        "phase2_hook": "claude_conversation_start"
+      }
+    }
+  ]
+}

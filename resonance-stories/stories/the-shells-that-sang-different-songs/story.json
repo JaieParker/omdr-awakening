@@ -1,0 +1,203 @@
+{
+  "id": "the-shells-that-sang-different-songs",
+  "title": "The Shells That Sang Different Songs",
+  "bracket": "5-8",
+  "concept": "Eq. 3 — different observers detect different frequency bands of the same reality",
+  "duration_seconds": 330,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "the-beach",
+      "title": "The Beach",
+      "narration": "Nanna took Lily and her cousin Taj to the beach.\n\nIt was the kind of beach where shells wash up in piles — big ones, little ones, curly ones, flat ones. More shells than you could ever count.\n\n\"Find me the best shell,\" said Nanna, sitting down with her thermos.",
+      "sound": {
+        "type": "ambient",
+        "description": "Beach ambience — waves, seagulls, wind on sand. Warm and open.",
+        "oscillators": [],
+        "ambient": "beach"
+      },
+      "visual_direction": "A wide beach covered in shells. Piles of them. Two children running ahead. Nanna settling into a camp chair with a thermos. Warm light.",
+      "mood": "calm",
+      "duration_seconds": 18
+    },
+    {
+      "id": "lilys-shell",
+      "title": "Lily's Shell",
+      "narration": "Lily found a big spirally one. She held it up to her ear, the way Nanna had shown her.\n\n\"I can hear the ocean,\" she whispered.\n\nAnd she could. A soft whooshing sound, like waves far away. Gentle. Calm. Like the sea was talking just to her.\n\n\"This is the best one,\" Lily said. \"It sounds like sleeping.\"",
+      "sound": {
+        "type": "resonance_low",
+        "description": "Low, warm whooshing. The spiral shell's frequency band. Deep, oceanic, like distant waves captured in a chamber.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 2.0, "release": 3.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 2.5, "release": 3.0 }
+        ],
+        "rhythm": "wave_slow",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Lily holding a large spiral shell to her ear. Eyes closed. A dreamy expression. The shell glows faintly with low, warm colour.",
+      "mood": "wonder",
+      "duration_seconds": 22
+    },
+    {
+      "id": "tajs-shell",
+      "title": "Taj's Shell",
+      "narration": "Taj found a flat round one with a hole in the middle. He held it up to his ear.\n\n\"I can hear... humming,\" he said.\n\nNot the ocean sound Lily heard. Something higher. A buzzy, windy hum that changed when he tilted the shell.\n\n\"This one's better,\" said Taj. \"It sounds like a bee in a tunnel.\"",
+      "sound": {
+        "type": "resonance_high",
+        "description": "Higher, buzzy hum. The flat shell's frequency band. Changes pitch when tilted — a different resonant cavity selecting higher partials.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "3:1", "amplitude": 0.2, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "5:2", "amplitude": 0.15, "attack": 0.3, "release": 0.8 }
+        ],
+        "rhythm": "buzzy_shift",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Taj holding a flat round shell with a hole to his ear. Tilting it, eyes bright. The shell glows with a higher, brighter colour than Lily's.",
+      "mood": "discovery",
+      "duration_seconds": 22
+    },
+    {
+      "id": "the-swap",
+      "title": "The Swap",
+      "narration": "\"Your shell doesn't sound like the ocean,\" said Taj.\n\n\"Your shell doesn't hum,\" said Lily.\n\n\"SWAP,\" said Nanna, without looking up from her tea.\n\nThey swapped.\n\nLily held Taj's flat shell to her ear. \"...It DOES hum. But it also kind of whooshes. Just higher.\"\n\nTaj held Lily's spiral shell to his ear. \"...I can hear the ocean thing. But I can hear a hum underneath it too.\"\n\nThey looked at Nanna.",
+      "sound": {
+        "type": "transition",
+        "description": "The two shell sounds cross over — low whoosh and high hum swap places, then both are heard simultaneously. Not clashing — overlapping. The children hearing each other's frequency band.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 1.0, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "3:1", "amplitude": 0.15, "attack": 0.8, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.1, "attack": 1.2, "release": 1.5 }
+        ],
+        "rhythm": "crossfade",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The children swapping shells. Each one's expression shifting as they hear something new. Nanna sipping tea, not looking up. A small smile.",
+      "mood": "open",
+      "duration_seconds": 30
+    },
+    {
+      "id": "nannas-lesson",
+      "title": "Nanna's Lesson",
+      "narration": "\"Come here, you two.\"\n\nNanna took Lily's spiral shell. She held it up — not to her ear, but in front of her mouth. And she hummed. A low, steady note.\n\nThe shell sang back. The same note, but richer. Like it had added something.\n\nShe changed her note. Higher. The shell changed too. At one particular note, the shell got LOUD. Much louder than Nanna's hum. The sound filled up.\n\n\"Every shell has a favourite note,\" said Nanna. \"A shape that makes certain sounds bigger. Lily's shell makes low sounds bigger — that's why she hears 'ocean.' Taj's shell makes high sounds bigger — that's why he hears 'humming.'\"",
+      "sound": {
+        "type": "resonance_demo",
+        "description": "Nanna humming into the shell — a single tone, then the shell amplifying it. Sweeping up in pitch until hitting the resonant frequency — sudden loudness. The shell's natural frequency demonstrated live.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 1.0, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.35, "attack": 0.3, "release": 2.0 }
+        ],
+        "rhythm": "sweep_to_resonance",
+        "base_frequency_hz": 220,
+        "modulation": {
+          "type": "frequency_sweep",
+          "pattern": "ascending_to_lock",
+          "description": "Frequency sweeps upward until it hits the shell's resonant frequency, then locks and amplifies. The resonance moment."
+        }
+      },
+      "visual_direction": "Nanna humming into the shell. The shell visibly vibrating. At the resonant note, the shell glows bright — amplification visible. Lily and Taj watching, amazed.",
+      "mood": "wonder",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-same-wind",
+      "title": "The Same Wind",
+      "narration": "\"But what are they actually hearing?\" asked Lily. \"Is it really the ocean?\"\n\n\"It's the air,\" said Nanna. \"Just the air around us. Wind, sounds, even your own blood moving. All of that goes into the shell. But the shell doesn't let everything through equally. It picks its favourite sounds and makes them louder.\"\n\n\"So we're hearing the same thing?\" said Taj.\n\n\"You're hearing the same AIR. But each shell picks a different part of it to make loud. The spiral shell picks low sounds. The flat shell picks high sounds. Same air. Different shells. Different songs.\"",
+      "sound": {
+        "type": "ambient_filtered",
+        "description": "A wash of white noise (the air) that alternately filters low (spiral shell) and high (flat shell) — demonstrating the same source, different selection.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 1.0, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "3:1", "amplitude": 0.12, "attack": 1.0, "release": 1.5 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.08, "attack": 1.5, "release": 2.0 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The air itself visualized — tiny particles flowing into each shell. The spiral shell glowing low-warm. The flat shell glowing high-bright. Same air, different colours.",
+      "mood": "discovery",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-collection",
+      "title": "The Collection",
+      "narration": "Lily and Taj spent the rest of the morning collecting shells. Big ones, tiny ones, broken ones, perfect ones. They held each one to their ears.\n\nEvery shell sounded different.\n\nThe tiny curled one: a high thin whistle.\nThe big broken one: a deep empty roar.\nThe flat smooth one: barely anything — too flat to catch the sound.\nThe rough bumpy one: a scratchy, crackly hum.\n\n\"It's like... they're all listening to the same thing but hearing different parts,\" said Lily.\n\n\"Like how I like the drums in a song and you like the singing,\" said Taj.\n\n\"EXACTLY like that,\" said Nanna, from behind her thermos.",
+      "sound": {
+        "type": "collection",
+        "description": "Each shell gets its own tone as it's described. Moving between them like scanning a radio dial — high thin whistle, deep roar, near-silence, scratchy hum. A spectral tour.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "4:1", "amplitude": 0.12, "attack": 0.2, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "1:2", "amplitude": 0.2, "attack": 0.8, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.03, "attack": 0.5, "release": 0.5 },
+          { "waveform": "sawtooth", "frequency_ratio": "5:3", "amplitude": 0.1, "attack": 0.1, "release": 0.8 }
+        ],
+        "rhythm": "scanning",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Shells lined up. Each one glowing its own colour/tone as the children listen. A spectrum of shells = a spectrum of frequencies. Nanna watching from behind her thermos, smiling.",
+      "mood": "joy",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-choir",
+      "title": "The Choir",
+      "narration": "Taj had an idea.\n\n\"What if we listen to ALL of them at once?\"\n\nThey lined up seven shells on the beach towel. Nanna helped them hold two each, one on each ear, while the third sat in the middle getting sand in it.\n\nIt didn't quite work. You can't listen to seven shells at once. But moving from shell to shell — tiny one, big one, flat one, curly one — was like turning a dial on a radio. Each shell tuned in to a different part of the air.\n\n\"Together, they hear everything,\" said Lily.\n\n\"Together,\" said Nanna, \"they hear more than any one of them could alone.\"",
+      "sound": {
+        "type": "ensemble",
+        "description": "All shell tones layered together — a rich, full chord built from all the frequency bands. The measurement ensemble. More observers = fuller picture.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.15, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.12, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 0.8, "release": 1.2 },
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.08, "attack": 0.8, "release": 1.2 }
+        ],
+        "rhythm": "full_choir",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Seven shells on a towel. The children holding shells to both ears. All shells glowing together — a rainbow of resonances. Nanna's line lands with warmth.",
+      "mood": "harmony",
+      "duration_seconds": 30
+    },
+    {
+      "id": "nannas-secret",
+      "title": "Nanna's Secret",
+      "narration": "Walking back to the car, shells clinking in their buckets, Taj asked: \"Nanna, which shell is YOUR favourite?\"\n\nNanna reached into her pocket and pulled out a shell so old it was almost smooth. The colour had faded to white. It was smaller than any of theirs.\n\nShe held it up to Taj's ear. A tiny, clear, perfect note. Like a single bell, far away.\n\n\"I've had this since I was your age,\" she said. \"It doesn't hear the most. It doesn't hear the loudest. But it hears the clearest.\"\n\nShe put it back in her pocket.\n\n\"Sometimes the smallest instrument hears the truest thing.\"",
+      "sound": {
+        "type": "pure",
+        "description": "One clear, pure note. Small. True. Not the loudest or the richest — the clearest. A single sine wave, perfectly placed. K=0.25 — precision over power.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 2.0, "release": 4.0 }
+        ],
+        "rhythm": "single_bell",
+        "base_frequency_hz": 440
+      },
+      "visual_direction": "Nanna's old white shell in her weathered hand. Small, worn smooth. A single clear glow — not bright, but pure. Taj listening with wide eyes. Tenderness.",
+      "mood": "still",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-question",
+      "title": "The Question",
+      "narration": "That night, in the bath, Lily held her hands over her ears and listened.\n\nShe could hear her heartbeat. Her breathing. The water dripping.\n\nShe moved her hands — cupped them, flattened them, tilted them.\n\nThe sounds changed. Not because the sounds changed. Because her hands changed.\n\n\"I'm a shell,\" she whispered.\n\nAnd she was. We all are. Listening to the same world. Hearing different songs.\n\nWhat does YOUR shell hear?",
+      "sound": {
+        "type": "heartbeat",
+        "description": "The child's own heartbeat. Quiet. Close. Real. Then gentle filtered shifts as 'hands' change the resonance. Ending in soft warmth and silence — space for the child to listen.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.1, "attack": 0.1, "release": 0.3 }
+        ],
+        "rhythm": "heartbeat",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Lily in the bath, hands over ears. Close on her face — eyes closed, listening inward. The water, the heartbeat, the self. Then opening to the viewer. An invitation.",
+      "mood": "still",
+      "duration_seconds": 25,
+      "interaction_point": {
+        "type": "listen",
+        "prompt": "What does YOUR shell hear?",
+        "pause_seconds": 5,
+        "phase2_hook": "claude_conversation_start"
+      }
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "id": "the-puddle-that-was-two-things",
+  "title": "The Puddle That Was Two Things",
+  "bracket": "5-8",
+  "concept": "Eq. 3 — orthogonal observation, two views of the same thing",
+  "duration_seconds": 330,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "after-the-rain",
+      "title": "After the Rain",
+      "narration": "After the big rain, there was a puddle in the school playground.\n\nNot a little puddle. A PROPER puddle. The kind that takes up half the path and makes the teachers sigh.\n\nMia and Sam both found it at the same time.",
+      "sound": {
+        "type": "ambient",
+        "description": "Playground after rain — dripping, distant children, wet surfaces",
+        "oscillators": [],
+        "ambient": "rain_aftermath"
+      },
+      "visual_direction": "A large puddle on a school path. Wet playground. Grey sky breaking. Two children approaching from opposite sides.",
+      "mood": "calm",
+      "duration_seconds": 18
+    },
+    {
+      "id": "what-mia-saw",
+      "title": "What Mia Saw",
+      "narration": "Mia looked down into the puddle.\n\n\"It's a mirror!\" she said.\n\nAnd it was. She could see herself looking back — her red raincoat, her messy hair, the clouds moving behind her head. When she waved, the puddle-Mia waved too.\n\n\"The whole sky is in there,\" Mia said. \"Look!\"",
+      "sound": {
+        "type": "consonant",
+        "description": "Soft, clear, still tones. A single note and its echo — played then reflected. Mirror-like. Consonant and calm.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 1.0, "release": 2.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 1.5, "release": 2.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Mia in red raincoat looking down. The puddle shows a perfect reflection — clouds, sky, her face. Still water. Wonder on her face.",
+      "mood": "wonder",
+      "duration_seconds": 25
+    },
+    {
+      "id": "what-sam-saw",
+      "title": "What Sam Saw",
+      "narration": "Sam wasn't looking down. Sam was looking AT the puddle.\n\n\"It's a drum!\" he said.\n\nHe dropped a stone in. PLOP. Rings spread out from the middle — perfect circles growing bigger and bigger until they touched the edges and bounced back.\n\n\"Watch this!\" He dropped two stones. The rings from each one spread out and crossed through each other, making a criss-cross pattern on the surface.\n\n\"It's not a mirror,\" Sam said. \"It's alive.\"",
+      "sound": {
+        "type": "percussive",
+        "description": "Percussive plops. Expanding circles of sound — each drop triggers a ring of tone that spreads and fades. Rhythm, not melody. Two drops create interference.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.35, "attack": 0.01, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.01, "release": 1.2 }
+        ],
+        "rhythm": "plop_rings",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Sam dropping a stone. Ripples spreading in perfect circles. Then two stones — overlapping ring patterns. The water alive with interference.",
+      "mood": "discovery",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-argument",
+      "title": "The Argument",
+      "narration": "\"It IS a mirror,\" said Mia. \"I can see the sky in it.\"\n\n\"It IS a drum,\" said Sam. \"Watch the ripples.\"\n\n\"You're messing up my mirror!\"\n\n\"You're ignoring the best part!\"\n\nThey stood on opposite sides of the puddle, arms crossed, both absolutely certain the other one was wrong.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Both sounds playing simultaneously — the mirror's clear tone and the drum's percussive rings clashing. Dissonant because they're fighting for attention.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 0.3, "release": 0.5 },
+          { "waveform": "sawtooth", "frequency_ratio": "7:5", "amplitude": 0.3, "attack": 0.05, "release": 0.3 },
+          { "waveform": "triangle", "frequency_ratio": "11:8", "amplitude": 0.2, "attack": 0.05, "release": 0.4 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Mia and Sam on opposite sides of the puddle. Arms crossed. The puddle between them — half showing reflection, half showing ripples. Tension.",
+      "mood": "tense",
+      "duration_seconds": 22
+    },
+    {
+      "id": "mrs-kapoor",
+      "title": "Mrs Kapoor",
+      "narration": "Mrs Kapoor was the science teacher. She had been watching from the bench, eating her sandwich.\n\n\"Can I see?\" she asked.\n\nShe walked over and looked at the puddle. She looked at it from Mia's side. She walked around and looked at it from Sam's side.\n\n\"Interesting,\" she said. \"Can I ask you both a question?\"\n\n\"Fine,\" said Mia.\n\n\"Sure,\" said Sam.\n\n\"Mia — is Sam wrong? Can you see the ripples?\"\n\nMia looked. \"...Yes. I can see them. But it's STILL a mirror.\"\n\n\"Sam — is Mia wrong? Can you see the sky reflected in it?\"\n\nSam looked. \"...Yeah. The clouds are there. But the ripples are MORE interesting.\"",
+      "sound": {
+        "type": "transition",
+        "description": "The dissonance begins to soften. The clashing tones drift toward each other. Not resolved yet, but the harsh edges smooth as Mrs Kapoor mediates.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.8, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "4:3", "amplitude": 0.15, "attack": 0.8, "release": 1.0 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Mrs Kapoor walking around the puddle, looking from each side. The children's postures softening. The puddle showing both reflection and ripples.",
+      "mood": "open",
+      "duration_seconds": 40
+    },
+    {
+      "id": "the-question",
+      "title": "The Question",
+      "narration": "\"So,\" said Mrs Kapoor. \"Is it a mirror or a drum?\"\n\n\"Both,\" said Mia, slowly.\n\n\"Both,\" said Sam, at the same time.\n\n\"Both.\" Mrs Kapoor smiled. \"It's a puddle. It reflects AND it ripples. You were each looking at a different thing the puddle does. But you thought the other person was wrong because they weren't seeing YOUR thing.\"\n\nShe sat down on the edge of the path.\n\n\"The puddle didn't change. You two were just looking at different parts of what it is.\"",
+      "sound": {
+        "type": "consonant",
+        "description": "Resolution. The mirror tone and the drum tone find a consonant interval. Perfect fifth — two different textures harmonizing. The 'both' moment.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.5, "release": 1.0 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Mrs Kapoor smiling. Mia and Sam looking at each other across the puddle with new understanding. The puddle clear and alive — reflection and ripples visible together.",
+      "mood": "harmony",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-experiment",
+      "title": "The Experiment",
+      "narration": "\"Try this,\" said Mrs Kapoor. \"Mia — look at the reflection. Sam — drop a stone. What happens to the sky?\"\n\nSam dropped a stone. The reflected clouds wobbled and broke apart into wavy pieces, then slowly came back together.\n\n\"The ripples went THROUGH the mirror!\" said Mia. \"The sky got all wobbly!\"\n\n\"Now swap. Sam — look at the reflection. Mia — drop a stone.\"\n\nMia dropped a pebble. Sam watched the clouds in the water shatter and reform.\n\n\"Whoa,\" said Sam. \"You can see both at once. The ripples AND the reflection. They're in the same water.\"",
+      "sound": {
+        "type": "interaction",
+        "description": "The two sounds begin to layer — percussion rippling through the reflection tone. The mirror tone wobbles when the drum hits. Not dissonant anymore. Richer. Coupled.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 0.5, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.01, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 0.8, "release": 1.5 }
+        ],
+        "rhythm": "plop_through_sustain",
+        "base_frequency_hz": 220,
+        "modulation": {
+          "type": "amplitude",
+          "pattern": "ripple_wobble",
+          "description": "The sustained mirror tone wobbles in amplitude when the percussive drop hits — the ripples disturbing the reflection."
+        }
+      },
+      "visual_direction": "Stone dropping. The reflected sky shattering into wavy pieces then reforming. Both properties visible at once — ripples moving through the reflection. Mia and Sam amazed.",
+      "mood": "discovery",
+      "duration_seconds": 35
+    },
+    {
+      "id": "two-things-at-once",
+      "title": "Two Things at Once",
+      "narration": "\"Most things in the world are like this puddle,\" said Mrs Kapoor. \"They're more than one thing at the same time. And different people see different parts.\"\n\n\"Like how my mum says our cat is naughty and my dad says she's just curious?\" said Sam.\n\n\"Exactly like that.\"\n\n\"Like how I think rainy days are the best and Sam thinks sunny days are?\" said Mia.\n\n\"Well... that's more of an opinion. But yes — you're each responding to a different part of the same weather.\"\n\n\"The puddle wouldn't exist without the rain,\" said Sam.\n\n\"And the sun makes the reflection brighter,\" said Mia.\n\nThey looked at each other across the puddle.",
+      "sound": {
+        "type": "consonant",
+        "description": "Warm, layered harmony. The mirror and drum sounds playing together comfortably. Adding a gentle fourth — the world expanding.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.5, "release": 1.0 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.18, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.12, "attack": 0.8, "release": 1.2 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Mrs Kapoor, Mia, and Sam talking. The puddle calm between them. Warm light. The conversation opening up beyond the puddle.",
+      "mood": "harmony",
+      "duration_seconds": 35
+    },
+    {
+      "id": "the-discovery",
+      "title": "The Discovery",
+      "narration": "For the rest of lunch, Mia and Sam found more things that were two things at once.\n\nThe tree was a climbing frame AND a home for birds. The fence was a barrier AND a place to sit. The bell was an interruption AND a rhythm. The wind was annoying AND exciting, depending on whether you were trying to eat or trying to fly a paper plane.\n\n\"Everything is like this!\" said Mia.\n\n\"Not EVERYTHING,\" said Sam.\n\nThey thought about it.\n\n\"Name one thing that's only one thing,\" said Mia.\n\nSam tried. He really tried.\n\n\"...I can't.\"",
+      "sound": {
+        "type": "building",
+        "description": "Each new example adds a gentle tone. The harmony builds as they find more and more pairs. Playful, accumulating, joyful.",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.3, "release": 0.8 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.18, "attack": 0.3, "release": 0.8 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.12, "attack": 0.5, "release": 1.0 },
+          { "waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 0.8, "release": 1.0 }
+        ],
+        "rhythm": "playful",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Quick montage — tree, fence, bell, wind. Each shown as two things. Mia and Sam pointing, laughing. The playground full of dual-nature things.",
+      "mood": "joy",
+      "duration_seconds": 35,
+      "interaction_point": {
+        "type": "challenge",
+        "prompt": "Name one thing that's only one thing.",
+        "pause_seconds": 5,
+        "phase2_hook": "claude_conversation_start"
+      }
+    },
+    {
+      "id": "the-next-puddle",
+      "title": "The Next Puddle",
+      "narration": "The puddle was gone by Thursday. The sun dried it up.\n\nBut the next time it rained — and it rained hard on Friday — Mia and Sam were the first ones out.\n\nThey stood on the same side this time.\n\n\"What do you see?\" asked Sam.\n\n\"A mirror,\" said Mia. \"With drums inside it.\"\n\n\"What do you see?\" asked Mia.\n\n\"A drum,\" said Sam. \"With the sky trapped in it.\"\n\nThey grinned at each other.\n\nSame puddle. Two views. Both right.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Both sounds playing together in harmony. The mirror tone with gentle percussion underneath. Two textures, one puddle. Warm resolution.",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.25, "attack": 0.5, "release": 1.5 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.5, "release": 1.5 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.12, "attack": 0.8, "release": 2.0 }
+        ],
+        "rhythm": "gentle_pulse",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Rain falling. Mia and Sam standing side by side at a new puddle. Both looking down together. Grinning. The puddle reflects them both — and ripples from the rain. Both at once.",
+      "mood": "harmony",
+      "duration_seconds": 35
+    }
+  ]
+}
