@@ -1,0 +1,15 @@
+{
+  "test": "recall_reinforcement_clustering",
+  "timestamp": "2026-04-01T06:09:36.467115",
+  "n_events": 83,
+  "n_memories": 227,
+  "n_unique_recalled": 221,
+  "top_consonance": 0.3950875180797108,
+  "random_mean": 0.4136513268703642,
+  "random_std": 0.021112732492427132,
+  "z_score": -0.8792707811417585,
+  "is_power_law": false,
+  "top_20_pct_share": 0.37635467980295567,
+  "significant": false,
+  "verdict": "FAIL"
+}
