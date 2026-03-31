@@ -154,10 +154,11 @@
 
     showLibrary();
 
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('SW registered:', reg.scope))
-        .catch(err => console.warn('SW registration failed:', err));
+    // Unregister any stale service workers — they cause cache/navigation issues
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.getRegistrations().then(regs => {
+        regs.forEach(r => r.unregister());
+      });
     }
   </script>
 </body>
