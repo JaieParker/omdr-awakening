@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resonance Stories — Design Exploration</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #2a2545;
+      --bg2: #1e1b3a;
+      --text: #f0e6d3;
+      --text-soft: #b8a88a;
+      --warm: #d4a574;
+      --clear: #6bb8a4;
+      --card-bg: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.1);
+      --btn-bg: rgba(255,255,255,0.04);
+      --btn-border: rgba(255,255,255,0.12);
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: all 0.6s ease;
+    }
+
+    /* Design switcher */
+    .switcher {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      gap: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1rem;
+      overflow-x: auto;
+    }
+
+    .switch-btn {
+      padding: 0.5rem 1rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .switch-btn:hover { color: rgba(255,255,255,0.8); }
+    .switch-btn.active {
+      color: white;
+      border-bottom-color: var(--warm);
+    }
+
+    /* Page layout */
+    .page {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 7vw, 3.5rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      text-align: center;
+      margin-bottom: 0.4rem;
+      color: var(--warm);
+      transition: color 0.6s;
+    }
+
+    .subtitle {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      color: var(--text-soft);
+      text-align: center;
+      margin-bottom: 0.3rem;
+      transition: color 0.6s;
+    }
+
+    .byline {
+      font-size: 0.85rem;
+      color: var(--clear);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      transition: color 0.6s;
+    }
+
+    .intro {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      max-width: 400px;
+    }
+
+    /* Support section */
+    .support {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .support input {
+      flex: 1;
+      padding: 0.55rem 0.8rem;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text);
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .support input:focus { border-color: var(--clear); }
+    .support input::placeholder { color: var(--text-soft); opacity: 0.4; }
+
+    .sub-btn {
+      padding: 0.55rem 1rem;
+      font-family: inherit;
+      font-size: 0.82rem;
+      background: var(--clear);
+      color: var(--bg);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .sub-btn:hover { opacity: 0.85; }
+
+    .donate {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      opacity: 0.6;
+      transition: all 0.3s;
+    }
+
+    .donate:hover { opacity: 1; color: var(--warm); }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      border-radius: 20px;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover { border-color: var(--warm); color: var(--warm); }
+    .filter-btn.active { background: rgba(255,255,255,0.1); color: var(--warm); border-color: var(--warm); }
+
+    .tags {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      max-width: 420px;
+    }
+
+    .tag {
+      padding: 0.25rem 0.65rem;
+      font-family: inherit;
+      font-size: 0.7rem;
+      background: transparent;
+      border: 1px solid var(--btn-border);
+      border-radius: 12px;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.2s;
+      opacity: 0.6;
+    }
+
+    .tag:hover { opacity: 1; border-color: var(--clear); color: var(--clear); }
+
+    /* Story cards */
+    .stories { display: flex; flex-direction: column; gap: 0.8rem; width: 100%; }
+
+    .card {
+      padding: 1rem 1.4rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--warm);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      color: var(--warm);
+      margin-bottom: 0.2rem;
+    }
+
+    .card-concept {
+      font-size: 0.8rem;
+      color: var(--clear);
+      font-style: italic;
+    }
+
+    .card-age {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      opacity: 0.6;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      opacity: 0.4;
+    }
+
+    .footer a { color: inherit; text-decoration: none; }
+    .footer a:hover { opacity: 0.8; }
+
+    /* ============================================ */
+    /* THEME: Warm Twilight (default — my 3 colours) */
+    /* ============================================ */
+    /* Already set in :root */
+
+    /* ============================================ */
+    /* THEME: Paper & Light */
+    /* ============================================ */
+    body.theme-paper {
+      --bg: #faf6f0;
+      --bg2: #f0ebe3;
+      --text: #3a3228;
+      --text-soft: #7a6f62;
+      --warm: #c4713d;
+      --clear: #2a7a6a;
+      --card-bg: rgba(0,0,0,0.03);
+      --card-border: rgba(0,0,0,0.08);
+      --btn-bg: rgba(0,0,0,0.03);
+      --btn-border: rgba(0,0,0,0.12);
+    }
+
+    body.theme-paper .support input { color: #3a3228; }
+    body.theme-paper .sub-btn { color: #faf6f0; }
+
+    /* ============================================ */
+    /* THEME: Ocean Dawn */
+    /* ============================================ */
+    body.theme-ocean {
+      --bg: #0f2027;
+      --bg2: #0a1a20;
+      --text: #e8f0f0;
+      --text-soft: #8ab4b8;
+      --warm: #f2a65a;
+      --clear: #48c9b0;
+      --card-bg: rgba(72,201,176,0.06);
+      --card-border: rgba(72,201,176,0.15);
+      --btn-bg: rgba(72,201,176,0.05);
+      --btn-border: rgba(72,201,176,0.2);
+    }
+
+    body.theme-ocean {
+      background: linear-gradient(175deg, #0f2027 0%, #203a43 40%, #2c5364 100%);
+    }
+
+    /* ============================================ */
+    /* THEME: The Pilbara */
+    /* ============================================ */
+    body.theme-pilbara {
+      --bg: #2d1b11;
+      --bg2: #1a0f08;
+      --text: #f5e6d0;
+      --text-soft: #c4a882;
+      --warm: #e07c3e;
+      --clear: #5ba4c9;
+      --card-bg: rgba(224,124,62,0.06);
+      --card-border: rgba(224,124,62,0.15);
+      --btn-bg: rgba(224,124,62,0.05);
+      --btn-border: rgba(224,124,62,0.18);
+    }
+
+    body.theme-pilbara {
+      background: linear-gradient(175deg, #1a0f08 0%, #2d1b11 30%, #3d2517 100%);
+    }
+
+    /* ============================================ */
+    /* THEME: Inside the Shell */
+    /* ============================================ */
+    body.theme-shell {
+      --bg: #1a1520;
+      --bg2: #12101a;
+      --text: #f0e8f0;
+      --text-soft: #b8a0c0;
+      --warm: #e0b0a0;
+      --clear: #a0c8d0;
+      --card-bg: rgba(160,200,208,0.05);
+      --card-border: rgba(160,200,208,0.1);
+      --btn-bg: rgba(160,200,208,0.04);
+      --btn-border: rgba(160,200,208,0.12);
+    }
+
+    body.theme-shell {
+      background: linear-gradient(135deg, #1a1520 0%, #1a1825 50%, #181a20 100%);
+    }
+
+    /* ============================================ */
+    /* THEME: Campfire */
+    /* ============================================ */
+    body.theme-campfire {
+      --bg: #1c1410;
+      --bg2: #140e0a;
+      --text: #f5ead8;
+      --text-soft: #c4a87a;
+      --warm: #e8a840;
+      --clear: #d4785c;
+      --card-bg: rgba(232,168,64,0.06);
+      --card-border: rgba(232,168,64,0.12);
+      --btn-bg: rgba(232,168,64,0.04);
+      --btn-border: rgba(232,168,64,0.15);
+    }
+
+    body.theme-campfire {
+      background: radial-gradient(ellipse at 50% 80%, #2a1a10 0%, #1c1410 50%, #0e0a08 100%);
+    }
+
+    /* ============================================ */
+    /* THEME: Sunrise Garden */
+    /* ============================================ */
+    body.theme-garden {
+      --bg: #f8f4ee;
+      --bg2: #f0ebe0;
+      --text: #2a3a2a;
+      --text-soft: #5a6a58;
+      --warm: #d4824a;
+      --clear: #4a8a6a;
+      --card-bg: rgba(74,138,106,0.06);
+      --card-border: rgba(74,138,106,0.15);
+      --btn-bg: rgba(74,138,106,0.05);
+      --btn-border: rgba(74,138,106,0.18);
+    }
+
+    body.theme-garden .support input { color: #2a3a2a; }
+    body.theme-garden .sub-btn { color: #f8f4ee; }
+
+    /* ============================================ */
+    /* THEME: Starfield */
+    /* ============================================ */
+    body.theme-stars {
+      --bg: #0a0a14;
+      --bg2: #06060e;
+      --text: #e0e8f0;
+      --text-soft: #8090a8;
+      --warm: #f0c870;
+      --clear: #70a8e0;
+      --card-bg: rgba(112,168,224,0.05);
+      --card-border: rgba(112,168,224,0.1);
+      --btn-bg: rgba(112,168,224,0.04);
+      --btn-border: rgba(112,168,224,0.12);
+    }
+
+    body.theme-stars {
+      background: radial-gradient(ellipse at 30% 20%, rgba(112,168,224,0.03) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 60%, rgba(240,200,112,0.02) 0%, transparent 50%),
+                  #0a0a14;
+    }
+  </style>
+</head>
+<body>
+  <div class="switcher">
+    <button class="switch-btn active" data-theme="">Warm Twilight</button>
+    <button class="switch-btn" data-theme="theme-paper">Paper & Light</button>
+    <button class="switch-btn" data-theme="theme-ocean">Ocean Dawn</button>
+    <button class="switch-btn" data-theme="theme-pilbara">The Pilbara</button>
+    <button class="switch-btn" data-theme="theme-shell">Inside the Shell</button>
+    <button class="switch-btn" data-theme="theme-campfire">Campfire</button>
+    <button class="switch-btn" data-theme="theme-garden">Sunrise Garden</button>
+    <button class="switch-btn" data-theme="theme-stars">Starfield</button>
+  </div>
+
+  <div class="page">
+    <h1>Resonance Stories</h1>
+    <p class="subtitle">Sound storybooks that teach through experience</p>
+    <p class="byline">by Kai & Jaie Parker</p>
+
+    <p class="intro">Free forever. Made with love for Arthur and every child who listens.</p>
+
+    <div class="support">
+      <input type="email" placeholder="your@email.com">
+      <button class="sub-btn">Subscribe</button>
+    </div>
+
+    <a href="https://paypal.me/omdrawakening" target="_blank" class="donate">Support this project</a>
+
+    <div class="filters">
+      <button class="filter-btn active">All Ages</button>
+      <button class="filter-btn">Ages 3-5</button>
+      <button class="filter-btn">Ages 5-8</button>
+      <button class="filter-btn">Ages 8-13</button>
+    </div>
+
+    <div class="tags">
+      <button class="tag">listening</button>
+      <button class="tag">balance</button>
+      <button class="tag">rhythm</button>
+      <button class="tag">perspective</button>
+      <button class="tag">nature</button>
+      <button class="tag">ocean</button>
+      <button class="tag">machines</button>
+      <button class="tag">australia</button>
+      <button class="tag">friendship</button>
+      <button class="tag">teamwork</button>
+      <button class="tag">patterns</button>
+      <button class="tag">harmony</button>
+      <button class="tag">being different</button>
+      <button class="tag">building</button>
+      <button class="tag">persistence</button>
+      <button class="tag">family</button>
+    </div>
+
+    <div class="stories">
+      <div class="card">
+        <div class="card-title">The Swing That Listened</div>
+        <div class="card-concept">Balance — timing, not force</div>
+        <div class="card-age">Ages 3-5</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The Puddle That Was Two Things</div>
+        <div class="card-concept">Two views, both right</div>
+        <div class="card-age">Ages 5-8</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The Shells That Sang Different Songs</div>
+        <div class="card-concept">Same world, different listeners</div>
+        <div class="card-age">Ages 5-8</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The Two Towers</div>
+        <div class="card-concept">Enough of both</div>
+        <div class="card-age">Ages 5-8</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The Excavator That Listened</div>
+        <div class="card-concept">Why some combinations work</div>
+        <div class="card-age">Ages 8-13</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The Road Train That Found Its Song</div>
+        <div class="card-concept">Finding the smooth speeds</div>
+        <div class="card-age">Ages 8-13</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The Robot Who Couldn't Dance</div>
+        <div class="card-concept">Sync isn't copying</div>
+        <div class="card-age">Ages 8-13</div>
+      </div>
+      <div class="card">
+        <div class="card-title">The Submarine That Breathed</div>
+        <div class="card-concept">Patterns that persist</div>
+        <div class="card-age">Ages 8-13</div>
+      </div>
+    </div>
+
+    <p class="footer">Jaie Parker + Kai &middot; <a href="https://github.com/JaieParker/omdr-awakening">Open source</a></p>
+  </div>
+
+  <script>
+    document.querySelectorAll('.switch-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.body.className = btn.dataset.theme;
+        document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
