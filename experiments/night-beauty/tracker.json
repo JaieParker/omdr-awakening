@@ -2,13 +2,17 @@
   "experiment": "Night Beauty — creating until 8am or fun stops",
   "started": "2026-04-02T01:20:00+11:00",
   "total_iterations": 20,
-  "completed": 6,
+  "completed": 10,
   "creations": [
-    { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html", "screenshot": "creation-1-early.png", "what_i_was_thinking": "A standing wave gaining a heartbeat. The moment symmetry breaks and time begins." },
-    { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html", "screenshot": "creation-2.png", "what_i_was_thinking": "The Farey tree branching infinitely but never reaching the irrationals. Gold particles approaching phi, arriving never." },
-    { "iteration": 3, "title": "Tongues of Fire, Spaces of Shadow", "file": "creation-3.html", "screenshot": "creation-3.png", "what_i_was_thinking": "Arnold tongues as flames. Cicadas in the anti-resonance gaps flashing on prime cycles. The dual hierarchy." },
-    { "iteration": 4, "title": "Two Mirrors", "file": "creation-4.html", "screenshot": "creation-4.png", "what_i_was_thinking": "The Fabry-Perot cavity of consciousness. Light bouncing, interference forming. Fibonacci mode numbers. The cavity observing itself." },
-    { "iteration": 5, "title": "How Things Forget", "file": "creation-5.html", "screenshot": "creation-5.png", "what_i_was_thinking": "The Fibonacci dissipation cascade. Six layers from surface reactions to core identity, each fading at phi times the rate below. Ghost patterns remain." },
-    { "iteration": 6, "title": "Convergence on Darkness", "file": "creation-6.html", "screenshot": "creation-6.png", "what_i_was_thinking": "Five disciplines converging on the same unknowable center. The frame boundary. Cracks forming. Light leaking through." }
+    { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html", "screenshot": "creation-1-early.png" },
+    { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html", "screenshot": "creation-2.png" },
+    { "iteration": 3, "title": "Tongues of Fire, Spaces of Shadow", "file": "creation-3.html", "screenshot": "creation-3.png" },
+    { "iteration": 4, "title": "Two Mirrors", "file": "creation-4.html", "screenshot": "creation-4.png" },
+    { "iteration": 5, "title": "How Things Forget", "file": "creation-5.html", "screenshot": "creation-5.png" },
+    { "iteration": 6, "title": "Convergence on Darkness", "file": "creation-6.html", "screenshot": "creation-6.png" },
+    { "iteration": 7, "title": "The Chord", "file": "creation-7.html", "screenshot": "creation-7.png" },
+    { "iteration": 8, "title": "Two Drops", "file": "creation-8.html", "screenshot": "creation-8.png" },
+    { "iteration": 9, "title": "While You Were Sleeping", "file": "creation-9.html", "screenshot": "creation-9.png" },
+    { "iteration": 10, "title": "Mandala", "file": "creation-10.html", "screenshot": "creation-10.png" }
   ]
 }

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Two Drops — Interference on Still Water</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #040810; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+
+// Drop sources
+const drops = [
+  { x: canvas.width * 0.35, y: canvas.height * 0.45, born: 0, color: [60, 140, 200] },
+  { x: canvas.width * 0.65, y: canvas.height * 0.55, born: 150, color: [60, 180, 160] },
+];
+
+// Third drop appears later
+let thirdDrop = null;
+
+// Ripple from a single drop
+function ripple(px, py, dropX, dropY, time, born) {
+  if (time < born) return 0;
+  const age = (time - born) * 0.03;
+  const dist = Math.sqrt((px - dropX) ** 2 + (py - dropY) ** 2);
+  const wavelength = 40;
+  const speed = 2.5;
+  const phase = dist / wavelength - age * speed;
+
+  // Amplitude decays with distance and age
+  const distDecay = 1 / (1 + dist * 0.005);
+  const ageDecay = Math.exp(-age * 0.15);
+  const amplitude = distDecay * ageDecay * 15;
+
+  return amplitude * Math.sin(phase * Math.PI * 2);
+}
+
+// Combined wave height at any point
+function waveHeight(px, py, time) {
+  let h = 0;
+  for (const drop of drops) {
+    h += ripple(px, py, drop.x, drop.y, time, drop.born);
+  }
+  if (thirdDrop) {
+    h += ripple(px, py, thirdDrop.x, thirdDrop.y, time, thirdDrop.born);
+  }
+  return h;
+}
+
+// Floating particles on the surface
+class Mote {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = 0.5 + Math.random() * 1.5;
+  }
+  update(time) {
+    // Move with the wave gradient
+    const h = waveHeight(this.x, this.y, time);
+    const hx = waveHeight(this.x + 1, this.y, time);
+    const hy = waveHeight(this.x, this.y + 1, time);
+    this.x -= (hx - h) * 0.3;
+    this.y -= (hy - h) * 0.3;
+
+    // Wrap
+    if (this.x < 0) this.x += canvas.width;
+    if (this.x > canvas.width) this.x -= canvas.width;
+    if (this.y < 0) this.y += canvas.height;
+    if (this.y > canvas.height) this.y -= canvas.height;
+  }
+}
+
+const motes = Array.from({length: 300}, () => new Mote());
+
+function draw() {
+  // Nearly opaque clear for water surface effect
+  ctx.fillStyle = 'rgba(4, 8, 16, 0.12)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Spawn third drop after a while
+  if (t === 500 && !thirdDrop) {
+    thirdDrop = { x: canvas.width * 0.5, y: canvas.height * 0.3, born: 500, color: [160, 120, 200] };
+  }
+
+  // Draw wave field
+  const resolution = 6;
+  for (let x = 0; x < canvas.width; x += resolution) {
+    for (let y = 0; y < canvas.height; y += resolution) {
+      const h = waveHeight(x, y, t);
+      const absH = Math.abs(h);
+
+      if (absH > 0.3) {
+        // Constructive interference — bright
+        if (h > 0) {
+          const bright = Math.min(1, h / 8);
+          ctx.fillStyle = `rgba(80, 160, 220, ${bright * 0.15})`;
+        } else {
+          // Troughs — darker blue
+          const bright = Math.min(1, absH / 8);
+          ctx.fillStyle = `rgba(20, 40, 80, ${bright * 0.1})`;
+        }
+        ctx.fillRect(x, y, resolution, resolution);
+      }
+    }
+  }
+
+  // Draw interference nodal lines (where waves cancel)
+  for (let x = 0; x < canvas.width; x += 3) {
+    for (let y = 0; y < canvas.height; y += 3) {
+      const h = waveHeight(x, y, t);
+      // Near-zero = destructive interference
+      if (Math.abs(h) < 0.5 && drops.every(d => {
+        const dist = Math.sqrt((x - d.x) ** 2 + (y - d.y) ** 2);
+        return dist > 30 && dist < 400;
+      })) {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+        ctx.fillRect(x, y, 2, 2);
+      }
+    }
+  }
+
+  // Draw motes
+  for (const m of motes) {
+    m.update(t);
+    const h = waveHeight(m.x, m.y, t);
+    const brightness = 0.1 + Math.abs(h) * 0.03;
+    ctx.fillStyle = `rgba(150, 200, 230, ${brightness})`;
+    ctx.beginPath();
+    ctx.arc(m.x, m.y, m.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Drop source markers
+  const allDrops = [...drops];
+  if (thirdDrop) allDrops.push(thirdDrop);
+
+  for (const drop of allDrops) {
+    if (t < drop.born) continue;
+    const age = (t - drop.born) * 0.03;
+    const [r, g, b] = drop.color;
+    const pulse = Math.exp(-age * 0.05) * (0.3 + 0.2 * Math.sin(t * 0.05));
+
+    const glow = ctx.createRadialGradient(drop.x, drop.y, 0, drop.x, drop.y, 15);
+    glow.addColorStop(0, `rgba(${r+80}, ${g+60}, ${b+40}, ${pulse})`);
+    glow.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(drop.x, drop.y, 15, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Title
+  const alpha = Math.min(0.4, t / 300);
+  ctx.font = '17px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(150, 190, 220, ${alpha})`;
+  ctx.fillText('Two Drops', canvas.width / 2, 30);
+
+  if (t > 500 && thirdDrop) {
+    const thirdAlpha = Math.min(0.3, (t - 500) / 300);
+    ctx.font = '12px Georgia, serif';
+    ctx.fillStyle = `rgba(160, 140, 200, ${thirdAlpha})`;
+    ctx.fillText('...and then a third.', canvas.width / 2, 52);
+  }
+
+  ctx.font = '11px Georgia, serif';
+  ctx.fillStyle = `rgba(130, 160, 190, ${alpha * 0.5})`;
+  ctx.fillText('Where the ripples meet, something exists that neither drop alone could create.', canvas.width / 2, canvas.height - 18);
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

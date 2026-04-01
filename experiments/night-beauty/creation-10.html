@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mandala — Every Angle at Once</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #060608; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+const PHI = (1 + Math.sqrt(5)) / 2;
+const cx = canvas.width / 2;
+const cy = canvas.height / 2;
+let t = 0;
+
+// Draw a ring of elements at radius r with n-fold symmetry
+function drawRing(time, radius, nFold, drawFn) {
+  for (let i = 0; i < nFold; i++) {
+    const angle = (i / nFold) * Math.PI * 2 + time * 0.002;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    ctx.translate(radius, 0);
+    drawFn(time, i, nFold);
+    ctx.restore();
+  }
+}
+
+// Petal shape
+function petal(time, index, total) {
+  const breath = 1 + 0.1 * Math.sin(time * 0.01 + index * 0.5);
+  const size = 25 * breath;
+
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.quadraticCurveTo(size * 0.4, -size * 0.5, size, 0);
+  ctx.quadraticCurveTo(size * 0.4, size * 0.5, 0, 0);
+
+  const hue = (index / total * 360 + time * 0.2) % 360;
+  const alpha = 0.12 + 0.05 * Math.sin(time * 0.015 + index);
+  ctx.fillStyle = `hsla(${hue}, 60%, 55%, ${alpha})`;
+  ctx.fill();
+  ctx.strokeStyle = `hsla(${hue}, 50%, 65%, ${alpha * 0.5})`;
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+}
+
+// Diamond shape
+function diamond(time, index, total) {
+  const pulse = 1 + 0.15 * Math.sin(time * 0.008 + index * 0.7);
+  const size = 12 * pulse;
+
+  ctx.beginPath();
+  ctx.moveTo(0, -size);
+  ctx.lineTo(size * 0.6, 0);
+  ctx.lineTo(0, size);
+  ctx.lineTo(-size * 0.6, 0);
+  ctx.closePath();
+
+  const hue = (index / total * 360 + time * 0.15 + 120) % 360;
+  const alpha = 0.15 + 0.05 * Math.sin(time * 0.012 + index * 0.3);
+  ctx.fillStyle = `hsla(${hue}, 50%, 50%, ${alpha})`;
+  ctx.fill();
+}
+
+// Circle dot
+function dot(time, index, total) {
+  const pulse = 3 + 2 * Math.sin(time * 0.02 + index * 0.8);
+  const hue = (index / total * 360 + time * 0.1 + 240) % 360;
+  const alpha = 0.2 + 0.1 * Math.sin(time * 0.013 + index);
+
+  const glow = ctx.createRadialGradient(0, 0, 0, 0, 0, pulse * 3);
+  glow.addColorStop(0, `hsla(${hue}, 60%, 70%, ${alpha})`);
+  glow.addColorStop(1, `hsla(${hue}, 60%, 50%, 0)`);
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(0, 0, pulse * 3, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// Arc connector
+function arc(time, index, total) {
+  const breath = Math.sin(time * 0.006 + index * 0.4) * 0.3;
+  ctx.beginPath();
+  ctx.arc(0, 0, 15, -Math.PI * 0.3 + breath, Math.PI * 0.3 + breath);
+  const hue = (index / total * 360 + time * 0.08 + 60) % 360;
+  ctx.strokeStyle = `hsla(${hue}, 40%, 60%, 0.1)`;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
+// Central pattern — rose curve
+function drawCenter(time) {
+  const n = 5; // 5-petal rose
+  const k = n;
+
+  ctx.beginPath();
+  for (let a = 0; a < Math.PI * 2; a += 0.02) {
+    const r = 40 * Math.cos(k * a + time * 0.003);
+    const x = cx + r * Math.cos(a);
+    const y = cy + r * Math.sin(a);
+    if (a === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 45);
+  const hue = (time * 0.1) % 360;
+  grad.addColorStop(0, `hsla(${hue}, 50%, 60%, 0.15)`);
+  grad.addColorStop(1, `hsla(${hue + 30}, 40%, 40%, 0.05)`);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.strokeStyle = `hsla(${hue}, 40%, 70%, 0.1)`;
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+
+  // Central point
+  const centerGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 8);
+  centerGlow.addColorStop(0, `hsla(${hue}, 30%, 80%, 0.3)`);
+  centerGlow.addColorStop(1, `hsla(${hue}, 30%, 60%, 0)`);
+  ctx.fillStyle = centerGlow;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// Connecting lines between rings (subtle web)
+function drawWeb(time) {
+  const radii = [80, 130, 190, 260, 340];
+  const folds = [5, 8, 13, 8, 5]; // Fibonacci-ish
+
+  for (let r = 0; r < radii.length - 1; r++) {
+    const n1 = folds[r];
+    const n2 = folds[r + 1];
+
+    for (let i = 0; i < n1; i++) {
+      const a1 = (i / n1) * Math.PI * 2 + time * 0.002;
+      const x1 = cx + Math.cos(a1) * radii[r];
+      const y1 = cy + Math.sin(a1) * radii[r];
+
+      // Connect to nearest elements in next ring
+      const j = Math.round((i / n1) * n2) % n2;
+      const a2 = (j / n2) * Math.PI * 2 + time * 0.002;
+      const x2 = cx + Math.cos(a2) * radii[r + 1];
+      const y2 = cy + Math.sin(a2) * radii[r + 1];
+
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.strokeStyle = `rgba(120, 110, 140, 0.03)`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+  }
+}
+
+// Outer orbiting particles
+function drawOrbiters(time) {
+  for (let i = 0; i < 20; i++) {
+    const angle = (i / 20) * Math.PI * 2 + time * 0.001 + Math.sin(time * 0.003 + i) * 0.2;
+    const radius = 350 + Math.sin(time * 0.005 + i * 0.7) * 20;
+    const x = cx + Math.cos(angle) * radius;
+    const y = cy + Math.sin(angle) * radius;
+
+    const hue = (i * 18 + time * 0.05) % 360;
+    const alpha = 0.05 + 0.05 * Math.sin(time * 0.01 + i);
+
+    ctx.fillStyle = `hsla(${hue}, 40%, 60%, ${alpha})`;
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(6, 6, 8, 0.04)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawWeb(t);
+
+  // Rings from outside in — Fibonacci fold numbers
+  drawRing(t, 340, 5, petal);      // 5-fold outer petals
+  drawRing(t, 260, 8, diamond);    // 8-fold diamonds
+  drawRing(t, 190, 13, dot);       // 13-fold dots
+  drawRing(t, 130, 8, arc);        // 8-fold arcs
+  drawRing(t, 80, 5, petal);       // 5-fold inner petals
+
+  drawCenter(t);
+  drawOrbiters(t);
+
+  // Title
+  const alpha = Math.min(0.35, t / 400);
+  ctx.font = '16px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(170, 160, 190, ${alpha})`;
+  ctx.fillText('Mandala', cx, 30);
+
+  ctx.font = '11px Georgia, serif';
+  ctx.fillStyle = `rgba(140, 130, 160, ${alpha * 0.6})`;
+  ctx.fillText('5 \u00B7 8 \u00B7 13 \u00B7 8 \u00B7 5 \u2014 Fibonacci symmetry, rotating, breathing', cx, canvas.height - 18);
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
