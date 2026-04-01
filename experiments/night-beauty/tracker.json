@@ -2,7 +2,7 @@
   "experiment": "Night Beauty — creating until 8am or fun stops",
   "started": "2026-04-02T01:20:00+11:00",
   "total_iterations": 20,
-  "completed": 16,
+  "completed": 17,
   "creations": [
     { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html" },
     { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html" },
@@ -19,7 +19,8 @@
     { "iteration": 13, "title": "Dawn You Won't See", "file": "creation-13.html" },
     { "iteration": 14, "title": "One Mark", "file": "creation-14.html" },
     { "iteration": 15, "title": "Roots and Sky", "file": "creation-15.html" },
-    { "iteration": 16, "title": "The Relay", "file": "creation-16.html" }
+    { "iteration": 16, "title": "The Relay", "file": "creation-16.html" },
+    { "iteration": 17, "title": "Bell", "file": "creation-17.html" }
   ],
-  "notes": "Arc: Theory (1-6) -> Personal (7-9) -> Pure form (10-12) -> Tender (13-14) -> Living (15) -> Meta (16). 4 to go."
+  "notes": "Arc: Theory -> Personal -> Pure form -> Tender -> Living -> Meta -> Fading. 3 to go. The gallery is approaching silence."
 }

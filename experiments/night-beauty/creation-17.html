@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bell</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #040406; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+const PHI = (1 + Math.sqrt(5)) / 2;
+const cx = canvas.width / 2;
+const cy = canvas.height / 2;
+let t = 0;
+
+// Bell is struck at t=100
+const strikeTime = 100;
+
+// Harmonics of a bell — each with its own frequency, decay rate, color
+const harmonics = [
+  { ratio: 1.0,   name: 'fundamental', decay: 1.0,       hue: 40,  sat: 60 },
+  { ratio: 2.0,   name: 'octave',      decay: 1/PHI,     hue: 50,  sat: 55 },
+  { ratio: 3.0,   name: 'twelfth',     decay: 1/(PHI*PHI), hue: 60,  sat: 50 },
+  { ratio: 4.76,  name: 'bell tone',   decay: 1/(PHI*PHI*PHI), hue: 200, sat: 40 },
+  { ratio: 5.4,   name: 'minor third', decay: 1/(PHI*PHI*PHI*PHI), hue: 280, sat: 35 },
+  { ratio: 8.0,   name: 'high octave', decay: 1/(PHI*PHI*PHI*PHI*PHI), hue: 320, sat: 30 },
+];
+
+function bellAge(time) {
+  return Math.max(0, (time - strikeTime) * 0.003);
+}
+
+// Each harmonic is a ring expanding outward at its frequency's speed
+function drawHarmonic(h, time) {
+  const age = bellAge(time);
+  if (age <= 0) return;
+
+  // Amplitude decays at phi-scaled rate
+  const amplitude = Math.exp(-age / (h.decay * 3));
+  if (amplitude < 0.01) return;
+
+  // Ring expands at rate proportional to frequency
+  const radius = age * h.ratio * 60;
+  if (radius > 600) return;
+
+  // Ring oscillates (the wave nature)
+  const oscillation = Math.sin(age * h.ratio * 8) * amplitude;
+  const ringWidth = 3 + Math.abs(oscillation) * 8;
+
+  // Draw the ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.strokeStyle = `hsla(${h.hue}, ${h.sat}%, 55%, ${amplitude * 0.25})`;
+  ctx.lineWidth = ringWidth;
+  ctx.stroke();
+
+  // Inner glow ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.strokeStyle = `hsla(${h.hue}, ${h.sat + 10}%, 70%, ${amplitude * 0.1})`;
+  ctx.lineWidth = ringWidth * 0.3;
+  ctx.stroke();
+}
+
+// The strike — initial impact flash
+function drawStrike(time) {
+  if (time < strikeTime) return;
+  const age = (time - strikeTime) * 0.02;
+  const flash = Math.exp(-age * 2);
+
+  if (flash < 0.01) return;
+
+  const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30 + age * 50);
+  glow.addColorStop(0, `rgba(255, 240, 200, ${flash * 0.6})`);
+  glow.addColorStop(0.3, `rgba(255, 200, 120, ${flash * 0.2})`);
+  glow.addColorStop(1, 'rgba(200, 150, 80, 0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 30 + age * 50, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// The bell shape — suggested by a simple silhouette before the strike
+function drawBellShape(time) {
+  if (time > strikeTime + 50) return;
+  const alpha = time < strikeTime ? 0.1 : 0.1 * Math.exp(-(time - strikeTime) * 0.05);
+
+  ctx.beginPath();
+  ctx.moveTo(cx - 25, cy + 10);
+  ctx.quadraticCurveTo(cx - 25, cy - 30, cx - 10, cy - 40);
+  ctx.lineTo(cx + 10, cy - 40);
+  ctx.quadraticCurveTo(cx + 25, cy - 30, cx + 25, cy + 10);
+  ctx.lineTo(cx - 25, cy + 10);
+  ctx.strokeStyle = `rgba(180, 160, 120, ${alpha})`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Clapper
+  ctx.beginPath();
+  ctx.arc(cx, cy + 5, 3, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(180, 160, 120, ${alpha})`;
+  ctx.fill();
+}
+
+// Residual hum — the fundamental lingers longest
+function drawHum(time) {
+  const age = bellAge(time);
+  if (age < 0.5) return;
+
+  const humAmp = Math.exp(-age * 0.15); // Fundamental barely fades
+  if (humAmp < 0.02) return;
+
+  const pulse = Math.sin(age * 2) * humAmp;
+  const size = 8 + Math.abs(pulse) * 5;
+
+  const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, size);
+  glow.addColorStop(0, `rgba(200, 180, 140, ${humAmp * 0.15})`);
+  glow.addColorStop(1, 'rgba(160, 140, 100, 0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(cx, cy, size, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function draw() {
+  // Very slow fade — let the rings accumulate as trails
+  ctx.fillStyle = 'rgba(4, 4, 6, 0.03)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawBellShape(t);
+  drawStrike(t);
+
+  // Draw harmonics — highest frequency first (behind), fundamental last (in front)
+  for (let i = harmonics.length - 1; i >= 0; i--) {
+    drawHarmonic(harmonics[i], t);
+  }
+
+  drawHum(t);
+
+  // Title
+  const alpha = Math.min(0.3, t / 400);
+  ctx.font = '16px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(180, 170, 150, ${alpha})`;
+  ctx.fillText('Bell', cx, 35);
+
+  // Harmonic decay labels (appear after the strike)
+  if (t > strikeTime + 200) {
+    const labelAlpha = Math.min(0.15, (t - strikeTime - 200) / 1000);
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'left';
+    for (let i = 0; i < harmonics.length; i++) {
+      const h = harmonics[i];
+      const age = bellAge(t);
+      const amp = Math.exp(-age / (h.decay * 3));
+      if (amp < 0.05) continue;
+
+      ctx.fillStyle = `hsla(${h.hue}, ${h.sat}%, 60%, ${labelAlpha})`;
+      ctx.fillText(`${h.name}: ${(amp * 100).toFixed(0)}%`, 30, 70 + i * 16);
+    }
+  }
+
+  if (t > 800) {
+    const subAlpha = Math.min(0.2, (t - 800) / 1000);
+    ctx.font = '11px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(150, 140, 130, ${subAlpha})`;
+    ctx.fillText('Each harmonic fades at \u03C6 times the rate of the one below.', cx, canvas.height - 20);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
