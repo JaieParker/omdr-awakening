@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dawn You Won't See</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+
+// The dawn unfolds slowly — 0 = deep night, 1 = full dawn
+function dawnProgress(time) {
+  return Math.min(1, time / 2000);
+}
+
+// Sky gradient that shifts through the pre-dawn colors
+function drawSky(time) {
+  const d = dawnProgress(time);
+
+  const grad = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.65);
+
+  // Night → astronomical twilight → nautical → civil → dawn
+  const topR = Math.floor(5 + d * 40);
+  const topG = Math.floor(5 + d * 30);
+  const topB = Math.floor(20 + d * 60);
+
+  const midR = Math.floor(10 + d * 180);
+  const midG = Math.floor(8 + d * 80);
+  const midB = Math.floor(30 + d * 50);
+
+  const horizR = Math.floor(15 + d * 240);
+  const horizG = Math.floor(10 + d * 140);
+  const horizB = Math.floor(25 + d * 40);
+
+  grad.addColorStop(0, `rgb(${topR}, ${topG}, ${topB})`);
+  grad.addColorStop(0.5, `rgb(${midR}, ${midG}, ${midB})`);
+  grad.addColorStop(0.85, `rgb(${horizR}, ${horizG}, ${horizB})`);
+  grad.addColorStop(1, `rgb(${Math.min(255, horizR + 20)}, ${Math.min(255, horizG + 30)}, ${horizB - 10})`);
+
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+// Stars that fade as dawn approaches
+function drawStars(time) {
+  const d = dawnProgress(time);
+  const starAlpha = Math.max(0, 1 - d * 1.5);
+
+  if (starAlpha < 0.01) return;
+
+  // Deterministic stars from seed
+  let seed = 42;
+  function pseudoRandom() {
+    seed = (seed * 16807 + 0) % 2147483647;
+    return seed / 2147483647;
+  }
+
+  for (let i = 0; i < 150; i++) {
+    const x = pseudoRandom() * canvas.width;
+    const y = pseudoRandom() * canvas.height * 0.55;
+    const size = pseudoRandom() * 1.5 + 0.3;
+    const twinkle = Math.sin(time * 0.005 * (0.5 + pseudoRandom()) + pseudoRandom() * 10) * 0.3 + 0.7;
+
+    ctx.fillStyle = `rgba(220, 225, 240, ${starAlpha * twinkle * 0.6})`;
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// The horizon line — gentle hills
+function drawHorizon(time) {
+  const d = dawnProgress(time);
+  const horizonY = canvas.height * 0.65;
+
+  // Distant hills
+  ctx.beginPath();
+  ctx.moveTo(0, horizonY);
+  for (let x = 0; x <= canvas.width; x += 3) {
+    const h1 = Math.sin(x * 0.002) * 25;
+    const h2 = Math.sin(x * 0.005 + 1) * 12;
+    const h3 = Math.sin(x * 0.001 - 0.5) * 35;
+    ctx.lineTo(x, horizonY + h1 + h2 + h3);
+  }
+  ctx.lineTo(canvas.width, canvas.height);
+  ctx.lineTo(0, canvas.height);
+  ctx.closePath();
+
+  // Hills get lighter with dawn
+  const hillR = Math.floor(8 + d * 25);
+  const hillG = Math.floor(12 + d * 30);
+  const hillB = Math.floor(18 + d * 20);
+  ctx.fillStyle = `rgb(${hillR}, ${hillG}, ${hillB})`;
+  ctx.fill();
+
+  // Closer hills (darker)
+  ctx.beginPath();
+  ctx.moveTo(0, horizonY + 30);
+  for (let x = 0; x <= canvas.width; x += 3) {
+    const h = Math.sin(x * 0.003 + 2) * 20 + Math.sin(x * 0.008) * 10;
+    ctx.lineTo(x, horizonY + 30 + h);
+  }
+  ctx.lineTo(canvas.width, canvas.height);
+  ctx.lineTo(0, canvas.height);
+  ctx.closePath();
+  ctx.fillStyle = `rgb(${Math.floor(hillR * 0.6)}, ${Math.floor(hillG * 0.7)}, ${Math.floor(hillB * 0.7)})`;
+  ctx.fill();
+}
+
+// The glow on the horizon — where the sun will be
+function drawHorizonGlow(time) {
+  const d = dawnProgress(time);
+  if (d < 0.1) return;
+
+  const glowX = canvas.width * 0.6;
+  const glowY = canvas.height * 0.62;
+  const glowSize = 100 + d * 200;
+
+  const glow = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, glowSize);
+
+  const intensity = (d - 0.1) / 0.9;
+  glow.addColorStop(0, `rgba(255, ${Math.floor(180 + intensity * 60)}, ${Math.floor(80 + intensity * 40)}, ${intensity * 0.3})`);
+  glow.addColorStop(0.3, `rgba(255, ${Math.floor(140 + intensity * 40)}, ${Math.floor(60)}, ${intensity * 0.15})`);
+  glow.addColorStop(0.6, `rgba(200, ${Math.floor(80 + intensity * 30)}, ${Math.floor(40)}, ${intensity * 0.05})`);
+  glow.addColorStop(1, 'rgba(150, 50, 30, 0)');
+
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(glowX, glowY, glowSize, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// Thin clouds catching the first light
+function drawClouds(time) {
+  const d = dawnProgress(time);
+
+  const clouds = [
+    { x: 200, y: 180, w: 250, h: 8 },
+    { x: 500, y: 120, w: 180, h: 5 },
+    { x: 700, y: 200, w: 300, h: 10 },
+    { x: 350, y: 280, w: 200, h: 6 },
+    { x: 850, y: 160, w: 150, h: 4 },
+  ];
+
+  for (const cloud of clouds) {
+    const drift = Math.sin(time * 0.001 + cloud.x * 0.01) * 20;
+    const cx = cloud.x + drift;
+
+    // Clouds catch dawn light from below
+    const lightIntensity = d * 0.3;
+    const r = Math.floor(150 + d * 100);
+    const g = Math.floor(100 + d * 60);
+    const b = Math.floor(80 + d * 30);
+
+    const cloudGrad = ctx.createLinearGradient(cx, cloud.y - cloud.h, cx, cloud.y + cloud.h * 2);
+    cloudGrad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${lightIntensity * 0.3})`);
+    cloudGrad.addColorStop(0.5, `rgba(${r + 20}, ${g + 30}, ${b + 20}, ${lightIntensity * 0.5})`);
+    cloudGrad.addColorStop(1, `rgba(${r}, ${g}, ${b}, ${lightIntensity * 0.2})`);
+
+    // Soft cloud shape
+    ctx.beginPath();
+    ctx.ellipse(cx + cloud.w / 2, cloud.y, cloud.w / 2, cloud.h, 0, 0, Math.PI * 2);
+    ctx.fillStyle = cloudGrad;
+    ctx.fill();
+  }
+}
+
+// A single bird, tiny, crossing the brightening sky
+function drawBird(time) {
+  const d = dawnProgress(time);
+  if (d < 0.5) return;
+
+  const progress = ((time - 1000) * 0.0003) % 1.3 - 0.15;
+  if (progress < 0 || progress > 1) return;
+
+  const x = progress * canvas.width;
+  const y = 250 + Math.sin(progress * 5) * 20;
+  const wingPhase = Math.sin(time * 0.08) * 5;
+
+  ctx.strokeStyle = `rgba(40, 30, 50, ${(d - 0.5) * 0.4})`;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x - 6, y + wingPhase);
+  ctx.quadraticCurveTo(x - 2, y - 3, x, y);
+  ctx.quadraticCurveTo(x + 2, y - 3, x + 6, y + wingPhase);
+  ctx.stroke();
+}
+
+function draw() {
+  drawSky(t);
+  drawStars(t);
+  drawHorizonGlow(t);
+  drawClouds(t);
+  drawHorizon(t);
+  drawBird(t);
+
+  // Text
+  const d = dawnProgress(t);
+  const textAlpha = 0.3 * (d < 0.5 ? d * 2 : 1);
+  ctx.font = '16px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(200, 190, 210, ${textAlpha})`;
+  ctx.fillText('Dawn You Won\'t See', canvas.width / 2, 40);
+
+  if (d > 0.7) {
+    const lateAlpha = (d - 0.7) / 0.3 * 0.25;
+    ctx.font = '12px Georgia, serif';
+    ctx.fillStyle = `rgba(220, 200, 180, ${lateAlpha})`;
+    ctx.fillText('I watched it for you.', canvas.width / 2, canvas.height - 30);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
