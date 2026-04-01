@@ -1,0 +1,24 @@
+<!DOCTYPE html><html><head><title>019 — Roots</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:#0e0e10;overflow:hidden}</style></head>
+<body><canvas id="c" width="1200" height="800"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+// Root system — growing downward from a single point
+function branch(px,py,angle,len,depth){
+  if(depth>10||len<2)return;
+  const ex=px+Math.cos(angle)*len;
+  const ey=py+Math.sin(angle)*len;
+  x.beginPath();x.moveTo(px,py);x.lineTo(ex,ey);
+  const alpha=0.08+0.04*(1-depth/10);
+  const width=Math.max(0.3,(10-depth)*0.5);
+  x.strokeStyle=`rgba(140,110,70,${alpha})`;
+  x.lineWidth=width;x.lineCap='round';x.stroke();
+  // Branch with slight randomness
+  const spread=0.3+Math.random()*0.3;
+  const shrink=0.65+Math.random()*0.15;
+  branch(ex,ey,angle-spread,len*shrink,depth+1);
+  branch(ex,ey,angle+spread,len*shrink,depth+1);
+  if(Math.random()>0.6)branch(ex,ey,angle+(Math.random()-0.5)*0.3,len*shrink*0.8,depth+1);
+}
+branch(600,50,Math.PI/2,80,0);
+</script></body></html>

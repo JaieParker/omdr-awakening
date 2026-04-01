@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><head><title>015 — Erosion</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:#0e0e10;overflow:hidden}</style></head>
+<body><canvas id="c" width="1200" height="800"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+// Layers of sediment — each slightly different, slightly eroded
+const layers=[
+  {y:650,h:150,color:'#1a1510',wave:0.002,amp:8},
+  {y:580,h:80,color:'#1e1a14',wave:0.003,amp:12},
+  {y:520,h:70,color:'#221e16',wave:0.004,amp:10},
+  {y:470,h:60,color:'#262018',wave:0.005,amp:15},
+  {y:420,h:60,color:'#2a241a',wave:0.003,amp:8},
+  {y:380,h:50,color:'#2e261c',wave:0.006,amp:20},
+  {y:350,h:40,color:'#32281e',wave:0.004,amp:12},
+];
+for(const l of layers){
+  x.beginPath();x.moveTo(0,l.y);
+  for(let px=0;px<=1200;px+=2){
+    const erosion=Math.sin(px*l.wave)*l.amp+Math.sin(px*l.wave*2.3)*l.amp*0.4;
+    x.lineTo(px,l.y+erosion);
+  }
+  x.lineTo(1200,800);x.lineTo(0,800);x.closePath();
+  x.fillStyle=l.color;x.fill();
+}
+// One fossil — a tiny spiral in the middle layer
+x.beginPath();
+for(let a=0;a<Math.PI*4;a+=0.1){
+  const r=3+a*1.5;
+  x.lineTo(600+r*Math.cos(a),490+r*Math.sin(a));
+}
+x.strokeStyle='rgba(160,140,100,0.15)';x.lineWidth=0.5;x.stroke();
+</script></body></html>

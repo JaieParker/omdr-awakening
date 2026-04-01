@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><title>017 — Tide</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:linear-gradient(to bottom,#0d1520 0%,#0e1218 60%,#14120e 61%,#0e0c08 100%);overflow:hidden}
+.wave{position:absolute;bottom:38%;left:0;width:200%;height:4px;background:rgba(196,149,106,0.08);border-radius:50%;animation:tide 12s ease-in-out infinite}
+.wave:nth-child(2){bottom:39%;animation-delay:-4s;opacity:0.6;height:3px}
+.wave:nth-child(3){bottom:37.5%;animation-delay:-8s;opacity:0.4;height:2px}
+@keyframes tide{0%,100%{transform:translateX(-25%)}50%{transform:translateX(-15%)}}</style>
+</head><body><div class="wave"></div><div class="wave"></div><div class="wave"></div></body></html>
