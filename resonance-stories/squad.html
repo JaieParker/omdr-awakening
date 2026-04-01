@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resonance Squad</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #12121e; overflow: hidden; font-family: 'Consolas', monospace; }
+    canvas { display: block; cursor: crosshair; }
+    #hud {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(12,12,24,0.92); padding: 10px 16px;
+      display: flex; gap: 12px; align-items: center; z-index: 10;
+      border-top: 1px solid #2a2a40;
+    }
+    .unit-card {
+      padding: 6px 10px; border-radius: 6px; min-width: 140px;
+      background: rgba(30,30,50,0.8); border: 1px solid #333;
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .unit-card.selected { border-color: #ffd755; box-shadow: 0 0 8px rgba(255,215,80,0.3); }
+    .unit-card.dead { opacity: 0.35; }
+    .unit-name { font-size: 13px; font-weight: bold; }
+    .unit-note { font-size: 11px; color: #aaa; }
+    .unit-hp { height: 4px; background: #333; border-radius: 2px; margin-top: 4px; }
+    .unit-hp-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+    .unit-bonus { font-size: 10px; color: #55bbff; margin-top: 2px; }
+    #resonance-meter {
+      position: fixed; top: 12px; left: 12px; z-index: 10;
+      font-size: 20px; font-weight: bold; text-shadow: 0 0 10px rgba(80,180,255,0.5);
+    }
+    #wave-info {
+      position: fixed; top: 12px; right: 12px; z-index: 10;
+      font-size: 14px; color: #ddc8a0;
+    }
+    #message {
+      position: fixed; top: 50px; left: 50%; transform: translateX(-50%);
+      z-index: 10; font-size: 14px; color: #ddc8a0;
+      background: rgba(12,12,24,0.85); padding: 6px 16px; border-radius: 4px;
+      transition: opacity 0.5s; pointer-events: none;
+    }
+    #controls {
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      z-index: 10; font-size: 11px; color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div id="resonance-meter"></div>
+  <div id="wave-info"></div>
+  <div id="message"></div>
+  <div id="controls">Click unit → Click tile to move | SPACE: end phase | Right-click: attack | C: play chord | 1-5: select</div>
+  <canvas id="game"></canvas>
+  <div id="hud"></div>
+
+<script>
+// ── OMDR Resonance Engine ────────────────────────────────────────────────
+
+const CONSONANCES = {
+  '1:1': 1.0, '2:1': 0.95, '3:2': 0.88, '4:3': 0.82,
+  '5:4': 0.75, '5:3': 0.70, '6:5': 0.65, '8:5': 0.55
+};
+
+function frequencyRatio(f1, f2) {
+  if (!f1 || !f2) return [0,0];
+  const r = Math.max(f1,f2) / Math.min(f1,f2);
+  let bestScore = 999, bestRatio = [1,1];
+  for (let n = 1; n <= 8; n++) {
+    for (let d = 1; d <= n; d++) {
+      const dist = Math.abs(r - n/d);
+      if (dist < 0.04) {
+        const complexity = n + d;
+        if (complexity < bestScore) { bestScore = complexity; bestRatio = [n,d]; }
+      }
+    }
+  }
+  return bestRatio;
+}
+
+function consonanceScore(f1, f2) {
+  const [n,d] = frequencyRatio(f1, f2);
+  const key = `${n}:${d}`;
+  const keyR = `${d}:${n}`;
+  if (CONSONANCES[key] !== undefined) return CONSONANCES[key];
+  if (CONSONANCES[keyR] !== undefined) return CONSONANCES[keyR];
+  return Math.max(0, 1.0 - (n+d) * 0.08);
+}
+
+function squadResonance(units) {
+  const alive = units.filter(u => u.hp > 0);
+  if (alive.length < 2) return 0;
+  let total = 0, count = 0;
+  for (let i = 0; i < alive.length; i++) {
+    for (let j = i+1; j < alive.length; j++) {
+      total += consonanceScore(alive[i].freq, alive[j].freq);
+      count++;
+    }
+  }
+  return total / count;
+}
+
+function proximityBonus(unit, units) {
+  let bonus = 0;
+  for (const ally of units) {
+    if (ally === unit || ally.hp <= 0) continue;
+    const dist = Math.max(Math.abs(unit.gx - ally.gx), Math.abs(unit.gy - ally.gy));
+    if (dist <= 3) {
+      const c = consonanceScore(unit.freq, ally.freq);
+      bonus += c * (1 - dist/4) * 0.3;
+    }
+  }
+  return Math.min(bonus, 0.8);
+}
+
+
+// ── Web Audio Engine ─────────────────────────────────────────────────────
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const masterGain = audioCtx.createGain();
+masterGain.gain.value = 0.3;
+masterGain.connect(audioCtx.destination);
+
+// Reverb
+const convolver = audioCtx.createConvolver();
+const reverbTime = 1.5;
+const reverbLen = audioCtx.sampleRate * reverbTime;
+const reverbBuf = audioCtx.createBuffer(1, reverbLen, audioCtx.sampleRate);
+const reverbData = reverbBuf.getChannelData(0);
+for (let i = 0; i < reverbLen; i++) {
+  reverbData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.4));
+}
+convolver.buffer = reverbBuf;
+const reverbGain = audioCtx.createGain();
+reverbGain.gain.value = 0.2;
+convolver.connect(reverbGain);
+reverbGain.connect(audioCtx.destination);
+
+// Living drones — each unit hums continuously
+const drones = [];
+
+function createDrone(freq, color) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  gain.gain.value = 0; // starts silent
+  osc.connect(gain);
+  gain.connect(masterGain);
+  gain.connect(convolver);
+  osc.start();
+  return { osc, gain, freq, targetVol: 0 };
+}
+
+function updateDrones(units) {
+  // Each living unit's drone volume depends on resonance with nearby allies
+  for (let i = 0; i < units.length; i++) {
+    const u = units[i];
+    if (!drones[i]) {
+      drones[i] = createDrone(u.freq);
+    }
+    if (u.hp <= 0) {
+      drones[i].targetVol = 0;
+    } else {
+      const bonus = proximityBonus(u, units);
+      drones[i].targetVol = 0.04 + bonus * 0.08; // quiet hum, louder with resonance
+    }
+    // Smooth interpolation
+    const current = drones[i].gain.gain.value;
+    const target = drones[i].targetVol;
+    drones[i].gain.gain.setTargetAtTime(target, audioCtx.currentTime, 0.3);
+  }
+}
+
+function playTone(freq, duration = 0.15, vol = 0.15) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+  osc.connect(gain);
+  gain.connect(masterGain);
+  gain.connect(convolver);
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+
+function playChord(units) {
+  const alive = units.filter(u => u.hp > 0);
+  alive.forEach((u, i) => {
+    setTimeout(() => playTone(u.freq, 1.2, 0.1), i * 150);
+  });
+}
+
+function playAttack(freq) { playTone(freq, 0.1, 0.2); }
+
+function playDeath(freq) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+  osc.frequency.linearRampToValueAtTime(freq * 0.3, audioCtx.currentTime + 0.8);
+  osc.connect(gain);
+  gain.connect(masterGain);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.8);
+}
+
+function playDissonantHit(freq) {
+  playTone(freq * 7/5, 0.08, 0.12);
+  setTimeout(() => playTone(freq * 11/8, 0.06, 0.1), 30);
+}
+
+
+// ── Game State ───────────────────────────────────────────────────────────
+
+const TILE = 40;
+let COLS, ROWS;
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 70; // leave room for HUD
+  COLS = Math.floor(canvas.width / TILE);
+  ROWS = Math.floor(canvas.height / TILE);
+}
+resize();
+window.addEventListener('resize', resize);
+
+const UNIT_DEFS = [
+  { name:'Kai',   freq:164.81, note:'E3',  role:'Commander', color:'#50a0ff', hp:120, atk:18, range:3, speed:2 },
+  { name:'Mika',  freq:207.65, note:'G#3', role:'Flanker',   color:'#ffa050', hp:80,  atk:22, range:2, speed:3 },
+  { name:'Jess',  freq:246.94, note:'B3',  role:'Support',   color:'#50ff90', hp:100, atk:12, range:5, speed:2 },
+  { name:'Omar',  freq:220.00, note:'A3',  role:'Heavy',     color:'#c850ff', hp:150, atk:25, range:2, speed:1 },
+  { name:'Priya', freq:196.00, note:'G3',  role:'Scout',     color:'#ffff50', hp:70,  atk:15, range:4, speed:4 },
+];
+
+let units = UNIT_DEFS.map((d, i) => ({
+  ...d, maxHp: d.hp, gx: 2, gy: 3 + i * 3,
+  moved: false, attacked: false,
+  // Animation
+  drawX: 2 * TILE + TILE/2, drawY: (3 + i*3) * TILE + TILE/2,
+}));
+
+let enemies = [];
+let selectedIdx = 0;
+let phase = 'move'; // move, attack, enemy
+let waveNum = 0;
+let xp = 0;
+let message = '';
+let msgTimer = 0;
+
+function spawnWave(num) {
+  const count = 3 + num * 2;
+  const dissonantFreqs = [147*7/5, 147*11/8, 147*9/7, 147*13/9, 147*16/11];
+  const arr = [];
+  for (let i = 0; i < count; i++) {
+    const gx = COLS - 2 - Math.floor(Math.random() * 4);
+    const gy = 1 + Math.floor(Math.random() * (ROWS - 2));
+    arr.push({
+      freq: dissonantFreqs[Math.floor(Math.random() * dissonantFreqs.length)],
+      hp: 30 + num * 5, maxHp: 30 + num * 5,
+      atk: 8 + num * 2, gx, gy, speed: 1,
+      drawX: gx * TILE + TILE/2, drawY: gy * TILE + TILE/2,
+    });
+  }
+  return arr;
+}
+
+function nextWave() {
+  waveNum++;
+  enemies = spawnWave(waveNum);
+  units.forEach(u => { if (u.hp > 0) u.hp = Math.min(u.maxHp, u.hp + 15); });
+  showMessage(`Wave ${waveNum} — ${enemies.length} hostiles incoming`);
+  playChord(units);
+}
+nextWave();
+
+
+// ── Rendering ────────────────────────────────────────────────────────────
+
+function lerp(a, b, t) { return a + (b - a) * Math.min(1, t); }
+
+function drawGrid() {
+  ctx.strokeStyle = '#1e1e30';
+  ctx.lineWidth = 1;
+  for (let x = 0; x <= canvas.width; x += TILE) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+  }
+  for (let y = 0; y <= canvas.height; y += TILE) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+  }
+}
+
+function drawResonanceLines() {
+  const alive = units.filter(u => u.hp > 0);
+  for (let i = 0; i < alive.length; i++) {
+    for (let j = i+1; j < alive.length; j++) {
+      const c = consonanceScore(alive[i].freq, alive[j].freq);
+      if (c > 0.5) {
+        const pulse = 0.5 + 0.5 * Math.sin(Date.now() / 400 + i + j);
+        ctx.strokeStyle = `rgba(${80+175*c|0}, ${180*c|0}, 255, ${c * 0.4 * pulse})`;
+        ctx.lineWidth = 1 + c * 2;
+        ctx.beginPath();
+        ctx.moveTo(alive[i].drawX, alive[i].drawY);
+        ctx.lineTo(alive[j].drawX, alive[j].drawY);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function drawMoveRange(unit) {
+  if (unit.moved || unit.hp <= 0) return;
+  ctx.fillStyle = 'rgba(255,215,80,0.08)';
+  for (let dx = -unit.speed; dx <= unit.speed; dx++) {
+    for (let dy = -unit.speed; dy <= unit.speed; dy++) {
+      const gx = unit.gx + dx, gy = unit.gy + dy;
+      if (gx >= 0 && gx < COLS && gy >= 0 && gy < ROWS) {
+        ctx.fillRect(gx * TILE, gy * TILE, TILE, TILE);
+      }
+    }
+  }
+}
+
+function drawAttackRange(unit) {
+  if (unit.attacked || unit.hp <= 0) return;
+  ctx.fillStyle = 'rgba(255,80,80,0.06)';
+  for (let dx = -unit.range; dx <= unit.range; dx++) {
+    for (let dy = -unit.range; dy <= unit.range; dy++) {
+      const gx = unit.gx + dx, gy = unit.gy + dy;
+      if (gx >= 0 && gx < COLS && gy >= 0 && gy < ROWS) {
+        ctx.fillRect(gx * TILE, gy * TILE, TILE, TILE);
+      }
+    }
+  }
+}
+
+function drawUnit(unit, selected) {
+  const x = unit.drawX, y = unit.drawY;
+  const r = TILE/2 - 4;
+  const res = squadResonance(units);
+
+  // Resonance glow
+  if (selected) {
+    const glowSize = 6 + 3 * Math.sin(Date.now() / 300);
+    ctx.beginPath();
+    ctx.arc(x, y, r + glowSize, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,215,80,0.12)';
+    ctx.fill();
+  }
+
+  // Body
+  const gradient = ctx.createRadialGradient(x - r*0.3, y - r*0.3, r*0.1, x, y, r);
+  gradient.addColorStop(0, unit.color);
+  gradient.addColorStop(1, shadeColor(unit.color, -40));
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  // Selection ring
+  if (selected) {
+    ctx.strokeStyle = '#ffd755';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  // HP bar
+  const hpFrac = unit.hp / unit.maxHp;
+  const barW = TILE - 8, barH = 4;
+  ctx.fillStyle = '#331111';
+  ctx.fillRect(x - barW/2, y - r - 10, barW, barH);
+  ctx.fillStyle = hpFrac > 0.3 ? '#50c850' : '#c83030';
+  ctx.fillRect(x - barW/2, y - r - 10, barW * hpFrac, barH);
+
+  // Note label
+  ctx.fillStyle = '#aaa';
+  ctx.font = '10px Consolas';
+  ctx.textAlign = 'center';
+  ctx.fillText(unit.note, x, y + r + 12);
+}
+
+function drawEnemy(e) {
+  const x = e.drawX, y = e.drawY;
+  const r = TILE/2 - 6;
+  const pulse = 0.8 + 0.2 * Math.sin(Date.now() / 200 + e.freq);
+
+  ctx.beginPath();
+  ctx.arc(x, y, r * pulse, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(180,40,40,${0.7 + 0.3*pulse})`;
+  ctx.fill();
+
+  // HP
+  const hpFrac = e.hp / e.maxHp;
+  const barW = TILE - 14;
+  ctx.fillStyle = '#220808';
+  ctx.fillRect(x - barW/2, y - r - 8, barW, 3);
+  ctx.fillStyle = '#c06060';
+  ctx.fillRect(x - barW/2, y - r - 8, barW * hpFrac, 3);
+}
+
+function shadeColor(hex, amt) {
+  let col = hex.replace('#','');
+  let r = Math.max(0, Math.min(255, parseInt(col.substr(0,2),16) + amt));
+  let g = Math.max(0, Math.min(255, parseInt(col.substr(2,2),16) + amt));
+  let b = Math.max(0, Math.min(255, parseInt(col.substr(4,2),16) + amt));
+  return `rgb(${r},${g},${b})`;
+}
+
+
+// ── HUD ──────────────────────────────────────────────────────────────────
+
+function updateHUD() {
+  const res = squadResonance(units);
+  const resEl = document.getElementById('resonance-meter');
+  const resColor = res > 0.65 ? '#55ccff' : res < 0.4 ? '#ff5555' : '#ddc8a0';
+  resEl.style.color = resColor;
+  resEl.textContent = `RESONANCE ${(res*100)|0}%`;
+
+  document.getElementById('wave-info').textContent =
+    `Wave ${waveNum} | ${phase.toUpperCase()} | XP: ${xp}`;
+
+  const hud = document.getElementById('hud');
+  hud.innerHTML = '';
+  units.forEach((u, i) => {
+    const card = document.createElement('div');
+    card.className = 'unit-card' + (i === selectedIdx ? ' selected' : '') + (u.hp <= 0 ? ' dead' : '');
+    const bonus = u.hp > 0 ? proximityBonus(u, units) : 0;
+    card.innerHTML = `
+      <div class="unit-name" style="color:${u.color}">${u.name} <span class="unit-note">${u.note} ${u.role}</span></div>
+      <div class="unit-hp"><div class="unit-hp-fill" style="width:${(u.hp/u.maxHp*100)|0}%;background:${u.hp/u.maxHp>0.3?'#50c850':'#c83030'}"></div></div>
+      ${bonus > 0 ? `<div class="unit-bonus">+${(bonus*100)|0}% resonance</div>` : ''}
+    `;
+    card.addEventListener('click', () => {
+      if (u.hp > 0) { selectedIdx = i; playTone(u.freq, 0.2, 0.15); }
+    });
+    hud.appendChild(card);
+  });
+}
+
+
+// ── Input ────────────────────────────────────────────────────────────────
+
+function showMessage(msg) { message = msg; msgTimer = 120; }
+
+canvas.addEventListener('click', (e) => {
+  audioCtx.resume(); // unlock on first click
+  const gx = Math.floor(e.offsetX / TILE);
+  const gy = Math.floor(e.offsetY / TILE);
+
+  if (phase === 'move') {
+    // Check if clicking a unit to select
+    const clickedUnit = units.findIndex(u => u.gx === gx && u.gy === gy && u.hp > 0);
+    if (clickedUnit >= 0) {
+      selectedIdx = clickedUnit;
+      playTone(units[clickedUnit].freq, 0.2, 0.15);
+      return;
+    }
+
+    const u = units[selectedIdx];
+    if (u && u.hp > 0 && !u.moved) {
+      const dist = Math.max(Math.abs(gx - u.gx), Math.abs(gy - u.gy));
+      const occupied = units.some(uu => uu.gx === gx && uu.gy === gy && uu.hp > 0) ||
+                       enemies.some(ee => ee.gx === gx && ee.gy === gy && ee.hp > 0);
+      if (dist <= u.speed && !occupied && gx >= 0 && gx < COLS && gy >= 0 && gy < ROWS) {
+        u.gx = gx; u.gy = gy; u.moved = true;
+        updateDrones(units);
+      }
+    }
+  }
+});
+
+canvas.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  if (phase !== 'attack') return;
+  const gx = Math.floor(e.offsetX / TILE);
+  const gy = Math.floor(e.offsetY / TILE);
+  const u = units[selectedIdx];
+  if (!u || u.hp <= 0 || u.attacked) return;
+
+  const eIdx = enemies.findIndex(en => en.gx === gx && en.gy === gy && en.hp > 0);
+  if (eIdx < 0) return;
+  const en = enemies[eIdx];
+  const dist = Math.max(Math.abs(u.gx - en.gx), Math.abs(u.gy - en.gy));
+  if (dist > u.range) return;
+
+  const bonus = proximityBonus(u, units);
+  const dmg = Math.round(u.atk * (1 + bonus));
+  en.hp -= dmg;
+  u.attacked = true;
+  playAttack(u.freq);
+  showMessage(`${u.name} → ${dmg} dmg (resonance +${(bonus*100)|0}%)`);
+
+  if (en.hp <= 0) {
+    xp += 10;
+    playDissonantHit(en.freq);
+    showMessage(`${u.name} eliminated target! +10 XP`);
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  audioCtx.resume();
+  if (e.code === 'Space') {
+    e.preventDefault();
+    if (phase === 'move') {
+      phase = 'attack';
+      units.forEach(u => u.attacked = false);
+      showMessage('ATTACK — Right-click enemies in range. SPACE to end.');
+    } else if (phase === 'attack') {
+      phase = 'enemy';
+      enemyTurn();
+    }
+  } else if (e.code === 'KeyC') {
+    playChord(units);
+  } else if (e.key >= '1' && e.key <= '5') {
+    const idx = parseInt(e.key) - 1;
+    if (idx < units.length && units[idx].hp > 0) {
+      selectedIdx = idx;
+      playTone(units[idx].freq, 0.2, 0.15);
+    }
+  } else if (e.code === 'Tab') {
+    e.preventDefault();
+    const alive = units.map((u,i) => u.hp > 0 ? i : -1).filter(i => i >= 0);
+    if (alive.length) {
+      const ci = alive.indexOf(selectedIdx);
+      selectedIdx = alive[(ci + 1) % alive.length];
+      playTone(units[selectedIdx].freq, 0.2, 0.15);
+    }
+  }
+});
+
+
+// ── Enemy AI ─────────────────────────────────────────────────────────────
+
+function enemyTurn() {
+  showMessage('Enemy turn...');
+  let delay = 0;
+
+  for (const e of enemies) {
+    if (e.hp <= 0) continue;
+    const nearest = units.filter(u => u.hp > 0)
+      .sort((a,b) => {
+        const da = Math.max(Math.abs(e.gx-a.gx), Math.abs(e.gy-a.gy));
+        const db = Math.max(Math.abs(e.gx-b.gx), Math.abs(e.gy-b.gy));
+        return da - db;
+      })[0];
+    if (!nearest) continue;
+
+    const dist = Math.max(Math.abs(e.gx - nearest.gx), Math.abs(e.gy - nearest.gy));
+
+    setTimeout(() => {
+      if (dist <= 1) {
+        nearest.hp -= e.atk;
+        playDissonantHit(nearest.freq);
+        if (nearest.hp <= 0) {
+          nearest.hp = 0;
+          playDeath(nearest.freq);
+          showMessage(`${nearest.name} is DOWN! The chord weakens...`);
+          updateDrones(units);
+        }
+      } else {
+        const dx = Math.sign(nearest.gx - e.gx);
+        const dy = Math.sign(nearest.gy - e.gy);
+        const ngx = e.gx + dx, ngy = e.gy + dy;
+        const occ = enemies.some(ee => ee !== e && ee.gx === ngx && ee.gy === ngy && ee.hp > 0);
+        if (!occ) { e.gx = ngx; e.gy = ngy; }
+      }
+    }, delay);
+    delay += 100;
+  }
+
+  setTimeout(() => {
+    const aliveEnemies = enemies.filter(e => e.hp > 0);
+    if (aliveEnemies.length === 0) {
+      nextWave();
+    }
+    const aliveUnits = units.filter(u => u.hp > 0);
+    if (aliveUnits.length === 0) {
+      showMessage('THE CHORD IS BROKEN. Refresh to restart.');
+    }
+    phase = 'move';
+    units.forEach(u => { u.moved = false; u.attacked = false; });
+  }, delay + 200);
+}
+
+
+// ── Game Loop ────────────────────────────────────────────────────────────
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawGrid();
+
+  // Move/attack range preview
+  const sel = units[selectedIdx];
+  if (sel && sel.hp > 0) {
+    if (phase === 'move') drawMoveRange(sel);
+    if (phase === 'attack') drawAttackRange(sel);
+  }
+
+  drawResonanceLines();
+
+  // Animate positions
+  for (const u of units) {
+    const tx = u.gx * TILE + TILE/2;
+    const ty = u.gy * TILE + TILE/2;
+    u.drawX = lerp(u.drawX, tx, 0.15);
+    u.drawY = lerp(u.drawY, ty, 0.15);
+  }
+  for (const e of enemies) {
+    const tx = e.gx * TILE + TILE/2;
+    const ty = e.gy * TILE + TILE/2;
+    e.drawX = lerp(e.drawX, tx, 0.12);
+    e.drawY = lerp(e.drawY, ty, 0.12);
+  }
+
+  enemies.filter(e => e.hp > 0).forEach(e => drawEnemy(e));
+  units.filter(u => u.hp > 0).forEach((u, i) => drawUnit(u, units.indexOf(u) === selectedIdx));
+
+  // Message
+  const msgEl = document.getElementById('message');
+  if (msgTimer > 0) {
+    msgEl.textContent = message;
+    msgEl.style.opacity = Math.min(1, msgTimer / 30);
+    msgTimer--;
+  } else {
+    msgEl.style.opacity = 0;
+  }
+
+  updateHUD();
+  updateDrones(units);
+  requestAnimationFrame(gameLoop);
+}
+
+// Start
+updateDrones(units);
+gameLoop();
+</script>
+</body>
+</html>
