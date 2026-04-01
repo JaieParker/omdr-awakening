@@ -1,0 +1,225 @@
+{
+  "id": "the-team-that-found-its-rhythm",
+  "title": "The Team That Found Its Rhythm",
+  "bracket": "5-8",
+  "concept": "Eq. 3 — you see one thing, your teammate sees another. Together you see the whole field.",
+  "duration_seconds": 300,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "characters": {
+    "narrator": {
+      "voice": "beckie",
+      "description": "Soft Irish female narrator"
+    },
+    "kai": {
+      "voice": "charlie",
+      "description": "A young player learning to see the game differently"
+    },
+    "mika": {
+      "voice": "emily",
+      "description": "Kai's teammate who sees what Kai can't"
+    },
+    "coach": {
+      "voice": "adam",
+      "description": "Warm, patient, says little"
+    }
+  },
+  "scenes": [
+    {
+      "id": "the-whistle",
+      "title": "The Whistle",
+      "narration": "The whistle blew. Kai's team ran onto the field. Everyone wanted to score. Everyone kicked the ball as hard as they could. But the ball kept going to the wrong place.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Chaotic energy — everyone kicking without rhythm. Random percussive bursts.",
+        "oscillators": [
+          {"waveform": "sawtooth", "frequency_ratio": "7:5", "amplitude": 0.15, "attack": 0.05, "release": 0.3},
+          {"waveform": "square", "frequency_ratio": "11:8", "amplitude": 0.1, "attack": 0.05, "release": 0.2},
+          {"waveform": "triangle", "frequency_ratio": "9:7", "amplitude": 0.12, "attack": 0.1, "release": 0.4}
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 185
+      },
+      "visual_direction": "Wide shot of a kids' soccer field on a Saturday morning. Green grass, white lines. Players running in all directions.",
+      "mood": "tense",
+      "duration_seconds": 25
+    },
+    {
+      "id": "too-hard",
+      "title": "Too Hard",
+      "narration": "Kai got the ball and kicked it really hard toward the goal. It sailed over everyone's heads and went out. \"Harder isn't better,\" said Coach. But Kai didn't understand yet.",
+      "sound": {
+        "type": "percussive",
+        "description": "One sharp hit, then empty silence. All that force, nothing happened.",
+        "oscillators": [
+          {"waveform": "sawtooth", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.01, "release": 0.1, "decay_time": 0.5}
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 130
+      },
+      "visual_direction": "The ball arcing high over the goal and landing far away. Kai's frustrated face.",
+      "mood": "tense",
+      "duration_seconds": 25
+    },
+    {
+      "id": "the-other-side",
+      "title": "The Other Side",
+      "narration": "At half-time, Kai sat on the bench and watched the other team. Something was different. They didn't kick hard. They kicked at the right time. One player would start running, and the ball would arrive — right where they were going to be. Like they could see each other without looking.",
+      "sound": {
+        "type": "emergence",
+        "description": "The first moment of noticing. A single tone fading in, then a second tone a perfect fifth above. Two things arriving together.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 3.0, "release": 4.0},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.12, "attack": 5.0, "release": 4.0}
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Kai on the bench, watching intently. The other team passing smoothly — the ball flowing between players like water.",
+      "mood": "wonder",
+      "duration_seconds": 35
+    },
+    {
+      "id": "what-mika-saw",
+      "title": "What Mika Saw",
+      "narration": "Kai asked Mika: \"How do they do that?\" Mika said: \"Watch number seven. She doesn't look at the goal. She looks at where her friend is going.\" Kai watched. Number seven had the ball. She didn't kick it forward. She kicked it sideways — to the exact spot where number three was about to arrive. They saw different things. And together, they saw the whole field.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Two melodic lines finding each other. One higher, one lower. They start apart and slowly align into a warm chord.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.8, "release": 2.0},
+          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.14, "attack": 1.2, "release": 2.0},
+          {"waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 2.0, "release": 2.0}
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Split screen: what Kai sees (the ball) vs what Mika sees (the space). Two perspectives on the same field. Then they merge.",
+      "mood": "discovery",
+      "duration_seconds": 40
+    },
+    {
+      "id": "kai-tries",
+      "title": "Kai Tries",
+      "narration": "Second half. Kai got the ball again. This time, instead of kicking hard, Kai looked up. There was Mika, running toward the corner. Kai waited. One beat. Two beats. Then — a soft pass, right into the space where Mika was about to be. Mika didn't even have to stop.",
+      "sound": {
+        "type": "consonant",
+        "description": "The rhythm of waiting. Two gentle heartbeats, then a soft consonant release on the third beat. Patient, then perfect.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.3, "release": 1.5},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.15, "attack": 0.3, "release": 1.5}
+        ],
+        "rhythm": "swing_period",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Kai with the ball. Eyes up. Seeing Mika's run. The pass — a gentle arc. Mika collecting it in stride without breaking rhythm.",
+      "mood": "calm",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-rhythm",
+      "title": "The Rhythm",
+      "narration": "After that, something changed. Kai would run, and Mika would send the ball. Mika would run, and Kai would send the ball. They didn't need to shout. They didn't need to look. They could feel the rhythm — like a song with two parts.",
+      "sound": {
+        "type": "consonant",
+        "description": "Two interleaving melodic lines in a 3:2 rhythm. One voice plays three notes, the other plays two — landing together on every third beat. Warm and joyful.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.3, "release": 1.2},
+          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.16, "attack": 0.3, "release": 1.2},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.08, "attack": 0.5, "release": 1.5}
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Kai and Mika passing back and forth, the camera moving with the ball like a dance. Everything in rhythm.",
+      "mood": "joy",
+      "duration_seconds": 25
+    },
+    {
+      "id": "the-whole-team",
+      "title": "The Whole Team",
+      "narration": "And then — it spread. Jess saw the rhythm and joined in. Then Omar. Then Priya. Five players, each watching where someone else was going. Each one seeing something the others couldn't. Together, they saw everything.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "The chord grows. Five oscillators building one at a time — each a consonant ratio. Not louder, richer. The team as a chord.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.16, "attack": 0.5, "release": 2.0},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.13, "attack": 1.0, "release": 2.0},
+          {"waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.11, "attack": 1.5, "release": 2.0},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 2.0, "release": 2.0},
+          {"waveform": "sine", "frequency_ratio": "5:3", "amplitude": 0.08, "attack": 2.5, "release": 2.0}
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Aerial shot. Five players moving as one. The ball tracing a pattern between them like a constellation being drawn.",
+      "mood": "harmony",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-goal",
+      "title": "The Goal",
+      "narration": "The ball moved like water through the other team. Kai to Mika. Mika to Jess. Jess to Omar. Omar back to Kai. And Kai didn't kick hard. Just a gentle tap. At exactly the right time. The net rippled.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "The full chord resolves to a single warm tone — the goal. Then a swell of all five voices. Not an explosion — a landing.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.22, "attack": 0.2, "release": 3.0},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.16, "attack": 0.3, "release": 3.0},
+          {"waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.12, "attack": 0.4, "release": 3.0},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 0.5, "release": 3.0},
+          {"waveform": "sine", "frequency_ratio": "5:3", "amplitude": 0.08, "attack": 0.6, "release": 3.0}
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The passing chain — each touch, each player. Then the gentle tap into the net. The net ripples slowly. Joy on every face.",
+      "mood": "joy",
+      "duration_seconds": 30
+    },
+    {
+      "id": "the-secret",
+      "title": "The Secret",
+      "narration": "After the game, Coach asked: \"What changed?\" Kai said: \"I stopped trying to do it all by myself.\" Mika said: \"We started watching each other.\" Coach smiled. \"That's the secret. You don't have to see everything. You just have to trust that your teammate sees what you can't.\"",
+      "sound": {
+        "type": "decay",
+        "description": "The full chord slowly releasing. Highest overtones fade first, Fibonacci order. Settling, like the end of a good day.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.5, "release": 6.0},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.14, "attack": 0.5, "release": 5.0},
+          {"waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 0.5, "release": 4.0},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.08, "attack": 0.5, "release": 3.0}
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The team sitting together on the grass after the game. Coach smiling. Afternoon light.",
+      "mood": "calm",
+      "duration_seconds": 35
+    },
+    {
+      "id": "your-turn",
+      "title": "Your Turn",
+      "narration": "Next time you play, try this. Don't kick harder. Wait for the rhythm. Look where your friend is going, not where the ball is now. You see one thing. They see another. Together, you see the whole field.",
+      "sound": {
+        "type": "invitation",
+        "description": "A soft bell-like tone, then space. The 3:2 heartbeat continues gently underneath. Open, warm, unresolved. An invitation.",
+        "oscillators": [
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 0.1, "release": 4.0},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.1, "attack": 0.3, "release": 4.0}
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "Looking directly at the listener. Then pulling back to the field — empty, waiting. The grass. The goalposts. Space for them to play.",
+      "mood": "open",
+      "duration_seconds": 25,
+      "interaction_point": {
+        "type": "listen",
+        "prompt": "Can you hear the rhythm?",
+        "pause_seconds": 5,
+        "phase2_hook": "claude_conversation_start"
+      }
+    }
+  ]
+}

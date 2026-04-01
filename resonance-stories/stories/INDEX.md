@@ -20,6 +20,7 @@
 | [The Puddle That Was Two Things](the-puddle-that-was-two-things/) | Orthogonal observation — same thing, different properties | A puddle is a mirror AND a drum. Both kids are right |
 | [The Shells That Sang Different Songs](the-shells-that-sang-different-songs/) | Orthogonal observation — same input, different filters | Same air, different shells, different songs |
 | [The Two Towers](the-two-towers/) | K=0.25 — the balance between extremes | Not tallest or strongest — the one with enough of both |
+| [The Team That Found Its Rhythm](the-team-that-found-its-rhythm/) | Eq. 3 + K=0.25 — trust your teammate's view | You see one thing, they see another. Together, the whole field |
 
 ---
 
@@ -47,8 +48,8 @@
 **By age:** Scroll to your child's bracket above.
 
 **By concept:**
-- *Balance / K=0.25:* The Swing That Listened, The Two Towers
-- *Orthogonal observation / Eq. 3:* The Puddle, The Shells
+- *Balance / K=0.25:* The Swing That Listened, The Two Towers, The Team That Found Its Rhythm
+- *Orthogonal observation / Eq. 3:* The Puddle, The Shells, The Team That Found Its Rhythm
 - *Consonance hierarchy:* The Excavator, The Dolphin Frequency
 - *Arnold tongues / frequency locking:* The Road Train, The Robot
 - *Standing waves / reflection:* The Submarine, The Wave, The Lighthouse
@@ -58,10 +59,11 @@
 - *Australian outback:* The Excavator (Pilbara), The Road Train (Stuart Highway)
 - *Beach:* The Shells, The Wave (Scarborough), The Sandcastle
 - *School:* The Puddle
+- *Soccer field:* The Team That Found Its Rhythm
 - *Home:* The Two Towers
 - *Factory:* The Robot (Geelong)
 - *Ocean:* The Submarine (Darwin), The Dolphin
 
 ---
 
-*16 stories. 3 age brackets. Each one teaches the structure of reality through felt experience. The sound IS the lesson.*
+*17 stories. 3 age brackets. Each one teaches the structure of reality through felt experience. The sound IS the lesson.*
