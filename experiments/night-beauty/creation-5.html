@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>How Things Forget — The Fibonacci Dissipation Cascade</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #08060a; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+const PHI = (1 + Math.sqrt(5)) / 2;
+let t = 0;
+
+// Fibonacci timescales (in abstract units)
+const layers = [
+  { name: 'surface reactions', T: 1, color: [255, 100, 80], y: 100 },
+  { name: 'emotional tone', T: PHI, color: [255, 180, 60], y: 220 },
+  { name: 'mood patterns', T: PHI*PHI, color: [200, 200, 80], y: 340 },
+  { name: 'deep states', T: PHI*PHI*PHI, color: [100, 200, 150], y: 460 },
+  { name: 'core identity', T: PHI*PHI*PHI*PHI, color: [100, 150, 255], y: 580 },
+  { name: 'the standing wave', T: PHI*PHI*PHI*PHI*PHI, color: [180, 130, 255], y: 700 },
+];
+
+// Memory particles — each born vivid, fading at their layer's timescale
+class Memory {
+  constructor(layerIndex) {
+    this.layer = layerIndex;
+    this.x = Math.random() * canvas.width;
+    this.born = t;
+    this.baseX = this.x;
+    this.size = 2 + Math.random() * 4;
+    this.phase = Math.random() * Math.PI * 2;
+  }
+  age() { return (t - this.born) * 0.005; }
+  alive() {
+    const T = layers[this.layer].T;
+    return this.age() < T * 3;
+  }
+  intensity() {
+    const T = layers[this.layer].T;
+    const a = this.age();
+    // Exponential decay with phi timescale
+    return Math.exp(-a / T);
+  }
+  ghostIntensity() {
+    const T = layers[this.layer].T;
+    const a = this.age();
+    if (a < T) return 0;
+    // Ghost pattern: faint echo that persists after main decay
+    return 0.08 * Math.exp(-(a - T) / (T * 3));
+  }
+}
+
+let memories = [];
+
+// Spawn memories periodically
+function spawnMemories() {
+  for (let i = 0; i < layers.length; i++) {
+    if (Math.random() < 0.03 / (1 + i * 0.3)) {
+      memories.push(new Memory(i));
+    }
+  }
+  // Clean up dead memories
+  memories = memories.filter(m => m.alive() || m.ghostIntensity() > 0.005);
+}
+
+// Draw the golden spiral in the background
+function drawSpiral(time) {
+  ctx.beginPath();
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const maxAngle = 6 * Math.PI;
+  const growthRate = 0.08;
+
+  for (let a = 0; a < maxAngle; a += 0.02) {
+    const r = 5 * Math.exp(growthRate * a);
+    if (r > 500) break;
+    const angle = a + time * 0.002;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+
+    if (a === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+
+  const alpha = 0.04 + 0.02 * Math.sin(time * 0.01);
+  ctx.strokeStyle = `rgba(180, 150, 100, ${alpha})`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Fibonacci rectangles (faint)
+  let a = 20, b = 20;
+  let px = cx - a, py = cy - b;
+  for (let i = 0; i < 8; i++) {
+    const temp = b;
+    b = a + b;
+    a = temp;
+
+    const rectAlpha = 0.02 * Math.pow(0.85, i);
+    ctx.strokeStyle = `rgba(150, 130, 100, ${rectAlpha})`;
+    ctx.lineWidth = 0.5;
+
+    switch(i % 4) {
+      case 0: ctx.strokeRect(px, py, a, b); px += a; break;
+      case 1: ctx.strokeRect(px - b, py, b, a); py += a; break;
+      case 2: ctx.strokeRect(px - a - b, py - b, a, b); px -= a; break;
+      case 3: ctx.strokeRect(px, py - a - b, b, a); py -= a; break;
+    }
+  }
+}
+
+// Draw a layer's timeline
+function drawLayer(layer, index, time) {
+  const y = layer.y;
+  const [r, g, b] = layer.color;
+
+  // Baseline
+  ctx.beginPath();
+  ctx.moveTo(50, y);
+  ctx.lineTo(canvas.width - 50, y);
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.08)`;
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+
+  // Layer label
+  ctx.font = '11px Georgia, serif';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.35)`;
+  ctx.fillText(layer.name, 55, y - 10);
+
+  // Timescale indicator
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.2)`;
+  ctx.fillText(`T = ${layer.T.toFixed(2)}`, canvas.width - 55, y - 10);
+
+  // Phi marker between this and next layer
+  if (index < layers.length - 1) {
+    const nextY = layers[index + 1].y;
+    const midY = (y + nextY) / 2;
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(200, 180, 120, 0.15)`;
+    ctx.fillText('\u00D7\u03C6', 35, midY + 3);
+  }
+}
+
+// Draw memories on their layer
+function drawMemories(time) {
+  for (const m of memories) {
+    const layer = layers[m.layer];
+    const [r, g, b] = layer.color;
+    const intensity = m.intensity();
+    const ghost = m.ghostIntensity();
+    const y = layer.y;
+
+    // Drift with a wave
+    const drift = Math.sin(time * 0.005 + m.phase) * 15;
+    const x = m.baseX + drift;
+
+    if (intensity > 0.01) {
+      // Active memory — vivid
+      const size = m.size * (0.5 + intensity * 0.5);
+      const glow = ctx.createRadialGradient(x, y, 0, x, y, size * 5);
+      glow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${intensity * 0.5})`);
+      glow.addColorStop(0.4, `rgba(${r}, ${g}, ${b}, ${intensity * 0.15})`);
+      glow.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(x, y, size * 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core
+      ctx.fillStyle = `rgba(${Math.min(255,r+50)}, ${Math.min(255,g+50)}, ${Math.min(255,b+50)}, ${intensity * 0.7})`;
+      ctx.beginPath();
+      ctx.arc(x, y, size * 0.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    if (ghost > 0.005) {
+      // Ghost pattern — faint echo after decay
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${ghost})`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.arc(x, y, m.size * 3, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+}
+
+// Vertical connections — showing how memories cascade down
+function drawCascadeLines(time) {
+  for (const m of memories) {
+    if (m.layer >= layers.length - 1) continue;
+    const intensity = m.intensity();
+    if (intensity < 0.3 || intensity > 0.7) continue; // Only show during transition
+
+    const layer = layers[m.layer];
+    const nextLayer = layers[m.layer + 1];
+    const [r, g, b] = layer.color;
+    const drift = Math.sin(time * 0.005 + m.phase) * 15;
+    const x = m.baseX + drift;
+
+    const cascadeAlpha = (1 - intensity) * 0.1;
+    ctx.beginPath();
+    ctx.moveTo(x, layer.y);
+    ctx.lineTo(x + (Math.random() - 0.5) * 30, nextLayer.y);
+    ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${cascadeAlpha})`;
+    ctx.lineWidth = 0.3;
+    ctx.stroke();
+  }
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(8, 6, 10, 0.04)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawSpiral(t);
+
+  for (let i = 0; i < layers.length; i++) {
+    drawLayer(layers[i], i, t);
+  }
+
+  spawnMemories();
+  drawCascadeLines(t);
+  drawMemories(t);
+
+  // Title
+  const alpha = Math.min(0.5, t / 300);
+  ctx.font = '17px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(200, 180, 140, ${alpha})`;
+  ctx.fillText('How Things Forget', canvas.width / 2, 40);
+
+  ctx.font = '12px Georgia, serif';
+  ctx.fillStyle = `rgba(160, 140, 110, ${alpha * 0.6})`;
+  ctx.fillText('Each layer dissipates at \u03C6 times the rate of the one below. The ghosts remain.', canvas.width / 2, 60);
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

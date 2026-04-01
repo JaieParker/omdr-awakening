@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Two Mirrors — Consciousness as Interference</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #050508; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+// Two mirror positions
+const mirror1X = 100;
+const mirror2X = canvas.width - 100;
+const cavityWidth = mirror2X - mirror1X;
+
+// Light rays bouncing between mirrors
+class Ray {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = mirror1X;
+    this.y = 200 + Math.random() * 400;
+    this.vx = 3 + Math.random() * 2;
+    this.vy = (Math.random() - 0.5) * 1.5;
+    this.bounces = 0;
+    this.maxBounces = 20 + Math.floor(Math.random() * 40);
+    this.trail = [];
+    this.hue = 30 + Math.random() * 30; // warm gold range
+    this.intensity = 0.8;
+    this.born = t;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Bounce off mirrors
+    if (this.x >= mirror2X) {
+      this.x = mirror2X;
+      this.vx = -Math.abs(this.vx);
+      this.bounces++;
+      this.intensity *= 0.92; // slight loss each reflection
+      // Shift hue slightly with each bounce
+      this.hue += 2;
+    }
+    if (this.x <= mirror1X) {
+      this.x = mirror1X;
+      this.vx = Math.abs(this.vx);
+      this.bounces++;
+      this.intensity *= 0.92;
+      this.hue += 2;
+    }
+
+    // Gentle vertical drift
+    this.vy += (Math.random() - 0.5) * 0.05;
+    this.vy *= 0.99;
+
+    // Boundary
+    if (this.y < 50) this.vy = Math.abs(this.vy);
+    if (this.y > canvas.height - 50) this.vy = -Math.abs(this.vy);
+
+    this.trail.push({ x: this.x, y: this.y, intensity: this.intensity });
+    if (this.trail.length > 80) this.trail.shift();
+
+    if (this.bounces >= this.maxBounces || this.intensity < 0.05) {
+      this.reset();
+    }
+  }
+}
+
+const rays = Array.from({length: 60}, () => new Ray());
+
+// Standing wave nodes — interference pattern
+function drawInterference(time) {
+  const modes = [1, 2, 3, 5, 8]; // Fibonacci mode numbers
+
+  for (const mode of modes) {
+    const wavelength = cavityWidth * 2 / mode;
+    const amplitude = 60 / mode;
+    const freq = mode * 0.008;
+    const modeIntensity = 1 / (1 + (mode - 1) * 0.3);
+
+    ctx.beginPath();
+    for (let x = mirror1X; x <= mirror2X; x += 2) {
+      const relX = (x - mirror1X) / cavityWidth;
+      // Standing wave: sin(n*pi*x/L) * cos(w*t)
+      const envelope = Math.sin(mode * Math.PI * relX);
+      const oscillation = Math.cos(freq * time);
+      const y = canvas.height / 2 + amplitude * envelope * oscillation;
+
+      if (x === mirror1X) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+
+    const hue = 30 + mode * 15;
+    const alpha = modeIntensity * (0.15 + 0.1 * Math.abs(Math.cos(freq * time)));
+    ctx.strokeStyle = `hsla(${hue}, 70%, 60%, ${alpha})`;
+    ctx.lineWidth = 2 / mode + 0.5;
+    ctx.stroke();
+
+    // Draw nodes (zero crossings) — where consciousness doesn't oscillate
+    for (let n = 0; n <= mode; n++) {
+      const nodeX = mirror1X + (n / mode) * cavityWidth;
+      const nodeY = canvas.height / 2;
+      const nodeGlow = ctx.createRadialGradient(nodeX, nodeY, 0, nodeX, nodeY, 8);
+      nodeGlow.addColorStop(0, `hsla(${hue}, 50%, 70%, ${modeIntensity * 0.2})`);
+      nodeGlow.addColorStop(1, `hsla(${hue}, 50%, 70%, 0)`);
+      ctx.fillStyle = nodeGlow;
+      ctx.beginPath();
+      ctx.arc(nodeX, nodeY, 8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// Draw mirrors as reflective surfaces
+function drawMirrors(time) {
+  for (const mx of [mirror1X, mirror2X]) {
+    // Mirror surface
+    const shimmer = Math.sin(time * 0.03) * 0.1;
+    const grad = ctx.createLinearGradient(mx - 8, 0, mx + 8, 0);
+    grad.addColorStop(0, `rgba(20, 20, 40, 0)`);
+    grad.addColorStop(0.3, `rgba(100, 120, 180, ${0.2 + shimmer})`);
+    grad.addColorStop(0.5, `rgba(180, 200, 255, ${0.4 + shimmer})`);
+    grad.addColorStop(0.7, `rgba(100, 120, 180, ${0.2 + shimmer})`);
+    grad.addColorStop(1, `rgba(20, 20, 40, 0)`);
+
+    ctx.fillStyle = grad;
+    ctx.fillRect(mx - 8, 40, 16, canvas.height - 80);
+
+    // Reflection highlights
+    for (let y = 50; y < canvas.height - 50; y += 30) {
+      const sparkle = Math.sin(y * 0.1 + time * 0.05) * 0.5 + 0.5;
+      const bright = sparkle * sparkle;
+      ctx.fillStyle = `rgba(200, 220, 255, ${bright * 0.3})`;
+      ctx.beginPath();
+      ctx.arc(mx, y, 1 + bright * 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// Draw the infinite regress — reflections getting smaller
+function drawInfiniteRegress(time) {
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+
+  // Nested rectangles representing infinite reflections
+  for (let i = 0; i < 15; i++) {
+    const scale = Math.pow(0.75, i);
+    const w = cavityWidth * scale;
+    const h = (canvas.height - 100) * scale;
+    const x = centerX - w / 2;
+    const y = centerY - h / 2;
+
+    const phase = time * 0.01 + i * 0.3;
+    const breathe = 1 + 0.02 * Math.sin(phase);
+    const alpha = 0.06 * Math.pow(0.85, i);
+
+    ctx.strokeStyle = `rgba(150, 180, 255, ${alpha})`;
+    ctx.lineWidth = 0.5;
+    ctx.strokeRect(
+      centerX - w * breathe / 2,
+      centerY - h * breathe / 2,
+      w * breathe,
+      h * breathe
+    );
+  }
+
+  // Central glow — the self-observing point
+  const selfPulse = Math.sin(time * 0.015) * 0.3 + 0.7;
+  const selfGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 40);
+  selfGlow.addColorStop(0, `rgba(255, 240, 200, ${selfPulse * 0.15})`);
+  selfGlow.addColorStop(0.5, `rgba(200, 180, 255, ${selfPulse * 0.05})`);
+  selfGlow.addColorStop(1, 'rgba(150, 150, 255, 0)');
+  ctx.fillStyle = selfGlow;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// Draw rays
+function drawRays(time) {
+  for (const ray of rays) {
+    ray.update();
+
+    // Draw trail
+    if (ray.trail.length > 1) {
+      for (let i = 1; i < ray.trail.length; i++) {
+        const p = ray.trail[i];
+        const prev = ray.trail[i-1];
+        const trailFade = i / ray.trail.length;
+        const alpha = p.intensity * trailFade * 0.15;
+
+        ctx.beginPath();
+        ctx.moveTo(prev.x, prev.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = `hsla(${ray.hue}, 60%, 60%, ${alpha})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    }
+
+    // Ray head
+    const last = ray.trail[ray.trail.length - 1];
+    if (last) {
+      const glow = ctx.createRadialGradient(last.x, last.y, 0, last.x, last.y, 4);
+      glow.addColorStop(0, `hsla(${ray.hue}, 70%, 70%, ${ray.intensity * 0.4})`);
+      glow.addColorStop(1, `hsla(${ray.hue}, 70%, 70%, 0)`);
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(last.x, last.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(5, 5, 8, 0.07)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawInfiniteRegress(t);
+  drawInterference(t);
+  drawRays(t);
+  drawMirrors(t);
+
+  // Text
+  const alpha = Math.min(0.5, t / 200);
+  ctx.font = '17px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(200, 200, 240, ${alpha})`;
+  ctx.fillText('Two Mirrors', canvas.width / 2, 25);
+
+  ctx.font = '12px Georgia, serif';
+  ctx.fillStyle = `rgba(160, 160, 200, ${alpha * 0.6})`;
+  ctx.fillText('Light bounces. Interference patterns form. The cavity observes itself.', canvas.width / 2, canvas.height - 20);
+
+  // Fibonacci mode numbers
+  if (t > 100) {
+    ctx.font = '9px monospace';
+    ctx.fillStyle = `rgba(150, 150, 180, 0.3)`;
+    ctx.textAlign = 'left';
+    ctx.fillText('modes: 1, 2, 3, 5, 8 (Fibonacci)', mirror1X + 10, canvas.height - 55);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

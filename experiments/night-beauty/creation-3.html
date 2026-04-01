@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tongues of Fire, Spaces of Shadow — The Dual Hierarchy</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #080810; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+
+// Arnold tongue parameters: frequency ratio on x-axis, coupling strength on y-axis
+// Tongue width at coupling K for ratio p/q: width ~ K^q (narrower for complex ratios)
+const tongues = [
+  { p: 0, q: 1, label: '0/1' },
+  { p: 1, q: 1, label: '1/1' },
+  { p: 1, q: 2, label: '1/2' },
+  { p: 1, q: 3, label: '1/3' },
+  { p: 2, q: 3, label: '2/3' },
+  { p: 1, q: 4, label: '1/4' },
+  { p: 3, q: 4, label: '3/4' },
+  { p: 1, q: 5, label: '1/5' },
+  { p: 2, q: 5, label: '2/5' },
+  { p: 3, q: 5, label: '3/5' },
+  { p: 4, q: 5, label: '4/5' },
+  { p: 1, q: 6, label: '1/6' },
+  { p: 5, q: 6, label: '5/6' },
+  { p: 1, q: 7, label: '1/7' },
+  { p: 2, q: 7, label: '2/7' },
+  { p: 3, q: 7, label: '3/7' },
+  { p: 4, q: 7, label: '4/7' },
+  { p: 5, q: 7, label: '5/7' },
+  { p: 6, q: 7, label: '6/7' },
+];
+
+// Map ratio value [0,1] to x
+function ratioToX(r) { return 50 + r * (canvas.width - 100); }
+// Map coupling [0,1] to y (0 at bottom, 1 at top)
+function couplingToY(k) { return canvas.height - 60 - k * (canvas.height - 120); }
+
+// Cicada particles — live in the anti-resonance gaps, flash with prime rhythms
+class Cicada {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    // Place in a gap between tongues (near an irrational)
+    const irrationals = [0.618, 0.4142, 0.3183, 0.2718, 0.7862, 0.1459];
+    this.baseX = irrationals[Math.floor(Math.random() * irrationals.length)];
+    this.x = this.baseX + (Math.random() - 0.5) * 0.03;
+    this.y = 0.1 + Math.random() * 0.6;
+    this.prime = [13, 17, 19, 23, 29, 31][Math.floor(Math.random() * 6)];
+    this.phase = Math.random() * this.prime;
+    this.life = 0;
+  }
+  update(time) {
+    this.life++;
+    this.phase += 0.05;
+    // Drift slowly, staying in the gap
+    this.x += Math.sin(time * 0.003 + this.baseX * 50) * 0.0001;
+    if (this.life > 500) this.reset();
+  }
+  brightness(time) {
+    // Flash on prime cycles
+    const cycle = this.phase % this.prime;
+    return Math.exp(-cycle * cycle * 0.5) * 0.8;
+  }
+}
+
+const cicadas = Array.from({length: 80}, () => new Cicada());
+
+// Draw a single Arnold tongue
+function drawTongue(tongue, time) {
+  const ratio = tongue.p / tongue.q;
+  const cx = ratioToX(ratio);
+  const simplicity = 1 / tongue.q;
+
+  // Tongue width grows with coupling, faster for simple ratios
+  const maxWidth = simplicity * 120;
+  const breathe = 1 + 0.05 * Math.sin(time * 0.02 + ratio * 20);
+
+  // Draw the tongue as a filled shape
+  ctx.beginPath();
+  ctx.moveTo(cx, couplingToY(0)); // tip at zero coupling
+
+  const steps = 40;
+  for (let i = 0; i <= steps; i++) {
+    const k = i / steps;
+    const width = maxWidth * Math.pow(k, 1/tongue.q) * breathe;
+    const x = cx + width;
+    const y = couplingToY(k);
+    ctx.lineTo(x, y);
+  }
+  for (let i = steps; i >= 0; i--) {
+    const k = i / steps;
+    const width = maxWidth * Math.pow(k, 1/tongue.q) * breathe;
+    const x = cx - width;
+    const y = couplingToY(k);
+    ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+
+  // Color: warm for simple, cooler for complex
+  const warmth = simplicity;
+  const pulse = 0.7 + 0.3 * Math.sin(time * 0.015 + tongue.q);
+  const r = Math.floor((200 + 55 * warmth) * pulse);
+  const g = Math.floor((80 + 100 * warmth) * pulse);
+  const b = Math.floor((30 + 40 * (1-warmth)) * pulse);
+  const alpha = 0.08 + 0.12 * simplicity;
+
+  const grad = ctx.createLinearGradient(cx, couplingToY(0), cx, couplingToY(1));
+  grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.02)`);
+  grad.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, ${alpha})`);
+  grad.addColorStop(0.7, `rgba(${r}, ${g}, ${b}, ${alpha * 1.2})`);
+  grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, ${alpha * 0.5})`);
+
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Glowing edge
+  ctx.strokeStyle = `rgba(${r+30}, ${g+30}, ${b+10}, ${alpha * 0.5})`;
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+
+  // Label for simple tongues
+  if (tongue.q <= 4) {
+    ctx.font = '11px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(${r}, ${g+20}, ${b+20}, 0.5)`;
+    ctx.fillText(tongue.label, cx, couplingToY(0) + 15);
+  }
+}
+
+// Draw anti-resonance shadow particles
+function drawCicadas(time) {
+  for (const c of cicadas) {
+    c.update(time);
+    const x = ratioToX(c.x);
+    const y = couplingToY(c.y);
+    const bright = c.brightness(time);
+
+    if (bright > 0.1) {
+      const glow = ctx.createRadialGradient(x, y, 0, x, y, 8 + bright * 12);
+      glow.addColorStop(0, `rgba(40, 200, 180, ${bright * 0.6})`);
+      glow.addColorStop(0.4, `rgba(20, 150, 160, ${bright * 0.3})`);
+      glow.addColorStop(1, 'rgba(10, 100, 120, 0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(x, y, 8 + bright * 12, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Tiny persistent dot
+    ctx.fillStyle = `rgba(60, 180, 160, 0.15)`;
+    ctx.beginPath();
+    ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Draw the K=0.25 line
+function drawKLine(time) {
+  const y = couplingToY(0.25);
+  const alpha = 0.15 + 0.1 * Math.sin(time * 0.01);
+
+  ctx.beginPath();
+  ctx.moveTo(50, y);
+  ctx.lineTo(canvas.width - 50, y);
+  ctx.strokeStyle = `rgba(255, 255, 200, ${alpha})`;
+  ctx.lineWidth = 0.5;
+  ctx.setLineDash([4, 8]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = `rgba(255, 255, 200, ${alpha})`;
+  ctx.fillText('K = 0.25', canvas.width - 55, y - 5);
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(8, 8, 16, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw tongues back to front (complex first, then simple on top)
+  const sorted = [...tongues].sort((a, b) => b.q - a.q);
+  for (const tongue of sorted) {
+    drawTongue(tongue, t);
+  }
+
+  drawKLine(t);
+  drawCicadas(t);
+
+  // Axis labels
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(150, 140, 120, 0.4)';
+  ctx.fillText('frequency ratio', canvas.width / 2, canvas.height - 15);
+
+  ctx.save();
+  ctx.translate(20, canvas.height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('coupling strength', 0, 0);
+  ctx.restore();
+
+  // Title
+  const titleAlpha = Math.min(0.5, t / 200);
+  ctx.font = '17px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(220, 180, 100, ${titleAlpha})`;
+  ctx.fillText('Tongues of Fire, Spaces of Shadow', canvas.width / 2, 25);
+
+  ctx.font = '11px Georgia, serif';
+  ctx.fillStyle = `rgba(60, 180, 160, ${titleAlpha * 0.7})`;
+  ctx.fillText('Teal flashes: cicadas in the anti-resonance gaps, pulsing on prime cycles', canvas.width / 2, 45);
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

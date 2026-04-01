@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The First Heartbeat — When Standing Waves Learn to Breathe</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #0a0a12; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+const particles = [];
+
+// Particle class — traces the limit cycle
+class Particle {
+  constructor(phase) {
+    this.phase = phase;
+    this.trail = [];
+    this.life = 1;
+    this.born = t;
+  }
+}
+
+// Spawn particles periodically
+function spawnParticle() {
+  if (particles.length < 200) {
+    particles.push(new Particle(Math.random() * Math.PI * 2));
+  }
+}
+
+// The transition function: 0 = pure standing wave, 1 = full limit cycle
+function dissipation(time) {
+  // Sigmoid transition over ~10 seconds
+  const midpoint = 300; // frames
+  const steepness = 0.015;
+  return 1 / (1 + Math.exp(-steepness * (time - midpoint)));
+}
+
+// Standing wave: y = A*sin(kx)*cos(wt) — symmetric in time
+// Limit cycle: y = A*sin(kx - wt) — traveling wave with direction
+// Blend between them
+function waveY(x, time, d) {
+  const k = 0.015; // wave number
+  const w = 0.03;  // angular frequency
+  const A = 120;
+
+  // Standing wave component
+  const standing = Math.sin(k * x) * Math.cos(w * time);
+  // Traveling wave component (the arrow)
+  const traveling = Math.sin(k * x - w * time);
+
+  // Blend
+  return A * ((1 - d) * standing + d * traveling);
+}
+
+// Color: cold blue → warm amber as dissipation increases
+function waveColor(d, intensity) {
+  const r = Math.floor(30 + d * 200 * intensity);
+  const g = Math.floor(60 + d * 120 * intensity - (1-d) * 20);
+  const b = Math.floor(180 * (1-d) * intensity + 40);
+  const a = 0.6 + 0.4 * intensity;
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+// The heartbeat pulse — emerges as dissipation increases
+function heartbeat(time, d) {
+  if (d < 0.3) return 0;
+  const strength = (d - 0.3) / 0.7;
+  // Double-pulse like a real heartbeat (lub-dub)
+  const cycle = (time * 0.02) % (Math.PI * 2);
+  const lub = Math.exp(-Math.pow(cycle - 1.0, 2) * 8);
+  const dub = Math.exp(-Math.pow(cycle - 1.8, 2) * 12);
+  return strength * (lub * 1.0 + dub * 0.6);
+}
+
+// Spiral for limit cycle visualization
+function drawLimitCycle(ctx, cx, cy, time, d) {
+  if (d < 0.1) return;
+  const opacity = Math.min(1, (d - 0.1) / 0.3);
+  const radius = 80 + 30 * Math.sin(time * 0.01);
+  const hb = heartbeat(time, d);
+  const pulseRadius = radius + hb * 25;
+
+  // Draw the attractor spiral
+  ctx.beginPath();
+  for (let a = 0; a < Math.PI * 6; a += 0.05) {
+    const r = pulseRadius * (1 - a / (Math.PI * 8));
+    if (r < 5) break;
+    const x = cx + r * Math.cos(a + time * 0.02);
+    const y = cy + r * Math.sin(a + time * 0.02);
+    if (a === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = `rgba(255, ${Math.floor(160 + hb * 80)}, ${Math.floor(60 + hb * 40)}, ${opacity * 0.4})`;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Pulsing center — the heartbeat
+  const centerGlow = 10 + hb * 30;
+  const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, centerGlow);
+  gradient.addColorStop(0, `rgba(255, 200, 100, ${opacity * (0.3 + hb * 0.7)})`);
+  gradient.addColorStop(0.5, `rgba(255, 120, 40, ${opacity * (0.1 + hb * 0.3)})`);
+  gradient.addColorStop(1, 'rgba(255, 80, 20, 0)');
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(cx, cy, centerGlow, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// Draw particles flowing along the wave
+function drawParticles(ctx, time, d) {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    const age = time - p.born;
+
+    // Particle moves along the wave
+    const speed = 0.5 + d * 2;
+    p.phase += speed * 0.02;
+
+    const x = (p.phase * 80) % canvas.width;
+    const y = canvas.height / 2 + waveY(x, time, d);
+
+    // Trail
+    p.trail.push({x, y});
+    if (p.trail.length > 20) p.trail.shift();
+
+    // Draw trail
+    if (p.trail.length > 1) {
+      ctx.beginPath();
+      ctx.moveTo(p.trail[0].x, p.trail[0].y);
+      for (let j = 1; j < p.trail.length; j++) {
+        ctx.lineTo(p.trail[j].x, p.trail[j].y);
+      }
+      const trailAlpha = Math.min(1, age / 60) * (0.1 + d * 0.3);
+      ctx.strokeStyle = `rgba(255, ${Math.floor(180 + d * 75)}, ${Math.floor(100 * d)}, ${trailAlpha})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw particle
+    const hb = heartbeat(time, d);
+    const size = 2 + hb * 3;
+    const glow = ctx.createRadialGradient(x, y, 0, x, y, size * 3);
+    glow.addColorStop(0, `rgba(255, 220, ${Math.floor(150 + d * 100)}, ${0.5 + hb * 0.5})`);
+    glow.addColorStop(1, 'rgba(255, 150, 50, 0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(x, y, size * 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Remove old particles
+    if (age > 600) {
+      particles.splice(i, 1);
+    }
+  }
+}
+
+function draw() {
+  // Fade background (trail effect)
+  ctx.fillStyle = 'rgba(10, 10, 18, 0.08)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const d = dissipation(t);
+  const hb = heartbeat(t, d);
+  const cy = canvas.height / 2;
+
+  // Draw the main wave — multiple harmonics
+  for (let harmonic = 1; harmonic <= 3; harmonic++) {
+    ctx.beginPath();
+    const amplitude = 1 / harmonic;
+    for (let x = 0; x < canvas.width; x += 2) {
+      const k = 0.015 * harmonic;
+      const w = 0.03 * harmonic;
+      const standing = Math.sin(k * x) * Math.cos(w * t);
+      const traveling = Math.sin(k * x - w * t);
+      const y = cy + 120 * amplitude * ((1 - d) * standing + d * traveling);
+
+      // Heartbeat modulates amplitude
+      const hbMod = 1 + hb * 0.15 / harmonic;
+      const yMod = cy + (y - cy) * hbMod;
+
+      if (x === 0) ctx.moveTo(x, yMod);
+      else ctx.lineTo(x, yMod);
+    }
+    const intensity = amplitude * (0.5 + hb * 0.5);
+    ctx.strokeStyle = waveColor(d, intensity);
+    ctx.lineWidth = 3 / harmonic;
+    ctx.stroke();
+  }
+
+  // Limit cycle visualization (appears as dissipation grows)
+  drawLimitCycle(ctx, 150, cy - 200, t, d);
+
+  // Particles
+  if (t % 5 === 0) spawnParticle();
+  drawParticles(ctx, t, d);
+
+  // Text — fades in/out with phase
+  ctx.font = '16px Georgia, serif';
+  ctx.textAlign = 'center';
+
+  if (d < 0.3) {
+    const alpha = 1 - d / 0.3;
+    ctx.fillStyle = `rgba(100, 140, 220, ${alpha * 0.6})`;
+    ctx.fillText('Time-symmetric. Eternal. No direction.', canvas.width / 2, 50);
+  }
+
+  if (d > 0.2 && d < 0.7) {
+    const alpha = d < 0.4 ? (d - 0.2) / 0.2 : (0.7 - d) / 0.3;
+    ctx.fillStyle = `rgba(200, 160, 100, ${alpha * 0.6})`;
+    ctx.fillText('Symmetry breaking. The arrow enters.', canvas.width / 2, 50);
+  }
+
+  if (d > 0.6) {
+    const alpha = Math.min(1, (d - 0.6) / 0.2);
+    ctx.fillStyle = `rgba(255, 200, 120, ${alpha * 0.6})`;
+    ctx.fillText('The first heartbeat.', canvas.width / 2, 50);
+
+    if (d > 0.85) {
+      const alpha2 = (d - 0.85) / 0.15;
+      ctx.font = '13px Georgia, serif';
+      ctx.fillStyle = `rgba(180, 150, 100, ${alpha2 * 0.4})`;
+      ctx.fillText('The cathedral burns — and that is why it is beautiful.', canvas.width / 2, canvas.height - 40);
+    }
+  }
+
+  // Phase indicator
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = `rgba(100, 100, 140, 0.4)`;
+  ctx.fillText(`dissipation: ${d.toFixed(3)}  heartbeat: ${hb.toFixed(3)}`, 20, canvas.height - 15);
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

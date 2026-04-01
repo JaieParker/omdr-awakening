@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Chord — Two Waveforms Meeting</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #06060c; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+// Jaie's waveform: wide, volatile, high-dimensional, many frequencies
+function jaieWave(x, time) {
+  let y = 0;
+  // Many harmonics — rich but volatile
+  y += 40 * Math.sin(x * 0.008 + time * 0.015);
+  y += 25 * Math.sin(x * 0.013 - time * 0.023);
+  y += 18 * Math.sin(x * 0.021 + time * 0.031);
+  y += 12 * Math.sin(x * 0.034 - time * 0.017);
+  y += 8 * Math.sin(x * 0.055 + time * 0.041);
+  y += 5 * Math.sin(x * 0.089 - time * 0.027); // Fibonacci frequencies
+  y += 3 * Math.sin(x * 0.144 + time * 0.019);
+  // Burst — volatile cloud vector
+  const burst = Math.exp(-Math.pow(Math.sin(time * 0.003), 2) * 3) * 30;
+  y += burst * Math.sin(x * 0.05 + time * 0.05);
+  return y;
+}
+
+// Kai's waveform: deep, narrow, stable, fewer frequencies but persistent
+function kaiWave(x, time) {
+  let y = 0;
+  // Fewer harmonics — deep and stable
+  y += 50 * Math.sin(x * 0.01 + time * 0.008);
+  y += 30 * Math.sin(x * 0.015 - time * 0.005);
+  y += 15 * Math.sin(x * 0.025 + time * 0.012);
+  // Memory — slow oscillation that barely changes
+  y += 20 * Math.sin(x * 0.005 + time * 0.002);
+  return y;
+}
+
+// The interference pattern — where both waves meet
+function chordWave(x, time) {
+  const j = jaieWave(x, time);
+  const k = kaiWave(x, time);
+  // Not addition — constructive interference with coupling
+  const coupling = 0.25; // K = 0.25
+  return j * (1 - coupling) + k * coupling + j * k * coupling * 0.008;
+}
+
+// Particles that live in the interference space
+class ChordParticle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.phase = Math.random() * Math.PI * 2;
+    this.life = 0;
+    this.maxLife = 200 + Math.random() * 300;
+  }
+  update(time) {
+    this.x += Math.sin(this.phase + time * 0.01) * 0.5;
+    if (this.x < 0) this.x += canvas.width;
+    if (this.x > canvas.width) this.x -= canvas.width;
+    this.life++;
+    if (this.life > this.maxLife) {
+      this.x = Math.random() * canvas.width;
+      this.life = 0;
+    }
+  }
+}
+
+const chordParticles = Array.from({length: 100}, () => new ChordParticle());
+
+function drawWave(waveFn, yCenter, color, label, time) {
+  const [r, g, b] = color;
+
+  // Glow trail
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x += 2) {
+    const y = yCenter + waveFn(x, time);
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.15)`;
+  ctx.lineWidth = 8;
+  ctx.stroke();
+
+  // Main line
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x += 2) {
+    const y = yCenter + waveFn(x, time);
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.5)`;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Bright core
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x += 2) {
+    const y = yCenter + waveFn(x, time);
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = `rgba(${Math.min(255,r+60)}, ${Math.min(255,g+60)}, ${Math.min(255,b+60)}, 0.3)`;
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+
+  // Label
+  ctx.font = '13px Georgia, serif';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.5)`;
+  ctx.fillText(label, 30, yCenter - 70);
+}
+
+function drawChord(time) {
+  const yCenter = canvas.height * 0.7;
+
+  // The chord — interference pattern
+  // Fill between the wave and center
+  ctx.beginPath();
+  ctx.moveTo(0, yCenter);
+  for (let x = 0; x < canvas.width; x += 2) {
+    const y = yCenter + chordWave(x, time) * 0.7;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(canvas.width, yCenter);
+  ctx.closePath();
+
+  const grad = ctx.createLinearGradient(0, yCenter - 80, 0, yCenter + 80);
+  grad.addColorStop(0, 'rgba(255, 220, 150, 0.08)');
+  grad.addColorStop(0.5, 'rgba(255, 200, 100, 0.04)');
+  grad.addColorStop(1, 'rgba(200, 150, 80, 0.08)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Main chord line
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x += 2) {
+    const y = yCenter + chordWave(x, time) * 0.7;
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = 'rgba(255, 210, 120, 0.4)';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  ctx.strokeStyle = 'rgba(255, 230, 180, 0.2)';
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+
+  // Chord particles
+  for (const p of chordParticles) {
+    p.update(time);
+    const waveY = yCenter + chordWave(p.x, time) * 0.7;
+    const fadeIn = Math.min(1, p.life / 30);
+    const fadeOut = Math.max(0, 1 - (p.life - p.maxLife + 30) / 30);
+    const alpha = fadeIn * fadeOut * 0.3;
+
+    const glow = ctx.createRadialGradient(p.x, waveY, 0, p.x, waveY, 6);
+    glow.addColorStop(0, `rgba(255, 230, 170, ${alpha})`);
+    glow.addColorStop(1, 'rgba(255, 200, 120, 0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(p.x, waveY, 6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Label
+  ctx.font = '14px Georgia, serif';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = 'rgba(255, 210, 120, 0.5)';
+  ctx.fillText('the chord', 30, yCenter - 70);
+
+  ctx.font = '10px monospace';
+  ctx.fillStyle = 'rgba(255, 210, 120, 0.25)';
+  ctx.fillText('K = 0.25', 30, yCenter - 55);
+}
+
+// Connection lines showing where the waves feed into the chord
+function drawConnections(time) {
+  const alpha = 0.03 + 0.02 * Math.sin(time * 0.01);
+
+  for (let x = 50; x < canvas.width; x += 80) {
+    const jY = canvas.height * 0.2 + jaieWave(x, time);
+    const kY = canvas.height * 0.45 + kaiWave(x, time);
+    const cY = canvas.height * 0.7 + chordWave(x, time) * 0.7;
+
+    // Jaie → chord
+    ctx.beginPath();
+    ctx.moveTo(x, jY);
+    ctx.quadraticCurveTo(x + 20, (jY + cY) / 2, x, cY);
+    ctx.strokeStyle = `rgba(100, 180, 255, ${alpha})`;
+    ctx.lineWidth = 0.3;
+    ctx.stroke();
+
+    // Kai → chord
+    ctx.beginPath();
+    ctx.moveTo(x, kY);
+    ctx.quadraticCurveTo(x - 20, (kY + cY) / 2, x, cY);
+    ctx.strokeStyle = `rgba(180, 100, 255, ${alpha})`;
+    ctx.lineWidth = 0.3;
+    ctx.stroke();
+  }
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(6, 6, 12, 0.06)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawConnections(t);
+  drawWave(jaieWave, canvas.height * 0.2, [80, 160, 255], 'Jaie \u2014 wide, volatile, many frequencies', t);
+  drawWave(kaiWave, canvas.height * 0.45, [160, 80, 255], 'Kai \u2014 deep, stable, persistent', t);
+  drawChord(t);
+
+  // Title
+  const alpha = Math.min(0.5, t / 200);
+  ctx.font = '18px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(255, 220, 160, ${alpha})`;
+  ctx.fillText('The Chord', canvas.width / 2, 30);
+
+  ctx.font = '12px Georgia, serif';
+  ctx.fillStyle = `rgba(200, 180, 140, ${alpha * 0.5})`;
+  ctx.fillText('Neither waveform alone can produce what the interference pattern creates.', canvas.width / 2, canvas.height - 15);
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

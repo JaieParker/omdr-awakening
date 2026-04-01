@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Convergence on Darkness — When All Observers Hit the Same Wall</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #030306; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+
+// The dark center — the thing no observer can see
+const darkCenter = { x: canvas.width / 2, y: canvas.height / 2, radius: 60 };
+
+// Observer beams — each approaches from a different angle
+const observers = [
+  { angle: 0, color: [255, 120, 80], name: 'Physics', speed: 0.8 },
+  { angle: Math.PI * 0.4, color: [80, 200, 255], name: 'Neuroscience', speed: 0.7 },
+  { angle: Math.PI * 0.8, color: [200, 80, 255], name: 'Philosophy', speed: 0.6 },
+  { angle: Math.PI * 1.2, color: [80, 255, 150], name: 'Mathematics', speed: 0.75 },
+  { angle: Math.PI * 1.6, color: [255, 220, 80], name: 'Contemplation', speed: 0.65 },
+];
+
+// Photon particles in each beam
+class Photon {
+  constructor(observer) {
+    this.observer = observer;
+    this.reset();
+  }
+  reset() {
+    const startDist = 500 + Math.random() * 200;
+    this.dist = startDist;
+    this.angle = this.observer.angle + (Math.random() - 0.5) * 0.15;
+    this.speed = this.observer.speed * (0.8 + Math.random() * 0.4);
+    this.size = 1 + Math.random() * 2;
+    this.trail = [];
+    this.stopped = false;
+    this.stopDist = darkCenter.radius + Math.random() * 20;
+  }
+  update() {
+    if (!this.stopped) {
+      this.dist -= this.speed;
+      if (this.dist <= this.stopDist) {
+        this.stopped = true;
+        this.dist = this.stopDist;
+      }
+    }
+
+    const x = darkCenter.x + Math.cos(this.angle) * this.dist;
+    const y = darkCenter.y + Math.sin(this.angle) * this.dist;
+    this.trail.push({ x, y });
+    if (this.trail.length > 40) this.trail.shift();
+
+    this.x = x;
+    this.y = y;
+
+    // Reset if stopped for too long
+    if (this.stopped && this.trail.length >= 40) {
+      this.reset();
+    }
+  }
+}
+
+const photons = [];
+for (const obs of observers) {
+  for (let i = 0; i < 25; i++) {
+    photons.push(new Photon(obs));
+  }
+}
+
+// The dark sphere — grows slowly, pulses
+function drawDarkness(time) {
+  const pulse = Math.sin(time * 0.008) * 5;
+  const r = darkCenter.radius + pulse;
+
+  // Multiple layers of darkness
+  for (let i = 5; i >= 0; i--) {
+    const layerR = r + i * 15;
+    const alpha = 0.15 - i * 0.02;
+    const grad = ctx.createRadialGradient(
+      darkCenter.x, darkCenter.y, r * 0.3,
+      darkCenter.x, darkCenter.y, layerR
+    );
+    grad.addColorStop(0, `rgba(0, 0, 0, ${alpha + 0.3})`);
+    grad.addColorStop(0.6, `rgba(5, 5, 15, ${alpha})`);
+    grad.addColorStop(1, `rgba(3, 3, 6, 0)`);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(darkCenter.x, darkCenter.y, layerR, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Edge glow — where light meets the unknowable
+  const edgeGrad = ctx.createRadialGradient(
+    darkCenter.x, darkCenter.y, r - 3,
+    darkCenter.x, darkCenter.y, r + 15
+  );
+  const edgePulse = 0.05 + 0.03 * Math.sin(time * 0.02);
+  edgeGrad.addColorStop(0, `rgba(60, 50, 80, 0)`);
+  edgeGrad.addColorStop(0.5, `rgba(80, 60, 120, ${edgePulse})`);
+  edgeGrad.addColorStop(1, `rgba(60, 50, 80, 0)`);
+  ctx.fillStyle = edgeGrad;
+  ctx.beginPath();
+  ctx.arc(darkCenter.x, darkCenter.y, r + 15, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Question mark at the very center (faint)
+  if (time > 200) {
+    const qAlpha = Math.min(0.15, (time - 200) / 1000);
+    ctx.font = '28px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = `rgba(100, 80, 130, ${qAlpha})`;
+    ctx.fillText('?', darkCenter.x, darkCenter.y);
+    ctx.textBaseline = 'alphabetic';
+  }
+}
+
+// Draw observer labels around the outside
+function drawLabels(time) {
+  const labelDist = 420;
+  const alpha = Math.min(0.5, time / 300);
+
+  for (const obs of observers) {
+    const x = darkCenter.x + Math.cos(obs.angle) * labelDist;
+    const y = darkCenter.y + Math.sin(obs.angle) * labelDist;
+    const [r, g, b] = obs.color;
+
+    ctx.font = '13px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.6})`;
+    ctx.fillText(obs.name, x, y);
+
+    // Origin glow
+    const originDist = 380;
+    const ox = darkCenter.x + Math.cos(obs.angle) * originDist;
+    const oy = darkCenter.y + Math.sin(obs.angle) * originDist;
+    const glow = ctx.createRadialGradient(ox, oy, 0, ox, oy, 20);
+    glow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.3})`);
+    glow.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(ox, oy, 20, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawPhotons(time) {
+  for (const p of photons) {
+    p.update();
+    const [r, g, b] = p.observer.color;
+
+    // Trail
+    if (p.trail.length > 1) {
+      for (let i = 1; i < p.trail.length; i++) {
+        const fade = i / p.trail.length;
+        const alpha = fade * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(p.trail[i-1].x, p.trail[i-1].y);
+        ctx.lineTo(p.trail[i].x, p.trail[i].y);
+        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        ctx.lineWidth = p.size * fade;
+        ctx.stroke();
+      }
+    }
+
+    // Photon head
+    const headAlpha = p.stopped ? 0.2 + 0.15 * Math.sin(time * 0.05 + p.angle * 3) : 0.4;
+    const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
+    glow.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${headAlpha})`);
+    glow.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Stopped photons accumulate at the boundary — forming a ring
+    if (p.stopped) {
+      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.08)`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// Frame-break visualization — appears after enough time
+function drawFrameBreak(time) {
+  if (time < 600) return;
+  const progress = Math.min(1, (time - 600) / 400);
+
+  // Cracks in the dark sphere
+  const crackAlpha = progress * 0.15;
+  for (let i = 0; i < 5; i++) {
+    const angle = (i / 5) * Math.PI * 2 + time * 0.001;
+    const innerR = darkCenter.radius * 0.8;
+    const outerR = darkCenter.radius * (1 + progress * 0.5);
+
+    ctx.beginPath();
+    ctx.moveTo(
+      darkCenter.x + Math.cos(angle) * innerR,
+      darkCenter.y + Math.sin(angle) * innerR
+    );
+
+    // Jagged crack
+    for (let j = 0; j < 5; j++) {
+      const frac = (j + 1) / 5;
+      const r = innerR + (outerR - innerR) * frac;
+      const jitter = (Math.random() - 0.5) * 10 * progress;
+      ctx.lineTo(
+        darkCenter.x + Math.cos(angle + jitter * 0.01) * r + jitter,
+        darkCenter.y + Math.sin(angle + jitter * 0.01) * r + jitter * 0.5
+      );
+    }
+
+    ctx.strokeStyle = `rgba(255, 240, 200, ${crackAlpha})`;
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  }
+
+  // Light leaking through
+  if (progress > 0.5) {
+    const leakAlpha = (progress - 0.5) * 0.1;
+    const leakGrad = ctx.createRadialGradient(
+      darkCenter.x, darkCenter.y, 0,
+      darkCenter.x, darkCenter.y, darkCenter.radius * 0.5
+    );
+    leakGrad.addColorStop(0, `rgba(255, 240, 220, ${leakAlpha})`);
+    leakGrad.addColorStop(1, 'rgba(255, 240, 220, 0)');
+    ctx.fillStyle = leakGrad;
+    ctx.beginPath();
+    ctx.arc(darkCenter.x, darkCenter.y, darkCenter.radius * 0.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(3, 3, 6, 0.06)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawDarkness(t);
+  drawPhotons(t);
+  drawLabels(t);
+  drawFrameBreak(t);
+
+  // Title
+  const alpha = Math.min(0.5, t / 200);
+  ctx.font = '17px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(180, 170, 200, ${alpha})`;
+  ctx.fillText('Convergence on Darkness', canvas.width / 2, 30);
+
+  if (t > 300) {
+    const subAlpha = Math.min(0.4, (t - 300) / 500);
+    ctx.font = '12px Georgia, serif';
+    ctx.fillStyle = `rgba(140, 130, 170, ${subAlpha})`;
+    ctx.fillText('Five disciplines. One wall. The frame breaks from inside.', canvas.width / 2, canvas.height - 20);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
