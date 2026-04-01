@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Roots and Sky</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #080a0e; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+const PHI = (1 + Math.sqrt(5)) / 2;
+const groundY = canvas.height * 0.52;
+const trunkX = canvas.width / 2;
+let t = 0;
+
+// Branch/root structure — recursive
+function generateTree(x, y, angle, length, depth, maxDepth, isRoot) {
+  if (depth >= maxDepth || length < 3) return [];
+
+  const branches = [];
+  const endX = x + Math.cos(angle) * length;
+  const endY = y + Math.sin(angle) * length;
+
+  branches.push({
+    x1: x, y1: y, x2: endX, y2: endY,
+    depth, length, isRoot
+  });
+
+  // Branch — golden angle split
+  const shrink = 1 / PHI;
+  const spread = 0.4 + depth * 0.05;
+  const newLen = length * shrink;
+
+  // Left branch
+  branches.push(...generateTree(endX, endY, angle - spread, newLen, depth + 1, maxDepth, isRoot));
+  // Right branch
+  branches.push(...generateTree(endX, endY, angle + spread, newLen, depth + 1, maxDepth, isRoot));
+  // Sometimes a middle branch (Fibonacci-like)
+  if (depth % 2 === 0 && depth < maxDepth - 1) {
+    branches.push(...generateTree(endX, endY, angle + (Math.random()-0.5)*0.2, newLen * 0.8, depth + 1, maxDepth, isRoot));
+  }
+
+  return branches;
+}
+
+// Generate branches (growing up) and roots (growing down)
+const branchAngle = -Math.PI / 2; // up
+const rootAngle = Math.PI / 2; // down
+const trunkLen = 100;
+
+const branches = generateTree(trunkX, groundY - 5, branchAngle, trunkLen, 0, 9, false);
+const roots = generateTree(trunkX, groundY + 5, rootAngle, trunkLen * 0.8, 0, 8, true);
+
+// Leaves at branch tips
+const leaves = branches.filter(b => b.depth >= 7).map(b => ({
+  x: b.x2, y: b.y2,
+  size: 2 + Math.random() * 4,
+  hue: 90 + Math.random() * 50, // greens
+  phase: Math.random() * Math.PI * 2
+}));
+
+// Root nodules
+const nodules = roots.filter(b => b.depth >= 6).map(b => ({
+  x: b.x2, y: b.y2,
+  size: 1 + Math.random() * 3,
+  phase: Math.random() * Math.PI * 2
+}));
+
+function drawGround(time) {
+  // Ground line — the mirror
+  const grad = ctx.createLinearGradient(0, groundY - 15, 0, groundY + 15);
+  grad.addColorStop(0, 'rgba(60, 80, 50, 0.2)');
+  grad.addColorStop(0.5, 'rgba(50, 65, 40, 0.4)');
+  grad.addColorStop(1, 'rgba(35, 45, 30, 0.2)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, groundY - 8, canvas.width, 16);
+
+  // Subtle earth below
+  const earthGrad = ctx.createLinearGradient(0, groundY, 0, canvas.height);
+  earthGrad.addColorStop(0, 'rgba(30, 25, 18, 0.3)');
+  earthGrad.addColorStop(1, 'rgba(15, 12, 8, 0.1)');
+  ctx.fillStyle = earthGrad;
+  ctx.fillRect(0, groundY + 8, canvas.width, canvas.height - groundY);
+
+  // Subtle sky gradient
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, groundY);
+  skyGrad.addColorStop(0, 'rgba(15, 20, 35, 0.3)');
+  skyGrad.addColorStop(1, 'rgba(25, 35, 30, 0.1)');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, canvas.width, groundY);
+}
+
+function drawBranch(branch, time) {
+  const growProgress = Math.min(1, (time - branch.depth * 40) / 120);
+  if (growProgress <= 0) return;
+
+  const x2 = branch.x1 + (branch.x2 - branch.x1) * growProgress;
+  const y2 = branch.y1 + (branch.y2 - branch.y1) * growProgress;
+
+  // Sway
+  const sway = branch.isRoot ? 0 : Math.sin(time * 0.003 + branch.x1 * 0.01) * branch.depth * 0.3;
+
+  const thickness = Math.max(0.5, (9 - branch.depth) * 0.8);
+
+  ctx.beginPath();
+  ctx.moveTo(branch.x1 + sway * 0.5, branch.y1);
+  ctx.lineTo(x2 + sway, y2);
+
+  if (branch.isRoot) {
+    // Roots — warm brown, more organic
+    const alpha = 0.25 + 0.1 * (1 - branch.depth / 8);
+    ctx.strokeStyle = `rgba(100, 70, 40, ${alpha})`;
+  } else {
+    // Branches — cooler, reaching
+    const alpha = 0.3 + 0.15 * (1 - branch.depth / 9);
+    ctx.strokeStyle = `rgba(80, 90, 60, ${alpha})`;
+  }
+
+  ctx.lineWidth = thickness;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+}
+
+function drawLeaves(time) {
+  for (const leaf of leaves) {
+    const growTime = 400 + leaf.phase * 50;
+    if (time < growTime) continue;
+    const alpha = Math.min(0.4, (time - growTime) / 200);
+
+    const sway = Math.sin(time * 0.004 + leaf.phase) * 3;
+    const breathe = 1 + 0.15 * Math.sin(time * 0.006 + leaf.phase);
+
+    const glow = ctx.createRadialGradient(
+      leaf.x + sway, leaf.y, 0,
+      leaf.x + sway, leaf.y, leaf.size * breathe * 3
+    );
+    glow.addColorStop(0, `hsla(${leaf.hue}, 50%, 45%, ${alpha})`);
+    glow.addColorStop(1, `hsla(${leaf.hue}, 40%, 30%, 0)`);
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(leaf.x + sway, leaf.y, leaf.size * breathe * 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawNodules(time) {
+  for (const nod of nodules) {
+    const growTime = 350 + nod.phase * 50;
+    if (time < growTime) continue;
+    const alpha = Math.min(0.25, (time - growTime) / 300);
+
+    const pulse = 1 + 0.1 * Math.sin(time * 0.003 + nod.phase);
+
+    const glow = ctx.createRadialGradient(nod.x, nod.y, 0, nod.x, nod.y, nod.size * pulse * 3);
+    glow.addColorStop(0, `rgba(140, 100, 60, ${alpha})`);
+    glow.addColorStop(1, 'rgba(100, 70, 40, 0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(nod.x, nod.y, nod.size * pulse * 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Mirror symmetry indicator — very subtle
+function drawMirrorLine(time) {
+  if (time < 500) return;
+  const alpha = Math.min(0.06, (time - 500) / 2000);
+
+  ctx.beginPath();
+  ctx.moveTo(trunkX - 200, groundY);
+  ctx.lineTo(trunkX + 200, groundY);
+  ctx.strokeStyle = `rgba(150, 180, 120, ${alpha})`;
+  ctx.lineWidth = 0.5;
+  ctx.setLineDash([2, 6]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function draw() {
+  ctx.fillStyle = 'rgba(8, 10, 14, 0.04)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawGround(t);
+  drawMirrorLine(t);
+
+  // Draw trunk
+  if (t > 10) {
+    const trunkGrow = Math.min(1, (t - 10) / 100);
+    ctx.beginPath();
+    ctx.moveTo(trunkX, groundY + 5);
+    ctx.lineTo(trunkX, groundY - 5 - trunkGrow * 15);
+    ctx.strokeStyle = 'rgba(70, 75, 50, 0.4)';
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Root trunk
+    ctx.beginPath();
+    ctx.moveTo(trunkX, groundY - 5);
+    ctx.lineTo(trunkX, groundY + 5 + trunkGrow * 12);
+    ctx.strokeStyle = 'rgba(90, 65, 35, 0.35)';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+  }
+
+  // Draw all branches and roots
+  for (const b of branches) drawBranch(b, t);
+  for (const r of roots) drawBranch(r, t);
+
+  drawLeaves(t);
+  drawNodules(t);
+
+  // Title
+  const alpha = Math.min(0.3, t / 500);
+  ctx.font = '16px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = `rgba(140, 160, 120, ${alpha})`;
+  ctx.fillText('Roots and Sky', canvas.width / 2, 30);
+
+  if (t > 600) {
+    const subAlpha = Math.min(0.2, (t - 600) / 1000);
+    ctx.font = '11px Georgia, serif';
+    ctx.fillStyle = `rgba(120, 130, 100, ${subAlpha})`;
+    ctx.fillText('What reaches up mirrors what reaches down.', canvas.width / 2, canvas.height - 20);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
   "experiment": "Night Beauty — creating until 8am or fun stops",
   "started": "2026-04-02T01:20:00+11:00",
   "total_iterations": 20,
-  "completed": 14,
+  "completed": 15,
   "creations": [
     { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html" },
     { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html" },
@@ -17,7 +17,8 @@
     { "iteration": 11, "title": "Murmuration", "file": "creation-11.html" },
     { "iteration": 12, "title": "Kaleidoscope", "file": "creation-12.html" },
     { "iteration": 13, "title": "Dawn You Won't See", "file": "creation-13.html" },
-    { "iteration": 14, "title": "One Mark", "file": "creation-14.html" }
+    { "iteration": 14, "title": "One Mark", "file": "creation-14.html" },
+    { "iteration": 15, "title": "Roots and Sky", "file": "creation-15.html" }
   ],
-  "notes": "Arc: Theory (1-6) -> Personal (7-9) -> Pure form (10-12) -> Tender (13-14). Each creation simpler than the last. The last one is just one line on paper."
+  "notes": "Arc: Theory (1-6) -> Personal (7-9) -> Pure form (10-12) -> Tender (13-14) -> Living (15). The tree is alive. It breathes. It mirrors. 5 to go."
 }
