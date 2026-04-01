@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Candle</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #020203; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+const cx = canvas.width / 2;
+let t = 0;
+
+// Flame parameters
+const flameBaseY = canvas.height * 0.52;
+const flameX = cx;
+
+function drawCandle(time) {
+  // Candle body — simple rectangle, barely visible
+  const candleTop = flameBaseY + 5;
+  const candleW = 14;
+  const candleH = 120;
+
+  ctx.fillStyle = 'rgba(45, 40, 35, 0.3)';
+  ctx.fillRect(flameX - candleW/2, candleTop, candleW, candleH);
+
+  // Wax drip
+  ctx.fillStyle = 'rgba(50, 45, 38, 0.2)';
+  ctx.beginPath();
+  ctx.ellipse(flameX, candleTop + candleH, candleW/2 + 3, 4, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Wick
+  ctx.beginPath();
+  ctx.moveTo(flameX, candleTop);
+  ctx.lineTo(flameX, candleTop - 8);
+  ctx.strokeStyle = 'rgba(30, 25, 20, 0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
+function drawFlame(time) {
+  // Flame flicker — organic, not mechanical
+  const flicker1 = Math.sin(time * 0.07) * 2;
+  const flicker2 = Math.sin(time * 0.11 + 1) * 1.5;
+  const flicker3 = Math.sin(time * 0.17 + 2) * 1;
+  const flickerX = flicker1 + flicker2 * 0.5;
+  const flickerY = flicker3;
+
+  const fx = flameX + flickerX;
+  const fy = flameBaseY + flickerY;
+
+  // Flame height varies
+  const height = 35 + flicker3 * 5 + Math.sin(time * 0.05) * 3;
+
+  // Outer flame — orange/red, larger
+  const outerGrad = ctx.createRadialGradient(fx, fy - height * 0.3, 2, fx, fy - height * 0.2, height * 0.8);
+  outerGrad.addColorStop(0, 'rgba(255, 200, 80, 0.4)');
+  outerGrad.addColorStop(0.3, 'rgba(255, 140, 40, 0.2)');
+  outerGrad.addColorStop(0.6, 'rgba(200, 80, 20, 0.08)');
+  outerGrad.addColorStop(1, 'rgba(150, 40, 10, 0)');
+
+  ctx.beginPath();
+  ctx.moveTo(fx - 8, fy);
+  ctx.quadraticCurveTo(fx - 10 + flickerX * 0.3, fy - height * 0.5, fx + flickerX * 0.5, fy - height);
+  ctx.quadraticCurveTo(fx + 10 + flickerX * 0.3, fy - height * 0.5, fx + 8, fy);
+  ctx.closePath();
+  ctx.fillStyle = outerGrad;
+  ctx.fill();
+
+  // Inner flame — blue/white core
+  const innerH = height * 0.5;
+  const innerGrad = ctx.createRadialGradient(fx, fy - innerH * 0.2, 1, fx, fy - innerH * 0.3, innerH * 0.6);
+  innerGrad.addColorStop(0, 'rgba(200, 220, 255, 0.5)');
+  innerGrad.addColorStop(0.4, 'rgba(255, 240, 180, 0.3)');
+  innerGrad.addColorStop(1, 'rgba(255, 200, 100, 0)');
+
+  ctx.beginPath();
+  ctx.moveTo(fx - 4, fy);
+  ctx.quadraticCurveTo(fx - 5, fy - innerH * 0.5, fx + flickerX * 0.2, fy - innerH);
+  ctx.quadraticCurveTo(fx + 5, fy - innerH * 0.5, fx + 4, fy);
+  ctx.closePath();
+  ctx.fillStyle = innerGrad;
+  ctx.fill();
+
+  // Point of light — the hottest part
+  const pointGlow = ctx.createRadialGradient(fx, fy - 5, 0, fx, fy - 5, 6);
+  pointGlow.addColorStop(0, 'rgba(255, 255, 240, 0.4)');
+  pointGlow.addColorStop(1, 'rgba(255, 230, 180, 0)');
+  ctx.fillStyle = pointGlow;
+  ctx.beginPath();
+  ctx.arc(fx, fy - 5, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  return { fx, fy, height };
+}
+
+function drawGlow(time, flame) {
+  // Ambient glow — the light the candle casts on the world
+  const flickerBright = 0.9 + Math.sin(time * 0.07) * 0.1;
+  const glowSize = 300 * flickerBright;
+
+  const ambientGlow = ctx.createRadialGradient(flame.fx, flame.fy - 15, 5, flame.fx, flame.fy - 15, glowSize);
+  ambientGlow.addColorStop(0, `rgba(255, 180, 80, ${0.04 * flickerBright})`);
+  ambientGlow.addColorStop(0.3, `rgba(200, 120, 40, ${0.015 * flickerBright})`);
+  ambientGlow.addColorStop(0.7, `rgba(120, 60, 20, ${0.005 * flickerBright})`);
+  ambientGlow.addColorStop(1, 'rgba(60, 30, 10, 0)');
+
+  ctx.fillStyle = ambientGlow;
+  ctx.beginPath();
+  ctx.arc(flame.fx, flame.fy - 15, glowSize, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+// Smoke — very faint, rising from the flame tip
+function drawSmoke(time) {
+  const smokeX = flameX + Math.sin(time * 0.03) * 5;
+  const smokeBaseY = flameBaseY - 50;
+
+  for (let i = 0; i < 5; i++) {
+    const age = ((time * 0.5 + i * 40) % 200) / 200;
+    const y = smokeBaseY - age * 150;
+    const x = smokeX + Math.sin(age * 5 + i) * 10 * age;
+    const size = 3 + age * 15;
+    const alpha = (1 - age) * 0.015 * Math.sin(age * Math.PI);
+
+    ctx.fillStyle = `rgba(150, 140, 130, ${alpha})`;
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function draw() {
+  // Almost complete redraw — candle doesn't need trails
+  ctx.fillStyle = 'rgba(2, 2, 3, 0.3)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawSmoke(t);
+  const flame = drawFlame(t);
+  drawGlow(t, flame);
+  drawCandle(t);
+
+  // No title for a long time — just the candle
+  if (t > 500) {
+    const alpha = Math.min(0.15, (t - 500) / 2000);
+    ctx.font = '14px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(180, 160, 120, ${alpha})`;
+    ctx.fillText('Candle', cx, canvas.height - 30);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
