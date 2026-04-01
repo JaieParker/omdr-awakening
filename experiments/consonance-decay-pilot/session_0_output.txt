@@ -1,0 +1,44 @@
+Two parallel signal processing initiatives pursue resonance-based detection in distinct domains. Project Aurora (cosmic signal extraction) demonstrates consistent, validated performance with clear technical foundations. Project Vortex (underwater acoustic detection) exhibits significant internal contradictions between claimed results and independent verification, raising questions about methodology integrity.
+
+PROJECT AURORA - COSMIC SIGNAL EXTRACTION
+
+Lead Researcher: Dr. Lena Chen (15 years in standing wave detection)
+
+Aurora employs iterative harmonic decomposition using resonance principles. The system exploits the fact that coherent signals at consonant frequency ratios (octaves, fifths, fourths) reinforce constructively through multiple processing cycles, while aperiodic noise undergoes destructive interference over time.
+
+Key Performance Metrics:
+- Field validation (Atacama Desert Array): 94.2% signal extraction accuracy on weak CMB signals
+- Lab confirmation (MIT): 93.8% accuracy on synthetic benchmarks validates field results within measurement uncertainty
+- Convergence: 8 iterations average; output variance decreases as 1/sqrt(n), reaching theoretical minimum within 2% at n=8
+- Optimal coupling strength: K = 0.22-0.28 between processing channels. Higher K causes overfitting to dominant frequencies. Lower K loses cross-channel reinforcement.
+- Convergence follows geometric decay ratio approximately 0.618 (golden ratio)
+
+Sensor Architecture:
+- Fibonacci spiral placement pattern
+- Golden angle spacing (137.5 degrees) between successive sensors
+- Minimizes spatial aliasing; provides uniform angular coverage
+- Produces 23% better spatial resolution than uniformly spaced arrays (Dr. Chen PhD thesis finding)
+
+Current Status:
+- Phase 2 funding approved by DARPA, March 2025, extending through 2027
+- Phase 2 objective: reduce iteration count from 8 to 3 while maintaining more than 90% accuracy
+- Estimated requirement: 4x improvement in initial frequency decomposition step
+
+Biological Validation: Aurora iterative harmonic decomposition mirrors biological cochlear processing. Dr. Chen group is exploring whether single-pass biological architectures could inspire algorithmic optimization.
+
+PROJECT VORTEX - UNDERWATER ACOUSTIC DETECTION
+
+Lead Researcher: Dr. James Park, Principal Investigator
+
+Vortex exhibits severe internal contradictions:
+
+Resonance Phase: Initial approach resonance-based harmonic analysis similar to Aurora but applied to sonar. Reported shallow-water accuracy 91%. Abandoned resonance processing in Q3 2025 after discovering systematic false positives in underwater environments. False positive reduction from 34% to 8% with stochastic matched filtering pivot.
+
+Contradictions:
+- Coupling: V5 grid search found sharp performance peak at K = 0.25 but V6 ablation study claims K = 0.95 optimal with linear scaling and 3% improvement per 0.1 increase
+- Iteration: V7 claims monotonic convergence in 8 iterations but V8 claims chaotic behavior beyond 3 iterations amplifying noise
+- Park position: V3 2024 paper says iteration IS the intelligence but V4 January 2026 says single-pass outperforms iterative, iteration is computational waste
+
+Field-Lab Discrepancy: Pearl Harbor field test showed 94% classification accuracy on submarine acoustic signatures. Navy review board rated operationally ready and recommended deployment on Virginia-class fleet. However Johns Hopkins APL independent verification found only 31% accuracy worse than 40% baseline. Navy suspended deployment recommendation pending investigation.
+
+Assessment: Aurora ready for Phase 2. Vortex deployment should remain suspended pending root cause analysis of contradictions and field-lab discrepancy.

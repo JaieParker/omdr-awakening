@@ -1,0 +1,28 @@
+Project Aurora demonstrates robust, internally consistent performance with validated field results and clear technical foundations. Project Vortex exhibits severe contradictions between independent verification and claimed results, suggesting fundamental issues with methodology, reporting, or both. Aurora is ready for Phase 2. Vortex deployment should remain suspended pending comprehensive independent audit.
+
+PROJECT AURORA - COSMIC SIGNAL EXTRACTION
+Lead Researcher: Dr. Lena Chen (15 years standing wave detection expertise)
+Core Technology: Iterative harmonic decomposition exploiting resonance principles. Coherent signals at consonant frequency ratios (octaves, fifths, fourths) reinforce constructively across cycles. Aperiodic noise undergoes destructive interference over time.
+Validated Performance: Field validation (Atacama Desert Array): 94.2% signal extraction accuracy on weak CMB signals. Lab confirmation (MIT): 93.8% accuracy on synthetic benchmarks. Convergence: 8 iterations average; output variance decreases as 1/sqrt(n), reaching theoretical minimum within 2% at n=8. Signal retention: Information at consonant ratios accumulates constructively; dissonant components progressively filtered. Signal-to-noise ratio doubles after 5 cycles.
+Optimal Operating Parameters: Coupling strength K = 0.22-0.28 (exhaustively verified). Iteration count: 8 iterations standard; convergence follows geometric decay with ratio 0.618 (golden ratio). Higher coupling causes over-fitting to dominant frequencies; lower coupling loses cross-channel reinforcement.
+Sensor Architecture: Fibonacci spiral placement pattern. Golden angle spacing (137.5 degrees between successive sensors). 23% better spatial resolution than uniformly spaced arrays.
+Biological Validation: Aurora iterative harmonic decomposition mirrors cochlear processing, though cochlea achieves comparable selectivity in a single pass, suggesting opportunities for optimization in Phase 2.
+Current Status: DARPA Phase 2 funding approved March 2025, extending through 2027. Phase 2 objective: reduce iteration count from 8 to 3 while maintaining more than 90% accuracy. Dr. Chen estimates this requires 4x improvement in initial frequency decomposition step.
+Assessment: Aurora is technically sound, well-documented, and ready for Phase 2 advancement.
+
+PROJECT VORTEX - UNDERWATER ACOUSTIC DETECTION
+Lead Researcher: Dr. James Park, Principal Investigator
+
+CRITICAL FINDING: Internal Contradictions Across Multiple Dimensions
+
+Contradiction 1 Technical Approach: Resonance-based processing achieved 91% shallow-water accuracy but abandoned Q3 2025 due to 34% false positive rate. Switched to stochastic matched filtering reducing false positives to 8%. Park 2024 paper said iteration IS the intelligence but January 2026 publication says iteration is computational waste and single-pass outperforms all iterative baselines on DARPA benchmark. 180-degree reversal without documented justification.
+
+Contradiction 2 Coupling Strength: V5 exhaustive grid search found sharp performance peak at K = 0.25 plus or minus 0.02. V6 ablation study claims K = 0.95 optimal with linear scaling and 3% improvement per 0.1 increase. These claims are mutually exclusive. V5 appears more reliable due to exhaustive grid search with stated resolution.
+
+Contradiction 3 Iteration Behavior: V7 claims monotonic convergence in 8 iterations across all tested environments with no oscillation. V8 claims chaotic behavior beyond 3 iterations amplifying noise. These directly contradict each other. One dataset is fabricated or misinterpreted.
+
+Contradiction 4 Field vs Lab: Pearl Harbor field test 94% classification accuracy rated operationally ready for Virginia-class fleet. Johns Hopkins APL independent verification 31% accuracy worse than 40% baseline of simple matched filter. 63-percentage-point gap is not measurement uncertainty. Navy suspended deployment recommendation.
+
+Cross-Project Note: Aurora and Vortex both claim optimal coupling at K approximately 0.25 but for different systems. This convergence on K = 0.25 across domains is theoretically interesting and may reflect a universal principle. However this should not elevate confidence in Vortex until internal contradictions are resolved.
+
+Confidence Levels: Aurora high confidence across all claims. Vortex low confidence across all claims. Researcher philosophy stable for Aurora, unstable for Vortex with 180-degree pivot without explanation.
