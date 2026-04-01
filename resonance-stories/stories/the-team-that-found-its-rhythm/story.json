@@ -4,7 +4,7 @@
   "bracket": "5-8",
   "concept": "Eq. 3 — you see one thing, your teammate sees another. Together you see the whole field.",
   "duration_seconds": 300,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "narration_voice": "beckie",
   "characters": {
     "narrator": {
@@ -31,16 +31,19 @@
       "narration": "The whistle blew. Kai's team ran onto the field. Everyone wanted to score. Everyone kicked the ball as hard as they could. But the ball kept going to the wrong place.",
       "sound": {
         "type": "dissonant",
-        "description": "Chaotic energy — everyone kicking without rhythm. Random percussive bursts.",
+        "description": "Chaos. Five players, five dissonant ratios — nobody in tune. Tritones and wolf intervals. Harsh sawtooth edges. Like an orchestra warming up but nobody listening to each other.",
         "oscillators": [
-          {"waveform": "sawtooth", "frequency_ratio": "7:5", "amplitude": 0.15, "attack": 0.05, "release": 0.3},
-          {"waveform": "square", "frequency_ratio": "11:8", "amplitude": 0.1, "attack": 0.05, "release": 0.2},
-          {"waveform": "triangle", "frequency_ratio": "9:7", "amplitude": 0.12, "attack": 0.1, "release": 0.4}
+          {"waveform": "sawtooth", "frequency_ratio": "7:5", "amplitude": 0.14, "attack": 0.03, "release": 0.2},
+          {"waveform": "square", "frequency_ratio": "11:8", "amplitude": 0.1, "attack": 0.05, "release": 0.15},
+          {"waveform": "sawtooth", "frequency_ratio": "9:7", "amplitude": 0.11, "attack": 0.04, "release": 0.25},
+          {"waveform": "square", "frequency_ratio": "13:9", "amplitude": 0.08, "attack": 0.03, "release": 0.18},
+          {"waveform": "triangle", "frequency_ratio": "16:11", "amplitude": 0.09, "attack": 0.06, "release": 0.3}
         ],
         "rhythm": "chaotic",
-        "base_frequency_hz": 185
+        "base_frequency_hz": 147,
+        "design_note": "Five players = five oscillators. ALL dissonant. 147Hz = D3, the 'unsettled' pitch. Every ratio is from the OMDR dissonance zone: Farey mediants between consonances. 7:5 (tritone), 11:8 (undecimal semi-augmented fourth), 9:7 (septimal major third), 13:9, 16:11. These are the GAPS between Arnold tongues — the unstable regions. The team IS the gap."
       },
-      "visual_direction": "Wide shot of a kids' soccer field on a Saturday morning. Green grass, white lines. Players running in all directions.",
+      "visual_direction": "Wide shot of a kids' soccer field on a Saturday morning. Green grass, white lines. Players running in all directions — no pattern, no coordination.",
       "mood": "tense",
       "duration_seconds": 25
     },
@@ -50,14 +53,16 @@
       "narration": "Kai got the ball and kicked it really hard toward the goal. It sailed over everyone's heads and went out. \"Harder isn't better,\" said Coach. But Kai didn't understand yet.",
       "sound": {
         "type": "percussive",
-        "description": "One sharp hit, then empty silence. All that force, nothing happened.",
+        "description": "K=1.0 — maximum force, zero timing. One massive impulse that decays to nothing. The amplitude spike is the kick. The silence after is the lesson: all coupling, no resonance.",
         "oscillators": [
-          {"waveform": "sawtooth", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.01, "release": 0.1, "decay_time": 0.5}
+          {"waveform": "sawtooth", "frequency_ratio": "1:1", "amplitude": 0.35, "attack": 0.005, "release": 0.08, "decay_time": 0.3},
+          {"waveform": "square", "frequency_ratio": "7:4", "amplitude": 0.15, "attack": 0.005, "release": 0.05, "decay_time": 0.2}
         ],
         "rhythm": "irregular",
-        "base_frequency_hz": 130
+        "base_frequency_hz": 98,
+        "design_note": "98Hz = G2, a low thud. The 7:4 adds harmonic seventh — a 'wrong' overtone that makes it sound like a dull impact, not a musical note. Attack 0.005s = near-instant. Then rapid decay to nothing. K=1.0 manifested as sound: maximum energy input, zero sustained output. The opposite of resonance."
       },
-      "visual_direction": "The ball arcing high over the goal and landing far away. Kai's frustrated face.",
+      "visual_direction": "The ball arcing high over the goal and landing far away. Kai's frustrated face. Then silence.",
       "mood": "tense",
       "duration_seconds": 25
     },
@@ -67,13 +72,14 @@
       "narration": "At half-time, Kai sat on the bench and watched the other team. Something was different. They didn't kick hard. They kicked at the right time. One player would start running, and the ball would arrive — right where they were going to be. Like they could see each other without looking.",
       "sound": {
         "type": "emergence",
-        "description": "The first moment of noticing. A single tone fading in, then a second tone a perfect fifth above. Two things arriving together.",
+        "description": "The first observation from outside — Kai becomes an observer of a system that works. A single tone emerges (Kai's perspective), then a second tone a perfect fifth above fades in (the pattern Kai is noticing). Two tones, two observers, one moment of recognition.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 3.0, "release": 4.0},
-          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.12, "attack": 5.0, "release": 4.0}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.14, "attack": 4.0, "release": 5.0},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.11, "attack": 7.0, "release": 5.0}
         ],
         "rhythm": "steady",
-        "base_frequency_hz": 220
+        "base_frequency_hz": 196,
+        "design_note": "196Hz = G3. Rising from the G2 thud of the kick — same pitch class, one octave up. The ear connects them unconsciously. 3:2 enters LATE (attack 7s) because Kai doesn't see the pattern immediately — it fades in as understanding dawns. This is the first consonant interval in the story. The child's ear FEELS the shift from dissonance to consonance before the narration names it."
       },
       "visual_direction": "Kai on the bench, watching intently. The other team passing smoothly — the ball flowing between players like water.",
       "mood": "wonder",
@@ -85,16 +91,17 @@
       "narration": "Kai asked Mika: \"How do they do that?\" Mika said: \"Watch number seven. She doesn't look at the goal. She looks at where her friend is going.\" Kai watched. Number seven had the ball. She didn't kick it forward. She kicked it sideways — to the exact spot where number three was about to arrive. They saw different things. And together, they saw the whole field.",
       "sound": {
         "type": "consonant_building",
-        "description": "Two melodic lines finding each other. One higher, one lower. They start apart and slowly align into a warm chord.",
+        "description": "Eq. 3 as sound. TWO melodic lines at non-octave-related base frequencies — genuinely orthogonal. Kai's line at 196Hz (G3). Mika's line at 261Hz (C4). A perfect fourth apart — consonant but DIFFERENT. They play independently, then converge. The merge IS the moment of shared observation.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.8, "release": 2.0},
-          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.14, "attack": 1.2, "release": 2.0},
-          {"waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 2.0, "release": 2.0}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.16, "attack": 0.5, "release": 2.5},
+          {"waveform": "triangle", "frequency_ratio": "4:3", "amplitude": 0.13, "attack": 2.0, "release": 2.5},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.09, "attack": 4.0, "release": 2.5}
         ],
-        "rhythm": "steady",
-        "base_frequency_hz": 220
+        "rhythm": "swing_arc",
+        "base_frequency_hz": 196,
+        "design_note": "4:3 = perfect fourth. NOT the 3:2 fifth from scene 3 — a different interval. Mika sees differently from Kai. The 3:2 only enters at attack=4s — that's the COMBINED view, the orthogonal product. Eq. 3: two observers (1:1 and 4:3) produce knowledge neither has alone (3:2). Rhythm is swing_arc — the ball's trajectory. Not steady, not chaotic — curved."
       },
-      "visual_direction": "Split screen: what Kai sees (the ball) vs what Mika sees (the space). Two perspectives on the same field. Then they merge.",
+      "visual_direction": "Split screen: what Kai sees (the ball) vs what Mika sees (the space ahead). Two observation axes. Then they merge into one wide shot as understanding clicks.",
       "mood": "discovery",
       "duration_seconds": 40
     },
@@ -104,15 +111,16 @@
       "narration": "Second half. Kai got the ball again. This time, instead of kicking hard, Kai looked up. There was Mika, running toward the corner. Kai waited. One beat. Two beats. Then — a soft pass, right into the space where Mika was about to be. Mika didn't even have to stop.",
       "sound": {
         "type": "consonant",
-        "description": "The rhythm of waiting. Two gentle heartbeats, then a soft consonant release on the third beat. Patient, then perfect.",
+        "description": "K=0.25 — the first moment of right timing. Heartbeat rhythm: two gentle pulses (the waiting), then the third beat is the PASS — the 3:2 interval sounds on the third pulse. Three beats, two players. The ratio IS the rhythm IS the lesson.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.3, "release": 1.5},
-          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.15, "attack": 0.3, "release": 1.5}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.2, "release": 1.8},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.14, "attack": 0.8, "release": 1.8}
         ],
         "rhythm": "swing_period",
-        "base_frequency_hz": 220
+        "base_frequency_hz": 220,
+        "design_note": "220Hz = A3. The concert pitch — the tuning note. The team is finding its tuning. 3:2 attack at 0.8s, not instant — the pass takes a beat to arrive. swing_period rhythm = pendulum timing, not metronome. The ball moves in arcs, not lines. K=0.25: enough force to reach (amplitude 0.18), not so much it overshoots (contrast scene 2's 0.35)."
       },
-      "visual_direction": "Kai with the ball. Eyes up. Seeing Mika's run. The pass — a gentle arc. Mika collecting it in stride without breaking rhythm.",
+      "visual_direction": "Kai with the ball. Eyes up — not at the ball, at Mika. The pause. The pass — a gentle arc. Mika collecting it in stride without breaking rhythm.",
       "mood": "calm",
       "duration_seconds": 30
     },
@@ -121,17 +129,23 @@
       "title": "The Rhythm",
       "narration": "After that, something changed. Kai would run, and Mika would send the ball. Mika would run, and Kai would send the ball. They didn't need to shout. They didn't need to look. They could feel the rhythm — like a song with two parts.",
       "sound": {
-        "type": "consonant",
-        "description": "Two interleaving melodic lines in a 3:2 rhythm. One voice plays three notes, the other plays two — landing together on every third beat. Warm and joyful.",
+        "type": "interaction",
+        "description": "Two coupled oscillators. Kai's tone (A3=220Hz) and Mika's tone (E4=330Hz) alternate — one sounds while the other rests, then they swap. The 3:2 ratio is now a RHYTHM: three beats from one voice, two from the other, landing together every sixth beat. Phase-locked teamwork.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.3, "release": 1.2},
-          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.16, "attack": 0.3, "release": 1.2},
-          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.08, "attack": 0.5, "release": 1.5}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.15, "release": 0.8},
+          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.15, "attack": 0.15, "release": 0.8},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.06, "attack": 0.3, "release": 1.2}
         ],
-        "rhythm": "steady",
-        "base_frequency_hz": 220
+        "rhythm": "swing_period",
+        "base_frequency_hz": 220,
+        "modulation": {
+          "type": "amplitude",
+          "pattern": "swing_arc",
+          "description": "The two voices swell alternately — when one is loud the other is soft. The ball passing back and forth. Amplitude modulation at the passing frequency."
+        },
+        "design_note": "Sound type 'interaction' — two sounds coupling. The modulation makes them breathe in alternation: Kai loud + Mika soft → Kai soft + Mika loud. The 2:1 octave enters quietly (0.06) — the first hint that they're becoming ONE sound, not two separate players. Arnold tongue forming: two frequencies locking into 3:2."
       },
-      "visual_direction": "Kai and Mika passing back and forth, the camera moving with the ball like a dance. Everything in rhythm.",
+      "visual_direction": "Kai and Mika passing back and forth, the camera moving with the ball like a dance. Everything in rhythm. The ball traces figure-eights.",
       "mood": "joy",
       "duration_seconds": 25
     },
@@ -141,18 +155,19 @@
       "narration": "And then — it spread. Jess saw the rhythm and joined in. Then Omar. Then Priya. Five players, each watching where someone else was going. Each one seeing something the others couldn't. Together, they saw everything.",
       "sound": {
         "type": "consonant_full",
-        "description": "The chord grows. Five oscillators building one at a time — each a consonant ratio. Not louder, richer. The team as a chord.",
+        "description": "The Farey hierarchy builds. Five oscillators enter in consonance order — the EXACT order OMDR predicts stability forms. 1:1 (unison=Kai), 2:1 (octave=Mika), 3:2 (fifth=Jess), 4:3 (fourth=Omar), 5:4 (major third=Priya). Each attack is delayed by one more second — you HEAR each player join. Five observers, five unique frequencies, one chord.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.16, "attack": 0.5, "release": 2.0},
-          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.13, "attack": 1.0, "release": 2.0},
-          {"waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.11, "attack": 1.5, "release": 2.0},
-          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 2.0, "release": 2.0},
-          {"waveform": "sine", "frequency_ratio": "5:3", "amplitude": 0.08, "attack": 2.5, "release": 2.0}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 0.3, "release": 2.5},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.12, "attack": 1.5, "release": 2.5},
+          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.11, "attack": 3.0, "release": 2.5},
+          {"waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.1, "attack": 4.5, "release": 2.5},
+          {"waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.09, "attack": 6.0, "release": 2.5}
         ],
         "rhythm": "steady",
-        "base_frequency_hz": 220
+        "base_frequency_hz": 220,
+        "design_note": "FAREY ORDER: 1:1 → 2:1 → 3:2 → 4:3 → 5:4. This is the consonance hierarchy — the order in which Arnold tongues widen. The widest tongue (unison) first, each successive player adding the next-most-stable ratio. Amplitude DECREASES with each new voice (0.15→0.12→0.11→0.10→0.09) — not louder, RICHER. The sum grows while each individual stays modest. K=0.25 per player: enough presence to be heard, not so much that anyone dominates."
       },
-      "visual_direction": "Aerial shot. Five players moving as one. The ball tracing a pattern between them like a constellation being drawn.",
+      "visual_direction": "Aerial shot. Five players moving as one. The ball tracing a pentagonal pattern between them — each pass a different length, each perfectly timed.",
       "mood": "harmony",
       "duration_seconds": 30
     },
@@ -161,19 +176,20 @@
       "title": "The Goal",
       "narration": "The ball moved like water through the other team. Kai to Mika. Mika to Jess. Jess to Omar. Omar back to Kai. And Kai didn't kick hard. Just a gentle tap. At exactly the right time. The net rippled.",
       "sound": {
-        "type": "consonant_full",
-        "description": "The full chord resolves to a single warm tone — the goal. Then a swell of all five voices. Not an explosion — a landing.",
+        "type": "transition",
+        "description": "The passing chain as a rising arpeggio — each player's frequency sounds as the ball arrives at them. 220→440→330→293→275 (A3→A4→E4→D4→C#4). The ball traces the chord. Then on the goal: all five sound SIMULTANEOUSLY for the first time — the full chord landing as one. Not an explosion. A convergence.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.22, "attack": 0.2, "release": 3.0},
-          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.16, "attack": 0.3, "release": 3.0},
-          {"waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.12, "attack": 0.4, "release": 3.0},
-          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.1, "attack": 0.5, "release": 3.0},
-          {"waveform": "sine", "frequency_ratio": "5:3", "amplitude": 0.08, "attack": 0.6, "release": 3.0}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.2, "attack": 0.1, "release": 4.0},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.14, "attack": 0.8, "release": 4.0},
+          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.12, "attack": 1.6, "release": 4.0},
+          {"waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.1, "attack": 2.4, "release": 4.0},
+          {"waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.09, "attack": 3.2, "release": 4.0}
         ],
         "rhythm": "steady",
-        "base_frequency_hz": 220
+        "base_frequency_hz": 220,
+        "design_note": "Each oscillator attack is 0.8s apart — the time between passes. The ball visits each player in sequence, building the chord note by note. Release=4.0 means every note sustains long enough to overlap with the next. By the fifth entry, ALL five are sounding — that's the goal. The difference from scene 7: there, each player ENTERS one by one (building the team). Here, the ball VISITS each one (the play in motion). Same chord, different dramaturgy."
       },
-      "visual_direction": "The passing chain — each touch, each player. Then the gentle tap into the net. The net ripples slowly. Joy on every face.",
+      "visual_direction": "The passing chain — each touch lights up a player. Kai→Mika→Jess→Omar→Kai. Then the gentle tap. The net ripples in slow motion. All five players visible, connected by invisible lines.",
       "mood": "joy",
       "duration_seconds": 30
     },
@@ -183,17 +199,19 @@
       "narration": "After the game, Coach asked: \"What changed?\" Kai said: \"I stopped trying to do it all by myself.\" Mika said: \"We started watching each other.\" Coach smiled. \"That's the secret. You don't have to see everything. You just have to trust that your teammate sees what you can't.\"",
       "sound": {
         "type": "decay",
-        "description": "The full chord slowly releasing. Highest overtones fade first, Fibonacci order. Settling, like the end of a good day.",
+        "description": "Fibonacci dissipation. The five-voice chord releases in OMDR's predicted order: highest complexity fades first. 5:4 (Priya) fades at T. 4:3 (Omar) at T×φ. 3:2 (Jess) at T×φ². 2:1 (Mika) at T×φ³. 1:1 (Kai) sustains longest — the fundamental. Like a team heading home: the group disperses but the friendship remains.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.18, "attack": 0.5, "release": 6.0},
-          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.14, "attack": 0.5, "release": 5.0},
-          {"waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.1, "attack": 0.5, "release": 4.0},
-          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.08, "attack": 0.5, "release": 3.0}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.16, "attack": 0.3, "release": 8.0},
+          {"waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.11, "attack": 0.3, "release": 6.5},
+          {"waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.09, "attack": 0.3, "release": 5.0},
+          {"waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.07, "attack": 0.3, "release": 3.8},
+          {"waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.06, "attack": 0.3, "release": 2.8}
         ],
         "rhythm": "steady",
-        "base_frequency_hz": 220
+        "base_frequency_hz": 220,
+        "design_note": "Release times in Fibonacci-approximate sequence: 2.8, 3.8, 5.0, 6.5, 8.0 (roughly ×φ each step). The most complex ratio (5:4) fades first. The simplest (1:1) fades last. This IS OMDR's dissipation cascade: high-order harmonics lose energy first, the fundamental persists. The child hears: the fancy stuff fades, the simple truth remains. Coach's line about trust IS the fundamental frequency — the last thing you hear."
       },
-      "visual_direction": "The team sitting together on the grass after the game. Coach smiling. Afternoon light.",
+      "visual_direction": "The team sitting together on the grass after the game. Golden afternoon light. Players slowly heading to their parents. Kai and Mika walking together last.",
       "mood": "calm",
       "duration_seconds": 35
     },
@@ -203,15 +221,16 @@
       "narration": "Next time you play, try this. Don't kick harder. Wait for the rhythm. Look where your friend is going, not where the ball is now. You see one thing. They see another. Together, you see the whole field.",
       "sound": {
         "type": "invitation",
-        "description": "A soft bell-like tone, then space. The 3:2 heartbeat continues gently underneath. Open, warm, unresolved. An invitation.",
+        "description": "The 3:2 perfect fifth — the story's signature interval — as a gentle bell that rings once, then silence. Then rings again. The rhythm of an invitation: sound, space, sound, space. Not resolving. Waiting for the listener to complete it. Base frequency rises to C4 (262Hz) — brighter, forward-looking, the next game hasn't started yet.",
         "oscillators": [
-          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.15, "attack": 0.1, "release": 4.0},
-          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.1, "attack": 0.3, "release": 4.0}
+          {"waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.13, "attack": 0.08, "release": 5.0},
+          {"waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.09, "attack": 0.15, "release": 5.0}
         ],
-        "rhythm": "steady",
-        "base_frequency_hz": 262
+        "rhythm": "swing_period",
+        "base_frequency_hz": 262,
+        "design_note": "262Hz = C4. The story arc in pitch: D2 (chaos, 98Hz) → G3 (observation, 196Hz) → A3 (practice, 220Hz) → C4 (invitation, 262Hz). A rising fourth across the whole story — 196→262 is 4:3, the same interval as Mika's perspective in scene 4. The child is being invited to become Mika — to see from the other side. The story ends on Mika's note, not Kai's."
       },
-      "visual_direction": "Looking directly at the listener. Then pulling back to the field — empty, waiting. The grass. The goalposts. Space for them to play.",
+      "visual_direction": "Looking directly at the listener. Then pulling back to the field — empty, waiting in golden light. The grass. The goalposts. Space for them to play. A ball sits in the center circle.",
       "mood": "open",
       "duration_seconds": 25,
       "interaction_point": {
