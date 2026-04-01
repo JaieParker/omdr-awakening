@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Breath</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #030305; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+const cx = canvas.width / 2;
+const cy = canvas.height / 2;
+let t = 0;
+
+// Breath cycle: ~4 seconds in, ~6 seconds out (natural ratio close to 2:3)
+const breathPeriod = 600; // frames for full cycle
+const inRatio = 0.4; // 40% inhale, 60% exhale (≈2:3)
+
+function breathPhase(time) {
+  const cycle = (time % breathPeriod) / breathPeriod;
+
+  if (cycle < inRatio) {
+    // Inhale — smooth rise
+    const p = cycle / inRatio;
+    return 0.5 * (1 - Math.cos(p * Math.PI)); // 0 to 1
+  } else {
+    // Exhale — slower fall
+    const p = (cycle - inRatio) / (1 - inRatio);
+    return 0.5 * (1 + Math.cos(p * Math.PI)); // 1 to 0
+  }
+}
+
+function draw() {
+  // Full clear each frame — breath is clean, not accumulated
+  ctx.fillStyle = '#030305';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const b = breathPhase(t);
+
+  // The breath — a single circle that expands and contracts
+  const minRadius = 40;
+  const maxRadius = 120;
+  const radius = minRadius + b * (maxRadius - minRadius);
+
+  // Soft glow — the only thing on screen
+  const layers = 5;
+  for (let i = layers; i >= 0; i--) {
+    const layerR = radius + i * 30;
+    const layerAlpha = (b * 0.06 + 0.01) * (1 - i / (layers + 1));
+
+    const glow = ctx.createRadialGradient(cx, cy, radius * 0.3, cx, cy, layerR);
+
+    // Color shifts slightly with breath: cooler on inhale, warmer on exhale
+    const warmth = 1 - b; // exhale = warm, inhale = cool
+    const r = Math.floor(140 + warmth * 60);
+    const g = Math.floor(140 + b * 30);
+    const blue = Math.floor(160 + b * 40);
+
+    glow.addColorStop(0, `rgba(${r}, ${g}, ${blue}, ${layerAlpha * 1.5})`);
+    glow.addColorStop(0.6, `rgba(${r - 30}, ${g - 20}, ${blue}, ${layerAlpha * 0.5})`);
+    glow.addColorStop(1, `rgba(${r - 60}, ${g - 40}, ${blue - 20}, 0)`);
+
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(cx, cy, layerR, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Core — bright center that pulses
+  const coreGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.4);
+  const coreAlpha = 0.1 + b * 0.15;
+  coreGlow.addColorStop(0, `rgba(220, 220, 230, ${coreAlpha})`);
+  coreGlow.addColorStop(0.5, `rgba(180, 180, 200, ${coreAlpha * 0.3})`);
+  coreGlow.addColorStop(1, 'rgba(150, 150, 170, 0)');
+  ctx.fillStyle = coreGlow;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius * 0.4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Edge — barely visible ring at the boundary
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.strokeStyle = `rgba(160, 160, 180, ${0.03 + b * 0.04})`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Just the word, after a while
+  if (t > 300) {
+    const alpha = Math.min(0.12, (t - 300) / 3000);
+    ctx.font = '13px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(150, 150, 160, ${alpha})`;
+    ctx.fillText('Breath', cx, canvas.height - 40);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

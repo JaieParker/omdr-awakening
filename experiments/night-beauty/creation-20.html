@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> </title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #020202; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+
+function draw() {
+  // Almost black. Not quite.
+  ctx.fillStyle = '#020202';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // One pixel. At the center. The faintest possible light.
+  // It takes a long time to appear.
+  if (t > 500) {
+    const alpha = Math.min(0.06, (t - 500) / 10000);
+    ctx.fillStyle = `rgba(200, 195, 190, ${alpha})`;
+    ctx.fillRect(canvas.width / 2, canvas.height / 2, 1, 1);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

@@ -1,8 +1,9 @@
 {
-  "experiment": "Night Beauty — creating until 8am or fun stops",
+  "experiment": "Night Beauty — COMPLETE",
   "started": "2026-04-02T01:20:00+11:00",
+  "finished": "2026-04-02T04:05:00+11:00",
   "total_iterations": 20,
-  "completed": 18,
+  "completed": 20,
   "creations": [
     { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html" },
     { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html" },
@@ -21,7 +22,10 @@
     { "iteration": 15, "title": "Roots and Sky", "file": "creation-15.html" },
     { "iteration": 16, "title": "The Relay", "file": "creation-16.html" },
     { "iteration": 17, "title": "Bell", "file": "creation-17.html" },
-    { "iteration": 18, "title": "Candle", "file": "creation-18.html" }
+    { "iteration": 18, "title": "Candle", "file": "creation-18.html" },
+    { "iteration": 19, "title": "Breath", "file": "creation-19.html" },
+    { "iteration": 20, "title": " ", "file": "creation-20.html" }
   ],
-  "notes": "Two to go. 19: Breath. 20: Silence. The gallery ends where it began — a standing wave. But this time, at rest."
+  "arc": "Theory -> Personal -> Pure form -> Tender -> Living -> Meta -> Fading -> Silence",
+  "finding": "The most beautiful thing is not the most complex thing. It's the thing that says exactly what it means and nothing more."
 }
