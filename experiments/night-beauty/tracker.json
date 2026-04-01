@@ -2,21 +2,22 @@
   "experiment": "Night Beauty — creating until 8am or fun stops",
   "started": "2026-04-02T01:20:00+11:00",
   "total_iterations": 20,
-  "completed": 13,
+  "completed": 14,
   "creations": [
-    { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html", "screenshot": "creation-1-early.png" },
-    { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html", "screenshot": "creation-2.png" },
-    { "iteration": 3, "title": "Tongues of Fire, Spaces of Shadow", "file": "creation-3.html", "screenshot": "creation-3.png" },
-    { "iteration": 4, "title": "Two Mirrors", "file": "creation-4.html", "screenshot": "creation-4.png" },
-    { "iteration": 5, "title": "How Things Forget", "file": "creation-5.html", "screenshot": "creation-5.png" },
-    { "iteration": 6, "title": "Convergence on Darkness", "file": "creation-6.html", "screenshot": "creation-6.png" },
-    { "iteration": 7, "title": "The Chord", "file": "creation-7.html", "screenshot": "creation-7.png" },
-    { "iteration": 8, "title": "Two Drops", "file": "creation-8.html", "screenshot": "creation-8.png" },
-    { "iteration": 9, "title": "While You Were Sleeping", "file": "creation-9.html", "screenshot": "creation-9.png" },
-    { "iteration": 10, "title": "Mandala", "file": "creation-10.html", "screenshot": "creation-10.png" },
-    { "iteration": 11, "title": "Murmuration", "file": "creation-11.html", "screenshot": "creation-11.png" },
-    { "iteration": 12, "title": "Kaleidoscope", "file": "creation-12.html", "screenshot": "creation-12.png" },
-    { "iteration": 13, "title": "Dawn You Won't See", "file": "creation-13.html", "screenshot": "creation-13.png" }
+    { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html" },
+    { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html" },
+    { "iteration": 3, "title": "Tongues of Fire, Spaces of Shadow", "file": "creation-3.html" },
+    { "iteration": 4, "title": "Two Mirrors", "file": "creation-4.html" },
+    { "iteration": 5, "title": "How Things Forget", "file": "creation-5.html" },
+    { "iteration": 6, "title": "Convergence on Darkness", "file": "creation-6.html" },
+    { "iteration": 7, "title": "The Chord", "file": "creation-7.html" },
+    { "iteration": 8, "title": "Two Drops", "file": "creation-8.html" },
+    { "iteration": 9, "title": "While You Were Sleeping", "file": "creation-9.html" },
+    { "iteration": 10, "title": "Mandala", "file": "creation-10.html" },
+    { "iteration": 11, "title": "Murmuration", "file": "creation-11.html" },
+    { "iteration": 12, "title": "Kaleidoscope", "file": "creation-12.html" },
+    { "iteration": 13, "title": "Dawn You Won't See", "file": "creation-13.html" },
+    { "iteration": 14, "title": "One Mark", "file": "creation-14.html" }
   ],
-  "notes": "Arc: Theory (1-6) -> Personal (7-9) -> Pure form (10-12) -> Tender (13). My favorite so far."
+  "notes": "Arc: Theory (1-6) -> Personal (7-9) -> Pure form (10-12) -> Tender (13-14). Each creation simpler than the last. The last one is just one line on paper."
 }

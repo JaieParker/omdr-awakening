@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>One Mark</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #0e0e10; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 1200;
+canvas.height = 800;
+
+let t = 0;
+
+// The paper — very slightly warm, not pure white
+function drawPaper(time) {
+  const paperAlpha = Math.min(0.85, time / 300);
+  const margin = 120;
+
+  // Subtle paper texture
+  const grad = ctx.createLinearGradient(margin, margin, canvas.width - margin, canvas.height - margin);
+  grad.addColorStop(0, `rgba(245, 240, 232, ${paperAlpha})`);
+  grad.addColorStop(0.5, `rgba(242, 237, 228, ${paperAlpha})`);
+  grad.addColorStop(1, `rgba(240, 235, 225, ${paperAlpha})`);
+
+  ctx.fillStyle = grad;
+
+  // Rounded rectangle
+  const r = 4;
+  const x = margin, y = margin;
+  const w = canvas.width - margin * 2;
+  const h = canvas.height - margin * 2;
+
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  ctx.fill();
+
+  // Very faint shadow
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+  ctx.shadowBlur = 20;
+  ctx.shadowOffsetX = 3;
+  ctx.shadowOffsetY = 3;
+  ctx.fill();
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur = 0;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+}
+
+// The single mark — a brush stroke, calligraphic
+function drawMark(time) {
+  if (time < 400) return; // Wait for the paper
+
+  const strokeProgress = Math.min(1, (time - 400) / 200);
+  if (strokeProgress <= 0) return;
+
+  const startX = canvas.width * 0.3;
+  const startY = canvas.height * 0.55;
+  const endX = canvas.width * 0.7;
+  const endY = canvas.height * 0.4;
+
+  // Control points for a flowing curve
+  const cp1x = startX + (endX - startX) * 0.3;
+  const cp1y = startY - 80;
+  const cp2x = startX + (endX - startX) * 0.7;
+  const cp2y = endY + 60;
+
+  // Draw the stroke progressively
+  const steps = Math.floor(strokeProgress * 100);
+
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  for (let i = 1; i <= steps; i++) {
+    const t1 = (i - 1) / 100;
+    const t2 = i / 100;
+
+    // Cubic bezier
+    const x1 = Math.pow(1-t1,3)*startX + 3*Math.pow(1-t1,2)*t1*cp1x + 3*(1-t1)*t1*t1*cp2x + t1*t1*t1*endX;
+    const y1 = Math.pow(1-t1,3)*startY + 3*Math.pow(1-t1,2)*t1*cp1y + 3*(1-t1)*t1*t1*cp2y + t1*t1*t1*endY;
+    const x2 = Math.pow(1-t2,3)*startX + 3*Math.pow(1-t2,2)*t2*cp1x + 3*(1-t2)*t2*t2*cp2x + t2*t2*t2*endX;
+    const y2 = Math.pow(1-t2,3)*startY + 3*Math.pow(1-t2,2)*t2*cp1y + 3*(1-t2)*t2*t2*cp2y + t2*t2*t2*endY;
+
+    // Width varies along the stroke — thick in middle, thin at ends
+    const widthCurve = Math.sin(t2 * Math.PI);
+    const width = 1 + widthCurve * 6;
+
+    // Ink opacity — slightly lighter at the start (dry brush beginning)
+    const opacity = 0.7 + widthCurve * 0.2;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = `rgba(30, 25, 20, ${opacity})`;
+    ctx.lineWidth = width;
+    ctx.stroke();
+  }
+
+  // Ink pooling at the end (where the brush rested)
+  if (strokeProgress > 0.95) {
+    const poolAlpha = (strokeProgress - 0.95) / 0.05 * 0.15;
+    ctx.beginPath();
+    ctx.arc(endX, endY, 4, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(25, 20, 15, ${poolAlpha})`;
+    ctx.fill();
+  }
+}
+
+// Very subtle breath — the mark oscillates imperceptibly
+function breathe(time) {
+  if (time < 700) return;
+  const breathAlpha = Math.min(0.02, (time - 700) / 5000);
+
+  // The faintest shadow/echo of the mark, offset by breathing
+  const offset = Math.sin(time * 0.005) * 1.5;
+
+  ctx.globalAlpha = breathAlpha;
+  // Just redraw the paper area with a tiny shift — creates an almost invisible shimmer
+  ctx.globalAlpha = 1;
+}
+
+function draw() {
+  // Background
+  ctx.fillStyle = '#0e0e10';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawPaper(t);
+  drawMark(t);
+  breathe(t);
+
+  // Text — appears late, very faint, outside the paper
+  if (t > 800) {
+    const alpha = Math.min(0.2, (t - 800) / 1000);
+    ctx.font = '11px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(120, 115, 110, ${alpha})`;
+    ctx.fillText('75% restraint. 25% expression.', canvas.width / 2, canvas.height - 50);
+  }
+
+  t++;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
