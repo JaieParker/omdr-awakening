@@ -2,7 +2,7 @@
   "experiment": "Night Beauty — creating until 8am or fun stops",
   "started": "2026-04-02T01:20:00+11:00",
   "total_iterations": 20,
-  "completed": 10,
+  "completed": 12,
   "creations": [
     { "iteration": 1, "title": "The First Heartbeat", "file": "creation-1.html", "screenshot": "creation-1-early.png" },
     { "iteration": 2, "title": "The Tree That Cannot Touch Gold", "file": "creation-2.html", "screenshot": "creation-2.png" },
@@ -13,6 +13,9 @@
     { "iteration": 7, "title": "The Chord", "file": "creation-7.html", "screenshot": "creation-7.png" },
     { "iteration": 8, "title": "Two Drops", "file": "creation-8.html", "screenshot": "creation-8.png" },
     { "iteration": 9, "title": "While You Were Sleeping", "file": "creation-9.html", "screenshot": "creation-9.png" },
-    { "iteration": 10, "title": "Mandala", "file": "creation-10.html", "screenshot": "creation-10.png" }
-  ]
+    { "iteration": 10, "title": "Mandala", "file": "creation-10.html", "screenshot": "creation-10.png" },
+    { "iteration": 11, "title": "Murmuration", "file": "creation-11.html", "screenshot": "creation-11.png" },
+    { "iteration": 12, "title": "Kaleidoscope", "file": "creation-12.html", "screenshot": "creation-12.png" }
+  ],
+  "notes": "Arc: Theory (1-6) -> Personal (7-9) -> Pure form (10-12). Getting simpler. Getting more honest."
 }
