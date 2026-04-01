@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resonance Toy</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a18; overflow: hidden; font-family: 'Georgia', serif; cursor: default; }
+    canvas { display: block; }
+    #info {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: #665544; font-size: 13px; text-align: center; pointer-events: none;
+    }
+    #title {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      color: #ddc8a0; font-size: 24px; text-align: center; pointer-events: none;
+      text-shadow: 0 0 20px rgba(220,200,160,0.3);
+    }
+    #resonance-label {
+      position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
+      font-size: 16px; text-align: center; pointer-events: none;
+      transition: color 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <div id="title">Resonance Toy</div>
+  <div id="resonance-label"></div>
+  <canvas id="c"></canvas>
+  <div id="info">Drag the three notes together. Listen to what happens.</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ── Audio ────────────────────────────────────────────────────────────────
+
+const ac = new (window.AudioContext || window.webkitAudioContext)();
+const master = ac.createGain();
+master.gain.value = 0.25;
+master.connect(ac.destination);
+
+// Reverb
+const conv = ac.createConvolver();
+const rLen = ac.sampleRate * 2;
+const rBuf = ac.createBuffer(2, rLen, ac.sampleRate);
+for (let ch = 0; ch < 2; ch++) {
+  const d = rBuf.getChannelData(ch);
+  for (let i = 0; i < rLen; i++) {
+    d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ac.sampleRate * 0.6));
+  }
+}
+conv.buffer = rBuf;
+const revGain = ac.createGain();
+revGain.gain.value = 0.15;
+conv.connect(revGain);
+revGain.connect(ac.destination);
+
+// ── The Three Notes ──────────────────────────────────────────────────────
+
+const NOTES = [
+  { name: 'Kai',  note: 'E3',  freq: 164.81, color: '#5090ff', x: 0, y: 0, radius: 35 },
+  { name: 'Mika', note: 'G#3', freq: 207.65, color: '#ffa050', x: 0, y: 0, radius: 35 },
+  { name: 'Jess', note: 'B3',  freq: 246.94, color: '#50ff90', x: 0, y: 0, radius: 35 },
+];
+
+// Spread initial positions
+function initPositions() {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const spread = Math.min(canvas.width, canvas.height) * 0.25;
+  NOTES[0].x = cx - spread;      NOTES[0].y = cy - spread * 0.3;
+  NOTES[1].x = cx + spread;      NOTES[1].y = cy - spread * 0.3;
+  NOTES[2].x = cx;               NOTES[2].y = cy + spread * 0.5;
+}
+initPositions();
+
+// Create oscillators + gains for each note
+const oscs = NOTES.map(n => {
+  const osc = ac.createOscillator();
+  const gain = ac.createGain();
+  const panner = ac.createStereoPanner();
+  osc.type = 'sine';
+  osc.frequency.value = n.freq;
+  gain.gain.value = 0;
+  osc.connect(gain);
+  gain.connect(panner);
+  panner.connect(master);
+  gain.connect(conv);
+  osc.start();
+
+  // Add a quiet second harmonic for warmth
+  const osc2 = ac.createOscillator();
+  const gain2 = ac.createGain();
+  osc2.type = 'triangle';
+  osc2.frequency.value = n.freq * 2;
+  gain2.gain.value = 0;
+  osc2.connect(gain2);
+  gain2.connect(panner);
+  osc2.start();
+
+  return { osc, gain, osc2, gain2, panner };
+});
+
+// ── Resonance Computation ────────────────────────────────────────────────
+
+const CONSONANCES = {
+  '1:1': 1.0, '2:1': 0.95, '3:2': 0.88, '4:3': 0.82,
+  '5:4': 0.75, '5:3': 0.70, '6:5': 0.65, '8:5': 0.55
+};
+
+function freqRatio(f1, f2) {
+  const r = Math.max(f1,f2) / Math.min(f1,f2);
+  let best = [1,1], bestC = 999;
+  for (let n = 1; n <= 8; n++)
+    for (let d = 1; d <= n; d++) {
+      if (Math.abs(r - n/d) < 0.04 && n+d < bestC) { bestC = n+d; best = [n,d]; }
+    }
+  return best;
+}
+
+function consonance(f1, f2) {
+  const [n,d] = freqRatio(f1, f2);
+  return CONSONANCES[`${n}:${d}`] || CONSONANCES[`${d}:${n}`] || Math.max(0, 1-(n+d)*0.08);
+}
+
+function totalResonance() {
+  let sum = 0, count = 0;
+  for (let i = 0; i < NOTES.length; i++)
+    for (let j = i+1; j < NOTES.length; j++) {
+      sum += consonance(NOTES[i].freq, NOTES[j].freq);
+      count++;
+    }
+  return sum / count;
+}
+
+function pairDistance(i, j) {
+  const dx = NOTES[i].x - NOTES[j].x;
+  const dy = NOTES[i].y - NOTES[j].y;
+  return Math.sqrt(dx*dx + dy*dy);
+}
+
+function maxDist() { return Math.sqrt(canvas.width*canvas.width + canvas.height*canvas.height) * 0.5; }
+
+function proximityFactor(i, j) {
+  const d = pairDistance(i, j);
+  const m = maxDist();
+  return Math.max(0, 1 - d / m);
+}
+
+// Overall "felt" resonance — frequency consonance × spatial proximity
+function feltResonance() {
+  let sum = 0, count = 0;
+  for (let i = 0; i < NOTES.length; i++)
+    for (let j = i+1; j < NOTES.length; j++) {
+      sum += consonance(NOTES[i].freq, NOTES[j].freq) * proximityFactor(i, j);
+      count++;
+    }
+  return sum / count;
+}
+
+// ── Audio Update ─────────────────────────────────────────────────────────
+
+function updateAudio() {
+  const fr = feltResonance();
+  const t = ac.currentTime;
+
+  for (let i = 0; i < NOTES.length; i++) {
+    // Volume based on proximity to others
+    let proxSum = 0;
+    for (let j = 0; j < NOTES.length; j++) {
+      if (i !== j) proxSum += proximityFactor(i, j);
+    }
+    const vol = 0.03 + proxSum * 0.08 * (0.5 + fr * 0.5);
+    oscs[i].gain.gain.setTargetAtTime(vol, t, 0.1);
+    oscs[i].gain2.gain.setTargetAtTime(vol * 0.3, t, 0.1);
+
+    // Pan based on x position
+    const pan = (NOTES[i].x / canvas.width) * 2 - 1;
+    oscs[i].panner.pan.setTargetAtTime(pan * 0.7, t, 0.1);
+
+    // Slight detuning when far apart (dissonance from isolation)
+    const detune = (1 - proxSum / 2) * 15; // up to 15 cents sharp when alone
+    oscs[i].osc.detune.setTargetAtTime(detune, t, 0.2);
+    oscs[i].osc2.detune.setTargetAtTime(-detune, t, 0.2); // opposite direction = beating
+  }
+}
+
+// ── Drawing ──────────────────────────────────────────────────────────────
+
+function drawResonanceField() {
+  // Background glow based on felt resonance
+  const fr = feltResonance();
+  const r = Math.floor(10 + fr * 15);
+  const g = Math.floor(10 + fr * 20);
+  const b = Math.floor(24 + fr * 30);
+  ctx.fillStyle = `rgb(${r},${g},${b})`;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawConnections() {
+  for (let i = 0; i < NOTES.length; i++) {
+    for (let j = i+1; j < NOTES.length; j++) {
+      const c = consonance(NOTES[i].freq, NOTES[j].freq);
+      const p = proximityFactor(i, j);
+      const strength = c * p;
+      if (strength < 0.05) continue;
+
+      const pulse = 0.6 + 0.4 * Math.sin(Date.now() / (300 + i * 100) + j);
+      const alpha = strength * pulse * 0.6;
+
+      // Resonance line
+      ctx.beginPath();
+      ctx.moveTo(NOTES[i].x, NOTES[i].y);
+      ctx.lineTo(NOTES[j].x, NOTES[j].y);
+      ctx.strokeStyle = `rgba(255,220,180,${alpha})`;
+      ctx.lineWidth = 1 + strength * 4;
+      ctx.stroke();
+
+      // Ratio label at midpoint
+      if (strength > 0.2) {
+        const [n,d] = freqRatio(NOTES[i].freq, NOTES[j].freq);
+        const mx = (NOTES[i].x + NOTES[j].x) / 2;
+        const my = (NOTES[i].y + NOTES[j].y) / 2;
+        ctx.fillStyle = `rgba(220,200,160,${alpha * 0.8})`;
+        ctx.font = '14px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText(`${n}:${d}`, mx, my - 8);
+      }
+    }
+  }
+}
+
+function drawNote(note, index) {
+  const x = note.x, y = note.y;
+  const fr = feltResonance();
+
+  // Glow ring — stronger with resonance
+  const glowR = note.radius + 10 + fr * 20;
+  const pulseR = glowR + 5 * Math.sin(Date.now() / 500 + index * 2);
+  const gradient = ctx.createRadialGradient(x, y, note.radius * 0.5, x, y, pulseR);
+  gradient.addColorStop(0, note.color + 'aa');
+  gradient.addColorStop(0.5, note.color + '33');
+  gradient.addColorStop(1, note.color + '00');
+  ctx.beginPath();
+  ctx.arc(x, y, pulseR, 0, Math.PI * 2);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  // Core circle
+  const coreGrad = ctx.createRadialGradient(x - note.radius*0.3, y - note.radius*0.3, 2, x, y, note.radius);
+  coreGrad.addColorStop(0, '#ffffff');
+  coreGrad.addColorStop(0.3, note.color);
+  coreGrad.addColorStop(1, note.color + '88');
+  ctx.beginPath();
+  ctx.arc(x, y, note.radius, 0, Math.PI * 2);
+  ctx.fillStyle = coreGrad;
+  ctx.fill();
+
+  // Oscillation ring — visible vibration
+  const oscR = note.radius + 3 * Math.sin(Date.now() * note.freq / 20000);
+  ctx.beginPath();
+  ctx.arc(x, y, oscR, 0, Math.PI * 2);
+  ctx.strokeStyle = note.color + '44';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Label
+  ctx.fillStyle = '#ddc8a0';
+  ctx.font = 'bold 16px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText(note.name, x, y + 4);
+  ctx.font = '12px Georgia';
+  ctx.fillStyle = '#998877';
+  ctx.fillText(note.note, x, y + 20);
+}
+
+function drawParticles() {
+  // Particles flow between close, consonant notes
+  const t = Date.now() / 1000;
+  for (let i = 0; i < NOTES.length; i++) {
+    for (let j = i+1; j < NOTES.length; j++) {
+      const strength = consonance(NOTES[i].freq, NOTES[j].freq) * proximityFactor(i, j);
+      if (strength < 0.15) continue;
+
+      const count = Math.floor(strength * 8);
+      for (let p = 0; p < count; p++) {
+        const phase = (t * 0.5 + p / count) % 1;
+        const px = NOTES[i].x + (NOTES[j].x - NOTES[i].x) * phase;
+        const py = NOTES[i].y + (NOTES[j].y - NOTES[i].y) * phase;
+        // Slight wave perpendicular to the line
+        const dx = NOTES[j].x - NOTES[i].x;
+        const dy = NOTES[j].y - NOTES[i].y;
+        const len = Math.sqrt(dx*dx + dy*dy) || 1;
+        const nx = -dy/len, ny = dx/len;
+        const wave = Math.sin(phase * Math.PI * 4 + t * 3) * 8 * strength;
+        const fx = px + nx * wave;
+        const fy = py + ny * wave;
+
+        ctx.beginPath();
+        ctx.arc(fx, fy, 1.5 + strength, 0, Math.PI * 2);
+        const alpha = Math.sin(phase * Math.PI) * strength * 0.6;
+        ctx.fillStyle = `rgba(255,220,180,${alpha})`;
+        ctx.fill();
+      }
+    }
+  }
+}
+
+// ── HUD ──────────────────────────────────────────────────────────────────
+
+function updateResonanceLabel() {
+  const fr = feltResonance();
+  const el = document.getElementById('resonance-label');
+  let text, color;
+  if (fr > 0.65) { text = '♪ The chord sings ♪'; color = '#ddc8a0'; }
+  else if (fr > 0.45) { text = 'Finding harmony...'; color = '#887766'; }
+  else if (fr > 0.25) { text = 'Reaching...'; color = '#665544'; }
+  else { text = 'Scattered'; color = '#443333'; }
+  el.textContent = text;
+  el.style.color = color;
+}
+
+// ── Drag Interaction ─────────────────────────────────────────────────────
+
+let dragging = null;
+let dragOffset = { x: 0, y: 0 };
+
+canvas.addEventListener('pointerdown', (e) => {
+  ac.resume();
+  const mx = e.clientX, my = e.clientY;
+  for (let i = NOTES.length - 1; i >= 0; i--) {
+    const dx = mx - NOTES[i].x, dy = my - NOTES[i].y;
+    if (dx*dx + dy*dy < NOTES[i].radius * NOTES[i].radius * 2) {
+      dragging = i;
+      dragOffset = { x: dx, y: dy };
+      canvas.style.cursor = 'grabbing';
+      // Play the note
+      const osc = ac.createOscillator();
+      const g = ac.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = NOTES[i].freq;
+      g.gain.setValueAtTime(0.15, ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.5);
+      osc.connect(g); g.connect(master); g.connect(conv);
+      osc.start(); osc.stop(ac.currentTime + 0.5);
+      break;
+    }
+  }
+});
+
+canvas.addEventListener('pointermove', (e) => {
+  if (dragging !== null) {
+    NOTES[dragging].x = e.clientX - dragOffset.x;
+    NOTES[dragging].y = e.clientY - dragOffset.y;
+  } else {
+    // Hover cursor
+    const mx = e.clientX, my = e.clientY;
+    let over = false;
+    for (const n of NOTES) {
+      const dx = mx - n.x, dy = my - n.y;
+      if (dx*dx + dy*dy < n.radius * n.radius * 2) { over = true; break; }
+    }
+    canvas.style.cursor = over ? 'grab' : 'default';
+  }
+});
+
+canvas.addEventListener('pointerup', () => {
+  dragging = null;
+  canvas.style.cursor = 'default';
+});
+
+// ── Main Loop ────────────────────────────────────────────────────────────
+
+function loop() {
+  drawResonanceField();
+  drawParticles();
+  drawConnections();
+  NOTES.forEach((n, i) => drawNote(n, i));
+  updateAudio();
+  updateResonanceLabel();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>

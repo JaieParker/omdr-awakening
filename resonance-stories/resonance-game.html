@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resonance</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a18; overflow: hidden; font-family: 'Georgia', serif; }
+    canvas { display: block; }
+    #ui {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 20px; pointer-events: none; z-index: 10;
+    }
+    #score { color: #ddc8a0; font-size: 20px; }
+    #state { color: #887766; font-size: 16px; text-align: center; }
+    #info { color: #554433; font-size: 14px; text-align: right; }
+    #start-screen {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; z-index: 20;
+      background: #0a0a18;
+    }
+    #start-screen h1 { color: #ddc8a0; font-size: 42px; margin-bottom: 8px; }
+    #start-screen p { color: #776655; font-size: 16px; margin-bottom: 30px; text-align: center; line-height: 1.6; }
+    #start-screen .tension { color: #998877; font-size: 14px; font-style: italic; margin-bottom: 30px; }
+    #start-btn {
+      background: none; border: 1px solid #554433; color: #ddc8a0;
+      font-family: Georgia; font-size: 18px; padding: 12px 40px;
+      cursor: pointer; border-radius: 4px; transition: all 0.3s;
+    }
+    #start-btn:hover { border-color: #ddc8a0; background: rgba(220,200,160,0.08); }
+    #game-over {
+      position: fixed; inset: 0; display: none; flex-direction: column;
+      align-items: center; justify-content: center; z-index: 20;
+      background: rgba(10,10,24,0.9);
+    }
+    #game-over h2 { color: #883333; font-size: 32px; margin-bottom: 8px; }
+    #game-over .final-score { color: #ddc8a0; font-size: 22px; margin-bottom: 20px; }
+    #game-over button {
+      background: none; border: 1px solid #554433; color: #ddc8a0;
+      font-family: Georgia; font-size: 16px; padding: 10px 30px;
+      cursor: pointer; border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="start-screen">
+  <h1>Resonance</h1>
+  <p>Three notes. One chord. A horde of noise.<br>
+  Drag your notes. Hold them together — the chord is your shield.<br>
+  But the dissonance is coming.</p>
+  <div class="tension">To dodge you must separate. To survive you must be together.</div>
+  <button id="start-btn">Play</button>
+</div>
+
+<div id="game-over">
+  <h2>The chord broke</h2>
+  <div class="final-score" id="final-score"></div>
+  <button onclick="location.reload()">Again</button>
+</div>
+
+<div id="ui">
+  <div id="score"></div>
+  <div id="state"></div>
+  <div id="info"></div>
+</div>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() { canvas.width = W = window.innerWidth; canvas.height = H = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+// ── Audio ────────────────────────────────────────────────────────────────
+
+const ac = new (window.AudioContext || window.webkitAudioContext)();
+const master = ac.createGain();
+master.gain.value = 0.25;
+master.connect(ac.destination);
+
+const conv = ac.createConvolver();
+const rLen = ac.sampleRate * 2;
+const rBuf = ac.createBuffer(2, rLen, ac.sampleRate);
+for (let ch = 0; ch < 2; ch++) {
+  const d = rBuf.getChannelData(ch);
+  for (let i = 0; i < rLen; i++) d[i] = (Math.random()*2-1) * Math.exp(-i/(ac.sampleRate*0.6));
+}
+conv.buffer = rBuf;
+const revGain = ac.createGain();
+revGain.gain.value = 0.15;
+conv.connect(revGain);
+revGain.connect(ac.destination);
+
+// Noise oscillator for enemy ambience
+const noiseNode = ac.createBufferSource();
+const noiseLen = ac.sampleRate * 2;
+const noiseBuf = ac.createBuffer(1, noiseLen, ac.sampleRate);
+const noiseData = noiseBuf.getChannelData(0);
+for (let i = 0; i < noiseLen; i++) noiseData[i] = Math.random()*2-1;
+noiseNode.buffer = noiseBuf;
+noiseNode.loop = true;
+const noiseGain = ac.createGain();
+noiseGain.gain.value = 0;
+noiseNode.connect(noiseGain);
+noiseGain.connect(master);
+noiseNode.start();
+
+// ── Notes ────────────────────────────────────────────────────────────────
+
+const NOTES = [
+  { name:'Kai',  freq:164.81, baseFreq:164.81, color:'#5090ff', x:0, y:0, r:30, health:1 },
+  { name:'Mika', freq:207.65, baseFreq:207.65, color:'#ffa050', x:0, y:0, r:30, health:1 },
+  { name:'Jess', freq:246.94, baseFreq:246.94, color:'#50ff90', x:0, y:0, r:30, health:1 },
+];
+
+function initNotes() {
+  const cx = W/2, cy = H/2;
+  NOTES[0].x = cx-60;  NOTES[0].y = cy;
+  NOTES[1].x = cx+60;  NOTES[1].y = cy;
+  NOTES[2].x = cx;     NOTES[2].y = cy+50;
+  NOTES.forEach(n => { n.health = 1; n.freq = n.baseFreq; });
+}
+
+const oscs = NOTES.map(n => {
+  const osc = ac.createOscillator();
+  const gain = ac.createGain();
+  const pan = ac.createStereoPanner();
+  osc.type = 'sine'; osc.frequency.value = n.freq; gain.gain.value = 0;
+  osc.connect(gain); gain.connect(pan); pan.connect(master); gain.connect(conv);
+  osc.start();
+  const osc2 = ac.createOscillator();
+  const gain2 = ac.createGain();
+  osc2.type = 'triangle'; osc2.frequency.value = n.freq*2; gain2.gain.value = 0;
+  osc2.connect(gain2); gain2.connect(pan); osc2.start();
+  return { osc, gain, osc2, gain2, pan };
+});
+
+// ── Enemies ──────────────────────────────────────────────────────────────
+
+let enemies = [];
+const DISSONANT = [7/5, 11/8, 9/7, 13/9, 16/11];
+
+function spawnEnemy() {
+  const angle = Math.random() * Math.PI * 2;
+  const dist = Math.max(W, H) * 0.6;
+  const baseF = 147;
+  enemies.push({
+    x: W/2 + Math.cos(angle) * dist,
+    y: H/2 + Math.sin(angle) * dist,
+    vx: 0, vy: 0,
+    freq: baseF * DISSONANT[Math.floor(Math.random()*DISSONANT.length)],
+    r: 8 + Math.random()*6,
+    hp: 1,
+  });
+}
+
+// ── Resonance Math ───────────────────────────────────────────────────────
+
+const CONS = {'1:1':1,'2:1':.95,'3:2':.88,'4:3':.82,'5:4':.75,'5:3':.7,'6:5':.65,'8:5':.55};
+
+function freqRatio(f1,f2) {
+  const r = Math.max(f1,f2)/Math.min(f1,f2);
+  let best=[1,1], bc=999;
+  for(let n=1;n<=8;n++) for(let d=1;d<=n;d++)
+    if(Math.abs(r-n/d)<0.04 && n+d<bc) { bc=n+d; best=[n,d]; }
+  return best;
+}
+
+function cons(f1,f2) {
+  const [n,d]=freqRatio(f1,f2);
+  return CONS[`${n}:${d}`]||CONS[`${d}:${n}`]||Math.max(0,1-(n+d)*0.08);
+}
+
+function dist(a,b) { return Math.sqrt((a.x-b.x)**2+(a.y-b.y)**2); }
+
+function chordCenter() {
+  const alive = NOTES.filter(n => n.health > 0);
+  if (!alive.length) return {x:W/2,y:H/2};
+  return { x: alive.reduce((s,n)=>s+n.x,0)/alive.length, y: alive.reduce((s,n)=>s+n.y,0)/alive.length };
+}
+
+function feltResonance() {
+  let sum=0, count=0;
+  for(let i=0;i<NOTES.length;i++) {
+    if(NOTES[i].health<=0) continue;
+    for(let j=i+1;j<NOTES.length;j++) {
+      if(NOTES[j].health<=0) continue;
+      const d = dist(NOTES[i],NOTES[j]);
+      const prox = Math.max(0, 1 - d/400);
+      sum += cons(NOTES[i].freq, NOTES[j].freq) * prox * NOTES[i].health * NOTES[j].health;
+      count++;
+    }
+  }
+  return count ? sum/count : 0;
+}
+
+// ── Game State ───────────────────────────────────────────────────────────
+
+let gameRunning = false;
+let score = 0;
+let time = 0;
+let spawnRate = 2.0; // seconds between spawns
+let spawnTimer = 0;
+let dragging = null;
+let dragOff = {x:0,y:0};
+let highScore = 0;
+
+// ── Update ───────────────────────────────────────────────────────────────
+
+function update(dt) {
+  if (!gameRunning) return;
+  time += dt;
+  score = Math.floor(time);
+
+  // Spawn enemies — accelerating
+  spawnRate = Math.max(0.3, 2.0 - time * 0.02);
+  spawnTimer -= dt;
+  if (spawnTimer <= 0) { spawnEnemy(); spawnTimer = spawnRate; }
+
+  const fr = feltResonance();
+  const center = chordCenter();
+
+  // Enemy behaviour
+  for (const e of enemies) {
+    // Move toward nearest note
+    let nearest = null, nd = Infinity;
+    for (const n of NOTES) {
+      if (n.health <= 0) continue;
+      const d = dist(e, n);
+      if (d < nd) { nd = d; nearest = n; }
+    }
+    if (!nearest) continue;
+
+    // Base speed increases over time
+    const speed = 40 + time * 1.5;
+    const dx = nearest.x - e.x, dy = nearest.y - e.y;
+    const len = Math.sqrt(dx*dx+dy*dy) || 1;
+    e.vx = (dx/len) * speed;
+    e.vy = (dy/len) * speed;
+
+    // CHORD REPULSION — the core mechanic
+    // High resonance pushes enemies away from chord center
+    const dc = dist(e, center);
+    if (dc < 250 && fr > 0.2) {
+      const repelForce = fr * 200 / Math.max(dc, 30);
+      const rx = (e.x - center.x) / Math.max(dc,1);
+      const ry = (e.y - center.y) / Math.max(dc,1);
+      e.vx += rx * repelForce;
+      e.vy += ry * repelForce;
+    }
+
+    e.x += e.vx * dt;
+    e.y += e.vy * dt;
+
+    // Hit detection — enemy touches a note
+    for (const n of NOTES) {
+      if (n.health <= 0) continue;
+      const d = dist(e, n);
+      if (d < n.r + e.r) {
+        // DETUNE the note — shift frequency away from base
+        n.freq += (Math.random()-0.5) * 8;
+        n.health -= 0.12;
+
+        // Knock the note away
+        const kx = (n.x - e.x) / Math.max(d,1);
+        const ky = (n.y - e.y) / Math.max(d,1);
+        n.x += kx * 15;
+        n.y += ky * 15;
+
+        // Kill the enemy on contact
+        e.hp = 0;
+
+        // Dissonant hit sound
+        const o = ac.createOscillator();
+        const g = ac.createGain();
+        o.type = 'sawtooth';
+        o.frequency.value = e.freq;
+        g.gain.setValueAtTime(0.12, ac.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.15);
+        o.connect(g); g.connect(master);
+        o.start(); o.stop(ac.currentTime + 0.15);
+      }
+    }
+  }
+
+  // Remove dead enemies
+  enemies = enemies.filter(e => e.hp > 0);
+
+  // Notes slowly retune toward base frequency (healing)
+  for (const n of NOTES) {
+    if (n.health > 0) {
+      n.freq += (n.baseFreq - n.freq) * 0.02; // slow drift back
+      // Health regenerates slightly when resonance is high
+      if (fr > 0.5) n.health = Math.min(1, n.health + dt * 0.03);
+    }
+  }
+
+  // Check game over — all notes dead
+  if (NOTES.every(n => n.health <= 0)) {
+    gameRunning = false;
+    highScore = Math.max(highScore, score);
+    document.getElementById('final-score').textContent = `${score}s survived | Best: ${highScore}s`;
+    document.getElementById('game-over').style.display = 'flex';
+  }
+
+  // Update audio
+  const t = ac.currentTime;
+  for (let i = 0; i < NOTES.length; i++) {
+    const n = NOTES[i];
+    if (n.health <= 0) {
+      oscs[i].gain.gain.setTargetAtTime(0, t, 0.1);
+      oscs[i].gain2.gain.setTargetAtTime(0, t, 0.1);
+      continue;
+    }
+    let proxSum = 0;
+    for (let j = 0; j < NOTES.length; j++) {
+      if (i!==j && NOTES[j].health>0) proxSum += Math.max(0, 1 - dist(NOTES[i],NOTES[j])/400);
+    }
+    const vol = (0.03 + proxSum * 0.08) * n.health;
+    oscs[i].gain.gain.setTargetAtTime(vol, t, 0.1);
+    oscs[i].gain2.gain.setTargetAtTime(vol*0.3, t, 0.1);
+    oscs[i].osc.frequency.setTargetAtTime(n.freq, t, 0.1);
+    oscs[i].osc2.frequency.setTargetAtTime(n.freq*2, t, 0.1);
+    oscs[i].pan.pan.setTargetAtTime((n.x/W)*2-1, t, 0.1);
+    // Detune when health is low
+    const detune = (1 - n.health) * 30;
+    oscs[i].osc.detune.setTargetAtTime(detune, t, 0.1);
+    oscs[i].osc2.detune.setTargetAtTime(-detune, t, 0.1);
+  }
+
+  // Enemy noise level based on count and proximity
+  const enemyThreat = enemies.reduce((s,e) => s + 100/Math.max(dist(e,center),50), 0);
+  noiseGain.gain.setTargetAtTime(Math.min(0.06, enemyThreat*0.003), t, 0.2);
+}
+
+// ── Draw ─────────────────────────────────────────────────────────────────
+
+function draw() {
+  const fr = feltResonance();
+
+  // Background responds to resonance
+  const br = Math.floor(10 + fr*15);
+  const bg = Math.floor(10 + fr*20);
+  const bb = Math.floor(24 + fr*30);
+  ctx.fillStyle = `rgb(${br},${bg},${bb})`;
+  ctx.fillRect(0,0,W,H);
+
+  // Chord shield visualisation — circle around center
+  if (fr > 0.15) {
+    const center = chordCenter();
+    const shieldR = 80 + fr * 170;
+    const pulse = 0.7 + 0.3 * Math.sin(time * 3);
+    const grad = ctx.createRadialGradient(center.x, center.y, shieldR*0.3, center.x, center.y, shieldR);
+    grad.addColorStop(0, `rgba(180,220,255,${fr*0.04*pulse})`);
+    grad.addColorStop(0.7, `rgba(100,160,255,${fr*0.06*pulse})`);
+    grad.addColorStop(1, `rgba(60,100,200,0)`);
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, shieldR, 0, Math.PI*2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+
+  // Resonance connections
+  for (let i=0;i<NOTES.length;i++) {
+    if(NOTES[i].health<=0) continue;
+    for(let j=i+1;j<NOTES.length;j++) {
+      if(NOTES[j].health<=0) continue;
+      const d = dist(NOTES[i],NOTES[j]);
+      const prox = Math.max(0, 1-d/400);
+      const c = cons(NOTES[i].freq,NOTES[j].freq) * prox;
+      if(c<0.05) continue;
+      const pulse = 0.6+0.4*Math.sin(time*4+i+j);
+      ctx.beginPath();
+      ctx.moveTo(NOTES[i].x,NOTES[i].y);
+      ctx.lineTo(NOTES[j].x,NOTES[j].y);
+      ctx.strokeStyle = `rgba(255,220,180,${c*pulse*0.5})`;
+      ctx.lineWidth = 1+c*4;
+      ctx.stroke();
+
+      // Particles
+      const cnt = Math.floor(c*6);
+      for(let p=0;p<cnt;p++) {
+        const ph = (time*0.5+p/cnt)%1;
+        const px = NOTES[i].x+(NOTES[j].x-NOTES[i].x)*ph;
+        const py = NOTES[i].y+(NOTES[j].y-NOTES[i].y)*ph;
+        const dx=NOTES[j].x-NOTES[i].x, dy=NOTES[j].y-NOTES[i].y;
+        const len=Math.sqrt(dx*dx+dy*dy)||1;
+        const wave = Math.sin(ph*Math.PI*4+time*3)*8*c;
+        ctx.beginPath();
+        ctx.arc(px+(-dy/len)*wave, py+(dx/len)*wave, 1.5+c, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(255,220,180,${Math.sin(ph*Math.PI)*c*0.5})`;
+        ctx.fill();
+      }
+    }
+  }
+
+  // Enemies
+  for (const e of enemies) {
+    const pulse = 0.7+0.3*Math.sin(time*8+e.freq);
+    // Glow
+    const eg = ctx.createRadialGradient(e.x,e.y,0,e.x,e.y,e.r*3);
+    eg.addColorStop(0, `rgba(200,40,40,${0.15*pulse})`);
+    eg.addColorStop(1, 'rgba(200,40,40,0)');
+    ctx.beginPath(); ctx.arc(e.x,e.y,e.r*3,0,Math.PI*2); ctx.fillStyle=eg; ctx.fill();
+    // Body
+    ctx.beginPath(); ctx.arc(e.x,e.y,e.r*pulse,0,Math.PI*2);
+    ctx.fillStyle = `rgba(180,40,40,${0.6+0.4*pulse})`;
+    ctx.fill();
+  }
+
+  // Notes
+  for (let i=0;i<NOTES.length;i++) {
+    const n = NOTES[i];
+    if (n.health<=0) continue;
+    const {x,y,r,color,name,health} = n;
+
+    // Health-based glow
+    const glowR = r + 10 + fr*20*health;
+    const pulseR = glowR + 3*Math.sin(time*4+i*2);
+    const gg = ctx.createRadialGradient(x,y,r*0.5,x,y,pulseR);
+    gg.addColorStop(0, color+'aa');
+    gg.addColorStop(0.5, color+'33');
+    gg.addColorStop(1, color+'00');
+    ctx.beginPath(); ctx.arc(x,y,pulseR,0,Math.PI*2); ctx.fillStyle=gg; ctx.fill();
+
+    // Core — dims with health
+    const alpha = Math.floor(health*255).toString(16).padStart(2,'0');
+    const cg = ctx.createRadialGradient(x-r*0.3,y-r*0.3,2,x,y,r);
+    cg.addColorStop(0, '#ffffff');
+    cg.addColorStop(0.3, color);
+    cg.addColorStop(1, color+alpha);
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle=cg; ctx.fill();
+
+    // Health ring
+    ctx.beginPath();
+    ctx.arc(x, y, r+2, -Math.PI/2, -Math.PI/2 + Math.PI*2*health);
+    ctx.strokeStyle = health > 0.4 ? '#50c850' : '#c83030';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Label
+    ctx.fillStyle = `rgba(220,200,160,${health})`;
+    ctx.font = 'bold 14px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText(name, x, y+4);
+  }
+
+  // UI
+  document.getElementById('score').textContent = `${score}s`;
+  const fr2 = feltResonance();
+  const stateEl = document.getElementById('state');
+  if (fr2 > 0.6) { stateEl.textContent = '♪ The chord holds ♪'; stateEl.style.color='#ddc8a0'; }
+  else if (fr2 > 0.35) { stateEl.textContent = 'Harmony fading...'; stateEl.style.color='#887766'; }
+  else if (fr2 > 0.15) { stateEl.textContent = 'Scattered...'; stateEl.style.color='#665544'; }
+  else { stateEl.textContent = 'The chord is breaking'; stateEl.style.color='#884444'; }
+  document.getElementById('info').textContent = `${enemies.length} dissonant`;
+}
+
+// ── Input ────────────────────────────────────────────────────────────────
+
+canvas.addEventListener('pointerdown', e => {
+  if(!gameRunning) return;
+  ac.resume();
+  for(let i=NOTES.length-1;i>=0;i--) {
+    const n=NOTES[i]; if(n.health<=0) continue;
+    if(dist({x:e.clientX,y:e.clientY},n) < n.r*1.5) {
+      dragging=i; dragOff={x:e.clientX-n.x,y:e.clientY-n.y};
+      canvas.style.cursor='grabbing';
+      // Ping
+      const o=ac.createOscillator(),g=ac.createGain();
+      o.type='sine'; o.frequency.value=n.freq;
+      g.gain.setValueAtTime(0.12,ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.3);
+      o.connect(g);g.connect(master);g.connect(conv);o.start();o.stop(ac.currentTime+0.3);
+      break;
+    }
+  }
+});
+
+canvas.addEventListener('pointermove', e => {
+  if(dragging!==null) {
+    NOTES[dragging].x=e.clientX-dragOff.x;
+    NOTES[dragging].y=e.clientY-dragOff.y;
+  }
+});
+
+canvas.addEventListener('pointerup', () => { dragging=null; canvas.style.cursor='default'; });
+
+// ── Start / Loop ─────────────────────────────────────────────────────────
+
+document.getElementById('start-btn').addEventListener('click', () => {
+  ac.resume();
+  document.getElementById('start-screen').style.display='none';
+  initNotes();
+  enemies = [];
+  score = 0; time = 0; spawnTimer = 1;
+  gameRunning = true;
+});
+
+let lastTime = 0;
+function loop(ts) {
+  const dt = Math.min(0.05, (ts-lastTime)/1000);
+  lastTime = ts;
+  update(dt);
+  draw();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
