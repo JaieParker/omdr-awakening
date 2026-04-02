@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>what passes through</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0c10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const cx = canvas.width / 2;
+const cy = canvas.height / 2;
+
+// The wave source — where something disturbs the surface
+let t = 0;
+let waveAge = 0;
+let waveActive = false;
+let waveStart = 0;
+
+// Grid of points representing still water
+const cols = 60;
+const rows = 60;
+const spacing = Math.min(canvas.width, canvas.height) * 0.85 / cols;
+const offsetX = cx - (cols / 2) * spacing;
+const offsetY = cy - (rows / 2) * spacing;
+
+// Each point has a height, velocity, and a rest state
+const points = [];
+for (let r = 0; r < rows; r++) {
+  points[r] = [];
+  for (let c = 0; c < cols; c++) {
+    points[r][c] = { h: 0, v: 0 };
+  }
+}
+
+// Drop a disturbance at the center
+function drop(px, py, amplitude, radius) {
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const dx = c - px;
+      const dy = r - py;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < radius) {
+        const shape = Math.cos((dist / radius) * Math.PI * 0.5);
+        points[r][c].h += amplitude * shape * shape;
+      }
+    }
+  }
+}
+
+// Damped wave propagation — shallow water simulation
+function step() {
+  const damping = 0.985;
+  const speed = 0.28;
+
+  // Update velocities from neighbors
+  for (let r = 1; r < rows - 1; r++) {
+    for (let c = 1; c < cols - 1; c++) {
+      const neighbors =
+        points[r-1][c].h + points[r+1][c].h +
+        points[r][c-1].h + points[r][c+1].h;
+      points[r][c].v += speed * (neighbors / 4 - points[r][c].h);
+      points[r][c].v *= damping;
+    }
+  }
+
+  // Update heights
+  for (let r = 1; r < rows - 1; r++) {
+    for (let c = 1; c < cols - 1; c++) {
+      points[r][c].h += points[r][c].v;
+    }
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw each point as a small circle shifted by height
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = offsetX + c * spacing;
+      const y = offsetY + r * spacing;
+      const h = points[r][c].h;
+
+      // Color: the surface at rest is a very dark blue-gray
+      // When displaced upward: cool silver-white (like light catching a crest)
+      // When displaced downward: slightly deeper blue (like shadow in a trough)
+      const base = 30;
+      const lift = Math.max(0, h) * 180;
+      const shadow = Math.max(0, -h) * 60;
+
+      const R = Math.min(255, base + lift * 0.7);
+      const G = Math.min(255, base + lift * 0.85);
+      const B = Math.min(255, base + 15 + lift - shadow * 0.3);
+      const alpha = 0.55 + Math.abs(h) * 0.8;
+
+      const radius = 1.2 + Math.abs(h) * 1.5;
+
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${Math.round(R)}, ${Math.round(G)}, ${Math.round(B)}, ${Math.min(1, alpha)})`;
+      ctx.fill();
+    }
+  }
+}
+
+// First drop — one quiet disturbance near center
+drop(cols/2, rows/2, 6, 5);
+
+let lastDrop = 0;
+
+function loop(ts) {
+  // Occasional gentle re-drop — not on a clock, slightly irregular
+  if (ts - lastDrop > 4200 + Math.sin(ts * 0.0003) * 1100) {
+    // Slightly off-center each time, as if wind
+    const jx = cols/2 + (Math.random() - 0.5) * 3;
+    const jy = rows/2 + (Math.random() - 0.5) * 3;
+    drop(jx, jy, 5 + Math.random() * 2, 4 + Math.random() * 2);
+    lastDrop = ts;
+  }
+
+  step();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
