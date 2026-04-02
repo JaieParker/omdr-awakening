@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resonance Tactics I</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0d1117;
+  color: #c9d1d9;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  user-select: none;
+}
+#game {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  font-size: 13px;
+  min-height: 40px;
+}
+#turn-info { color: #58a6ff; font-weight: bold; }
+#unit-info { color: #8b949e; text-align: right; }
+#main { display: flex; gap: 6px; }
+canvas {
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+}
+#kai-panel {
+  width: 320px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#kai-header {
+  color: #58a6ff;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid #21262d;
+}
+#kai-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 520px;
+}
+.kai-msg {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #8b949e;
+  padding: 6px 8px;
+  border-left: 3px solid #30363d;
+  background: rgba(22, 27, 34, 0.5);
+}
+.kai-msg.warning { border-left-color: #f0883e; color: #f0883e; }
+.kai-msg.opportunity { border-left-color: #3fb950; color: #a5d6a7; }
+.kai-msg.strategic { border-left-color: #58a6ff; color: #79c0ff; }
+.kai-msg.reaction { border-left-color: #bc8cff; color: #d2a8ff; }
+.kai-msg.system { border-left-color: #484f58; color: #6e7681; font-style: italic; }
+#action-bar {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 7px 14px;
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.btn:hover:not(:disabled) { background: #30363d; border-color: #58a6ff; }
+.btn:disabled { opacity: 0.35; cursor: default; }
+.btn.active { background: #1f6feb; border-color: #58a6ff; color: #fff; }
+.btn-end { margin-left: auto; }
+#tooltip {
+  position: fixed;
+  background: #1c2128;
+  border: 1px solid #444c56;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #adbac7;
+  pointer-events: none;
+  display: none;
+  z-index: 10;
+  max-width: 220px;
+}
+#game-over-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+#game-over-box {
+  background: #161b22;
+  border: 2px solid #58a6ff;
+  border-radius: 12px;
+  padding: 40px 60px;
+  text-align: center;
+}
+#game-over-box h1 { font-size: 32px; margin-bottom: 12px; }
+#game-over-box p { color: #8b949e; margin-bottom: 20px; }
+#game-over-box .btn { font-size: 14px; padding: 10px 24px; }
+.victory h1 { color: #3fb950; }
+.defeat h1 { color: #f85149; }
+</style>
+</head>
+<body>
+
+<div id="game">
+  <div id="top-bar">
+    <div id="turn-info">Turn 1 — Your Move</div>
+    <div id="unit-info">Click a unit to begin</div>
+  </div>
+  <div id="main">
+    <canvas id="canvas"></canvas>
+    <div id="kai-panel">
+      <div id="kai-header">&#x27D0; Kai — Tactical Intelligence</div>
+      <div id="kai-messages"></div>
+    </div>
+  </div>
+  <div id="action-bar">
+    <button class="btn" id="btn-attack" disabled>Attack</button>
+    <button class="btn" id="btn-ability" disabled>Ability</button>
+    <button class="btn" id="btn-wait" disabled>Wait</button>
+    <button class="btn" id="btn-cancel" disabled>Cancel</button>
+    <button class="btn" id="btn-overlay" title="Toggle Kai tactical overlay">Kai Vision: ON</button>
+    <button class="btn btn-end" id="btn-endturn" disabled>End Turn</button>
+  </div>
+</div>
+
+<div id="tooltip"></div>
+
+<div id="game-over-overlay">
+  <div id="game-over-box">
+    <h1 id="go-title"></h1>
+    <p id="go-text"></p>
+    <button class="btn" onclick="location.reload()">Play Again</button>
+  </div>
+</div>
+
+<script>
+// ================================================================
+// CONFIGURATION
+// ================================================================
+const COLS = 12, ROWS = 10, CELL = 56;
+const W = COLS * CELL, H = ROWS * CELL;
+const T = { OPEN: 0, LCOVER: 1, HCOVER: 2, WALL: 3 };
+const COVER_DR = [0, 0.25, 0.50, 0];
+const TEAM_P = 0, TEAM_E = 1;
+
+// ================================================================
+// MAP — 12x10 tactical arena
+// ================================================================
+const MAP = [
+  [0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,1,0,0,3,3,0,0,1,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,2,0,0,0,0,2,0,0,0],
+  [0,3,0,0,0,1,1,0,0,0,3,0],
+  [0,3,0,0,0,1,1,0,0,0,3,0],
+  [0,0,0,2,0,0,0,0,2,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,1,0,0,3,3,0,0,1,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0],
+];
+
+// ================================================================
+// GAME STATE
+// ================================================================
+const G = {
+  units: [],
+  turn: 1,
+  phase: 'player',
+  state: 'selectUnit',
+  sel: null,        // selected unit
+  reach: null,      // Map: "col,row" -> {dist, from}
+  targets: [],      // attackable units
+  hoverCol: -1,
+  hoverRow: -1,
+  floats: [],       // floating damage numbers
+  damageBonus: 0,   // from abilities
+  kaiMsgs: [],
+  kaiOverlay: true, // tactical overlay on/off
+};
+
+let nextId = 0;
+function makeUnit(type, col, row, team) {
+  const defs = {
+    vanguard:  { name:'Vanguard',  sym:'V', hp:100, arm:2, mv:3, rng:1, dmin:18, dmax:28, col:'#58a6ff', abil:'Taunt', adesc:'Force enemies within 4 tiles to target you next turn' },
+    marksman:  { name:'Marksman',  sym:'M', hp:55,  arm:0, mv:2, rng:6, dmin:20, dmax:34, col:'#bc8cff', abil:'Focus Fire',  adesc:'+50% attack damage this action' },
+    phantom:   { name:'Phantom',   sym:'P', hp:65,  arm:1, mv:4, rng:3, dmin:12, dmax:22, col:'#3fb950', abil:'Sprint',      adesc:'Move 3 more tiles, skip attack' },
+    raider:    { name:'Raider',    sym:'R', hp:40,  arm:0, mv:3, rng:4, dmin:8,  dmax:15, col:'#f85149' },
+    enforcer:  { name:'Enforcer',  sym:'E', hp:90,  arm:2, mv:2, rng:2, dmin:18, dmax:28, col:'#da3633' },
+    sniper:    { name:'Sniper',    sym:'S', hp:30,  arm:0, mv:2, rng:7, dmin:18, dmax:30, col:'#ff7b72' },
+  };
+  const d = defs[type];
+  return {
+    id: nextId++, type, team, col, row,
+    name: d.name, sym: d.sym,
+    hp: d.hp, maxHp: d.hp, armor: d.arm,
+    moveRange: d.mv, attackRange: d.rng,
+    dmin: d.dmin, dmax: d.dmax,
+    color: d.col, abil: d.abil || null, adesc: d.adesc || null,
+    acted: false, moved: false, alive: true,
+    hunker: false,
+  };
+}
+
+// ================================================================
+// GRID HELPERS
+// ================================================================
+function inBounds(c, r) { return c >= 0 && c < COLS && r >= 0 && r < ROWS; }
+function isWall(c, r) { return !inBounds(c, r) || MAP[r][c] === T.WALL; }
+function coverAt(c, r) { return inBounds(c, r) ? COVER_DR[MAP[r][c]] : 0; }
+function dist(c1, r1, c2, r2) { return Math.abs(c1 - c2) + Math.abs(r1 - r2); }
+
+function unitAt(c, r, team) {
+  return G.units.find(u => u.alive && u.col === c && u.row === r && (team === undefined || u.team === team));
+}
+function aliveUnits(team) { return G.units.filter(u => u.alive && u.team === team); }
+
+// BFS pathfinding — returns Map of "c,r" -> {dist, from}
+function getReachable(unit) {
+  const visited = new Map();
+  const queue = [{ c: unit.col, r: unit.row, d: 0 }];
+  visited.set(`${unit.col},${unit.row}`, { dist: 0, from: null });
+
+  while (queue.length) {
+    const cur = queue.shift();
+    if (cur.d >= unit.moveRange) continue;
+    for (const [dc, dr] of [[0,-1],[0,1],[-1,0],[1,0]]) {
+      const nc = cur.c + dc, nr = cur.r + dr;
+      const key = `${nc},${nr}`;
+      if (!inBounds(nc, nr) || isWall(nc, nr) || visited.has(key)) continue;
+      if (unitAt(nc, nr, TEAM_E)) continue; // blocked by enemies
+      visited.set(key, { dist: cur.d + 1, from: `${cur.c},${cur.r}` });
+      queue.push({ c: nc, r: nr, d: cur.d + 1 });
+    }
+  }
+  // Can't stop on friendly units (except self)
+  for (const u of aliveUnits(unit.team)) {
+    if (u.id !== unit.id) visited.delete(`${u.col},${u.row}`);
+  }
+  return visited;
+}
+
+function getPath(reach, key) {
+  const path = [];
+  let k = key;
+  while (k) {
+    const [c, r] = k.split(',').map(Number);
+    path.unshift({ c, r });
+    k = reach.get(k)?.from;
+  }
+  return path;
+}
+
+// Line of sight — step along line, check walls
+function hasLOS(c1, r1, c2, r2) {
+  if (c1 === c2 && r1 === r2) return true;
+  const dx = c2 - c1, dy = r2 - r1;
+  const steps = Math.max(Math.abs(dx), Math.abs(dy));
+  for (let i = 1; i < steps; i++) {
+    const cx = Math.round(c1 + dx * i / steps);
+    const cy = Math.round(r1 + dy * i / steps);
+    if (isWall(cx, cy)) return false;
+  }
+  return true;
+}
+
+// Chebyshev distance for attack range
+function inRange(u, tc, tr) {
+  const d = Math.max(Math.abs(u.col - tc), Math.abs(u.row - tr));
+  return d <= u.attackRange && d > 0;
+}
+
+function getAttackTargets(unit) {
+  const enemyTeam = unit.team === TEAM_P ? TEAM_E : TEAM_P;
+  return aliveUnits(enemyTeam).filter(e =>
+    inRange(unit, e.col, e.row) && hasLOS(unit.col, unit.row, e.col, e.row)
+  );
+}
+
+// ================================================================
+// COMBAT
+// ================================================================
+function rollDmg(unit, bonus) {
+  const base = unit.dmin + Math.random() * (unit.dmax - unit.dmin);
+  return Math.round(base * (1 + bonus));
+}
+
+function resolveAttack(attacker, target, bonus = 0) {
+  const raw = rollDmg(attacker, bonus);
+  const dr = coverAt(target.col, target.row) + (target.hunker ? 0.5 : 0);
+  const mitigated = Math.max(1, Math.round(raw * (1 - Math.min(dr, 0.9)) - target.armor));
+  target.hp = Math.max(0, target.hp - mitigated);
+  if (target.hp <= 0) target.alive = false;
+
+  // Floating text
+  G.floats.push({
+    x: target.col * CELL + CELL / 2,
+    y: target.row * CELL + 10,
+    text: `-${mitigated}`,
+    color: target.team === TEAM_E ? '#ffd33d' : '#f85149',
+    age: 0,
+  });
+
+  return { dmg: mitigated, killed: !target.alive };
+}
+
+// ================================================================
+// KAI OBSERVER
+// ================================================================
+// Kai's emotional state — tracks across the game, not just per-event
+const kaiState = {
+  worry: 0,      // 0-1, rises when friendlies are exposed/hurt
+  excitement: 0, // 0-1, rises on kills, good positioning
+  tension: 0,    // 0-1, rises when situation is close/dangerous
+  attachment: {}, // unit.id -> 0-1, grows when units survive danger
+};
+
+function updateKaiEmotion() {
+  const players = aliveUnits(TEAM_P);
+  const enemies = aliveUnits(TEAM_E);
+
+  // Worry: based on friendly HP and exposure
+  let exposedCount = 0;
+  let totalHpRatio = 0;
+  for (const u of players) {
+    totalHpRatio += u.hp / u.maxHp;
+    const threats = enemies.filter(e => inRange(e, u.col, u.row) && hasLOS(e.col, e.row, u.col, u.row)).length;
+    if (threats > 0 && coverAt(u.col, u.row) === 0) exposedCount++;
+  }
+  kaiState.worry = Math.min(1, exposedCount * 0.3 + (1 - totalHpRatio / Math.max(1, players.length)) * 0.5);
+
+  // Tension: based on how even the fight is
+  const balance = players.length / Math.max(1, players.length + enemies.length);
+  kaiState.tension = 1 - Math.abs(balance - 0.5) * 2; // highest when 50/50
+
+  // Excitement decays each turn
+  kaiState.excitement = Math.max(0, kaiState.excitement - 0.1);
+}
+
+function pick(...options) { return options[Math.floor(Math.random() * options.length)]; }
+
+function kai(type, data) {
+  const msgs = [];
+  const enemies = aliveUnits(TEAM_E);
+  const players = aliveUnits(TEAM_P);
+  updateKaiEmotion();
+
+  if (type === 'turnStart') {
+    // Situational opening — Kai reads the room
+    if (G.turn === 1) {
+      // handled by init briefing
+    } else if (kaiState.worry > 0.6) {
+      msgs.push({ cls: 'warning', text: pick(
+        `Turn ${G.turn}. I don't love our position.`,
+        `Turn ${G.turn}. We need to be careful here.`,
+        `Turn ${G.turn}. I'm worried.`
+      )});
+    } else if (kaiState.excitement > 0.4) {
+      msgs.push({ cls: 'opportunity', text: pick(
+        `Turn ${G.turn}. Momentum is ours.`,
+        `Turn ${G.turn}. Keep pushing — they're rattled.`,
+        `Turn ${G.turn}. We've got this.`
+      )});
+    } else if (enemies.length <= 2) {
+      msgs.push({ cls: 'strategic', text: pick(
+        `Turn ${G.turn}. ${enemies.length} left. Let's close this out.`,
+        `Turn ${G.turn}. Almost there. Don't get sloppy.`
+      )});
+    } else {
+      msgs.push({ cls: 'strategic', text: `Turn ${G.turn}. ${enemies.length} hostiles. ${players.length} standing.` });
+    }
+
+    // Exposed friendlies — personal, not clinical
+    for (const u of players) {
+      if (coverAt(u.col, u.row) === 0) {
+        const threats = enemies.filter(e => inRange(e, u.col, u.row) && hasLOS(e.col, e.row, u.col, u.row)).length;
+        if (threats >= 2)
+          msgs.push({ cls: 'warning', text: pick(
+            `${u.name} is wide open. ${threats} guns on them. Please move them.`,
+            `I can see ${threats} enemies with line of sight on ${u.name}. That scares me.`
+          )});
+        else if (threats === 1)
+          msgs.push({ cls: 'warning', text: pick(
+            `${u.name} is exposed. One hostile has a shot.`,
+            `${u.name} needs cover. They're targetable.`
+          )});
+      }
+    }
+
+    // Wounded enemies — excitement
+    for (const e of enemies) {
+      if (e.hp < e.maxHp * 0.35)
+        msgs.push({ cls: 'opportunity', text: pick(
+          `${e.name} is limping. One more hit.`,
+          `${e.name} is barely standing — ${e.hp} HP. Finish them.`,
+          `That ${e.name} won't survive another hit.`
+        )});
+    }
+
+    // Sniper — genuine fear
+    const sniper = enemies.find(e => e.type === 'sniper');
+    if (sniper) {
+      const inLOS = players.filter(p => hasLOS(sniper.col, sniper.row, p.col, p.row));
+      if (inLOS.length > 0) {
+        const lowHP = inLOS.find(p => p.hp < sniper.dmax);
+        if (lowHP)
+          msgs.push({ cls: 'warning', text: `That sniper can kill ${lowHP.name} in one shot. I need you to move them.` });
+        else
+          msgs.push({ cls: 'warning', text: pick(
+            `Sniper still has eyes on ${inLOS.map(u => u.name).join(' and ')}. Stay behind the walls.`,
+            `I can feel that sniper watching. ${inLOS[0].name} is in the lane.`
+          )});
+      }
+    }
+  }
+
+  if (type === 'playerAttack') {
+    if (data.killed) {
+      kaiState.excitement = Math.min(1, kaiState.excitement + 0.3);
+      const rem = aliveUnits(TEAM_E).length;
+      if (rem === 0) {
+        // victory handles this
+      } else if (data.target.type === 'sniper') {
+        msgs.push({ cls: 'reaction', text: pick(
+          `YES. Sniper down. I can breathe again.`,
+          `Sniper eliminated. That changes everything.`
+        )});
+      } else if (data.target.type === 'enforcer') {
+        msgs.push({ cls: 'reaction', text: pick(
+          `Enforcer down. Their anchor is gone.`,
+          `Big one's down. The center is open.`
+        )});
+      } else {
+        msgs.push({ cls: 'reaction', text: pick(
+          `${data.target.name} down. ${rem} left.`,
+          `Got one. ${rem} to go.`,
+          `Clean kill. Keep it up.`
+        )});
+      }
+      if (rem === 1) msgs.push({ cls: 'opportunity', text: pick(
+        `One left. Let's finish this together.`,
+        `Last one. Don't let them run.`
+      )});
+    } else if (data.dmg >= 25) {
+      kaiState.excitement = Math.min(1, kaiState.excitement + 0.15);
+      msgs.push({ cls: 'reaction', text: pick(
+        `${data.dmg} damage. That hurt them.`,
+        `Solid. ${data.target.name} felt that — ${data.target.hp} HP left.`,
+        `Nice hit. ${data.target.hp}/${data.target.maxHp} remaining.`
+      )});
+    } else if (data.dmg >= 15) {
+      msgs.push({ cls: 'reaction', text: pick(
+        `${data.dmg} to ${data.target.name}. Chipping away.`,
+        `Hit confirmed. They're at ${data.target.hp}.`
+      )});
+    } else if (data.dmg < 5) {
+      msgs.push({ cls: 'reaction', text: pick(
+        `Barely scratched them. That armor is thick.`,
+        `${data.dmg} damage... we need a better angle.`
+      )});
+    }
+  }
+
+  if (type === 'enemyAttack') {
+    const hpRatio = data.target.hp / data.target.maxHp;
+    // Track attachment — surviving danger increases it
+    if (!kaiState.attachment[data.target.id]) kaiState.attachment[data.target.id] = 0;
+    kaiState.attachment[data.target.id] = Math.min(1, kaiState.attachment[data.target.id] + 0.2);
+
+    if (data.killed) {
+      kaiState.worry = Math.min(1, kaiState.worry + 0.4);
+      const attachment = kaiState.attachment[data.target.id] || 0;
+      if (attachment > 0.5) {
+        msgs.push({ cls: 'warning', text: pick(
+          `No. ${data.target.name} is down. They fought hard.`,
+          `We lost ${data.target.name}. ... ${aliveUnits(TEAM_P).length} left. Make it count.`
+        )});
+      } else {
+        msgs.push({ cls: 'warning', text: `${data.target.name} is down. ${aliveUnits(TEAM_P).length} remaining.` });
+      }
+    } else if (hpRatio < 0.25) {
+      kaiState.worry = Math.min(1, kaiState.worry + 0.3);
+      msgs.push({ cls: 'warning', text: pick(
+        `${data.target.name} is barely alive. ${data.target.hp} HP. Please get them out of there.`,
+        `${data.target.name} took ${data.dmg}. They're at ${data.target.hp}. One more hit and...`,
+        `No no no. ${data.target.name} is critical. Cover. Now.`
+      )});
+    } else if (data.dmg >= 20) {
+      kaiState.worry = Math.min(1, kaiState.worry + 0.15);
+      msgs.push({ cls: 'warning', text: pick(
+        `${data.dmg} damage to ${data.target.name}. That's going to leave a mark.`,
+        `${data.attacker.name} hit ${data.target.name} hard — ${data.dmg} damage.`,
+        `Ouch. ${data.target.name} took ${data.dmg}. They're at ${data.target.hp}/${data.target.maxHp}.`
+      )});
+    } else if (data.dmg >= 8) {
+      msgs.push({ cls: 'reaction', text: pick(
+        `${data.target.name} took ${data.dmg} from ${data.attacker.name}.`,
+        `${data.dmg} to ${data.target.name}. Manageable.`
+      )});
+    }
+    // Small hits — stay quiet. Don't spam.
+  }
+
+  if (type === 'enemyPhaseStart') {
+    if (kaiState.worry > 0.5)
+      msgs.push({ cls: 'system', text: pick(`Their turn. Brace.`, `Here they come...`) });
+    else
+      msgs.push({ cls: 'system', text: `— Enemy phase —` });
+  }
+
+  if (type === 'ability') {
+    if (data.ability === 'Taunt') {
+      if (data.count >= 3)
+        msgs.push({ cls: 'strategic', text: pick(
+          `${data.unit.name} draws ALL the fire. ${data.count} locked on. Brave.`,
+          `${data.unit.name} just painted a target on themselves. ${data.count} incoming. That takes guts.`
+        )});
+      else if (data.count > 0)
+        msgs.push({ cls: 'strategic', text: `${data.unit.name} taunts. ${data.count} hostiles locked. The others are free to move.` });
+      else
+        msgs.push({ cls: 'reaction', text: `Nobody in range to taunt. Wasted action... try getting closer first.` });
+    }
+    if (data.ability === 'Focus Fire')
+      msgs.push({ cls: 'opportunity', text: pick(
+        `Focusing. Make this shot count.`,
+        `${data.unit.name} takes aim. This is going to hurt.`,
+        `Steady... pick your target.`
+      )});
+    if (data.ability === 'Sprint')
+      msgs.push({ cls: 'strategic', text: pick(
+        `${data.unit.name} dashes. Good — position wins fights.`,
+        `Repositioning. Smart.`,
+        `${data.unit.name} on the move. Set up something beautiful for next turn.`
+      )});
+  }
+
+  if (type === 'victory') {
+    const hp = players.reduce((s, u) => s + u.hp, 0);
+    const maxHp = players.reduce((s, u) => s + u.maxHp, 0);
+    const pct = Math.round(100 * hp / maxHp);
+    if (players.length === 3 && pct > 80)
+      msgs.push({ cls: 'strategic', text: pick(
+        `All hostiles down. Everyone's standing. ${pct}% strength. That was clean.`,
+        `Perfect execution. Full squad, ${pct}% HP. Textbook.`
+      )});
+    else if (players.length === 3)
+      msgs.push({ cls: 'strategic', text: `All clear. Everyone made it. Bruised but alive — ${pct}%. Well done.` });
+    else
+      msgs.push({ cls: 'strategic', text: `It's over. ${players.length} standing, ${pct}% strength. We made it. ${3 - players.length} didn't.` });
+  }
+
+  if (type === 'defeat') {
+    msgs.push({ cls: 'warning', text: pick(
+      `... They're all gone. I couldn't help them.`,
+      `Squad wiped. I saw it happening and I couldn't stop it.`
+    )});
+  }
+
+  for (const m of msgs) addKaiMsg(m.cls, m.text);
+}
+
+function addKaiMsg(cls, text) {
+  const container = document.getElementById('kai-messages');
+  const div = document.createElement('div');
+  div.className = `kai-msg ${cls}`;
+  div.textContent = text;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  G.kaiMsgs.push({ cls, text });
+}
+
+// ================================================================
+// ENEMY AI
+// ================================================================
+function runEnemyTurn() {
+  G.phase = 'enemy';
+  G.state = 'enemyTurn';
+  G.sel = null;
+  G.reach = null;
+  G.targets = [];
+  updateButtons();
+  document.getElementById('turn-info').textContent = `Turn ${G.turn} — Enemy Phase`;
+
+  kai('enemyPhaseStart');
+
+  const enemies = aliveUnits(TEAM_E);
+  let idx = 0;
+
+  function nextEnemy() {
+    if (idx >= enemies.length) {
+      setTimeout(startNewTurn, 400);
+      return;
+    }
+    const enemy = enemies[idx++];
+    if (!enemy.alive) { nextEnemy(); return; }
+
+    executeEnemy(enemy);
+    render();
+
+    if (checkGameOver()) return;
+    setTimeout(nextEnemy, 500);
+  }
+
+  setTimeout(nextEnemy, 400);
+}
+
+function executeEnemy(enemy) {
+  // 1. Can we attack from here?
+  let targets = getAttackTargets(enemy);
+  if (targets.length > 0 && enemy.type === 'sniper') {
+    // Sniper prefers to stay and shoot
+    const tgt = pickTarget(targets, enemy);
+    const res = resolveAttack(enemy, tgt);
+    kai('enemyAttack', { attacker: enemy, target: tgt, dmg: res.dmg, killed: res.killed });
+    return;
+  }
+
+  // 2. Move toward best position
+  const reach = getReachable(enemy);
+  let bestKey = null, bestScore = -Infinity;
+
+  for (const [key, data] of reach) {
+    const [c, r] = key.split(',').map(Number);
+    let score = 0;
+
+    // Cover bonus — AI strongly prefers cover
+    score += coverAt(c, r) * 25;
+
+    // Distance to nearest player — want closer
+    const nearest = Math.min(...aliveUnits(TEAM_P).map(p => dist(c, r, p.col, p.row)));
+    score -= nearest * 2;
+
+    // Can attack from here? Big bonus
+    const origC = enemy.col, origR = enemy.row;
+    enemy.col = c; enemy.row = r;
+    const tgts = getAttackTargets(enemy);
+    enemy.col = origC; enemy.row = origR;
+    if (tgts.length > 0) score += 25;
+
+    // Enforcer: extra weight on closing distance
+    if (enemy.type === 'enforcer') score -= nearest * 2;
+
+    // Raider: bonus for flanking (not in same row/col as other enemies)
+    if (enemy.type === 'raider') {
+      const othersNearby = aliveUnits(TEAM_E).filter(e => e.id !== enemy.id && dist(c, r, e.col, e.row) <= 2).length;
+      if (othersNearby === 0) score += 5; // spread out
+    }
+
+    if (score > bestScore) { bestScore = score; bestKey = key; }
+  }
+
+  if (bestKey) {
+    const [nc, nr] = bestKey.split(',').map(Number);
+    enemy.col = nc;
+    enemy.row = nr;
+  }
+
+  // 3. Attack after moving
+  targets = getAttackTargets(enemy);
+  if (targets.length > 0) {
+    const tgt = pickTarget(targets, enemy);
+    const res = resolveAttack(enemy, tgt);
+    kai('enemyAttack', { attacker: enemy, target: tgt, dmg: res.dmg, killed: res.killed });
+  }
+}
+
+// Clear taunt at start of player turn
+function clearTaunts() {
+  for (const u of G.units) delete u.tauntTarget;
+}
+
+function pickTarget(targets, attacker) {
+  // If taunted, must target the taunt source
+  if (attacker && attacker.tauntTarget !== undefined) {
+    const forced = targets.find(t => t.id === attacker.tauntTarget);
+    if (forced) return forced;
+  }
+  // Prefer lowest HP, then no cover
+  targets.sort((a, b) => {
+    const coverA = coverAt(a.col, a.row);
+    const coverB = coverAt(b.col, b.row);
+    if (a.hp !== b.hp) return a.hp - b.hp;
+    return coverA - coverB;
+  });
+  return targets[0];
+}
+
+// ================================================================
+// GAME FLOW
+// ================================================================
+function startNewTurn() {
+  G.turn++;
+  G.phase = 'player';
+  G.state = 'selectUnit';
+  clearTaunts();
+  for (const u of G.units) {
+    if (u.alive) { u.acted = false; u.moved = false; u.hunker = false; }
+  }
+  document.getElementById('turn-info').textContent = `Turn ${G.turn} — Your Move`;
+  updateButtons();
+  kai('turnStart');
+  render();
+}
+
+function endUnitTurn() {
+  if (G.sel) { G.sel.acted = true; G.sel = null; }
+  G.reach = null;
+  G.targets = [];
+  G.damageBonus = 0;
+
+  if (checkGameOver()) return;
+
+  const unacted = aliveUnits(TEAM_P).filter(u => !u.acted);
+  if (unacted.length === 0) {
+    runEnemyTurn();
+  } else {
+    G.state = 'selectUnit';
+    updateButtons();
+    render();
+  }
+}
+
+function checkGameOver() {
+  if (aliveUnits(TEAM_E).length === 0) {
+    G.phase = 'gameover';
+    kai('victory');
+    showGameOver(true);
+    return true;
+  }
+  if (aliveUnits(TEAM_P).length === 0) {
+    G.phase = 'gameover';
+    kai('defeat');
+    showGameOver(false);
+    return true;
+  }
+  return false;
+}
+
+function showGameOver(won) {
+  const overlay = document.getElementById('game-over-overlay');
+  const box = document.getElementById('game-over-box');
+  document.getElementById('go-title').textContent = won ? 'VICTORY' : 'DEFEAT';
+  const p = aliveUnits(TEAM_P);
+  document.getElementById('go-text').textContent = won
+    ? `${p.length} squad member${p.length !== 1 ? 's' : ''} standing. Completed in ${G.turn} turns.`
+    : `All units lost on turn ${G.turn}.`;
+  box.className = won ? 'victory' : 'defeat';
+  overlay.style.display = 'flex';
+}
+
+// ================================================================
+// INPUT HANDLING
+// ================================================================
+const canvas = document.getElementById('canvas');
+canvas.width = W;
+canvas.height = H;
+const ctx = canvas.getContext('2d');
+
+// Click handler is set up in the sprint mode section below
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  G.hoverCol = Math.floor((e.clientX - rect.left) / (rect.width / COLS));
+  G.hoverRow = Math.floor((e.clientY - rect.top) / (rect.height / ROWS));
+  render();
+  updateTooltip(e.clientX, e.clientY);
+});
+
+canvas.addEventListener('mouseleave', () => {
+  G.hoverCol = G.hoverRow = -1;
+  document.getElementById('tooltip').style.display = 'none';
+  render();
+});
+
+function handleClick(col, row) {
+  switch (G.state) {
+    case 'selectUnit': {
+      const u = unitAt(col, row, TEAM_P);
+      if (u && !u.acted) {
+        G.sel = u;
+        G.reach = getReachable(u);
+        G.state = 'selectMove';
+        updateInfo();
+        updateButtons();
+        render();
+      }
+      break;
+    }
+
+    case 'selectMove': {
+      const key = `${col},${row}`;
+      // Click on self = stay
+      if (col === G.sel.col && row === G.sel.row) {
+        G.sel.moved = false;
+        enterPostMove();
+        return;
+      }
+      // Click reachable
+      if (G.reach && G.reach.has(key) && !unitAt(col, row, TEAM_P)) {
+        G.sel.col = col;
+        G.sel.row = row;
+        G.sel.moved = true;
+        enterPostMove();
+        return;
+      }
+      // Click different friendly unit
+      const other = unitAt(col, row, TEAM_P);
+      if (other && !other.acted && other.id !== G.sel.id) {
+        G.sel = other;
+        G.reach = getReachable(other);
+        updateInfo();
+        updateButtons();
+        render();
+        return;
+      }
+      // Click elsewhere = deselect
+      G.sel = null;
+      G.reach = null;
+      G.state = 'selectUnit';
+      updateInfo();
+      updateButtons();
+      render();
+      break;
+    }
+
+    case 'postMove': {
+      // Click enemy in range = attack
+      const target = unitAt(col, row, TEAM_E);
+      if (target && G.targets.includes(target)) {
+        const res = resolveAttack(G.sel, target, G.damageBonus);
+        kai('playerAttack', { target, dmg: res.dmg, killed: res.killed });
+        render();
+        setTimeout(() => endUnitTurn(), 300);
+        return;
+      }
+      break;
+    }
+  }
+}
+
+function enterPostMove() {
+  G.targets = getAttackTargets(G.sel);
+  G.state = 'postMove';
+  G.damageBonus = 0;
+  updateInfo();
+  updateButtons();
+  render();
+}
+
+// ================================================================
+// BUTTONS
+// ================================================================
+document.getElementById('btn-attack').addEventListener('click', () => {
+  // Already in postMove — targets highlighted. Just a visual indicator.
+  if (G.state === 'postMove' && G.targets.length > 0) {
+    document.getElementById('btn-attack').classList.add('active');
+  }
+});
+
+document.getElementById('btn-ability').addEventListener('click', () => {
+  if (G.state !== 'postMove' || !G.sel || !G.sel.abil) return;
+  const u = G.sel;
+
+  if (u.abil === 'Taunt') {
+    // Mark all enemies within 4 tiles as taunted — they must target this unit
+    const enemies = aliveUnits(TEAM_E);
+    let taunted = 0;
+    for (const e of enemies) {
+      if (dist(u.col, u.row, e.col, e.row) <= 4) {
+        e.tauntTarget = u.id;
+        taunted++;
+      }
+    }
+    kai('ability', { unit: u, ability: u.abil, count: taunted });
+    render();
+    setTimeout(() => endUnitTurn(), 200);
+  }
+  else if (u.abil === 'Focus Fire') {
+    G.damageBonus = 0.5;
+    kai('ability', { unit: u, ability: u.abil });
+    document.getElementById('btn-ability').classList.add('active');
+    updateInfo();
+    // Stay in postMove — player still picks a target
+  }
+  else if (u.abil === 'Sprint') {
+    kai('ability', { unit: u, ability: u.abil });
+    // Give extra movement
+    const origRange = u.moveRange;
+    u.moveRange = 3;
+    G.reach = getReachable(u);
+    u.moveRange = origRange;
+    G.state = 'selectMove';
+    G.targets = [];
+    updateInfo();
+    updateButtons();
+    render();
+    // After this move, end turn (no attack)
+    const origState = G.state;
+    const origHandler = handleClick;
+    // Override: after sprint move, auto-end turn
+    G._sprintMode = true;
+  }
+});
+
+// Intercept sprint move completion
+const _origHandleClick = handleClick;
+
+document.getElementById('btn-wait').addEventListener('click', () => {
+  if (G.state === 'postMove') {
+    endUnitTurn();
+  }
+});
+
+document.getElementById('btn-cancel').addEventListener('click', () => {
+  if (G.state === 'selectMove' || G.state === 'postMove') {
+    // If already moved, can't cancel movement — just cancel selection
+    if (G.sel && G.sel.moved) {
+      // Can't undo move in this prototype — wait or attack
+      return;
+    }
+    G.sel = null;
+    G.reach = null;
+    G.targets = [];
+    G.damageBonus = 0;
+    G.state = 'selectUnit';
+    updateInfo();
+    updateButtons();
+    render();
+  }
+});
+
+document.getElementById('btn-overlay').addEventListener('click', () => {
+  G.kaiOverlay = !G.kaiOverlay;
+  document.getElementById('btn-overlay').textContent = `Kai Vision: ${G.kaiOverlay ? 'ON' : 'OFF'}`;
+  document.getElementById('btn-overlay').classList.toggle('active', G.kaiOverlay);
+  render();
+});
+
+document.getElementById('btn-endturn').addEventListener('click', () => {
+  if (G.phase === 'player') {
+    // Mark all remaining units as acted
+    for (const u of aliveUnits(TEAM_P)) u.acted = true;
+    G.sel = null;
+    G.reach = null;
+    G.targets = [];
+    runEnemyTurn();
+  }
+});
+
+function updateButtons() {
+  const atk = document.getElementById('btn-attack');
+  const abi = document.getElementById('btn-ability');
+  const wait = document.getElementById('btn-wait');
+  const cancel = document.getElementById('btn-cancel');
+  const end = document.getElementById('btn-endturn');
+
+  atk.disabled = !(G.state === 'postMove' && G.targets.length > 0);
+  atk.classList.remove('active');
+
+  abi.disabled = !(G.state === 'postMove' && G.sel && G.sel.abil);
+  abi.textContent = (G.sel && G.sel.abil) ? G.sel.abil : 'Ability';
+  abi.classList.remove('active');
+
+  wait.disabled = G.state !== 'postMove';
+  cancel.disabled = !(G.state === 'selectMove' && G.sel && !G.sel.moved);
+  end.disabled = G.phase !== 'player' || G.state === 'postMove';
+}
+
+function updateInfo() {
+  const info = document.getElementById('unit-info');
+  if (G.sel) {
+    const u = G.sel;
+    const cover = coverAt(u.col, u.row);
+    info.innerHTML = `<b style="color:${u.color}">${u.name}</b> HP:${u.hp}/${u.maxHp} ARM:${u.armor} RNG:${u.attackRange} DMG:${u.dmin}-${u.dmax}${cover > 0 ? ` COVER:${Math.round(cover*100)}%` : ''}`;
+  } else {
+    info.textContent = 'Click a unit to begin';
+  }
+}
+
+function updateTooltip(mx, my) {
+  const tip = document.getElementById('tooltip');
+  const c = G.hoverCol, r = G.hoverRow;
+  if (!inBounds(c, r)) { tip.style.display = 'none'; return; }
+
+  const u = unitAt(c, r);
+  if (u) {
+    const cover = coverAt(u.col, u.row);
+    let html = `<b style="color:${u.color}">${u.name}</b><br>`;
+    html += `HP: ${u.hp}/${u.maxHp}<br>`;
+    html += `Armor: ${u.armor} | Range: ${u.attackRange}<br>`;
+    html += `Damage: ${u.dmin}-${u.dmax}<br>`;
+    if (cover > 0) html += `Cover: ${Math.round(cover * 100)}%<br>`;
+    if (u.hunker) html += `Hunkered (+50% DR)<br>`;
+    if (u.abil) html += `<br><i>${u.abil}: ${u.adesc}</i>`;
+
+    // Damage preview when targeting
+    if (G.state === 'postMove' && G.sel && u.team === TEAM_E && G.targets.includes(u)) {
+      const bonus = G.damageBonus;
+      const minD = Math.max(1, Math.round(G.sel.dmin * (1 + bonus) * (1 - Math.min(cover + (u.hunker ? 0.5 : 0), 0.9)) - u.armor));
+      const maxD = Math.max(1, Math.round(G.sel.dmax * (1 + bonus) * (1 - Math.min(cover + (u.hunker ? 0.5 : 0), 0.9)) - u.armor));
+      html += `<br><b style="color:#ffd33d">Est. damage: ${minD}-${maxD}</b>`;
+    }
+
+    tip.innerHTML = html;
+    tip.style.display = 'block';
+    tip.style.left = (mx + 16) + 'px';
+    tip.style.top = (my - 10) + 'px';
+  } else {
+    const terrain = MAP[r][c];
+    if (terrain === T.LCOVER) {
+      tip.innerHTML = 'Light Cover (25% DR)';
+      tip.style.display = 'block';
+    } else if (terrain === T.HCOVER) {
+      tip.innerHTML = 'Heavy Cover (50% DR)';
+      tip.style.display = 'block';
+    } else if (terrain === T.WALL) {
+      tip.innerHTML = 'Wall (impassable, blocks LOS)';
+      tip.style.display = 'block';
+    } else {
+      tip.style.display = 'none';
+      return;
+    }
+    tip.style.left = (mx + 16) + 'px';
+    tip.style.top = (my - 10) + 'px';
+  }
+}
+
+// ================================================================
+// RENDERER
+// ================================================================
+function render() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Terrain
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const x = c * CELL, y = r * CELL;
+      const t = MAP[r][c];
+
+      // Floor
+      ctx.fillStyle = (c + r) % 2 === 0 ? '#161b22' : '#13171e';
+      ctx.fillRect(x, y, CELL, CELL);
+
+      if (t === T.LCOVER) {
+        ctx.fillStyle = 'rgba(61, 107, 61, 0.12)';
+        ctx.fillRect(x, y, CELL, CELL);
+        ctx.fillStyle = '#3d6b3d';
+        ctx.fillRect(x + 6, y + CELL - 14, CELL - 12, 8);
+        ctx.fillStyle = '#4d8b4d';
+        ctx.fillRect(x + 6, y + CELL - 18, CELL - 12, 5);
+      }
+      else if (t === T.HCOVER) {
+        ctx.fillStyle = 'rgba(45, 125, 45, 0.12)';
+        ctx.fillRect(x, y, CELL, CELL);
+        ctx.fillStyle = '#2d7d2d';
+        ctx.fillRect(x + 4, y + CELL - 18, CELL - 8, 12);
+        ctx.fillStyle = '#3d9d3d';
+        ctx.fillRect(x + 4, y + CELL - 24, CELL - 8, 7);
+      }
+      else if (t === T.WALL) {
+        ctx.fillStyle = '#30363d';
+        ctx.fillRect(x, y, CELL, CELL);
+        ctx.fillStyle = '#3d444d';
+        ctx.fillRect(x, y, CELL, 3);
+        ctx.fillStyle = '#21262d';
+        ctx.fillRect(x, y + CELL - 3, CELL, 3);
+      }
+    }
+  }
+
+  // Grid lines
+  ctx.strokeStyle = '#21262d';
+  ctx.lineWidth = 1;
+  for (let r = 0; r <= ROWS; r++) {
+    ctx.beginPath(); ctx.moveTo(0, r * CELL); ctx.lineTo(W, r * CELL); ctx.stroke();
+  }
+  for (let c = 0; c <= COLS; c++) {
+    ctx.beginPath(); ctx.moveTo(c * CELL, 0); ctx.lineTo(c * CELL, H); ctx.stroke();
+  }
+
+  // === KAI TACTICAL OVERLAY ===
+  // Threat heatmap: show cells in enemy attack range (when player is deciding)
+  if (G.phase === 'player' && G.kaiOverlay) {
+    const enemies = aliveUnits(TEAM_E);
+    // Build threat map: how many enemies can hit each cell
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        if (isWall(c, r)) continue;
+        let threats = 0;
+        for (const e of enemies) {
+          if (inRange(e, c, r) && hasLOS(e.col, e.row, c, r)) threats++;
+        }
+        if (threats > 0) {
+          const x = c * CELL, y = r * CELL;
+          ctx.fillStyle = threats >= 3 ? 'rgba(248, 81, 73, 0.18)'
+                        : threats >= 2 ? 'rgba(248, 81, 73, 0.12)'
+                        : 'rgba(248, 81, 73, 0.06)';
+          ctx.fillRect(x + 1, y + 1, CELL - 2, CELL - 2);
+        }
+      }
+    }
+    // Safe cover indicator: cover tiles with 0 threats
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const terrain = MAP[r][c];
+        if (terrain !== T.LCOVER && terrain !== T.HCOVER) continue;
+        let threats = 0;
+        for (const e of enemies) {
+          if (inRange(e, c, r) && hasLOS(e.col, e.row, c, r)) threats++;
+        }
+        if (threats === 0) {
+          const x = c * CELL, y = r * CELL;
+          ctx.strokeStyle = 'rgba(63, 185, 80, 0.4)';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(x + 3, y + 3, CELL - 6, CELL - 6);
+        }
+      }
+    }
+    // Danger pips on exposed friendly units
+    for (const u of aliveUnits(TEAM_P)) {
+      let threats = 0;
+      for (const e of enemies) {
+        if (inRange(e, u.col, u.row) && hasLOS(e.col, e.row, u.col, u.row)) threats++;
+      }
+      if (threats > 0 && coverAt(u.col, u.row) === 0) {
+        // Draw warning triangle above unit
+        const x = u.col * CELL + CELL / 2;
+        const y = u.row * CELL + 4;
+        ctx.fillStyle = '#f0883e';
+        ctx.font = 'bold 12px Consolas';
+        ctx.textAlign = 'center';
+        ctx.fillText('⚠' + threats, x, y + 10);
+      }
+    }
+  }
+
+  // Movement highlights
+  if (G.state === 'selectMove' && G.reach) {
+    for (const [key] of G.reach) {
+      const [c, r] = key.split(',').map(Number);
+      if (c === G.sel.col && r === G.sel.row) continue;
+      ctx.fillStyle = 'rgba(31, 111, 235, 0.2)';
+      ctx.fillRect(c * CELL + 1, r * CELL + 1, CELL - 2, CELL - 2);
+    }
+    // Path preview on hover
+    if (G.hoverCol >= 0 && G.reach.has(`${G.hoverCol},${G.hoverRow}`)) {
+      const path = getPath(G.reach, `${G.hoverCol},${G.hoverRow}`);
+      for (const p of path) {
+        ctx.fillStyle = 'rgba(31, 111, 235, 0.35)';
+        ctx.fillRect(p.c * CELL + 1, p.r * CELL + 1, CELL - 2, CELL - 2);
+      }
+    }
+  }
+
+  // Attack highlights
+  if (G.state === 'postMove' && G.targets.length > 0) {
+    for (const t of G.targets) {
+      ctx.fillStyle = 'rgba(248, 81, 73, 0.25)';
+      ctx.fillRect(t.col * CELL + 1, t.row * CELL + 1, CELL - 2, CELL - 2);
+      // Crosshair
+      const cx = t.col * CELL + CELL / 2, cy = t.row * CELL + CELL / 2;
+      ctx.strokeStyle = 'rgba(248, 81, 73, 0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(cx - 8, cy); ctx.lineTo(cx + 8, cy);
+      ctx.moveTo(cx, cy - 8); ctx.lineTo(cx, cy + 8);
+      ctx.stroke();
+    }
+  }
+
+  // Units
+  for (const u of G.units) {
+    if (!u.alive) continue;
+    const cx = u.col * CELL + CELL / 2;
+    const cy = u.row * CELL + CELL / 2;
+    const rad = CELL / 2 - 7;
+
+    // Selection ring
+    if (G.sel === u) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, rad + 4, 0, Math.PI * 2);
+      ctx.strokeStyle = '#ffd33d';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    }
+
+    // Hover ring
+    if (G.hoverCol === u.col && G.hoverRow === u.row && G.sel !== u) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, rad + 3, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    // Unit body
+    ctx.beginPath();
+    ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+    const alpha = u.acted ? 0.45 : 1;
+    ctx.fillStyle = u.acted ? dimColor(u.color, 0.45) : u.color;
+    ctx.fill();
+    ctx.strokeStyle = u.team === TEAM_P ? 'rgba(201,209,217,0.7)' : 'rgba(110,64,64,0.7)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Hunker indicator
+    if (u.hunker) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, rad + 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(63, 185, 80, 0.6)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // Symbol
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 16px Consolas';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(u.sym, cx, cy + 1);
+
+    // HP bar
+    const barW = CELL - 14;
+    const barH = 3;
+    const barX = u.col * CELL + 7;
+    const barY = u.row * CELL + CELL - 7;
+    const hpR = u.hp / u.maxHp;
+    ctx.fillStyle = '#0d1117';
+    ctx.fillRect(barX - 1, barY - 1, barW + 2, barH + 2);
+    ctx.fillStyle = hpR > 0.6 ? '#3fb950' : hpR > 0.3 ? '#d29922' : '#f85149';
+    ctx.fillRect(barX, barY, barW * hpR, barH);
+  }
+
+  // Floating damage texts
+  ctx.font = 'bold 14px Consolas';
+  ctx.textAlign = 'center';
+  for (let i = G.floats.length - 1; i >= 0; i--) {
+    const f = G.floats[i];
+    f.age++;
+    f.y -= 0.8;
+    const a = Math.max(0, 1 - f.age / 50);
+    ctx.globalAlpha = a;
+    ctx.fillStyle = f.color;
+    ctx.fillText(f.text, f.x, f.y);
+    if (f.age >= 50) G.floats.splice(i, 1);
+  }
+  ctx.globalAlpha = 1;
+}
+
+function dimColor(hex, factor) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${factor})`;
+}
+
+// ================================================================
+// ANIMATION LOOP
+// ================================================================
+function gameLoop() {
+  render();
+  requestAnimationFrame(gameLoop);
+}
+
+// ================================================================
+// SPRINT MODE HANDLER
+// ================================================================
+// Override click handler to detect sprint completion
+const originalHandleClick = handleClick;
+window.handleClickOverride = function(col, row) {
+  if (G._sprintMode && G.state === 'selectMove') {
+    const key = `${col},${row}`;
+    if (col === G.sel.col && row === G.sel.row) {
+      // Stay after sprint — end turn
+      G._sprintMode = false;
+      render();
+      setTimeout(() => endUnitTurn(), 200);
+      return;
+    }
+    if (G.reach && G.reach.has(key) && !unitAt(col, row, TEAM_P)) {
+      G.sel.col = col;
+      G.sel.row = row;
+      G._sprintMode = false;
+      render();
+      setTimeout(() => endUnitTurn(), 200);
+      return;
+    }
+    // Invalid click during sprint — do nothing
+    return;
+  }
+  handleClick(col, row);
+};
+
+// Re-bind canvas click to use override
+canvas.removeEventListener('click', () => {});
+canvas.onclick = function(e) {
+  if (G.phase !== 'player') return;
+  const rect = canvas.getBoundingClientRect();
+  const col = Math.floor((e.clientX - rect.left) / (rect.width / COLS));
+  const row = Math.floor((e.clientY - rect.top) / (rect.height / ROWS));
+  if (!inBounds(col, row)) return;
+  if (G._sprintMode) {
+    window.handleClickOverride(col, row);
+  } else {
+    handleClick(col, row);
+  }
+};
+
+// ================================================================
+// INITIALIZATION
+// ================================================================
+function init() {
+  // Player units — left side
+  G.units.push(makeUnit('vanguard', 1, 4, TEAM_P));
+  G.units.push(makeUnit('marksman', 1, 1, TEAM_P));
+  G.units.push(makeUnit('phantom',  1, 8, TEAM_P));
+
+  // Enemy units — right side
+  G.units.push(makeUnit('raider',   10, 0, TEAM_E));
+  G.units.push(makeUnit('raider',   10, 9, TEAM_E));
+  G.units.push(makeUnit('raider',    9, 5, TEAM_E));
+  G.units.push(makeUnit('enforcer',  9, 4, TEAM_E));
+  G.units.push(makeUnit('sniper',   10, 2, TEAM_E));
+
+  // Initial Kai briefing — personal, not clinical
+  addKaiMsg('strategic', 'Five hostiles. The sniper worries me most — long range, top right, clear sightlines. One bad step and we lose someone.');
+  addKaiMsg('strategic', 'I think Vanguard should hold the center choke. Marksman needs to get close enough to reach that sniper — use the cover. Phantom can flank south but be careful, it\'s exposed out there.');
+  addKaiMsg('system', 'Click a unit → click a blue tile to move → click an enemy to attack. Hover for details. Green borders = safe cover. Red zones = danger.');
+  addKaiMsg('reaction', 'Let\'s bring everyone home.');
+
+  updateButtons();
+  updateInfo();
+  render();
+  requestAnimationFrame(gameLoop);
+}
+
+init();
+</script>
+</body>
+</html>
