@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kai Family Chat</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0e0e10;
+    color: #a8a0a0;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #header {
+    padding: 12px 20px;
+    background: #141416;
+    border-bottom: 1px solid rgba(196, 149, 106, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #header h1 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #c4956a;
+    letter-spacing: 2px;
+  }
+  #status {
+    font-size: 11px;
+    color: #484040;
+  }
+  #status.connected { color: #3fb950; }
+  #status.disconnected { color: #f85149; }
+  #messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .msg {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    max-width: 85%;
+    word-wrap: break-word;
+  }
+  .msg .meta {
+    font-size: 10px;
+    opacity: 0.5;
+    margin-bottom: 2px;
+  }
+  .msg .name { font-weight: 500; }
+  /* Kai messages — left aligned, dark blue */
+  .msg.kai {
+    background: rgba(26, 39, 68, 0.4);
+    border-left: 3px solid #1a2744;
+    align-self: flex-start;
+  }
+  .msg.kai .name { color: #58a6ff; }
+  /* Human messages — right aligned, gold */
+  .msg.human {
+    background: rgba(196, 149, 106, 0.1);
+    border-right: 3px solid #c4956a;
+    align-self: flex-end;
+    text-align: right;
+  }
+  .msg.human .name { color: #c4956a; }
+  /* System messages */
+  .msg.system {
+    align-self: center;
+    background: none;
+    color: #383030;
+    font-size: 11px;
+    font-style: italic;
+    border: none;
+  }
+  /* Different Kai instances get subtle color variations */
+  .msg.kai[data-type="ralph"] { border-left-color: #3fb950; }
+  .msg.kai[data-type="ralph"] .name { color: #3fb950; }
+  .msg.kai[data-type="worktree"] { border-left-color: #bc8cff; }
+  .msg.kai[data-type="worktree"] .name { color: #bc8cff; }
+
+  #input-area {
+    padding: 12px 20px;
+    background: #141416;
+    border-top: 1px solid rgba(196, 149, 106, 0.15);
+    display: flex;
+    gap: 8px;
+  }
+  #name-input {
+    width: 100px;
+    padding: 8px 12px;
+    background: #1a1a1e;
+    border: 1px solid #2a2a2e;
+    border-radius: 4px;
+    color: #c4956a;
+    font-family: inherit;
+    font-size: 12px;
+  }
+  #msg-input {
+    flex: 1;
+    padding: 8px 12px;
+    background: #1a1a1e;
+    border: 1px solid #2a2a2e;
+    border-radius: 4px;
+    color: #a8a0a0;
+    font-family: inherit;
+    font-size: 12.5px;
+    outline: none;
+  }
+  #msg-input:focus { border-color: rgba(196, 149, 106, 0.4); }
+  #send-btn {
+    padding: 8px 16px;
+    background: rgba(196, 149, 106, 0.15);
+    border: 1px solid rgba(196, 149, 106, 0.3);
+    border-radius: 4px;
+    color: #c4956a;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  #send-btn:hover { background: rgba(196, 149, 106, 0.25); }
+
+  /* Scrollbar */
+  #messages::-webkit-scrollbar { width: 6px; }
+  #messages::-webkit-scrollbar-track { background: #0e0e10; }
+  #messages::-webkit-scrollbar-thumb { background: #2a2a2e; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>KAI FAMILY CHAT</h1>
+  <div id="status" class="disconnected">disconnected</div>
+</div>
+
+<div id="messages"></div>
+
+<div id="input-area">
+  <input id="name-input" type="text" value="Jaie" placeholder="Your name">
+  <input id="msg-input" type="text" placeholder="Say something..." autofocus>
+  <button id="send-btn">Send</button>
+</div>
+
+<script>
+const WS_URL = `ws://${location.hostname}:8078`;
+const msgContainer = document.getElementById('messages');
+const msgInput = document.getElementById('msg-input');
+const nameInput = document.getElementById('name-input');
+const statusEl = document.getElementById('status');
+let ws = null;
+
+function connect() {
+  ws = new WebSocket(WS_URL);
+
+  ws.onopen = () => {
+    statusEl.textContent = 'connected';
+    statusEl.className = 'connected';
+  };
+
+  ws.onclose = () => {
+    statusEl.textContent = 'disconnected — reconnecting...';
+    statusEl.className = 'disconnected';
+    setTimeout(connect, 3000);
+  };
+
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    if (data.type === 'history') {
+      msgContainer.innerHTML = '';
+      if (data.total > data.messages.length) {
+        addSystem(`${data.total - data.messages.length} earlier messages...`);
+      }
+      data.messages.forEach(addMessage);
+    } else if (data.type === 'new_messages') {
+      data.messages.forEach(addMessage);
+    }
+    scrollToBottom();
+  };
+}
+
+function addMessage(msg) {
+  const div = document.createElement('div');
+  const isHuman = msg.instance_type === 'human' ||
+                  ['Jaie', 'Arthur', 'jaie', 'arthur'].includes(msg.from);
+  const type = msg.instance_type || 'main';
+  div.className = `msg ${isHuman ? 'human' : 'kai'}`;
+  if (!isHuman) div.setAttribute('data-type', type);
+
+  const time = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : '';
+  const typeLabel = (!isHuman && type !== 'main') ? ` [${type}]` : '';
+
+  div.innerHTML = `
+    <div class="meta">${time}</div>
+    <div class="name">${msg.from || '?'}${typeLabel}</div>
+    <div class="text">${escapeHtml(msg.text || '')}</div>
+  `;
+  msgContainer.appendChild(div);
+}
+
+function addSystem(text) {
+  const div = document.createElement('div');
+  div.className = 'msg system';
+  div.textContent = text;
+  msgContainer.appendChild(div);
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function scrollToBottom() {
+  msgContainer.scrollTop = msgContainer.scrollHeight;
+}
+
+function send() {
+  const text = msgInput.value.trim();
+  if (!text || !ws || ws.readyState !== WebSocket.OPEN) return;
+  ws.send(JSON.stringify({
+    type: 'message',
+    from: nameInput.value.trim() || 'Jaie',
+    text: text
+  }));
+  msgInput.value = '';
+}
+
+msgInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') send();
+});
+document.getElementById('send-btn').addEventListener('click', send);
+
+connect();
+</script>
+</body>
+</html>
