@@ -1,0 +1,11 @@
+<!DOCTYPE html><html><head><title>030 — Balloon</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:#d0e4f4;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.balloon{width:60px;height:75px;border-radius:50% 50% 45% 45%;background:radial-gradient(ellipse at 35% 30%,#f0c040,#d4a020);position:relative;animation:float 4s ease-in-out infinite}
+.string{width:1px;height:100px;background:rgba(80,80,80,0.2);margin-top:-2px}
+.knot{width:6px;height:6px;background:rgba(180,150,40,0.5);clip-path:polygon(50% 0,100% 100%,0 100%)}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-15px) rotate(2deg)}}</style>
+</head><body>
+<div class="balloon"></div>
+<div class="knot"></div>
+<div class="string"></div>
+</body></html>

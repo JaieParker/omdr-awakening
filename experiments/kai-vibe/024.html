@@ -1,0 +1,57 @@
+<!DOCTYPE html><html><head><title>024 — Dandelion</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:linear-gradient(to bottom,#d8e8f0 0%,#c8dce8 50%,#90a880 85%,#708060 100%);overflow:hidden}</style></head>
+<body><canvas id="c" width="1200" height="800"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+// Dandelion seeds floating upward
+const seeds=[];
+for(let i=0;i<30;i++){
+  seeds.push({
+    x:500+Math.random()*200,
+    y:600-Math.random()*100,
+    vx:(Math.random()-0.5)*0.3,
+    vy:-0.3-Math.random()*0.5,
+    size:2+Math.random()*3,
+    wobble:Math.random()*Math.PI*2
+  });
+}
+// Stem
+x.beginPath();x.moveTo(600,780);
+x.quadraticCurveTo(598,700,600,620);
+x.strokeStyle='rgba(80,100,60,0.4)';x.lineWidth=2;x.stroke();
+// Seed head (mostly empty — seeds are leaving)
+x.beginPath();x.arc(600,618,8,0,Math.PI*2);
+x.fillStyle='rgba(220,220,210,0.3)';x.fill();
+
+let t=0;
+function draw(){
+  // Don't clear — let seeds leave traces
+  x.fillStyle='rgba(216,232,240,0.02)';
+  x.fillRect(0,0,1200,500);
+
+  for(const s of seeds){
+    s.x+=s.vx+Math.sin(t*0.01+s.wobble)*0.2;
+    s.y+=s.vy;
+    s.wobble+=0.02;
+
+    // Draw seed — tiny star shape
+    x.save();x.translate(s.x,s.y);
+    x.strokeStyle='rgba(180,180,170,0.3)';x.lineWidth=0.3;
+    for(let a=0;a<Math.PI*2;a+=Math.PI/4){
+      x.beginPath();x.moveTo(0,0);
+      x.lineTo(Math.cos(a)*s.size*3,Math.sin(a)*s.size*3);
+      x.stroke();
+    }
+    // Center dot
+    x.fillStyle='rgba(160,150,120,0.4)';
+    x.beginPath();x.arc(0,0,0.8,0,Math.PI*2);x.fill();
+    x.restore();
+
+    // Reset if off screen
+    if(s.y<-20){s.y=620;s.x=595+Math.random()*10;}
+  }
+  t++;
+  requestAnimationFrame(draw);
+}
+draw();
+</script></body></html>

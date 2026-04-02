@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><title>026 — Aurora</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:#0a0a18;overflow:hidden}</style></head>
+<body><canvas id="c" width="1200" height="800"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let t=0;
+function draw(){
+  x.fillStyle='rgba(10,10,24,0.05)';
+  x.fillRect(0,0,1200,800);
+  // Aurora curtains — vertical shimmers of green and purple
+  for(let i=0;i<5;i++){
+    const baseX=200+i*180+Math.sin(t*0.003+i*1.5)*60;
+    const sway=Math.sin(t*0.005+i*0.8)*40;
+    x.beginPath();
+    for(let y=50;y<500;y+=3){
+      const wave=Math.sin(y*0.008+t*0.004+i)*30+sway;
+      const fade=Math.sin((y-50)/450*Math.PI);
+      if(y===50)x.moveTo(baseX+wave,y);
+      else x.lineTo(baseX+wave,y);
+    }
+    const hue=120+i*30+Math.sin(t*0.002)*20; // green to purple
+    x.strokeStyle=`hsla(${hue},60%,50%,${0.06+0.03*Math.sin(t*0.01+i)})`;
+    x.lineWidth=40+Math.sin(t*0.007+i)*10;
+    x.stroke();
+    // Bright core
+    x.strokeStyle=`hsla(${hue},50%,70%,${0.02+0.01*Math.sin(t*0.015+i)})`;
+    x.lineWidth=8;
+    x.stroke();
+  }
+  // Stars behind
+  if(t===1){
+    for(let i=0;i<100;i++){
+      x.fillStyle=`rgba(200,210,230,${0.1+Math.random()*0.3})`;
+      x.beginPath();x.arc(Math.random()*1200,Math.random()*400,Math.random()*1,0,Math.PI*2);x.fill();
+    }
+  }
+  t++;requestAnimationFrame(draw);
+}
+draw();
+</script></body></html>

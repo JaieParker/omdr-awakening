@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><title>027 — Kite</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:linear-gradient(to bottom,#c0d8f0 0%,#d8e8f4 100%);overflow:hidden}</style></head>
+<body><canvas id="c" width="1200" height="800"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let t=0;
+function draw(){
+  x.clearRect(0,0,1200,800);
+  // Kite position — figure-8 pattern in the sky
+  const kx=600+Math.sin(t*0.008)*200;
+  const ky=200+Math.sin(t*0.016)*80+Math.sin(t*0.005)*30;
+  // Kite shape — diamond
+  const tilt=Math.sin(t*0.01)*0.3;
+  x.save();x.translate(kx,ky);x.rotate(tilt);
+  x.beginPath();
+  x.moveTo(0,-20);x.lineTo(12,0);x.lineTo(0,25);x.lineTo(-12,0);x.closePath();
+  x.fillStyle='rgba(200,80,60,0.7)';x.fill();
+  x.strokeStyle='rgba(160,60,40,0.5)';x.lineWidth=0.5;x.stroke();
+  // Cross struts
+  x.beginPath();x.moveTo(0,-20);x.lineTo(0,25);x.moveTo(-12,0);x.lineTo(12,0);
+  x.strokeStyle='rgba(100,50,30,0.3)';x.lineWidth=0.5;x.stroke();
+  // Tail
+  x.beginPath();x.moveTo(0,25);
+  for(let i=1;i<=8;i++){
+    x.lineTo(Math.sin(t*0.02+i*0.8)*8*i/4, 25+i*12);
+  }
+  x.strokeStyle='rgba(200,80,60,0.3)';x.lineWidth=1;x.stroke();
+  x.restore();
+  // String — from kite to bottom of screen
+  x.beginPath();x.moveTo(kx,ky+25);
+  x.quadraticCurveTo(kx+20,500,600,790);
+  x.strokeStyle='rgba(80,80,80,0.1)';x.lineWidth=0.5;x.stroke();
+
+  t++;requestAnimationFrame(draw);
+}
+draw();
+</script></body></html>

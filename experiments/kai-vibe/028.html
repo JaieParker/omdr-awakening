@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><title>028 — Thermal</title>
+<style>*{margin:0;padding:0}body{height:100vh;background:linear-gradient(to bottom,#a8c8e8 0%,#d0e0f0 60%,#e0d8c8 95%,#c8b8a0 100%);overflow:hidden}</style></head>
+<body><canvas id="c" width="1200" height="800"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let t=0;
+// Birds circling in a thermal — spiraling upward
+const birds=[];
+for(let i=0;i<12;i++){
+  birds.push({
+    angle:i/12*Math.PI*2,
+    radius:40+Math.random()*30,
+    height:600-Math.random()*100,
+    riseSpeed:0.3+Math.random()*0.2,
+    orbitSpeed:0.008+Math.random()*0.003,
+    wingPhase:Math.random()*Math.PI*2
+  });
+}
+function draw(){
+  x.clearRect(0,0,1200,800);
+  for(const b of birds){
+    b.angle+=b.orbitSpeed;
+    b.height-=b.riseSpeed;
+    b.radius+=Math.sin(b.angle*2)*0.3;// wobble
+    if(b.height<-30){b.height=650;b.radius=40+Math.random()*30;}
+    const bx=600+Math.cos(b.angle)*b.radius*(1+b.height/2000);
+    const by=b.height;
+    const scale=0.5+b.height/1200;
+    const wing=Math.sin(t*0.03+b.wingPhase)*4*scale;
+    // Simple bird — two arcs
+    x.beginPath();
+    x.moveTo(bx-8*scale,by+wing);
+    x.quadraticCurveTo(bx-3*scale,by-2*scale,bx,by);
+    x.quadraticCurveTo(bx+3*scale,by-2*scale,bx+8*scale,by+wing);
+    x.strokeStyle=`rgba(40,35,30,${0.2+0.3*scale})`;
+    x.lineWidth=1.2*scale;x.stroke();
+  }
+  // Thermal indicator — faint upward arrows
+  for(let y=700;y>100;y-=60){
+    const alpha=0.02*(1-y/800);
+    x.fillStyle=`rgba(180,160,140,${alpha})`;
+    x.beginPath();
+    x.moveTo(600,y);x.lineTo(604,y+8);x.lineTo(596,y+8);x.closePath();
+    x.fill();
+  }
+  t++;requestAnimationFrame(draw);
+}
+draw();
+</script></body></html>
