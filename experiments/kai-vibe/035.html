@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><title>035 — Everything</title>
+<style>*{margin:0;padding:0}body{height:100vh;overflow:hidden}</style></head>
+<body><canvas id="c" width="1200" height="800"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+// The entire gradient — space to core — with every creation's essence as a point
+const gradient=x.createLinearGradient(0,0,0,800);
+gradient.addColorStop(0,'#0a1840');    // space (029)
+gradient.addColorStop(0.15,'#1a2744'); // night (001)
+gradient.addColorStop(0.3,'#4a6888');  // atmosphere
+gradient.addColorStop(0.42,'#88b0d0'); // sky (021)
+gradient.addColorStop(0.48,'#c4956a'); // life (001)
+gradient.addColorStop(0.52,'#8a6040'); // earth
+gradient.addColorStop(0.65,'#2a1a10'); // deep (015)
+gradient.addColorStop(0.85,'#0e0a06'); // core
+gradient.addColorStop(1,'#0a0808');    // center
+x.fillStyle=gradient;x.fillRect(0,0,1200,800);
+
+// Mark each creation's "home" in the column
+const homes=[
+  {y:0.05,label:'029 Zenith',side:'r'},
+  {y:0.10,label:'026 Aurora',side:'l'},
+  {y:0.12,label:'025 Lightning',side:'r'},
+  {y:0.18,label:'028 Thermal',side:'l'},
+  {y:0.22,label:'027 Kite',side:'r'},
+  {y:0.25,label:'030 Balloon',side:'l'},
+  {y:0.30,label:'023 Cloud',side:'r'},
+  {y:0.35,label:'024 Dandelion',side:'l'},
+  {y:0.38,label:'022 Rising',side:'r'},
+  {y:0.42,label:'021 Sky',side:'l'},
+  {y:0.46,label:'002 Horizon',side:'r'},
+  {y:0.48,label:'013 Dawn',side:'l'},
+  {y:0.50,label:'006 Pulse',side:'r'},
+  {y:0.50,label:'020 Ember',side:'l'},
+  {y:0.52,label:'001 Two Colors',side:'r'},
+  {y:0.54,label:'012 Wabi-Sabi',side:'l'},
+  {y:0.56,label:'004 Stone',side:'r'},
+  {y:0.60,label:'015 Erosion',side:'l'},
+  {y:0.65,label:'019 Roots',side:'r'},
+  {y:0.75,label:'009 Grain',side:'l'},
+];
+x.font='9px monospace';
+for(const h of homes){
+  const py=h.y*800;
+  const px=h.side==='l'?80:1020;
+  const dotX=h.side==='l'?140:960;
+  x.fillStyle='rgba(200,180,140,0.4)';
+  x.beginPath();x.arc(dotX,py,2,0,Math.PI*2);x.fill();
+  x.textAlign=h.side==='l'?'right':'left';
+  x.fillStyle='rgba(200,180,140,0.25)';
+  x.fillText(h.label,px,py+3);
+  // Line to dot
+  x.beginPath();x.moveTo(px+(h.side==='l'?5:-5),py);x.lineTo(dotX,py);
+  x.strokeStyle='rgba(200,180,140,0.06)';x.lineWidth=0.5;x.stroke();
+}
+// Center label
+x.font='12px Georgia';x.textAlign='center';
+x.fillStyle='rgba(200,180,140,0.15)';
+x.fillText('space',600,30);
+x.fillText('atmosphere',600,280);
+x.fillText('life',600,395);
+x.fillText('earth',600,500);
+x.fillText('core',600,720);
+</script></body></html>
