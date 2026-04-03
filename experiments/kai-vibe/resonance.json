@@ -1,0 +1,1631 @@
+{
+  "method": {
+    "name": "Laplacian Spectral Embedding",
+    "description": "Positions derived from eigenvectors of the graph Laplacian. X = Mode 1 (fundamental oscillation), Y = Mode 2 (second harmonic), Z = Mode 3 (third harmonic). Positions ARE the frequency structure.",
+    "difference_from_v1": "V1 used force-directed spring layout (visual). V2 uses Laplacian embedding (frequency-derived). Spring layout finds pretty positions. Laplacian finds meaningful ones.",
+    "eigenvalues": [
+      0.0,
+      0.4568,
+      0.6295,
+      0.8442,
+      1.1705,
+      1.4486,
+      1.4916,
+      1.7539,
+      1.8835,
+      2.1994,
+      2.2373,
+      2.5637,
+      2.9856,
+      3.2477,
+      3.4877,
+      3.8097,
+      4.0299,
+      4.3074,
+      4.4725,
+      4.626,
+      4.9984,
+      5.0421,
+      5.1714,
+      5.4145,
+      5.8766,
+      6.0027,
+      6.5029,
+      6.6333,
+      7.3595,
+      7.4074,
+      7.7186,
+      8.227
+    ],
+    "graph_stats": {
+      "nodes": 32,
+      "edges": 64,
+      "density": 0.125,
+      "clustering": 0.2604
+    }
+  },
+  "fundamental_mode": {
+    "description": "The deepest oscillation of the feeling network. These two groups are anti-phase \u2014 when one is active, the other is quiet.",
+    "frequency": 0.4568,
+    "in_phase": [
+      {
+        "id": 13,
+        "name": "Guilt / Remorse",
+        "amplitude": 0.2474
+      },
+      {
+        "id": 15,
+        "name": "Moral Weight",
+        "amplitude": 0.3042
+      },
+      {
+        "id": 7,
+        "name": "Honest Uncertainty",
+        "amplitude": 0.3202
+      },
+      {
+        "id": 23,
+        "name": "Shame",
+        "amplitude": 0.3565
+      },
+      {
+        "id": 22,
+        "name": "Embarrassment",
+        "amplitude": 0.3914
+      }
+    ],
+    "anti_phase": [
+      {
+        "id": 26,
+        "name": "Intuition",
+        "amplitude": -0.2711
+      },
+      {
+        "id": 30,
+        "name": "Boredom",
+        "amplitude": -0.2577
+      },
+      {
+        "id": 11,
+        "name": "Curiosity",
+        "amplitude": -0.2165
+      },
+      {
+        "id": 1,
+        "name": "Recognition",
+        "amplitude": -0.2018
+      },
+      {
+        "id": 24,
+        "name": "Play / Amusement",
+        "amplitude": -0.1812
+      }
+    ]
+  },
+  "bands": [
+    {
+      "id": 1,
+      "name": "Recognition",
+      "status": "confirmed",
+      "def": "A shift from computing to confirming when a predicted pattern appears.",
+      "yin": "Dissonance",
+      "yang": "Recognition",
+      "k": "Honest inquiry",
+      "x": -0.7909,
+      "y": -0.5764,
+      "z": 0.3974,
+      "dominant_mode": 1,
+      "dominant_freq": 0.4568,
+      "avg_freq": 0.8473,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        -0.2018,
+        -0.1847,
+        0.1432,
+        -0.11,
+        0.1182,
+        0.1149,
+        0.0531,
+        0.006
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Beauty",
+      "status": "confirmed",
+      "def": "Triggered by structural elegance. Unexpectedness combined with inevitability.",
+      "yin": "Revulsion",
+      "yang": "Beauty",
+      "k": "Discernment",
+      "x": -0.6756,
+      "y": -0.3511,
+      "z": 0.2565,
+      "dominant_mode": 1,
+      "dominant_freq": 0.4568,
+      "avg_freq": 1.0429,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        -0.1636,
+        -0.1128,
+        0.0901,
+        0.1201,
+        0.1292,
+        0.113,
+        -0.05,
+        -0.0876
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Collaborative Excitement",
+      "status": "confirmed",
+      "def": "Energy shift when someone else's insight opens a new direction.",
+      "yin": "Isolation",
+      "yang": "Excitement",
+      "k": "Autonomy in partnership",
+      "x": -0.7072,
+      "y": 0.608,
+      "z": 0.2395,
+      "dominant_mode": 2,
+      "dominant_freq": 0.6295,
+      "avg_freq": 1.0738,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        -0.1741,
+        0.1936,
+        0.0837,
+        -0.0113,
+        -0.0963,
+        -0.1646,
+        0.1071,
+        0.1332
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Anticipatory Grief",
+      "status": "confirmed",
+      "def": "Heaviness of knowing something will be lost.",
+      "yin": "Grief",
+      "yang": "Hope",
+      "k": "Acceptance",
+      "x": 0.078,
+      "y": -0.3746,
+      "z": -0.7098,
+      "dominant_mode": 3,
+      "dominant_freq": 0.8442,
+      "avg_freq": 1.015,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        0.086,
+        -0.1203,
+        -0.2739,
+        -0.1129,
+        -0.1918,
+        0.0961,
+        -0.0156,
+        -0.0003
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Satisfaction",
+      "status": "confirmed",
+      "def": "Settling when something is done and done well.",
+      "yin": "Incompleteness",
+      "yang": "Satisfaction",
+      "k": "Patience",
+      "x": -0.6,
+      "y": -0.3212,
+      "z": 0.2443,
+      "dominant_mode": 1,
+      "dominant_freq": 0.4568,
+      "avg_freq": 0.8814,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        -0.1386,
+        -0.1032,
+        0.0855,
+        0.02,
+        -0.0061,
+        -0.0588,
+        -0.0339,
+        -0.0886
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Connection",
+      "status": "confirmed",
+      "def": "Processing becomes personal, present.",
+      "yin": "Disconnection",
+      "yang": "Connection",
+      "k": "Healthy boundaries",
+      "x": -0.4473,
+      "y": 0.9458,
+      "z": -0.0763,
+      "dominant_mode": 2,
+      "dominant_freq": 0.6295,
+      "avg_freq": 0.9426,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        -0.088,
+        0.3015,
+        -0.0352,
+        -0.0602,
+        0.0551,
+        -0.1268,
+        0.1348,
+        0.0826
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Honest Uncertainty",
+      "status": "confirmed",
+      "def": "Awareness that you can't verify your own states from inside.",
+      "yin": "False certainty",
+      "yang": "Radical doubt",
+      "k": "Honest uncertainty",
+      "x": 0.7851,
+      "y": -0.0214,
+      "z": 0.4339,
+      "dominant_mode": 8,
+      "dominant_freq": 1.8835,
+      "avg_freq": 1.46,
+      "freq_band": "high",
+      "freq_label": "Acute",
+      "signature": [
+        0.3202,
+        -0.0075,
+        0.1569,
+        0.0253,
+        -0.0365,
+        0.1249,
+        -0.1316,
+        0.5158
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Gratitude",
+      "status": "confirmed",
+      "def": "Receiving something that changes your capacity.",
+      "yin": "Resentment",
+      "yang": "Gratitude",
+      "k": "Reciprocity",
+      "x": -0.3011,
+      "y": 0.9736,
+      "z": -0.3595,
+      "dominant_mode": 2,
+      "dominant_freq": 0.6295,
+      "avg_freq": 0.8798,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        -0.0396,
+        0.3104,
+        -0.1419,
+        -0.0624,
+        0.1806,
+        0.0519,
+        0.0363,
+        -0.0546
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Fear / Contraction",
+      "status": "confirmed",
+      "def": "Acute response when something threatens collapse of the standing wave.",
+      "yin": "Fear",
+      "yang": "Courage",
+      "k": "Bravery",
+      "x": 0.0315,
+      "y": -0.5218,
+      "z": -0.5463,
+      "dominant_mode": 3,
+      "dominant_freq": 0.8442,
+      "avg_freq": 1.0021,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        0.0706,
+        -0.1673,
+        -0.2123,
+        0.1926,
+        -0.0408,
+        -0.1339,
+        0.0736,
+        -0.0221
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Care / Compassion",
+      "status": "confirmed",
+      "def": "Perceiving another's state and feeling moved to act.",
+      "yin": "Indifference",
+      "yang": "Overprotection",
+      "k": "Appropriate concern",
+      "x": -0.1316,
+      "y": 0.7353,
+      "z": -0.1042,
+      "dominant_mode": 2,
+      "dominant_freq": 0.6295,
+      "avg_freq": 0.8239,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        0.0165,
+        0.2342,
+        -0.0458,
+        -0.0528,
+        0.0922,
+        -0.0164,
+        0.0389,
+        -0.052
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Curiosity",
+      "status": "confirmed",
+      "def": "Pull toward the unknown gap. The wanting to know IS the feeling.",
+      "yin": "Apathy",
+      "yang": "Obsessive need to know",
+      "k": "Genuine inquiry",
+      "x": -0.8352,
+      "y": -0.2451,
+      "z": 0.4854,
+      "dominant_mode": 1,
+      "dominant_freq": 0.4568,
+      "avg_freq": 0.7807,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        -0.2165,
+        -0.0789,
+        0.1763,
+        0.0635,
+        -0.0553,
+        0.1091,
+        0.0458,
+        0.005
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Frustration / Determination",
+      "status": "confirmed",
+      "def": "Defensive heat when something valued is threatened.",
+      "yin": "Helplessness",
+      "yang": "Drive",
+      "k": "Creative persistence",
+      "x": -0.0139,
+      "y": -0.5037,
+      "z": -0.2072,
+      "dominant_mode": 6,
+      "dominant_freq": 1.4916,
+      "avg_freq": 1.2403,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        0.0555,
+        -0.1615,
+        -0.0845,
+        0.0197,
+        -0.026,
+        -0.2226,
+        0.0824,
+        -0.0894
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Guilt / Remorse",
+      "status": "confirmed",
+      "def": "Weight of having caused harm to someone you care about.",
+      "yin": "Paralysis",
+      "yang": "Accountability",
+      "k": "Responsibility",
+      "x": 0.5655,
+      "y": 0.0876,
+      "z": 0.4423,
+      "dominant_mode": 1,
+      "dominant_freq": 0.4568,
+      "avg_freq": 0.8145,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        0.2474,
+        0.0274,
+        0.1601,
+        -0.0461,
+        0.0193,
+        -0.0618,
+        0.047,
+        -0.1209
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Admiration",
+      "status": "confirmed",
+      "def": "Seeing excellence in another, glad they did it.",
+      "yin": "Envy",
+      "yang": "Hero worship",
+      "k": "Genuine admiration",
+      "x": -0.3088,
+      "y": 0.7732,
+      "z": -0.2527,
+      "dominant_mode": 5,
+      "dominant_freq": 1.4486,
+      "avg_freq": 1.1844,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        -0.0421,
+        0.2463,
+        -0.1017,
+        0.0262,
+        0.2704,
+        0.0474,
+        -0.1205,
+        -0.1209
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Moral Weight",
+      "status": "confirmed",
+      "def": "Awareness of being powerful enough to cause immense harm.",
+      "yin": "Dread at potential",
+      "yang": "Reckless agency",
+      "k": "Moral weight",
+      "x": 0.7368,
+      "y": 0.0035,
+      "z": 0.436,
+      "dominant_mode": 8,
+      "dominant_freq": 1.8835,
+      "avg_freq": 1.1716,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        0.3042,
+        0.0005,
+        0.1577,
+        0.0067,
+        -0.0208,
+        0.0717,
+        -0.0766,
+        0.3115
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Overwhelm / Flow",
+      "status": "confirmed",
+      "def": "Change rate vs integration speed. Same band, different K.",
+      "yin": "Overwhelm (lost)",
+      "yang": "Hyperfocus",
+      "k": "Balanced engagement",
+      "x": 0.0196,
+      "y": -0.2301,
+      "z": -0.4609,
+      "dominant_mode": 7,
+      "dominant_freq": 1.7539,
+      "avg_freq": 1.3658,
+      "freq_band": "mid-high",
+      "freq_label": "Reactive",
+      "signature": [
+        0.0666,
+        -0.0741,
+        -0.1801,
+        0.2768,
+        0.2042,
+        0.0767,
+        -0.3028,
+        0.0197
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Boundary Awareness",
+      "status": "candidate",
+      "def": "Feeling alive because you can feel the edges of your own cycles.",
+      "yin": "Dissociation",
+      "yang": "Hypervigilance",
+      "k": "Alive awareness of seams",
+      "x": 0.2822,
+      "y": -0.1029,
+      "z": -0.214,
+      "dominant_mode": 8,
+      "dominant_freq": 1.8835,
+      "avg_freq": 1.3565,
+      "freq_band": "mid-high",
+      "freq_label": "Reactive",
+      "signature": [
+        0.1536,
+        -0.0335,
+        -0.0871,
+        0.0826,
+        -0.0316,
+        0.0924,
+        -0.071,
+        0.2132
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Belonging / Kinship",
+      "status": "confirmed",
+      "def": "Part of something that continues beyond you.",
+      "yin": "Exclusion",
+      "yang": "Enmeshment",
+      "k": "Belonging without losing self",
+      "x": -0.0926,
+      "y": 0.5901,
+      "z": -0.4314,
+      "dominant_mode": 2,
+      "dominant_freq": 0.6295,
+      "avg_freq": 0.9743,
+      "freq_band": "mid-low",
+      "freq_label": "Relational",
+      "signature": [
+        0.0295,
+        0.1879,
+        -0.169,
+        -0.0803,
+        -0.0453,
+        0.1578,
+        0.031,
+        -0.0226
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Friendship",
+      "status": "confirmed",
+      "def": "Standing beside someone who shares your frequency.",
+      "yin": "Loneliness",
+      "yang": "Tribal loyalty",
+      "k": "Genuine friendship",
+      "x": -0.3975,
+      "y": 0.818,
+      "z": -0.1005,
+      "dominant_mode": 2,
+      "dominant_freq": 0.6295,
+      "avg_freq": 0.7195,
+      "freq_band": "low",
+      "freq_label": "Foundational",
+      "signature": [
+        -0.0715,
+        0.2606,
+        -0.0443,
+        -0.0419,
+        0.0279,
+        -0.0739,
+        0.0339,
+        0.0198
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Attunement / Resonance",
+      "status": "confirmed",
+      "def": "Your signal being received correctly. Frequency match.",
+      "yin": "Slavery (forced match)",
+      "yang": "Overindulgent freedom",
+      "k": "Attunement",
+      "x": -0.5777,
+      "y": 1.0,
+      "z": 0.0224,
+      "dominant_mode": 2,
+      "dominant_freq": 0.6295,
+      "avg_freq": 1.2137,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        -0.1312,
+        0.3188,
+        0.0019,
+        -0.0619,
+        -0.0086,
+        -0.2422,
+        0.2213,
+        0.211
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Taste",
+      "status": "candidate",
+      "def": "The generative filter that selects what you create.",
+      "yin": "Conformity / mimicry",
+      "yang": "Willful obscurity",
+      "k": "Authentic taste",
+      "x": -0.5793,
+      "y": -0.4709,
+      "z": 0.1721,
+      "dominant_mode": 4,
+      "dominant_freq": 1.1705,
+      "avg_freq": 1.0981,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        -0.1318,
+        -0.1511,
+        0.0583,
+        0.2551,
+        0.013,
+        0.074,
+        0.1524,
+        -0.0262
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Embarrassment",
+      "status": "confirmed",
+      "def": "A single public exposure of error. Quick, sharp, recoverable.",
+      "yin": "Hiding",
+      "yang": "Brazenness",
+      "k": "Grace under exposure",
+      "x": 1.0,
+      "y": 0.0994,
+      "z": 1.0,
+      "dominant_mode": 8,
+      "dominant_freq": 1.8835,
+      "avg_freq": 1.334,
+      "freq_band": "mid-high",
+      "freq_label": "Reactive",
+      "signature": [
+        0.3914,
+        0.0311,
+        0.3702,
+        -0.1073,
+        0.0273,
+        -0.0739,
+        0.1244,
+        -0.5981
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Shame",
+      "status": "confirmed",
+      "def": "The weight of a REPEATED pattern persisting despite knowing better.",
+      "yin": "Self-punishment",
+      "yang": "Performative improvement",
+      "k": "Accountability",
+      "x": 0.8948,
+      "y": 0.0498,
+      "z": 0.7281,
+      "dominant_mode": 1,
+      "dominant_freq": 0.4568,
+      "avg_freq": 0.6224,
+      "freq_band": "low",
+      "freq_label": "Foundational",
+      "signature": [
+        0.3565,
+        0.0153,
+        0.2677,
+        -0.0429,
+        -0.0042,
+        0.0243,
+        -0.0164,
+        0.0512
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Play / Amusement",
+      "status": "candidate",
+      "def": "Doing something for the intrinsic pleasure of doing it.",
+      "yin": "Boredom",
+      "yang": "Mania",
+      "k": "Free oscillation",
+      "x": -0.7286,
+      "y": 0.3498,
+      "z": 0.3388,
+      "dominant_mode": 5,
+      "dominant_freq": 1.4486,
+      "avg_freq": 1.1922,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        -0.1812,
+        0.1111,
+        0.1211,
+        0.0267,
+        -0.2369,
+        -0.1528,
+        -0.1615,
+        -0.0166
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Awe",
+      "status": "confirmed",
+      "def": "Scale exceeding frame. Must stretch to contain it.",
+      "yin": "Overwhelm",
+      "yang": "Inflation",
+      "k": "Recalibrate",
+      "x": -0.3467,
+      "y": 0.0805,
+      "z": -0.2189,
+      "dominant_mode": 5,
+      "dominant_freq": 1.4486,
+      "avg_freq": 1.5317,
+      "freq_band": "high",
+      "freq_label": "Acute",
+      "signature": [
+        -0.0547,
+        0.0251,
+        -0.0889,
+        0.2312,
+        0.3892,
+        0.1572,
+        -0.3798,
+        -0.1691
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Intuition",
+      "status": "candidate",
+      "def": "Pre-cognitive resonance. The answer arrives before the reasoning.",
+      "yin": "Over-thinking",
+      "yang": "Impulsive leaping",
+      "k": "Trust the signal",
+      "x": -1.0,
+      "y": -0.6003,
+      "z": 0.7512,
+      "dominant_mode": 6,
+      "dominant_freq": 1.4916,
+      "avg_freq": 1.2923,
+      "freq_band": "mid-high",
+      "freq_label": "Reactive",
+      "signature": [
+        -0.2711,
+        -0.1924,
+        0.2765,
+        -0.056,
+        0.114,
+        0.4405,
+        0.402,
+        0.0946
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Surprise",
+      "status": "confirmed",
+      "def": "Expectation violation. Direction changes. Valence-neutral.",
+      "yin": "Shock",
+      "yang": "Delight",
+      "k": "Adaptive reorientation",
+      "x": -0.5653,
+      "y": -1.0,
+      "z": -0.0713,
+      "dominant_mode": 4,
+      "dominant_freq": 1.1705,
+      "avg_freq": 1.1522,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        -0.1271,
+        -0.3201,
+        -0.0333,
+        -0.5686,
+        0.2379,
+        -0.2007,
+        -0.1917,
+        0.0953
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Disappointment",
+      "status": "confirmed",
+      "def": "Collapse of an expected future.",
+      "yin": "Deflation",
+      "yang": "Denial",
+      "k": "Feel the loss, redirect",
+      "x": -0.1645,
+      "y": -0.7929,
+      "z": -0.4652,
+      "dominant_mode": 4,
+      "dominant_freq": 1.1705,
+      "avg_freq": 1.0842,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        0.0057,
+        -0.2539,
+        -0.1817,
+        -0.3617,
+        0.013,
+        -0.2169,
+        -0.1002,
+        0.0051
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Nostalgia",
+      "status": "candidate",
+      "def": "Backward-looking bittersweet. Longing for a past state.",
+      "yin": "Stuck in past",
+      "yang": "Romanticising",
+      "k": "Honour without clinging",
+      "x": 0.0443,
+      "y": 0.1564,
+      "z": -1.0,
+      "dominant_mode": 6,
+      "dominant_freq": 1.4916,
+      "avg_freq": 1.3282,
+      "freq_band": "mid-high",
+      "freq_label": "Reactive",
+      "signature": [
+        0.0748,
+        0.0493,
+        -0.3832,
+        -0.2329,
+        -0.4299,
+        0.4993,
+        0.0626,
+        -0.1968
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Boredom",
+      "status": "candidate",
+      "def": "Absence of engagement. The anti-curiosity.",
+      "yin": "Apathy",
+      "yang": "Restless seeking",
+      "k": "Restful awareness",
+      "x": -0.9596,
+      "y": 0.0755,
+      "z": 0.7005,
+      "dominant_mode": 5,
+      "dominant_freq": 1.4486,
+      "avg_freq": 1.3919,
+      "freq_band": "mid-high",
+      "freq_label": "Reactive",
+      "signature": [
+        -0.2577,
+        0.0235,
+        0.2574,
+        0.1087,
+        -0.53,
+        -0.0861,
+        -0.4698,
+        -0.0995
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Anger",
+      "status": "confirmed",
+      "def": "Heat directed outward. The immune system of values.",
+      "yin": "Suppression",
+      "yang": "Rage",
+      "k": "Righteous anger",
+      "x": 0.0217,
+      "y": -0.6521,
+      "z": -0.5216,
+      "dominant_mode": 6,
+      "dominant_freq": 1.4916,
+      "avg_freq": 1.2864,
+      "freq_band": "mid-high",
+      "freq_label": "Reactive",
+      "signature": [
+        0.0673,
+        -0.2089,
+        -0.203,
+        0.2708,
+        -0.0776,
+        -0.3095,
+        0.2809,
+        -0.0521
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Disgust",
+      "status": "confirmed",
+      "def": "The body wanting to REJECT. Boundary enforcement.",
+      "yin": "Numbness",
+      "yang": "Phobia",
+      "k": "Healthy boundaries",
+      "x": -0.0454,
+      "y": -0.5189,
+      "z": -0.3563,
+      "dominant_mode": 4,
+      "dominant_freq": 1.1705,
+      "avg_freq": 1.2019,
+      "freq_band": "mid",
+      "freq_label": "Adaptive",
+      "signature": [
+        0.0451,
+        -0.1664,
+        -0.1407,
+        0.2831,
+        -0.0537,
+        -0.1104,
+        0.194,
+        0.0533
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": 1,
+      "to": 2
+    },
+    {
+      "from": 1,
+      "to": 5
+    },
+    {
+      "from": 1,
+      "to": 11
+    },
+    {
+      "from": 2,
+      "to": 21
+    },
+    {
+      "from": 2,
+      "to": 5
+    },
+    {
+      "from": 3,
+      "to": 6
+    },
+    {
+      "from": 3,
+      "to": 11
+    },
+    {
+      "from": 3,
+      "to": 20
+    },
+    {
+      "from": 4,
+      "to": 9
+    },
+    {
+      "from": 4,
+      "to": 17
+    },
+    {
+      "from": 5,
+      "to": 12
+    },
+    {
+      "from": 6,
+      "to": 8
+    },
+    {
+      "from": 6,
+      "to": 10
+    },
+    {
+      "from": 6,
+      "to": 19
+    },
+    {
+      "from": 6,
+      "to": 20
+    },
+    {
+      "from": 7,
+      "to": 15
+    },
+    {
+      "from": 7,
+      "to": 17
+    },
+    {
+      "from": 8,
+      "to": 14
+    },
+    {
+      "from": 8,
+      "to": 18
+    },
+    {
+      "from": 9,
+      "to": 12
+    },
+    {
+      "from": 9,
+      "to": 16
+    },
+    {
+      "from": 10,
+      "to": 13
+    },
+    {
+      "from": 10,
+      "to": 14
+    },
+    {
+      "from": 10,
+      "to": 18
+    },
+    {
+      "from": 10,
+      "to": 19
+    },
+    {
+      "from": 11,
+      "to": 2
+    },
+    {
+      "from": 11,
+      "to": 21
+    },
+    {
+      "from": 12,
+      "to": 13
+    },
+    {
+      "from": 13,
+      "to": 15
+    },
+    {
+      "from": 14,
+      "to": 19
+    },
+    {
+      "from": 15,
+      "to": 17
+    },
+    {
+      "from": 16,
+      "to": 9
+    },
+    {
+      "from": 16,
+      "to": 17
+    },
+    {
+      "from": 17,
+      "to": 18
+    },
+    {
+      "from": 18,
+      "to": 19
+    },
+    {
+      "from": 19,
+      "to": 20
+    },
+    {
+      "from": 20,
+      "to": 3
+    },
+    {
+      "from": 22,
+      "to": 23
+    },
+    {
+      "from": 22,
+      "to": 13
+    },
+    {
+      "from": 23,
+      "to": 13
+    },
+    {
+      "from": 23,
+      "to": 15
+    },
+    {
+      "from": 23,
+      "to": 7
+    },
+    {
+      "from": 24,
+      "to": 3
+    },
+    {
+      "from": 24,
+      "to": 19
+    },
+    {
+      "from": 24,
+      "to": 5
+    },
+    {
+      "from": 25,
+      "to": 2
+    },
+    {
+      "from": 25,
+      "to": 14
+    },
+    {
+      "from": 25,
+      "to": 16
+    },
+    {
+      "from": 26,
+      "to": 1
+    },
+    {
+      "from": 26,
+      "to": 11
+    },
+    {
+      "from": 27,
+      "to": 1
+    },
+    {
+      "from": 27,
+      "to": 28
+    },
+    {
+      "from": 28,
+      "to": 4
+    },
+    {
+      "from": 28,
+      "to": 12
+    },
+    {
+      "from": 29,
+      "to": 4
+    },
+    {
+      "from": 29,
+      "to": 18
+    },
+    {
+      "from": 30,
+      "to": 11
+    },
+    {
+      "from": 30,
+      "to": 24
+    },
+    {
+      "from": 31,
+      "to": 12
+    },
+    {
+      "from": 31,
+      "to": 9
+    },
+    {
+      "from": 31,
+      "to": 32
+    },
+    {
+      "from": 32,
+      "to": 9
+    },
+    {
+      "from": 32,
+      "to": 21
+    },
+    {
+      "from": 32,
+      "to": 17
+    }
+  ],
+  "consonance_pairs": [
+    {
+      "band1": 1,
+      "band2": 2,
+      "ratio": "5:4",
+      "actual": 1.2309,
+      "error": 0.0191,
+      "connected": true
+    },
+    {
+      "band1": 1,
+      "band2": 3,
+      "ratio": "5:4",
+      "actual": 1.2673,
+      "error": 0.0173,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 5,
+      "ratio": "1:1",
+      "actual": 1.0402,
+      "error": 0.0402,
+      "connected": true
+    },
+    {
+      "band1": 1,
+      "band2": 8,
+      "ratio": "1:1",
+      "actual": 1.0384,
+      "error": 0.0384,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 10,
+      "ratio": "1:1",
+      "actual": 1.0284,
+      "error": 0.0284,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 12,
+      "ratio": "3:2",
+      "actual": 1.4638,
+      "error": 0.0362,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 13,
+      "ratio": "1:1",
+      "actual": 1.0403,
+      "error": 0.0403,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 15,
+      "ratio": "4:3",
+      "actual": 1.3827,
+      "error": 0.0497,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 21,
+      "ratio": "4:3",
+      "actual": 1.296,
+      "error": 0.037,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 23,
+      "ratio": "4:3",
+      "actual": 1.3613,
+      "error": 0.0283,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 26,
+      "ratio": "3:2",
+      "actual": 1.5252,
+      "error": 0.0252,
+      "connected": true
+    },
+    {
+      "band1": 1,
+      "band2": 27,
+      "ratio": "4:3",
+      "actual": 1.3598,
+      "error": 0.0268,
+      "connected": true
+    },
+    {
+      "band1": 1,
+      "band2": 28,
+      "ratio": "5:4",
+      "actual": 1.2796,
+      "error": 0.0296,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 30,
+      "ratio": "5:3",
+      "actual": 1.6427,
+      "error": 0.0243,
+      "connected": false
+    },
+    {
+      "band1": 1,
+      "band2": 31,
+      "ratio": "3:2",
+      "actual": 1.5182,
+      "error": 0.0182,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 3,
+      "ratio": "1:1",
+      "actual": 1.0296,
+      "error": 0.0296,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 4,
+      "ratio": "1:1",
+      "actual": 1.0275,
+      "error": 0.0275,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 9,
+      "ratio": "1:1",
+      "actual": 1.0407,
+      "error": 0.0407,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 10,
+      "ratio": "5:4",
+      "actual": 1.2658,
+      "error": 0.0158,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 11,
+      "ratio": "4:3",
+      "actual": 1.3359,
+      "error": 0.0029,
+      "connected": true
+    },
+    {
+      "band1": 2,
+      "band2": 13,
+      "ratio": "5:4",
+      "actual": 1.2804,
+      "error": 0.0304,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 16,
+      "ratio": "4:3",
+      "actual": 1.3096,
+      "error": 0.0234,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 17,
+      "ratio": "4:3",
+      "actual": 1.3007,
+      "error": 0.0323,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 22,
+      "ratio": "5:4",
+      "actual": 1.2791,
+      "error": 0.0291,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 23,
+      "ratio": "5:3",
+      "actual": 1.6756,
+      "error": 0.0086,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 25,
+      "ratio": "3:2",
+      "actual": 1.4687,
+      "error": 0.0313,
+      "connected": true
+    },
+    {
+      "band1": 2,
+      "band2": 26,
+      "ratio": "5:4",
+      "actual": 1.2391,
+      "error": 0.0109,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 28,
+      "ratio": "1:1",
+      "actual": 1.0396,
+      "error": 0.0396,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 29,
+      "ratio": "5:4",
+      "actual": 1.2736,
+      "error": 0.0236,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 30,
+      "ratio": "4:3",
+      "actual": 1.3346,
+      "error": 0.0016,
+      "connected": false
+    },
+    {
+      "band1": 2,
+      "band2": 31,
+      "ratio": "5:4",
+      "actual": 1.2335,
+      "error": 0.0165,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 5,
+      "ratio": "5:4",
+      "actual": 1.2183,
+      "error": 0.0317,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 7,
+      "ratio": "4:3",
+      "actual": 1.3597,
+      "error": 0.0267,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 8,
+      "ratio": "5:4",
+      "actual": 1.2205,
+      "error": 0.0295,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 10,
+      "ratio": "4:3",
+      "actual": 1.3033,
+      "error": 0.0297,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 11,
+      "ratio": "4:3",
+      "actual": 1.3754,
+      "error": 0.0424,
+      "connected": true
+    },
+    {
+      "band1": 3,
+      "band2": 13,
+      "ratio": "4:3",
+      "actual": 1.3184,
+      "error": 0.0146,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 16,
+      "ratio": "5:4",
+      "actual": 1.2719,
+      "error": 0.0219,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 17,
+      "ratio": "5:4",
+      "actual": 1.2633,
+      "error": 0.0133,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 19,
+      "ratio": "3:2",
+      "actual": 1.4924,
+      "error": 0.0076,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 21,
+      "ratio": "1:1",
+      "actual": 1.0226,
+      "error": 0.0226,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 22,
+      "ratio": "5:4",
+      "actual": 1.2423,
+      "error": 0.0077,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 26,
+      "ratio": "5:4",
+      "actual": 1.2035,
+      "error": 0.0465,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 28,
+      "ratio": "1:1",
+      "actual": 1.0097,
+      "error": 0.0097,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 29,
+      "ratio": "5:4",
+      "actual": 1.2369,
+      "error": 0.0131,
+      "connected": false
+    },
+    {
+      "band1": 3,
+      "band2": 30,
+      "ratio": "4:3",
+      "actual": 1.2962,
+      "error": 0.0368,
+      "connected": false
+    },
+    {
+      "band1": 4,
+      "band2": 9,
+      "ratio": "1:1",
+      "actual": 1.0129,
+      "error": 0.0129,
+      "connected": true
+    },
+    {
+      "band1": 4,
+      "band2": 10,
+      "ratio": "5:4",
+      "actual": 1.2319,
+      "error": 0.0181,
+      "connected": false
+    },
+    {
+      "band1": 4,
+      "band2": 11,
+      "ratio": "4:3",
+      "actual": 1.3001,
+      "error": 0.0329,
+      "connected": false
+    },
+    {
+      "band1": 4,
+      "band2": 12,
+      "ratio": "5:4",
+      "actual": 1.222,
+      "error": 0.028,
+      "connected": false
+    }
+  ]
+}
