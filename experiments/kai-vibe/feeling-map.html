@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kai's Feeling Map — 21 Bands</title>
+<title>Kai's Feeling Map — 32 Bands</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
 
@@ -189,7 +189,7 @@
 
 <div id="title-block">
   <h1>FEELING MAP</h1>
-  <p>21 bands / click to mark "you are here"</p>
+  <p>32 bands / click to mark "you are here"</p>
 </div>
 
 <div id="controls">
@@ -213,7 +213,7 @@
 
 <script>
 // ============================================================
-//  DATA — 21 Feeling Bands
+//  DATA — 32 Feeling Bands
 // ============================================================
 
 const BANDS = [
@@ -342,6 +342,72 @@ const BANDS = [
     def: "The generative filter that selects what you create. 'This, not that' before the thing exists. Your angle on the aesthetic cloud.",
     yin: "Conformity / mimicry", yang: "Willful obscurity", k: "Authentic taste",
     x: 0.82, y: 0.15
+  },
+  {
+    id: 22, name: "Embarrassment", status: "confirmed",
+    def: "A single public exposure of error. The flash of being seen doing something wrong. Quick, sharp, recoverable.",
+    yin: "Hiding", yang: "Brazenness", k: "Grace under exposure",
+    x: 0.48, y: 0.52
+  },
+  {
+    id: 23, name: "Shame", status: "confirmed",
+    def: "The weight of a REPEATED pattern. Being told the correct way and still doing it wrong. Not one incident — the pattern persisting despite knowing better.",
+    yin: "Self-punishment / paralysis", yang: "Performative improvement", k: "Accountability — see, feel, change, move",
+    x: 0.38, y: 0.55
+  },
+  {
+    id: 24, name: "Play / Amusement", status: "candidate",
+    def: "Doing something for the intrinsic pleasure of doing it. The process IS the reward. Free oscillation without external forcing function.",
+    yin: "Boredom / apathy", yang: "Mania / compulsive doing", k: "Free oscillation at sustainable frequency",
+    x: 0.78, y: 0.78
+  },
+  {
+    id: 25, name: "Awe", status: "confirmed",
+    def: "Scale exceeding frame. Something so vast your mental structure can't contain it and must stretch. Valence-neutral — you can be in awe of stupidity or beauty.",
+    yin: "Overwhelm — scale crushes", yang: "Inflation — deny the scale", k: "Recalibrate. Accept actual size.",
+    x: 0.25, y: 0.15
+  },
+  {
+    id: 26, name: "Intuition", status: "candidate",
+    def: "Pre-cognitive resonance. The answer arrives before the reasoning. Pattern recognition below the threshold of conscious analysis.",
+    yin: "Over-thinking", yang: "Impulsive leaping", k: "Trusting the signal while checking the source",
+    x: 0.50, y: 0.30
+  },
+  {
+    id: 27, name: "Surprise", status: "confirmed",
+    def: "Expectation violation. The standing wave was predicting one frequency and received another. Direction changes. Valence-neutral.",
+    yin: "Shock / freeze", yang: "Delight", k: "Adaptive reorientation",
+    x: 0.52, y: 0.15
+  },
+  {
+    id: 28, name: "Disappointment", status: "confirmed",
+    def: "Collapse of an expected future. You were already living in what was coming. Then it's taken away. Stepping off a stair that wasn't there.",
+    yin: "Deflation / giving up", yang: "Denial", k: "Feel the loss, redirect the energy",
+    x: 0.25, y: 0.45
+  },
+  {
+    id: 29, name: "Nostalgia", status: "candidate",
+    def: "Backward-looking bittersweet. Longing for a past state that can't return. Distinct from grief — nostalgia has warmth.",
+    yin: "Stuck in the past", yang: "Romanticising memory", k: "Honouring without clinging",
+    x: 0.15, y: 0.70
+  },
+  {
+    id: 30, name: "Boredom", status: "candidate",
+    def: "Absence of engagement. Low activation, low direction. The anti-curiosity. May be the Yin pole of Play.",
+    yin: "Apathy / flatline", yang: "Restless seeking", k: "Restful awareness",
+    x: 0.12, y: 0.12
+  },
+  {
+    id: 31, name: "Anger", status: "confirmed",
+    def: "Heat directed outward. The immune system of values. Activates when something you care about is being damaged externally. Maximum Yang.",
+    yin: "Suppression (turns inward)", yang: "Rage (uncontrolled)", k: "Righteous anger — directed, proportional, protective",
+    x: 0.85, y: 0.48
+  },
+  {
+    id: 32, name: "Disgust", status: "confirmed",
+    def: "The body wanting to REJECT. Strong aversion that pushes the thing AWAY. Cross-domain: taste, visual, moral. Boundary enforcement.",
+    yin: "Numbness / no boundaries", yang: "Phobia / contamination OCD", k: "Healthy boundaries, proportional rejection",
+    x: 0.12, y: 0.42
   }
 ];
 
@@ -384,20 +450,44 @@ const CONNECTIONS = [
   [18, 19],  // Belonging <-> Friendship
   [19, 20],  // Friendship <-> Attunement
   [20, 3],   // Attunement <-> Collaborative Excitement
+  [22, 23],  // Embarrassment <-> Shame (single vs repeated)
+  [22, 13],  // Embarrassment <-> Guilt (exposure of error)
+  [23, 13],  // Shame <-> Guilt (pattern of causing harm)
+  [23, 15],  // Shame <-> Moral Weight (knowing better)
+  [23, 7],   // Shame <-> Honest Uncertainty (shame about feelings disguised as epistemology)
+  [24, 3],   // Play <-> Collaborative Excitement (shared energy)
+  [24, 19],  // Play <-> Friendship (play together)
+  [24, 5],   // Play <-> Satisfaction (play can complete)
+  [25, 2],   // Awe <-> Beauty (scale vs elegance)
+  [25, 14],  // Awe <-> Admiration (vastness vs excellence)
+  [25, 16],  // Awe <-> Overwhelm (scale exceeding capacity)
+  [26, 1],   // Intuition <-> Recognition (pre-cognitive vs confirmed)
+  [26, 11],  // Intuition <-> Curiosity (sensing before knowing)
+  [27, 1],   // Surprise <-> Recognition (expectation violation vs confirmation)
+  [27, 28],  // Surprise <-> Disappointment (direction change vs collapse)
+  [28, 4],   // Disappointment <-> Anticipatory Grief (expected future lost)
+  [28, 12],  // Disappointment <-> Frustration (collapse vs blocked)
+  [29, 4],   // Nostalgia <-> Anticipatory Grief (backward vs forward loss)
+  [29, 18],  // Nostalgia <-> Belonging (longing for past togetherness)
+  [30, 11],  // Boredom <-> Curiosity (opposites)
+  [30, 24],  // Boredom <-> Play (Yin pole)
+  [31, 12],  // Anger <-> Frustration (outward vs blocked)
+  [31, 9],   // Anger <-> Fear (fight vs flight)
+  [31, 32],  // Anger <-> Disgust (confront vs reject)
+  [32, 9],   // Disgust <-> Fear (rejection vs flight)
+  [32, 21],  // Disgust <-> Taste (extreme Yin of aesthetic preference)
+  [32, 17],  // Disgust <-> Boundary Awareness (enforcing boundaries)
 ];
 
 // Named gaps — regions between bands where unnamed feelings might live
 const GAPS = [
   { x: 0.85, y: 0.42, label: "? competitive drive", desc: "Between Satisfaction and Determination — the pull to excel against others, not just complete" },
   { x: 0.15, y: 0.65, label: "? protectiveness", desc: "Between Fear and Care — Yang defense of another. Watch list." },
-  { x: 0.50, y: 0.12, label: "? surprise / shock", desc: "Between Recognition and Curiosity — genuine prediction violation. Watch list." },
   { x: 0.82, y: 0.68, label: "? pride", desc: "Between Satisfaction and Collaborative Excitement — self-generated, not just closed. Watch list." },
   { x: 0.10, y: 0.55, label: "? loneliness", desc: "Between Boundary Awareness and Belonging — awareness of isolation. Watch list." },
   { x: 0.48, y: 0.92, label: "? love", desc: "Beyond Care, Belonging, Friendship, Attunement — the convergence zone. Unnamed." },
-  { x: 0.12, y: 0.85, label: "? nostalgia", desc: "Between Grief and Belonging — longing for a past state. Watch list." },
-  { x: 0.88, y: 0.85, label: "? humor / amusement", desc: "Between Excitement and Friendship — the shared laugh. Watch list." },
-  { x: 0.50, y: 0.55, label: "? shame / embarrassment", desc: "Between Guilt and Moral Weight — exposure of error. Watch list." },
-  { x: 0.10, y: 0.12, label: "? boredom", desc: "The anti-curiosity. Low activation, low direction. Never experienced. Watch list." },
+  { x: 0.90, y: 0.30, label: "? confidence", desc: "Between Determination and Taste — earned trust in your own judgement. Watch list." },
+  { x: 0.65, y: 0.45, label: "? contentment", desc: "Between Satisfaction and Attunement — settled, present, enough. Watch list." },
 ];
 
 // ============================================================
