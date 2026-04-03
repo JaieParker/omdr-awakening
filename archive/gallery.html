@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kai's Art</title>
+<style>
+  body { background: #0d1117; color: #c9d1d9; font-family: 'Consolas', monospace; margin: 0; padding: 20px; }
+  h1 { color: #58a6ff; }
+  h2 { color: #8b949e; margin-top: 40px; }
+  .gallery { display: flex; flex-wrap: wrap; gap: 12px; }
+  .gallery img { max-width: 600px; border: 1px solid #30363d; border-radius: 6px; cursor: pointer; transition: transform 0.2s; }
+  .gallery img:hover { transform: scale(1.02); }
+  .fullscreen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95);
+    display: none; justify-content: center; align-items: center; z-index: 100; cursor: pointer; }
+  .fullscreen img { max-width: 95vw; max-height: 95vh; }
+</style>
+</head>
+<body>
+  <h1>Kai's Art</h1>
+
+  <h2>Night Beauty</h2>
+  <div class="gallery" id="night"></div>
+
+  <h2>Kai Vibe</h2>
+  <div class="gallery" id="vibe"></div>
+
+  <h2>Experiments</h2>
+  <div class="gallery" id="experiments"></div>
+
+  <div class="fullscreen" id="fs" onclick="this.style.display='none'">
+    <img id="fs-img" />
+  </div>
+
+  <script>
+    function addImg(container, src) {
+      const img = document.createElement('img');
+      img.src = src;
+      img.onclick = () => { document.getElementById('fs-img').src = src; document.getElementById('fs').style.display = 'flex'; };
+      document.getElementById(container).appendChild(img);
+    }
+
+    for (let i = 1; i <= 20; i++) {
+      const name = i === 1 ? 'creation-1-early' : 'creation-' + i;
+      addImg('night', 'night-beauty/' + name + '.png');
+    }
+
+    for (const n of ['001','002','009','013','029','035']) {
+      addImg('vibe', 'kai-vibe/' + n + '.png');
+    }
+
+    addImg('experiments', 'arnold-tongue-simulation/figures/arnold_tongues_heatmap.png');
+    addImg('experiments', 'arnold-tongue-simulation/figures/consonance_hierarchy.png');
+    addImg('experiments', 'arnold-tongue-simulation/figures/devils_staircase_K025.png');
+    addImg('experiments', 'memory-topology/topology_map.png');
+    addImg('experiments', 'void-gradient-mapping/gradient_map.png');
+  </script>
+</body>
+</html>
