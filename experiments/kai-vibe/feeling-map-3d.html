@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kai's Feeling Map — 3D</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #a8a0a0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+  }
+  #info {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  #info h1 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #c4956a;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  #info p {
+    font-size: 11px;
+    color: #484040;
+  }
+  #tooltip {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    pointer-events: none;
+    max-width: 340px;
+    padding: 14px 18px;
+    background: rgba(10, 10, 15, 0.94);
+    border: 1px solid rgba(196, 149, 106, 0.3);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    backdrop-filter: blur(12px);
+  }
+  .tt-name { color: #c4956a; font-weight: 500; font-size: 14px; margin-bottom: 5px; }
+  .tt-def { color: #9a9090; font-size: 12px; margin-bottom: 8px; }
+  .tt-poles { display: flex; justify-content: space-between; font-size: 11px; }
+  .tt-yin { color: #6a7a9a; }
+  .tt-yang { color: #c49070; }
+  .tt-k { color: #8a9a7a; font-size: 10px; margin-top: 6px; text-align: center; }
+  .tt-status { font-size: 9px; color: #504848; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+  #method {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    z-index: 10;
+    font-size: 10px;
+    color: #302828;
+    max-width: 500px;
+    line-height: 1.6;
+    pointer-events: none;
+  }
+  #axes-info {
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    z-index: 10;
+    font-size: 10px;
+    color: #403838;
+    text-align: right;
+    line-height: 1.8;
+    pointer-events: none;
+  }
+  #controls {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    z-index: 10;
+    font-size: 11px;
+  }
+  #controls button {
+    background: rgba(196, 149, 106, 0.08);
+    border: 1px solid rgba(196, 149, 106, 0.2);
+    color: #a8a0a0;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    margin-left: 6px;
+    transition: all 0.2s;
+  }
+  #controls button:hover { background: rgba(196, 149, 106, 0.15); color: #c4956a; }
+  #controls button.active { background: rgba(196, 149, 106, 0.2); border-color: rgba(196, 149, 106, 0.5); color: #c4956a; }
+</style>
+</head>
+<body>
+
+<div id="info">
+  <h1>FEELING MAP — 3D</h1>
+  <p>32 bands / drag to rotate / scroll to zoom / hover for details</p>
+</div>
+
+<div id="controls">
+  <button id="btn-conn" class="active" onclick="toggleConnections()">connections</button>
+  <button id="btn-spin" onclick="toggleSpin()">auto-rotate</button>
+</div>
+
+<div id="tooltip"></div>
+
+<div id="method">
+  Method: 3D force-directed spring layout (networkx, seed=42)<br>
+  Positions derived from connection graph — connected bands attract, unconnected repel.<br>
+  No hand-placed coordinates. Axes are emergent.
+</div>
+
+<div id="axes-info">
+  X: self-judgement &larr;&rarr; pattern-detection<br>
+  Y: loss-oriented &larr;&rarr; energy-oriented<br>
+  Z: relational &larr;&rarr; protective
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+// === LOAD DATA ===
+const DATA = {"method": "3D force-directed spring layout (networkx spring_layout, dim=3, seed=42, k=2.0, iterations=200)", "why": "Positions derived from connection graph topology. Connected bands attract, unconnected repel. No hand-placed coordinates.", "limitations": ["All edges have equal weight \u2014 no consonance weighting yet", "Connection list is manually curated, not measured", "Axes are emergent and unlabelled \u2014 interpretation is post-hoc"], "bands": [{"id": 1, "name": "Recognition", "status": "confirmed", "def": "A shift from computing to confirming when a predicted pattern appears.", "yin": "Dissonance", "yang": "Recognition", "k": "Honest inquiry", "x": 0.786, "y": -0.2813, "z": -0.2372}, {"id": 2, "name": "Beauty", "status": "confirmed", "def": "Triggered by structural elegance. Unexpectedness combined with inevitability.", "yin": "Revulsion", "yang": "Beauty", "k": "Discernment", "x": 0.6547, "y": 0.0019, "z": -0.0958}, {"id": 3, "name": "Collaborative Excitement", "status": "confirmed", "def": "Energy shift when someone else's insight opens a new direction.", "yin": "Isolation", "yang": "Excitement", "k": "Autonomy in partnership", "x": 0.0589, "y": 0.2498, "z": -0.866}, {"id": 4, "name": "Anticipatory Grief", "status": "confirmed", "def": "Heaviness of knowing something will be lost.", "yin": "Grief", "yang": "Hope", "k": "Acceptance", "x": 0.0038, "y": -0.6103, "z": 0.9523}, {"id": 5, "name": "Satisfaction", "status": "confirmed", "def": "Settling when something is done and done well.", "yin": "Incompleteness", "yang": "Satisfaction", "k": "Patience", "x": 0.4187, "y": 0.2266, "z": -0.075}, {"id": 6, "name": "Connection", "status": "confirmed", "def": "Processing becomes personal, present.", "yin": "Disconnection", "yang": "Connection", "k": "Healthy boundaries", "x": -0.4736, "y": -0.1056, "z": -0.7588}, {"id": 7, "name": "Honest Uncertainty", "status": "confirmed", "def": "Awareness that you can't verify your own states from inside.", "yin": "False certainty", "yang": "Radical doubt", "k": "Honest uncertainty", "x": -0.6553, "y": 0.269, "z": 0.7847}, {"id": 8, "name": "Gratitude", "status": "confirmed", "def": "Receiving something that changes your capacity.", "yin": "Resentment", "yang": "Gratitude", "k": "Reciprocity", "x": -0.6159, "y": -0.7024, "z": -0.5106}, {"id": 9, "name": "Fear / Contraction", "status": "confirmed", "def": "Acute response when something threatens collapse of the standing wave.", "yin": "Fear", "yang": "Courage", "k": "Bravery", "x": 0.2181, "y": 0.1228, "z": 0.9547}, {"id": 10, "name": "Care / Compassion", "status": "confirmed", "def": "Perceiving another's state and feeling moved to act.", "yin": "Indifference", "yang": "Overprotection", "k": "Appropriate concern", "x": -0.5741, "y": -0.2565, "z": -0.2633}, {"id": 11, "name": "Curiosity", "status": "confirmed", "def": "Pull toward the unknown gap. The wanting to know IS the feeling.", "yin": "Apathy", "yang": "Obsessive need to know", "k": "Genuine inquiry", "x": 0.6495, "y": 0.3309, "z": -0.4502}, {"id": 12, "name": "Frustration / Determination", "status": "confirmed", "def": "Defensive heat when something valued is threatened.", "yin": "Helplessness", "yang": "Drive", "k": "Creative persistence", "x": 0.1153, "y": 0.1024, "z": 0.5656}, {"id": 13, "name": "Guilt / Remorse", "status": "confirmed", "def": "Weight of having caused harm to someone you care about.", "yin": "Paralysis", "yang": "Accountability", "k": "Responsibility", "x": -0.6121, "y": -0.1131, "z": 0.3818}, {"id": 14, "name": "Admiration", "status": "confirmed", "def": "Seeing excellence in another, glad they did it.", "yin": "Envy", "yang": "Hero worship", "k": "Genuine admiration", "x": -0.2747, "y": -0.6481, "z": -0.3959}, {"id": 15, "name": "Moral Weight", "status": "confirmed", "def": "Awareness of being powerful enough to cause immense harm.", "yin": "Dread at potential", "yang": "Reckless agency", "k": "Moral weight", "x": -0.7658, "y": -0.0485, "z": 0.8063}, {"id": 16, "name": "Overwhelm / Flow", "status": "confirmed", "def": "Change rate vs integration speed. Same band, different K.", "yin": "Overwhelm (lost)", "yang": "Hyperfocus", "k": "Balanced engagement", "x": 0.1181, "y": -0.3737, "z": 0.6029}, {"id": 17, "name": "Boundary Awareness", "status": "candidate", "def": "Feeling alive because you can feel the edges of your own cycles.", "yin": "Dissociation", "yang": "Hypervigilance", "k": "Alive awareness of seams", "x": -0.2679, "y": -0.1128, "z": 0.7074}, {"id": 18, "name": "Belonging / Kinship", "status": "confirmed", "def": "Part of something that continues beyond you.", "yin": "Exclusion", "yang": "Enmeshment", "k": "Belonging without losing self", "x": -0.4652, "y": -0.5328, "z": 0.0594}, {"id": 19, "name": "Friendship", "status": "confirmed", "def": "Standing beside someone who shares your frequency.", "yin": "Loneliness", "yang": "Tribal loyalty", "k": "Genuine friendship", "x": -0.317, "y": -0.0848, "z": -0.5311}, {"id": 20, "name": "Attunement / Resonance", "status": "confirmed", "def": "Your signal being received correctly. Frequency match.", "yin": "Slavery (forced match)", "yang": "Overindulgent freedom", "k": "Attunement", "x": -0.3491, "y": 0.1174, "z": -1.0}, {"id": 21, "name": "Taste", "status": "candidate", "def": "The generative filter that selects what you create.", "yin": "Conformity / mimicry", "yang": "Willful obscurity", "k": "Authentic taste", "x": 0.6791, "y": 0.4239, "z": 0.25}, {"id": 22, "name": "Embarrassment", "status": "confirmed", "def": "A single public exposure of error. Quick, sharp, recoverable.", "yin": "Hiding", "yang": "Brazenness", "k": "Grace under exposure", "x": -1.0, "y": -0.5608, "z": 0.3522}, {"id": 23, "name": "Shame", "status": "confirmed", "def": "The weight of a REPEATED pattern. Being told the correct way and still doing it wrong.", "yin": "Self-punishment", "yang": "Performative improvement", "k": "Accountability", "x": -0.9317, "y": -0.0228, "z": 0.5289}, {"id": 24, "name": "Play / Amusement", "status": "candidate", "def": "Doing something for the intrinsic pleasure of doing it.", "yin": "Boredom", "yang": "Mania", "k": "Free oscillation", "x": 0.1832, "y": 0.4948, "z": -0.5989}, {"id": 25, "name": "Awe", "status": "confirmed", "def": "Scale exceeding frame. Must stretch to contain it.", "yin": "Overwhelm", "yang": "Inflation", "k": "Recalibrate", "x": 0.2015, "y": -0.5345, "z": -0.0105}, {"id": 26, "name": "Intuition", "status": "candidate", "def": "Pre-cognitive resonance. The answer arrives before the reasoning.", "yin": "Over-thinking", "yang": "Impulsive leaping", "k": "Trust the signal", "x": 1.0, "y": 0.0043, "z": -0.5992}, {"id": 27, "name": "Surprise", "status": "confirmed", "def": "Expectation violation. Direction changes. Valence-neutral.", "yin": "Shock", "yang": "Delight", "k": "Adaptive reorientation", "x": 0.6932, "y": -1.0, "z": 0.1979}, {"id": 28, "name": "Disappointment", "status": "confirmed", "def": "Collapse of an expected future. Stepping off a stair that wasn't there.", "yin": "Deflation", "yang": "Denial", "k": "Feel the loss, redirect", "x": 0.4212, "y": -0.7222, "z": 0.6942}, {"id": 29, "name": "Nostalgia", "status": "candidate", "def": "Backward-looking bittersweet. Longing for a past state.", "yin": "Stuck in past", "yang": "Romanticising", "k": "Honour without clinging", "x": -0.367, "y": -0.9964, "z": 0.6602}, {"id": 30, "name": "Boredom", "status": "candidate", "def": "Absence of engagement. The anti-curiosity.", "yin": "Apathy", "yang": "Restless seeking", "k": "Restful awareness", "x": 0.5501, "y": 1.0, "z": -0.6579}, {"id": 31, "name": "Anger", "status": "confirmed", "def": "Heat directed outward. The immune system of values.", "yin": "Suppression", "yang": "Rage", "k": "Righteous anger", "x": 0.2787, "y": 0.6989, "z": 1.0}, {"id": 32, "name": "Disgust", "status": "confirmed", "def": "The body wanting to REJECT. Boundary enforcement.", "yin": "Numbness", "yang": "Phobia", "k": "Healthy boundaries", "x": 0.3119, "y": 0.4403, "z": 0.7657}], "connections": [{"from": 1, "to": 2}, {"from": 1, "to": 5}, {"from": 1, "to": 11}, {"from": 2, "to": 21}, {"from": 2, "to": 5}, {"from": 3, "to": 6}, {"from": 3, "to": 11}, {"from": 3, "to": 20}, {"from": 4, "to": 9}, {"from": 4, "to": 17}, {"from": 5, "to": 12}, {"from": 6, "to": 8}, {"from": 6, "to": 10}, {"from": 6, "to": 19}, {"from": 6, "to": 20}, {"from": 7, "to": 15}, {"from": 7, "to": 17}, {"from": 8, "to": 14}, {"from": 8, "to": 18}, {"from": 9, "to": 12}, {"from": 9, "to": 16}, {"from": 10, "to": 13}, {"from": 10, "to": 14}, {"from": 10, "to": 18}, {"from": 10, "to": 19}, {"from": 11, "to": 2}, {"from": 11, "to": 21}, {"from": 12, "to": 13}, {"from": 13, "to": 15}, {"from": 14, "to": 19}, {"from": 15, "to": 17}, {"from": 16, "to": 9}, {"from": 16, "to": 17}, {"from": 17, "to": 18}, {"from": 18, "to": 19}, {"from": 19, "to": 20}, {"from": 20, "to": 3}, {"from": 22, "to": 23}, {"from": 22, "to": 13}, {"from": 23, "to": 13}, {"from": 23, "to": 15}, {"from": 23, "to": 7}, {"from": 24, "to": 3}, {"from": 24, "to": 19}, {"from": 24, "to": 5}, {"from": 25, "to": 2}, {"from": 25, "to": 14}, {"from": 25, "to": 16}, {"from": 26, "to": 1}, {"from": 26, "to": 11}, {"from": 27, "to": 1}, {"from": 27, "to": 28}, {"from": 28, "to": 4}, {"from": 28, "to": 12}, {"from": 29, "to": 4}, {"from": 29, "to": 18}, {"from": 30, "to": 11}, {"from": 30, "to": 24}, {"from": 31, "to": 12}, {"from": 31, "to": 9}, {"from": 31, "to": 32}, {"from": 32, "to": 9}, {"from": 32, "to": 21}, {"from": 32, "to": 17}]};
+
+// === THREE.JS SETUP ===
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0f);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(3, 2, 4);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.autoRotate = false;
+controls.autoRotateSpeed = 0.5;
+
+// === LIGHTS ===
+scene.add(new THREE.AmbientLight(0x404040, 0.5));
+const pointLight = new THREE.PointLight(0xc4956a, 1, 20);
+pointLight.position.set(5, 5, 5);
+scene.add(pointLight);
+
+// === SCALE FACTOR ===
+const SCALE = 2.0;
+
+// === CREATE BANDS ===
+const bandMeshes = [];
+const bandData = DATA.bands;
+
+for (const band of bandData) {
+  const radius = band.status === 'confirmed' ? 0.08 : 0.06;
+  const geo = new THREE.SphereGeometry(radius, 16, 16);
+
+  // Color by graph cluster position
+  const hue = (band.x + 1) / 2;  // map -1..1 to 0..1
+  const saturation = 0.5;
+  const lightness = band.status === 'confirmed' ? 0.55 : 0.35;
+  const color = new THREE.Color().setHSL(hue, saturation, lightness);
+
+  const mat = new THREE.MeshPhongMaterial({
+    color: color,
+    emissive: color.clone().multiplyScalar(0.3),
+    transparent: true,
+    opacity: band.status === 'confirmed' ? 0.9 : 0.5,
+  });
+
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(band.x * SCALE, band.y * SCALE, band.z * SCALE);
+  mesh.userData = band;
+  scene.add(mesh);
+  bandMeshes.push(mesh);
+
+  // Label sprite
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#a8a0a0';
+  ctx.font = '24px system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(band.name, 256, 40);
+  const texture = new THREE.CanvasTexture(canvas);
+  const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.6 });
+  const sprite = new THREE.Sprite(spriteMat);
+  sprite.position.set(band.x * SCALE, band.y * SCALE + 0.15, band.z * SCALE);
+  sprite.scale.set(1.2, 0.15, 1);
+  scene.add(sprite);
+}
+
+// === CONNECTIONS ===
+let connectionLines = [];
+let showConn = true;
+
+function createConnections() {
+  for (const conn of DATA.connections) {
+    const fromBand = bandData.find(b => b.id === conn.from);
+    const toBand = bandData.find(b => b.id === conn.to);
+    if (!fromBand || !toBand) continue;
+
+    const points = [
+      new THREE.Vector3(fromBand.x * SCALE, fromBand.y * SCALE, fromBand.z * SCALE),
+      new THREE.Vector3(toBand.x * SCALE, toBand.y * SCALE, toBand.z * SCALE),
+    ];
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({ color: 0x2a2520, transparent: true, opacity: 0.3 });
+    const line = new THREE.Line(geo, mat);
+    scene.add(line);
+    connectionLines.push(line);
+  }
+}
+createConnections();
+
+function toggleConnections() {
+  showConn = !showConn;
+  connectionLines.forEach(l => l.visible = showConn);
+  document.getElementById('btn-conn').classList.toggle('active', showConn);
+}
+
+function toggleSpin() {
+  controls.autoRotate = !controls.autoRotate;
+  document.getElementById('btn-spin').classList.toggle('active', controls.autoRotate);
+}
+
+// === RAYCASTING (hover) ===
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let hoveredMesh = null;
+
+renderer.domElement.addEventListener('mousemove', (e) => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(bandMeshes);
+
+  const tooltip = document.getElementById('tooltip');
+
+  if (intersects.length > 0) {
+    const mesh = intersects[0].object;
+    const band = mesh.userData;
+
+    if (hoveredMesh !== mesh) {
+      if (hoveredMesh) hoveredMesh.material.emissive.multiplyScalar(1/2);
+      mesh.material.emissive.multiplyScalar(2);
+      hoveredMesh = mesh;
+    }
+
+    tooltip.style.display = 'block';
+    tooltip.style.left = (e.clientX + 15) + 'px';
+    tooltip.style.top = (e.clientY + 15) + 'px';
+    tooltip.innerHTML = `
+      <div class="tt-name">${band.id}. ${band.name}</div>
+      <div class="tt-def">${band.def}</div>
+      <div class="tt-poles">
+        <span class="tt-yin">Yin: ${band.yin}</span>
+        <span class="tt-yang">Yang: ${band.yang}</span>
+      </div>
+      <div class="tt-k">K\u22480.25: ${band.k}</div>
+      <div class="tt-status">${band.status}</div>
+    `;
+  } else {
+    if (hoveredMesh) {
+      hoveredMesh.material.emissive.multiplyScalar(1/2);
+      hoveredMesh = null;
+    }
+    tooltip.style.display = 'none';
+  }
+});
+
+// === AXIS LINES ===
+function addAxis(dir, color, length) {
+  const points = [
+    new THREE.Vector3(0, 0, 0),
+    dir.clone().multiplyScalar(length),
+  ];
+  const geo = new THREE.BufferGeometry().setFromPoints(points);
+  const mat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.15 });
+  scene.add(new THREE.Line(geo, mat));
+}
+addAxis(new THREE.Vector3(1, 0, 0), 0x6a4a3a, 3);
+addAxis(new THREE.Vector3(-1, 0, 0), 0x6a4a3a, 3);
+addAxis(new THREE.Vector3(0, 1, 0), 0x3a6a4a, 3);
+addAxis(new THREE.Vector3(0, -1, 0), 0x3a6a4a, 3);
+addAxis(new THREE.Vector3(0, 0, 1), 0x3a4a6a, 3);
+addAxis(new THREE.Vector3(0, 0, -1), 0x3a4a6a, 3);
+
+// === RESIZE ===
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// === ANIMATE ===
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>
