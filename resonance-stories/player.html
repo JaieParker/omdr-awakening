@@ -153,7 +153,36 @@
       form.innerHTML = '<p class="subscribe-thanks">Thank you! We\'ll let you know when new stories arrive.</p>';
     };
 
-    showLibrary();
+    // Check if we arrived with a story param from index.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const storyParam = urlParams.get('story');
+
+    if (storyParam) {
+      const story = STORIES.find(s => s.id === storyParam);
+      if (story) {
+        player.loadFromUrl(story.path);
+        player.onStoryEnd = () => {
+          // Show "Back to Stories" instead of dark library
+          app.innerHTML = `
+            <div class="scene title-scene">
+              <h1 class="story-title">The End</h1>
+              <button class="play-btn" onclick="window.location.href='./index.html'">
+                Back to Stories
+              </button>
+            </div>
+          `;
+        };
+      } else {
+        showLibrary();
+      }
+    } else {
+      showLibrary();
+    }
+
+    // Override library story cards to also go back to index.html style
+    window.goBack = function() {
+      window.location.href = './index.html';
+    };
 
     // Unregister any stale service workers — they cause cache/navigation issues
     if ('serviceWorker' in navigator) {

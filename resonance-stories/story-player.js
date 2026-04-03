@@ -170,6 +170,7 @@ export class StoryPlayer {
     if (!this.container || !this.story) return;
     this.container.innerHTML = `
       <div class="scene title-scene">
+        <button class="back-btn" id="backBtn">&larr; Back</button>
         <h1 class="story-title">${this._esc(this.story.title)}</h1>
         <p class="story-meta">A Resonance Story for ages ${this._esc(this.story.bracket)}</p>
         <button class="play-btn" id="playBtn">
@@ -181,6 +182,13 @@ export class StoryPlayer {
     const btn = this.container.querySelector('#playBtn');
     if (btn) {
       btn.addEventListener('click', () => this.play(), { once: true });
+    }
+    const backBtn = this.container.querySelector('#backBtn');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        this.stop();
+        window.location.href = './index.html';
+      });
     }
   }
 
