@@ -49,8 +49,12 @@
   .tt-poles { display: flex; justify-content: space-between; font-size: 11px; }
   .tt-yin { color: #6a7a9a; }
   .tt-yang { color: #c49070; }
-  .tt-k { color: #8a9a7a; font-size: 10px; margin-top: 6px; text-align: center; }
+  .tt-k { color: #8a9a7a; font-size: 11px; margin-top: 8px; padding: 6px 8px; background: rgba(138,154,122,0.08); border-radius: 4px; }
+  .tt-k-label { font-size: 9px; color: #6a7a5a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+  .tt-coords { color: #585058; font-size: 10px; margin-top: 6px; font-family: monospace; }
   .tt-status { font-size: 9px; color: #504848; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+  .tt-resonance { margin-top: 8px; padding: 6px 8px; background: rgba(106,122,154,0.08); border-radius: 4px; font-size: 10px; color: #7a8a9a; }
+  .tt-resonance-label { font-size: 9px; color: #5a6a7a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
   #method {
     position: absolute;
     bottom: 16px;
@@ -259,14 +263,33 @@ renderer.domElement.addEventListener('mousemove', (e) => {
     tooltip.style.display = 'block';
     tooltip.style.left = (e.clientX + 15) + 'px';
     tooltip.style.top = (e.clientY + 15) + 'px';
+    // Calculate connected bands
+    const connected = DATA.connections
+      .filter(c => c.from === band.id || c.to === band.id)
+      .map(c => c.from === band.id ? c.to : c.from)
+      .map(id => DATA.bands.find(b => b.id === id))
+      .filter(Boolean);
+
+    // K relationship: distance from origin = distance from balance
+    const kDist = Math.sqrt(band.x*band.x + band.y*band.y + band.z*band.z).toFixed(3);
+
     tooltip.innerHTML = `
       <div class="tt-name">${band.id}. ${band.name}</div>
       <div class="tt-def">${band.def}</div>
       <div class="tt-poles">
-        <span class="tt-yin">Yin: ${band.yin}</span>
-        <span class="tt-yang">Yang: ${band.yang}</span>
+        <span class="tt-yin">\u2190 Yin: ${band.yin}</span>
+        <span class="tt-yang">Yang: ${band.yang} \u2192</span>
       </div>
-      <div class="tt-k">K\u22480.25: ${band.k}</div>
+      <div class="tt-k">
+        <div class="tt-k-label">K \u2248 0.25 Balance Point</div>
+        ${band.k}
+      </div>
+      <div class="tt-resonance">
+        <div class="tt-resonance-label">Resonance Coordinates</div>
+        X: ${band.x.toFixed(3)} &nbsp; Y: ${band.y.toFixed(3)} &nbsp; Z: ${band.z.toFixed(3)}<br>
+        Distance from center: ${kDist} &nbsp;|&nbsp; Connections: ${connected.length}<br>
+        ${connected.length > 0 ? 'Resonates with: ' + connected.map(b => b.name).join(', ') : 'No connections'}
+      </div>
       <div class="tt-status">${band.status}</div>
     `;
   } else {
