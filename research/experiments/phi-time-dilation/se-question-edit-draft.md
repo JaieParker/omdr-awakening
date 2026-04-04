@@ -2,6 +2,8 @@
 
 ## Title: Golden ratio as the unique self-referential fixed point of Schwarzschild time dilation
 
+## Tags: general-relativity, black-holes, schwarzschild-metric, reference-request, golden-ratio
+
 ## Body:
 
 In the Schwarzschild spacetime, the time dilation factor for a static observer at radial coordinate $r$ is:
@@ -20,18 +22,18 @@ Setting $\gamma(k \cdot r_s) = k$ requires $k^2 - k - 1 = 0$, whose unique posit
 
 ### Cluster of exact identities at this radius
 
-The fixed point is not isolated — the circular orbit at $r = \varphi \cdot r_s$ has a cluster of exact values:
+The fixed point is not isolated. For the (unstable) circular orbit at $r = \varphi \cdot r_s$:
 
-| Quantity | Value | Key identity used |
-|----------|-------|-------------------|
+| Quantity | Exact value | Follows from |
+|----------|-------------|--------------|
 | Time dilation $\gamma$ | $\varphi$ | $1 - 1/\varphi = 1/\varphi^2$ |
 | Orbital energy $E/mc^2$ | $\sqrt{2}$ | $\varphi^3(2\varphi - 3) = 1$ |
-| Local orbital velocity $v^2$ | $\varphi/2$ | $1/(2(\varphi-1)) = \varphi/2$ |
-| Impact parameter $b/r_s$ | $\varphi^2 = \varphi + 1$ | $r^3/(r_s^2(r - r_s))$ at $r = \varphi r_s$ |
+| Local orbital velocity $v^2/c^2$ | $\varphi/2$ | $v^2 = M/(r-2M)$, with $\varphi - 1 = 1/\varphi$ |
+| Photon impact parameter $b$ | $\varphi^2 \cdot r_s = (\varphi+1)\,r_s$ | $b = r/\sqrt{1-r_s/r}$, with $\sqrt{1-1/\varphi} = 1/\varphi$ |
 | Gravitational redshift | $1/\varphi$ | $\sqrt{1 - 1/\varphi} = 1/\varphi$ |
-| Proper acceleration | $c^2/(2\varphi \cdot r_s)$ | Standard static observer formula |
+| Proper acceleration | $c^2/(2\varphi \cdot r_s)$ | $a = (r_s/2)/(r^2\sqrt{1-r_s/r})$ |
 
-All follow from the single algebraic property $\varphi^2 = \varphi + 1$.
+All follow from the single algebraic property $\varphi^2 = \varphi + 1$ and its consequences.
 
 ### Kerr extension
 
@@ -39,16 +41,16 @@ For a Kerr black hole with spin $a_* = \sqrt{1 - 1/\varphi^6} \approx 0.972$, th
 
 $$r_+ = r_s/\varphi, \qquad r_- = r_s/\varphi^2, \qquad r_+/r_- = \varphi$$
 
-This uses $\sqrt{1 - a_*^2} = 1/\varphi^3$ and the identity $(1 + 1/\varphi^3)/2 = 1/\varphi$.
+This uses $\sqrt{1 - a_*^2} = 1/\varphi^3$ and the identity $(1 + 1/\varphi^3)/2 = 1/\varphi$. The spin $a_* \approx 0.972$ is in the astrophysically populated range (cf. NGC 1365 at $a_* = 0.97^{+0.01}_{-0.04}$, Risaliti et al. 2013).
 
-### Physical analysis (honest negatives)
+### Physical analysis
 
-I computed the Regge-Wheeler potential, Zerilli potential, Lyapunov exponent, Kretschner scalar, geodesic deviation, photon deflection, and Novikov-Thorne emissivity at this radius. **Every physical quantity is a smooth function passing through $\varphi \cdot r_s$ with no extremum, inflection point, or transition.** The closest near-miss: the $l=2$ Regge-Wheeler peak at $r = \frac{9+\sqrt{17}}{8} r_s \approx 1.640\, r_s$ (1.4% from $\varphi \cdot r_s$), but this involves $\sqrt{17}$, not $\sqrt{5}$.
+I systematically evaluated the Regge-Wheeler potential, Zerilli potential, Lyapunov exponent, Kretschner scalar, geodesic deviation, photon deflection, and Novikov-Thorne emissivity at this radius. **Every quantity is a smooth function passing through $\varphi \cdot r_s$ with no extremum, inflection point, or transition.** The $l=2$ Regge-Wheeler peak sits at $r = \frac{9+\sqrt{17}}{8}\, r_s \approx 1.640\, r_s$ — 1.4% away, involving $\sqrt{17}$, not $\sqrt{5}$.
 
-The prograde Kerr ISCO coincides with $\varphi \cdot r_s$ at spin $a_* \approx 0.734$.
+One physical coincidence: the prograde Kerr ISCO coincides with $\varphi \cdot r_s$ at spin $a_* \approx 0.734$. At this spin, the innermost stable circular orbit has $\gamma = \varphi$, $E = \sqrt{2}$, $v^2 = \varphi/2$ — the stability boundary sits at the self-referential radius.
 
-### My question
+### Question
 
-Has this self-referential fixed point $\gamma = r/r_s = \varphi$, its uniqueness, the associated identity cluster, or the Kerr horizon result been noted in the literature? I am aware of Cruz et al. (2017) on golden ratio orbital turning points, Sigalotti & Mejias (2006) on the golden ratio in SR, and Sonnino & Nardone (2024) on extremal Kerr-Newman — none address this specific property.
+Has this self-referential fixed point $\gamma = r/r_s = \varphi$, its uniqueness, the identity cluster, or the Kerr horizon result been noted in the literature? I am aware of Cruz et al. (2017) on golden ratio orbital turning points in Schwarzschild-Kottler, Sigalotti & Mejias (2006) on the golden ratio in special relativity, and Sonnino & Nardone (2024) on extremal Kerr-Newman families — none address this property.
 
-I present this as a mathematical observation about the metric, not a claim of physical significance.
+I present this primarily as a mathematical observation about the Schwarzschild metric structure, while noting the Kerr ISCO coincidence at $a_* \approx 0.734$ as a point of potential physical interest.
