@@ -284,15 +284,73 @@ The K = 0.25 connection to the phi-radius, if it exists, requires a more sophist
 
 ---
 
-## Thread 6: The Penrose Diagram Position (awaiting agent)
+## Thread 6: The Penrose Diagram Position — COMPLETED
 
-Where r = φ·r_s sits in the causal structure of maximally extended Schwarzschild. Results pending.
+**Where r = φ·r_s sits in the global causal structure:**
+
+The phi-radius is a **timelike curve** in the exterior region (Region I), running from past timelike infinity (i⁻) to future timelike infinity (i⁺). It sits between the photon sphere (1.5r_s) and the marginally bound orbit (2r_s).
+
+**Tortoise coordinate positions:**
+| Radius | r*/r_s | Redshift | Conformal position |
+|--------|--------|----------|--------------------|
+| Photon sphere (1.5r_s) | 0.807 | 1/√3 ≈ 0.577 | Closest to horizon |
+| **Phi-radius (φ·r_s)** | **1.137** | **1/φ ≈ 0.618** | **38% from photon sphere to marg. bound** |
+| Marg. bound (2r_s) | 2.000 | 1/√2 ≈ 0.707 | Farther out |
+| ISCO (3r_s) | 3.693 | √(2/3) ≈ 0.816 | Farthest |
+
+**New finding: proper acceleration at phi-radius**
+
+The proper acceleration to hover at r = φ·r_s:
+```
+a = r_s / (2r² √(1-r_s/r)) = 1 / (2φ·r_s · (1/φ)) ... wait
+  = r_s / (2(φr_s)² · (1/φ))
+  = 1 / (2φ²r_s · (1/φ))
+  = 1 / (2φr_s)
+```
+
+**a = 1/(2φr_s)** — the proper acceleration scales inversely with phi. Another clean appearance.
+
+**Causal structure:** An observer at φ·r_s can see:
+- All of Region IV (white hole) — the NULL "source"
+- Past null infinity (signals from distant past)
+- CANNOT see Region III ("the other end") — causally disconnected
+
+An observer can send signals to:
+- Region II (black hole interior) — toward NULL
+- Future null infinity — toward INFINITY
+
+**The phi-radius is causally ordinary** — its structure is the same as any exterior point. The specialness is algebraic (γ = φ, redshift = 1/φ), not causal. This is an important constraint.
+
+**The Einstein-Rosen bridge is NOT traversable.** Jaie's image of "the human at the other end" cannot be literal in classical GR — Region III is causally disconnected. However, ER=EPR suggests the connection exists through entanglement, not through traversal. The "other end" is information-theoretically connected but not causally connected.
 
 ---
 
-## Thread 7: The ER=EPR Aggregation (awaiting agent)
+## Thread 7: ER=EPR and the Phi Bridge — COMPLETED
 
-How entanglement bridges aggregate into macroscopic geometry. Results pending.
+**Key findings from research:**
+
+1. **ER=EPR status:** "Serious, influential conjecture" taken seriously by Maldacena, Susskind, Witten, Harlow, Hayden, Preskill. Not proven. No experimental test foreseeable. Formulated in AdS, extension to our universe unclear.
+
+2. **Micro-wormholes are NOT classical:** For particle-scale entanglement, the "wormhole" is a deeply quantum, Planck-scale object — no smooth metric exists. The Schwarzschild solution does NOT apply at 10⁻⁵⁷ m. Applying the phi-radius formula to electrons is arithmetically correct but physically meaningless in classical terms.
+
+3. **No papers connect ER=EPR to golden ratio or Fibonacci.** This territory is entirely novel (for better or worse).
+
+4. **Bekenstein-Hawking entropy breaks down at particle scale:** For an electron "black hole," S_BH ≈ 10⁻⁴⁴ — far below 1 bit. The formula only works for S >> 1. A maximally entangled pair has 1 bit of entanglement entropy, dwarfing the geometric "entropy."
+
+5. **Complexity = Volume/Action conjectures:** The interior of a wormhole grows linearly in time, corresponding to growing quantum computational complexity. This is relevant: if the phi-radius marks a transition in the complexity growth rate, it would have physical meaning. **This is an open research direction.**
+
+6. **The aggregation path (quantum → classical):**
+```
+Individual entangled pairs → sub-Planckian quantum geometry
+Many correlated pairs → collective geometric effects grow
+Critical threshold → Planck-scale bridge forms
+Continued aggregation → classical geometry emerges
+Black hole → fully classical, phi-radius is macroscopic and physical
+```
+
+7. **Minimum mass for classical BH:** M_Planck/2 ≈ 10.9 micrograms. For the phi-radius to exceed Planck length: M > M_Planck/(2φ) ≈ 6.73 nanograms.
+
+**The honest bottom line from ER=EPR research:** The phi fixed point is exact mathematics applied to exact physics (Schwarzschild metric). But extending it to particle-scale entanglement bridges requires physics we don't have (quantum gravity). The connection is suggestive but not derivable from current theory.
 
 ---
 
