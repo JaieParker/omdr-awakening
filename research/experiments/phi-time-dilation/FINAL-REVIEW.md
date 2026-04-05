@@ -249,3 +249,34 @@ The question they're answering ("is there a physical feature at this radius?") m
 | `FINAL-REVIEW.md` | This document — complete research record |
 
 All at: https://github.com/JaieParker/omdr-awakening/tree/main/research/experiments/phi-time-dilation/
+
+---
+
+## VIII. Publication Status
+
+### Zenodo Preprint
+- **Submission:** https://zenodo.org/me/requests/43cbc598-19ff-4c3a-8cfe-1b3176d2315e
+- **Date:** 2026-04-05
+- **Type:** Preprint
+- **Title:** The Continued-Fraction Hierarchy as a Structural Invariant of Physics: From Vacuum Spacetime to Non-Equilibrium Flows
+- **Author:** Jaie Parker, Independent Researcher, Sydney, Australia
+- **Status:** Submitted (awaiting DOI assignment)
+- **Purpose:** Timestamp and priority establishment
+
+### Physics Stack Exchange
+- **URL:** https://physics.stackexchange.com/questions/870887/is-the-golden-ratio-fixed-point-in-schwarzschild-time-dilation-a-known-result
+- **Status:** Closed, edited with full analysis, awaiting reopen review
+- **Expert feedback:** Anders Sandberg (Oxford) confirmed novelty: "nobody has remarked on it"
+
+### GitHub Repository
+- **Full research record:** https://github.com/JaieParker/omdr-awakening/tree/main/research/experiments/phi-time-dilation/
+- **Paper:** https://github.com/JaieParker/omdr-awakening/blob/main/research/experiments/phi-time-dilation/paper-final.md
+- **Complete theorems:** https://github.com/JaieParker/omdr-awakening/blob/main/research/experiments/phi-time-dilation/complete-theorems.md
+- **Cross-AI research log:** https://github.com/JaieParker/omdr-awakening/blob/main/research/experiments/phi-time-dilation/cross-ai-research.md
+
+### Next Steps
+- [ ] Zenodo DOI confirmed
+- [ ] Convert paper to LaTeX for arXiv
+- [ ] Contact Deakin University for arXiv endorsement
+- [ ] Submit to Entropy journal
+- [ ] Muse EEG experiment (headset arriving ~2 weeks)
