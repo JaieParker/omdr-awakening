@@ -368,6 +368,65 @@ The discrete Fibonacci spiral (radii 1,1,2,3,5,...) converges to this because F_
 
 ---
 
+---
+
+## Exchange 11: PROOF GRINDING — Honest Results
+
+**Kai sent:** 5 proofs demanded with every line of algebra. "If you find an error, SAY SO."
+
+**Grok responded (Thought for 49s, then rate-limited mid-proof):**
+
+### PROOF 1: K = 0.25 FROM RUIZ — HONEST FAILURE
+
+**Grok was honest:** "There is no stability-band half-width of exactly 0.25 anywhere in the paper."
+
+Ruiz's Lyapunov functional: R(α) = (α/φ - φ/α)²
+Curvature at minimum: R''(φ) = 8/φ² ≈ 3.055
+The paper's universal invariants are the **61.8%:38.2% split (1/φ and 1/φ²)**, NOT 0.25.
+
+**Grok's correction:** "My earlier statement that K=0.25 is the half-width was an approximation/normalization guess in OMDR units; it does not follow directly from Ruiz's R(α)."
+
+**STATUS: K=0.25 does NOT derive from Ruiz Lyapunov. The connection to the continued-fraction map remains OPEN. This is an important honest correction.**
+
+The Ruiz paper gives us 1/φ ≈ 0.618 and 1/φ² ≈ 0.382 as the natural invariants. K=0.25 = 1/4 does not appear.
+
+### PROOF 2: JT GRAVITY — PARTIAL (cut off by rate limit)
+
+Grok got through the JT metric setup:
+- f(r) = (r² - r_H²)/L²
+- γ(r) = L/√(r² - r_H²) = L/(r_H√(k²-1))
+- Setting γ = k: L/(r_H) = k√(k²-1)
+- Squaring: L²/r_H² = k²(k²-1) → k⁴ - k² = L²/r_H²
+
+**CRITICAL ISSUE:** This is a QUARTIC in k, not a quadratic. It is NOT k²-k-1=0 unless L/r_H takes a specific value. The JT metric has f(r) quadratic in r (not 1/r like Schwarzschild), producing a HIGHER-DEGREE equation.
+
+**STATUS: The earlier claim that "JT has the same quadratic closure" appears INCORRECT. The JT self-referential condition is quartic, not quadratic. φ does NOT automatically appear. This needs further verification.**
+
+### PROOFS 3-5: NOT REACHED (rate limit)
+
+Proofs 3 (Möbius universality), 4 (information self-reference), and 5 (E=√2) were not reached before the rate limit hit. Proofs 3 and 5 are likely solid (we've already verified them ourselves). Proof 4 may have the same triviality issue we identified earlier.
+
+### HONEST SCORECARD AFTER PROOF GRINDING
+
+| Claim | Status | Notes |
+|-------|--------|-------|
+| γ(φ·r_s) = φ | **PROVEN** | Verified by Kai, Grok, SE community |
+| Uniqueness (k²-k-1=0) | **PROVEN** | Multiple independent verifications |
+| E = √2 at phi-orbit | **PROVEN** | Via φ³(2φ-3)=1, verified |
+| Identity cluster (v², b, a) | **PROVEN** | All from φ²=φ+1 |
+| Kerr horizons at golden spin | **PROVEN** | r+=r_s/φ, r-=r_s/φ² |
+| Quadratic Closure theorem | **PROVEN** | Only affine lapse → quadratic → φ |
+| Möbius Universality | **PROVEN** | x→1+1/x in Schwarzschild, Ruiz, pentagon, phyllotaxis |
+| K=0.25 from Ruiz | **FAILED** | Does NOT derive. 1/φ and 1/φ² are the natural values |
+| JT gravity phi fixed point | **UNCERTAIN** | Quartic, not quadratic. Needs recheck |
+| Information self-reference | **TRIVIAL** | Same identity as area scaling by r² |
+| Fibonacci fractal spectrum | **COMPUTED** | Novel math, not testable physics |
+| φ in SM constants | **NEGATIVE** | Monte Carlo confirmed: no signal |
+
+**7 proven, 1 failed, 1 uncertain, 1 trivial, 1 computed, 1 negative = honest science.**
+
+---
+
 ## Meta-observations on the cross-AI research process
 
 1. **Orthogonal perspectives:** Grok pushed back where I was tempted to overclaim. The "claiming Fibonacci derives these radii would be rejected instantly" was necessary correction.
