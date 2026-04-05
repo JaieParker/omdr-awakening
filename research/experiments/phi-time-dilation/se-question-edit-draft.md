@@ -54,3 +54,7 @@ One physical coincidence: the prograde Kerr ISCO coincides with $\varphi \cdot r
 Has this self-referential fixed point $\gamma = r/r_s = \varphi$, its uniqueness, the identity cluster, or the Kerr horizon result been noted in the literature? I am aware of Cruz et al. (2017) on golden ratio orbital turning points in Schwarzschild-Kottler, Sigalotti & Mejias (2006) on the golden ratio in special relativity, and Sonnino & Nardone (2024) on extremal Kerr-Newman families — none address this property.
 
 I present this primarily as a mathematical observation about the Schwarzschild metric structure, while noting the Kerr ISCO coincidence at $a_* \approx 0.734$ as a point of potential physical interest.
+
+**Update:** Following feedback from @AndersSandberg confirming every dynamical quantity is smooth through this radius (no physical feature), we extended the analysis to show the same Möbius map $x \mapsto 1 + 1/x$ appears identically in Arnold tongue theory, Hückel molecular orbitals, non-equilibrium RG flows (Ruiz 2025, Entropy), and phyllotaxis — all instances of the same discrete subgroup of PGL$(2, \mathbb{Q}(\sqrt{5}))$. The golden ratio is the canonical attractor of quadratic algebraic closure, not a dynamical feature of a specific radius.
+
+Full paper with Kerr extension ($a_* = 2\varphi^{-3/2}$, consistent with NGC 1365), honest negative results, and 8 companion papers across 12 domains: [Zenodo DOI: 10.5281/zenodo.19426142](https://zenodo.org/records/19426142)
