@@ -35,3 +35,6 @@ The Fibonacci convergents $F(n+1)/F(n)$ discretize the radial coordinate with di
 I've searched the literature and found prior work connecting the golden ratio to black holes — Cruz, Olivares & Villanueva (2017) on orbital turning points in Schwarzschild-Kottler, Sigalotti & Mejias (2006) on the golden ratio in special relativity, and Sonnino & Nardone (2024) on extremal Kerr-Newman families — but none of these state this specific identity.
 
 **Has this time dilation fixed point been noted before?** Is it a known result buried in a textbook, or is it genuinely unpublished? And does the radius $r = \varphi \cdot r_s$ have any known physical significance beyond this identity?
+
+
+POSTED: https://physics.stackexchange.com/questions/870887/is-the-golden-ratio-fixed-point-in-schwarzschild-time-dilation-a-known-result
