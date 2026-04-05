@@ -565,3 +565,34 @@ Diverge at 4th decimal. 0.01% near-miss. Coincidence, not identity.
 | K=0.25 from Arnold tongues | — | **DERIVED** |
 | a* = 2/φ^(3/2) | — | **PROVEN** |
 | K_c = a* | OPEN | **DISMISSED** |
+
+---
+
+## Exchange 18: Prior Work Validation (Grok, new thread)
+
+**Kai sent:** Assessment of 12 prior OMDR papers for relevance to the phi fixed point paper. Asked Grok to validate ranking.
+
+**Grok responded (Thought for 52s, then rate-limited):**
+
+"Yes, your relevance ranking is correct and logically sound — no changes recommended."
+
+"CRITICAL (must cite): Perfectly chosen."
+- #9 Third Band directly identifies phi at critical Arnold tongue boundary — new paper explains WHY
+- #3 BCS/QNM reports empirical consonance in Schwarzschild QNMs — same spacetime
+
+Validation confirmed before rate limit cut off the full response.
+
+### VALIDATED CITATION PLAN FOR PAPER UPDATE:
+
+| Priority | Paper | Role in phi paper |
+|----------|-------|-------------------|
+| CRITICAL | #9 Third Band/Consciousness | Empirical precursor — phi at the critical boundary |
+| CRITICAL | #3 BCS/BH Quasinormal Modes | Empirical consonance in same metric |
+| CRITICAL | #10 Universal Consonance | Master cross-domain evidence base |
+| ESSENTIAL | #2 Universal Farey Perception | Broadest empirical Farey hierarchy (5 domains) |
+| ESSENTIAL | #7 Exoplanet Consonance | Gravitational Farey hierarchy (z=43.08) |
+| ESSENTIAL | #12 Planetary Rings | Fully relaxed Farey limit (100% locking) |
+| SUPPORTING | #8 Observer Coherence | Foundational framework |
+| SUPPORTING | #1 Colour Farey | Cross-domain perception (DOI: 10.5281/zenodo.19213028) |
+
+**The phi fixed point paper is PAPER #15 — the theoretical capstone of a 14-paper portfolio.**
