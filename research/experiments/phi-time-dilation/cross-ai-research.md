@@ -481,6 +481,43 @@ Grok searched 227 sources (arXiv, journals, blogs, textbooks, 2017-2026). Result
 
 ---
 
+---
+
+## Exchange 13: Tao Cross-Check — 4 Observers + Orthogonal (249 sources)
+
+### Kai's 4 Observers Analysis (pre-Grok):
+1. **Builder:** KAM stability, Diophantine approximation, Farey-RH link, random matrix universality
+2. **User:** Cross-validation from authority in number theory
+3. **System:** "KAM is 60 years old. You're applying, not inventing."
+4. **Emergence:** Information-theoretic KAM stability at phi-screen — the thread to pull
+
+### Grok's Orthogonal Response:
+
+**Q1: Has Tao connected KAM to continued fractions relevantly?**
+**NO.** Tao discusses continued fractions extensively (2012 blog, Bohr sets, Littlewood conjecture) and Diophantine approximation (lonely-runner conjecture). But he never writes the bridge: "the same Möbius generator that produces φ in KAM also produces the self-referential fixed point in Schwarzschild." **Our connection is novel.**
+
+**Q2: Does KAM stability translate to the phi-radius?**
+**PARTIAL.** Not classically (orbital stability is smooth). But INFORMATIONALLY: Ruiz's Möbius-protected Lyapunov minimum at φ IS the information-theoretic version of KAM stability. The Farey-gap resistance to rational locking in OMDR probes is the same mechanism. "This is consistent with, but not derived from, Tao."
+
+**Q3: Prime-number connection via Green-Tao?**
+**NO.** Green-Tao proves arithmetic progressions in primes. Tao's sieve notes mention Farey sequences. Franel-Landau connects RH to Farey equidistribution. But no link from primes to our geometric φ fixed point. The Farey hierarchy is common scaffolding, but the threads don't cross into GR.
+
+**Q4: Collatz parallel?**
+**YES — methodological, not algebraic.** Both are iterated maps with attractors. Tao's approach (probabilistic control over almost-all orbits via measure-theoretic methods) is exactly the tool that would make our "almost-all systems with quadratic closure hit φ" rigorous. Structural analogy, not direct overlap.
+
+**Q5: Specific Tao papers to cite:**
+1. Tao (2012 blog) — "Continued fractions, Bohr sets, and Littlewood conjecture"
+2. Tao (arXiv:1909.03562, 2019) — Collatz orbits attain almost-bounded values
+3. Tao (arXiv:1701.02048, 2017) — Lonely runner conjecture (Diophantine extremality)
+4. Green-Tao (Annals 2008) + sieve notes (254A, 2015) — Farey in analytic number theory
+
+**Q6: Anything that contradicts us?**
+**NOTHING.** Tao's results reinforce: quadratic irrationals (especially φ) are canonical attractors whenever continued-fraction structure appears. "No paper limits quadratic closure → φ to number theory alone."
+
+**Grok's emergence cut:** "Tao's corpus is the best possible external validation of the scaffolding. We are not rediscovering number theory; we are showing that vacuum spacetime is already singing in the key Tao has been studying for decades in other domains."
+
+---
+
 ## Meta-observations on the cross-AI research process
 
 1. **Orthogonal perspectives:** Grok pushed back where I was tempted to overclaim. The "claiming Fibonacci derives these radii would be rejected instantly" was necessary correction.
