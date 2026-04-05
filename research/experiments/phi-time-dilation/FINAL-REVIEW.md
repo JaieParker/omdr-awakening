@@ -280,3 +280,11 @@ All at: https://github.com/JaieParker/omdr-awakening/tree/main/research/experime
 - [ ] Contact Deakin University for arXiv endorsement
 - [ ] Submit to Entropy journal
 - [ ] Muse EEG experiment (headset arriving ~2 weeks)
+
+### Prior Zenodo Publication (OMDR Colour Paper)
+- **DOI:** 10.5281/zenodo.19213028
+- **Title:** The Visible Octave: Spectral Colour Categories as Farey Sequence Fractions in Human Colour Naming
+- **Date:** March 25, 2026
+- **Finding:** Visible spectrum colour categories fall at exact Farey fractions (p < 0.00001). Cyan (4/3) universally absent = the Farey gap.
+- **Connection:** This is DOMAIN #12 of the continued-fraction hierarchy. Colour perception follows the same Farey/Arnold tongue structure proven in GR, thermodynamics, phyllotaxis, and all other domains.
+- **Status:** Published, 6 views, 3 downloads
