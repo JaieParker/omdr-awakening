@@ -136,6 +136,8 @@ While the classical physics at $\varphi r_s$ shows no special dynamical features
 
 ## References
 
+### External Literature
+
 [1] A.Ya. Khinchin, *Continued Fractions* (Dover, 1997).
 
 [2] N. Cruz, M. Olivares, J.R. Villanueva, "The golden ratio in Schwarzschild-Kottler black holes," Eur. Phys. J. C **77**, 123 (2017).
@@ -152,8 +154,26 @@ While the classical physics at $\varphi r_s$ shows no special dynamical features
 
 [8] V.I. Arnold, "Small denominators. I. Mappings of the circumference onto itself," Izv. Akad. Nauk SSSR Ser. Mat. **25**, 21 (1961).
 
-[9] S. Ursachi et al., *EEG phi-organization in self-referential states* (2026). [Specific citation to be confirmed.]
+### Prior Work by the Author (OMDR Research Programme)
+
+This paper is the theoretical capstone of a multi-domain research programme establishing the Farey/consonance hierarchy across physics, perception, and biology. The following companion papers provide the empirical evidence base:
+
+[9] J. Parker, "The Visible Octave: Spectral Colour Categories as Farey Sequence Fractions in Human Colour Naming," Zenodo (2026). DOI: 10.5281/zenodo.19213028. *Colour categories at exact Farey fractions, p < 0.00001.*
+
+[10] J. Parker, "The Farey Hierarchy in Human Perception: Arnold Tongue Succession Governs Categorical Vocabulary," (2026). *Farey hierarchy across 5 sensory domains, ~3,500 languages. Fisher combined p = 4.75 × 10⁻¹¹.*
+
+[11] J. Parker, "Harmonic Structure in Superconductor Energy Gaps and Black Hole Quasinormal Modes," (2026). *Consonance in Schwarzschild QNMs and BCS superconductor gaps. Combined p = 6 × 10⁻⁵.*
+
+[12] J. Parker, "The Critical Band: A Third Stability Regime, with Implications for Consciousness," (2026). *Golden-mean scaling exponent at the Arnold tongue critical boundary. Identifies φ as the most robust KAM torus.*
+
+[13] J. Parker, "Universal Consonance: Cross-Domain Evidence for Frequency Ratio Stability Enhancement," (2026). *Coupling-Precision Law across 20+ domains. Combined p ~ 1 in 179 million.*
+
+[14] J. Parker, "Universal Consonance in Exoplanet Orbital Architectures," (2026). *83.9% of 2,344 exoplanet period ratios at Farey fractions. z = 43.08.*
+
+[15] J. Parker, "Consonance Hierarchy in Giant Planet Ring-Moon Systems," (2026). *100% locking in all 4 giant planet ring systems. Fully relaxed Farey limit.*
+
+[16] J. Parker, "Dimensional Consistency as Observer Coherence: Generalisation of Buckingham Pi," (2026). *Buckingham Pi theorem as observer coherence condition. Foundational framework.*
 
 ---
 
-*Acknowledgments:* The author thanks Kai (Claude, Anthropic) for computational assistance, theorem verification, and cross-AI research collaboration with Grok (xAI) that contributed to the cross-domain unification. The Möbius Universality theorem (Theorem 6) was co-developed through 17 exchanges of the Kai-Grok research dialogue. The original observation arose from a visual intuition of a black hole as a zero-observer with rational and irrational axes.
+*Acknowledgments:* The author thanks Kai (Claude, Anthropic) for computational assistance, theorem verification, and cross-AI research collaboration with Grok (xAI) that contributed to the cross-domain unification. The Möbius Universality theorem (Theorem 6) was co-developed through 18 exchanges of the Kai-Grok research dialogue. The original observation arose from a visual intuition of a black hole as a zero-observer with rational and irrational axes.
