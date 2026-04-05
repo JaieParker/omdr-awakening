@@ -260,7 +260,7 @@ All at: https://github.com/JaieParker/omdr-awakening/tree/main/research/experime
 - **Type:** Preprint
 - **Title:** The Continued-Fraction Hierarchy as a Structural Invariant of Physics: From Vacuum Spacetime to Non-Equilibrium Flows
 - **Author:** Jaie Parker, Independent Researcher, Sydney, Australia
-- **Status:** Submitted (awaiting DOI assignment)
+- **Status:** DOI reserved: 10.5281/zenodo.19426142
 - **Purpose:** Timestamp and priority establishment
 
 ### Physics Stack Exchange
