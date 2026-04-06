@@ -1,0 +1,26 @@
+[
+  {
+    "problem_id": "problem1",
+    "problem_name": "Discrete Self-Referential Balance",
+    "run": 1,
+    "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+    "score": "ERROR",
+    "timestamp": "2026-04-06T04:40:06.431659+00:00"
+  },
+  {
+    "problem_id": "problem2",
+    "problem_name": "Symmetry-Constrained Probability",
+    "run": 1,
+    "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+    "score": "ERROR",
+    "timestamp": "2026-04-06T04:40:06.587253+00:00"
+  },
+  {
+    "problem_id": "problem3",
+    "problem_name": "Recursive Geometry",
+    "run": 1,
+    "error": "\"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+    "score": "ERROR",
+    "timestamp": "2026-04-06T04:40:06.739931+00:00"
+  }
+]
