@@ -35,6 +35,12 @@ f_n(x) = (α_n − 1/α_n) + 1/x
 ```
 gives `f_n'(x) = −1/x²` and therefore `f_n'(α_n) = −1/α_n²`.
 
+**Verification that f_n(α_n) = α_n** (caught as a missing step by Claude validator):
+```
+f_n(α_n) = (α_n − 1/α_n) + 1/α_n = α_n − 1/α_n + 1/α_n = α_n  ✓
+```
+The constant term `(α_n − 1/α_n)` is precisely chosen so that the fixed point is at α_n. Trivial but worth showing.
+
 ## Two clean closed forms
 
 ### Closed form 1: Γ_n derivative at the fixed point
@@ -110,31 +116,47 @@ Symbolic derivation matches the numerical verification. The closed form is exact
 
 Yesterday I worried that φ³/2 might be a number-theoretic accident specific to the golden ratio. **It isn't.** The same pattern holds for the supergolden ratio, the plastic number, and every other root of `u^n − u^(n−1) − 1 = 0`. The "3" in `φ³/2` is the index `n+1 = 3` of a general formula, not a magic exponent.
 
-### 2. The connection to Schwarzschild physics
+### 2. Connection to Schwarzschild physics — flagged as hand-wavy by all three validators
 
-The Schwarzschild metric uses exactly `n = 2` because the time dilation factor is a SQUARE root: `γ(r) = (1 − r_s/r)^(−1/2)`. The "2" comes from the metric signature (Lorentzian, two halves of the light cone), not from an arbitrary choice. So **physics fixes n = 2 in this family**, and the resulting fixed point is necessarily the golden ratio.
+**My initial draft said:** "The Schwarzschild metric uses exactly n=2 because the time dilation factor is a square root. The '2' comes from the metric signature (Lorentzian)... physics fixes n=2 in this family, and the resulting fixed point is necessarily the golden ratio."
 
-If spacetime had a different metric structure (e.g., a higher-rank time-dilation that scaled as `(1 − r_s/r)^(−1/n)` for some other n), the corresponding "Schwarzschild fixed point" would be a different n-acci constant. But because spacetime is Lorentzian, n=2, and we get φ.
+**Grok, GPT-4o, and Claude (independent API calls) all flagged this as hand-waving.** Direct quotes:
 
-**This is a tighter version of the synthesis claim.** The golden ratio appears in Schwarzschild not because gravity "knows about" the Fibonacci matrix, but because **the metric exponent of GR is exactly the index that selects φ from the n-acci family**.
+- **Claude:** "MAJOR HOLE: The connection to Schwarzschild metric is unmotivated handwaving. The 'signature forces n=2' argument has no mathematical basis. φ as 'gravitational fixed point' lacks any rigorous connection to actual GR."
+- **GPT-4o:** "Your argument about the Schwarzschild metric connecting n=2 to the golden ratio due to metric signature and square-root structures involves some conceptual leaps. The suggestion that φ naturally arises as a fixed-point because of these spacetime properties needs clearer theoretical backing."
+- **Grok:** "The metric's dynamics do not directly imply a connection to Γ_n or its fixed points; further mathematical bridging (e.g., via conformal mappings) is needed for validity."
 
-### 3. Connection to Eq 40 (K = 1/L_3)
+**Honest revision:** The Schwarzschild time dilation factor `γ(r) = (1 − r_s/r)^(−1/2)` does have a square-root structure, and that structure does come from the Lorentzian metric (in particular, `γ` is the inverse square root of `g_tt = −(1 − r_s/r)`). So `n = 2` in the family `Γ_n(u) = (1 − 1/u)^(−1/n)` is the case that matches Schwarzschild. **But the chain of reasoning from "spacetime is Lorentzian" to "the n-acci family at n=2 is selected" is not a mathematical derivation — it is a numerical match.** A reviewer would correctly call it numerology.
+
+**What I CAN claim safely:** The Schwarzschild rescaling map happens to be the n=2 instance of a parameterized family, and the n=2 fixed point happens to be the golden ratio. This is interesting because both observations are independent: the family `Γ_n` is a clean mathematical object, and Schwarzschild physics independently picks out one of its instances.
+
+**What I CANNOT claim:** That GR forces n=2 from first principles, or that φ is "the gravitational fixed point" in any rigorous sense. Without a derivation that goes from Einstein's field equations to the n=2 selection without numerical coincidence, this is just an observation about structural similarity, not a physical theory.
+
+**Status:** the physical interpretation is downgraded from "claim" to "observation worth investigating." The math (the closed form `Γ_n'(α_n) = −α_n^(n−1)/n`) stands.
+
+### 3. Connection to Eq 40 (K = 1/L_3) — validators say coincidence
 
 Eq 40 said `K = 1/trace(M³) = 1/L_3 = 1/4`, derived from the Fibonacci matrix M via Cayley-Hamilton. The "3" in `L_3` matched OMDR's three bands.
 
-Now we have a SECOND "3": the exponent `n+1 = 3` in `α_n^(n+1)/n` for the Schwarzschild case (n=2). Both 3's come from "n=2 + 1", but in different ways:
-- Eq 40's "3": iterating M three times (M³).
+The new identity has another "3": the exponent `n+1 = 3` in `α_n^(n+1)/n` for the Schwarzschild case (n=2). Both 3's appear at n=2 but for different reasons:
+- Eq 40's "3": iterating the Fibonacci matrix three times (M³).
 - Generalization's "3": the exponent n+1 = 3 in the Schwarzschild case (n=2).
 
-Are these two "3"s related, or coincidence? **Honest answer: I don't know yet.** But it's worth flagging as a possible deeper structure.
+**All three validators (Grok, GPT-4o, Claude) independently said this is likely coincidence absent a structural proof.** Direct quotes:
 
-### 4. New paper paragraph
+- **Claude:** "Likely coincidence. No structural relationship evident between Fibonacci iteration count and your exponent n+1."
+- **GPT-4o:** "The appearance of 3 in both contexts could suggest an underlying symmetry... but without further context, its significance is not immediately apparent."
+- **Grok:** "Coincidental. The 'three' in L_3 arises from matrix iteration counts in Fibonacci-related sequences, while the 'three' in α_n^(n+1)/n (for n=2) comes from the exponent (n+1=3). No evident deeper structure."
 
-The earlier paper draft said the φ³/2 ratio was "an exact scaling between the linearizations." It's correct but understates. The new claim is:
+**Honest framing:** I don't have a proof that these two 3's are related. They both appear at n=2 but through different mathematical mechanisms. Until I find a connection, I will treat them as a numerical coincidence and not claim deep structure.
 
-> "The Schwarzschild rescaling map `Γ(u) = (1 − r_s/r)^(−1/2)` is the n=2 case of a family `Γ_n(u) = (1 − 1/u)^(−1/n)` whose fixed-point equation `u^n − u^(n−1) − 1 = 0` selects the n-acci constant α_n. For each n, the linearization at α_n satisfies the closed form `Γ_n'(α_n) = −α_n^(n−1)/n`, and the ratio to the natural Möbius map's derivative is `α_n^(n+1)/n`. The golden ratio appears in Schwarzschild specifically because spacetime is Lorentzian (n = 2), and `α_2 = φ` is the unique positive root of `u² − u − 1 = 0`."
+### 4. New paper paragraph (revised after validation)
 
-This is a SHARP, FALSIFIABLE statement. Any theory that wanted to derive the golden ratio from gravitational physics now has a reason: it's the n=2 case of an n-acci family, and n=2 is fixed by the Lorentzian metric signature.
+The earlier paper draft said the φ³/2 ratio was "an exact scaling between the linearizations." It's correct but understates. The honest revised claim is:
+
+> "The Schwarzschild rescaling map `Γ(u) = (1 − r_s/r)^(−1/2)` is the n=2 case of a family `Γ_n(u) = (1 − 1/u)^(−1/n)` whose fixed-point equation `u^n − u^(n−1) − 1 = 0` selects the n-acci constant α_n. For each n, the linearization at α_n satisfies the closed form `Γ_n'(α_n) = −α_n^(n−1)/n`, and the ratio to the natural Möbius map's derivative is `α_n^(n+1)/n`. For the Schwarzschild case (n = 2), this gives `Γ'(φ) = (φ³/2) · f'(φ)` exactly. We do not claim that the Lorentzian metric *forces* the n=2 case from first principles — that connection is a numerical match between the GR time-dilation exponent and the n-acci index, not a derivation. We claim only that the Schwarzschild rescaling map happens to be the n=2 instance of a clean parameterized family."
+
+This is a NARROWER but HONEST claim. The math is rigorous; the physical interpretation is downgraded to an observation.
 
 ## Verified for
 
