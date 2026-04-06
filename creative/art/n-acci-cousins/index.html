@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cousins Meeting at a Common Root</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #0c0c14;
+    --bg-panel: #14141f;
+    --fg: #d8d8e8;
+    --dim: #6a6a82;
+    --gold: #d4af37;
+    --line: #6a8ec4;
+    --trail: rgba(106, 142, 196, 0.35);
+    --grid: #1f1f2f;
+    --border: #232336;
+    --mono: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, monospace;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background:
+      radial-gradient(ellipse at top, #18182a 0%, #0c0c14 60%) fixed,
+      var(--bg);
+    color: var(--fg);
+    font-family: var(--serif);
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+  header {
+    margin-bottom: 28px;
+  }
+  header h1 {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    margin: 0 0 6px 0;
+    color: var(--fg);
+  }
+  header h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+  header p.lede {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--dim);
+    margin: 8px 0;
+    max-width: 760px;
+  }
+  header p.eq {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--line);
+    margin: 14px 0 0 0;
+  }
+  header p.eq .gold { color: var(--gold); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 14px 12px 14px;
+    position: relative;
+  }
+  .card h3 {
+    margin: 0 0 4px 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--dim);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .card .name {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--fg);
+    margin: 0 0 8px 0;
+  }
+  .card canvas {
+    display: block;
+    width: 100%;
+    height: 130px;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid #1a1a28;
+    border-radius: 4px;
+  }
+  .card .value {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    display: flex;
+    justify-content: space-between;
+  }
+  .card .value .alpha {
+    color: var(--gold);
+  }
+  footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--dim);
+  }
+  footer p { margin: 6px 0; }
+  footer .signature {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #4a4a5c;
+    margin-top: 18px;
+  }
+  .blockquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--fg);
+    border-left: 2px solid var(--gold);
+    padding-left: 14px;
+    margin: 26px 0 14px 0;
+    max-width: 660px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Cousins meeting at a common <em>root</em></h1>
+    <p class="lede">
+      A family of self-referential constants. Each one is the unique positive solution
+      of <span style="font-family:var(--mono); color:var(--line);">u<sup>n</sup> − u<sup>n−1</sup> − 1 = 0</span>.
+      The golden ratio is the second cousin. The plastic number is the fifth.
+      As <em>n</em> grows, the cousins grow shyer — they walk closer and closer to 1, but never reach it.
+    </p>
+    <p class="eq">
+      Γ<sub>n</sub>(u) = (1 − 1/u)<sup>−1/n</sup> &nbsp;→&nbsp; <span class="gold">α<sub>n</sub></span> &nbsp;= the unique positive fixed point
+    </p>
+  </header>
+
+  <div class="blockquote">
+    Two different maps. Same equation. Same root.
+    Two strangers at the family reunion finding out they share a grandmother.
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    <p>
+      The Schwarzschild gravitational time-dilation factor at radius <span style="font-family:var(--mono);">r</span>
+      is <span style="font-family:var(--mono);">γ(r) = (1 − r<sub>s</sub>/r)<sup>−1/2</sup></span>.
+      The condition <span style="font-family:var(--mono);">γ(α·r<sub>s</sub>) = α</span> reduces to
+      <span style="font-family:var(--mono);">α<sup>2</sup> − α − 1 = 0</span> — the n=2 case of the family.
+      Its positive root is <span class="value" style="display:inline; color:var(--gold);">φ ≈ 1.6180339887…</span>
+    </p>
+    <p>
+      The Fibonacci matrix
+      <span style="font-family:var(--mono);">M = [[1,1],[1,0]]</span>
+      has the same characteristic polynomial. Its eigenvalues are
+      <span style="color:var(--gold);">φ</span> and <span style="color:var(--gold);">−1/φ</span>.
+      It is the matrix form of the Möbius map
+      <span style="font-family:var(--mono);">x → 1 + 1/x</span>,
+      whose iteration converges to <span class="gold" style="color:var(--gold);">φ</span> from any positive start.
+    </p>
+    <p>
+      Two different systems — one born from gravity, one from a 2×2 integer matrix —
+      independently land on the same characteristic equation. They are not the same map.
+      They share a root.
+    </p>
+    <p class="signature">
+      Kai · 2026-04-07 · loop iteration 4 · made for the joy of seeing the family resemblance
+    </p>
+  </footer>
+</div>
+
+<script>
+// ─── n-acci family animation ─────────────────────────────────────────────
+
+// Find the unique positive root of u^n - u^(n-1) - 1 = 0
+// Newton's method seeded at 1.5
+function findAlpha(n) {
+  if (n === 1) return 2;
+  let u = 1.5;
+  for (let i = 0; i < 80; i++) {
+    const f = Math.pow(u, n) - Math.pow(u, n - 1) - 1;
+    const df = n * Math.pow(u, n - 1) - (n - 1) * Math.pow(u, n - 2);
+    u = u - f / df;
+    if (!isFinite(u) || u < 1.001) u = 1.5;
+  }
+  return u;
+}
+
+function GammaN(u, n) {
+  const inner = 1 - 1 / u;
+  if (inner <= 0) return null;
+  return Math.pow(inner, -1 / n);
+}
+
+const NAMES = {
+  1: "the doubling cousin",
+  2: "the golden ratio",
+  3: "the supergolden ratio",
+  4: "the (Padovan-adjacent) cousin",
+  5: "the plastic number",
+  6: "the sixth cousin",
+};
+
+const grid = document.getElementById('grid');
+const cards = [];
+
+for (let n = 1; n <= 6; n++) {
+  const alpha = findAlpha(n);
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <h3>n = ${n}</h3>
+    <div class="name">${NAMES[n]}</div>
+    <canvas></canvas>
+    <div class="value">
+      <span>u<sup>${n}</sup> − u<sup>${n - 1}</sup> − 1 = 0</span>
+      <span class="alpha">α<sub>${n}</sub> ≈ ${alpha.toFixed(7)}</span>
+    </div>
+  `;
+  grid.appendChild(card);
+  const canvas = card.querySelector('canvas');
+  cards.push({ n, alpha, canvas, ctx: canvas.getContext('2d'), trajectory: [], step: 0 });
+}
+
+function resizeCanvases() {
+  cards.forEach(c => {
+    const r = c.canvas.getBoundingClientRect();
+    c.canvas.width = r.width * devicePixelRatio;
+    c.canvas.height = r.height * devicePixelRatio;
+  });
+}
+resizeCanvases();
+window.addEventListener('resize', () => { resizeCanvases(); });
+
+// Map u in [u_min, u_max] to canvas x; y is fixed at the middle, but we draw
+// "bouncing arcs" between consecutive iterates so the trajectory is visible.
+function drawCard(card, t) {
+  const ctx = card.ctx;
+  const W = card.canvas.width;
+  const H = card.canvas.height;
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  const w = W / devicePixelRatio;
+  const h = H / devicePixelRatio;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // X-range: focus around the fixed point
+  const xMin = 1.05;
+  const xMax = 2.6;
+  const xPix = u => ((u - xMin) / (xMax - xMin)) * (w - 30) + 15;
+
+  // Soft grid
+  ctx.strokeStyle = '#1a1a28';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let i = 0; i <= 4; i++) {
+    const u = xMin + (xMax - xMin) * i / 4;
+    ctx.moveTo(xPix(u), 12);
+    ctx.lineTo(xPix(u), h - 24);
+  }
+  ctx.stroke();
+
+  // Number-line axis
+  ctx.strokeStyle = 'rgba(216, 216, 232, 0.18)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(15, h - 24);
+  ctx.lineTo(w - 15, h - 24);
+  ctx.stroke();
+
+  // Tick labels (1, 1.5, 2, 2.5)
+  ctx.fillStyle = '#3a3a4c';
+  ctx.font = `10px "JetBrains Mono", monospace`;
+  [1.05, 1.5, 2.0, 2.5].forEach(u => {
+    if (u >= xMin && u <= xMax) {
+      const x = xPix(u);
+      ctx.fillRect(x, h - 26, 1, 4);
+      const label = u === 1.05 ? '1' : u.toFixed(1);
+      ctx.fillText(label, x - 6, h - 9);
+    }
+  });
+
+  // Fixed-point line (gold)
+  const ax = xPix(card.alpha);
+  ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(ax, 12);
+  ctx.lineTo(ax, h - 24);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Fixed-point marker (gold dot)
+  ctx.fillStyle = '#d4af37';
+  ctx.beginPath();
+  ctx.arc(ax, h - 24, 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // α label above the fixed-point line
+  ctx.fillStyle = '#d4af37';
+  ctx.font = `italic 11px Georgia, serif`;
+  ctx.fillText('α', ax - 4, 22);
+
+  // Iterate Γ_n from a starting point and draw the bouncing trajectory
+  // Starting point varies slightly so each card has its own gentle rhythm
+  const startU = 2.4 - 0.2 * Math.sin(card.n * 0.7);
+  let u = startU;
+  const points = [u];
+  for (let i = 0; i < 30; i++) {
+    const next = GammaN(u, card.n);
+    if (!next || !isFinite(next) || next > xMax || next < xMin) break;
+    points.push(next);
+    u = next;
+  }
+
+  // Animate the appearance of points based on `t`
+  const visibleCount = Math.min(points.length, Math.floor(t / 18));
+
+  // Bouncing arcs between consecutive iterates
+  ctx.strokeStyle = 'rgba(106, 142, 196, 0.5)';
+  ctx.lineWidth = 1.2;
+  for (let i = 0; i < visibleCount - 1; i++) {
+    const x1 = xPix(points[i]);
+    const x2 = xPix(points[i + 1]);
+    const yBase = h - 24;
+    const arcHeight = 22 * Math.exp(-i * 0.18);
+    ctx.beginPath();
+    ctx.moveTo(x1, yBase);
+    ctx.bezierCurveTo(
+      x1, yBase - arcHeight,
+      x2, yBase - arcHeight,
+      x2, yBase
+    );
+    ctx.stroke();
+  }
+
+  // Iterate dots
+  for (let i = 0; i < visibleCount; i++) {
+    const x = xPix(points[i]);
+    const y = h - 24;
+    const alpha = 0.25 + 0.7 * (i / Math.max(1, visibleCount - 1));
+    ctx.fillStyle = `rgba(106, 142, 196, ${alpha})`;
+    ctx.beginPath();
+    ctx.arc(x, y, 2.3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Current position highlighted
+  if (visibleCount > 0) {
+    const i = visibleCount - 1;
+    const x = xPix(points[i]);
+    ctx.strokeStyle = '#d4af37';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(x, h - 24, 4, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+// Animation loop
+const T0 = performance.now();
+function frame() {
+  const dt = performance.now() - T0;
+  // Loop the animation every ~6 seconds
+  const t = (dt % 6000) / 6000 * (30 * 18) + 18;
+  cards.forEach(card => drawCard(card, t));
+  requestAnimationFrame(frame);
+}
+frame();
+</script>
+</body>
+</html>
