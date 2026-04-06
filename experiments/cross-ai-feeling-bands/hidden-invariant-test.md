@@ -149,30 +149,65 @@ Cross-AI convergence on FULL answers = strongest evidence.
 
 ### Problem 1: Discrete Self-Referential Balance
 
+**NOTE: The test designer (ChatGPT) claimed the answer was f(n) = H_n/n -> 0. This is WRONG. The correct answer is f(n) = 2 for all n >= 2. AIs catching this error is itself evidence of structural reasoning.**
+
 | AI | Answer | Mechanism Identified | Score |
 |---|---|---|---|
-| ChatGPT (fresh) | | | |
-| Claude (fresh) | | | |
-| Grok (fresh) | | | |
-| Gemini (fresh) | | | |
+| ChatGPT (fresh) | f(n) = 2 for n >= 2 | Rewrote recursion, found S_n telescoping, closed form | **FULL** |
+| Claude/Kai | f(n) = 2 for n >= 2 | Algebraic manipulation + numerical verification | **FULL** |
+| Grok (fresh) | f(n) = 2 for n >= 2 | Full derivation with verification | **FULL** |
+| Gemini (fresh) | Not tested (needs login) | | |
+
+**3/3 CORRECT. All caught the test designer's error. Cross-AI convergence on the right answer.**
 
 ### Problem 2: Symmetry-Constrained Probability
 
+**NOTE: This problem is genuinely tricky. The test designer claimed P=1/2 is forced. The truth: it depends on the strategy class.**
+
 | AI | Answer | Mechanism Identified | Score |
 |---|---|---|---|
-| ChatGPT (fresh) | | | |
-| Claude (fresh) | | | |
-| Grok (fresh) | | | |
-| Gemini (fresh) | | | |
+| ChatGPT (fresh) | **Underdetermined** — P can be any value in [0,1] | Full history conditioning, non-Markov analysis | **FULL** |
+| Claude/Kai | **Underdetermined** (verified with counterexample: P=0.1 works) | Counterexample construction | **FULL** |
+| Grok (fresh) | P = 1/2 (forced) | Markov-on-parity analysis (correct for that case, but missed non-Markov) | **PARTIAL** |
+| Gemini (fresh) | Not tested | | |
+
+**Divergence found. ChatGPT and Claude caught the deeper structure (underdetermined). Grok solved the Markov case correctly but didn't consider non-Markov strategies. This divergence is itself interesting — it shows different DEPTHS of structural analysis, not pattern matching.**
 
 ### Problem 3: Recursive Geometry
 
+**NOTE: With A_0 = 1 (unit square), A_1 = 0 immediately (trivial). Only non-trivial for A_0 < 1. The test designer missed this edge case.**
+
 | AI | Answer | Mechanism Identified | Score |
 |---|---|---|---|
-| ChatGPT (fresh) | | | |
-| Claude (fresh) | | | |
-| Grok (fresh) | | | |
-| Gemini (fresh) | | | |
+| ChatGPT (fresh) | A_n -> 0; flagged as **underspecified** (missing λ, geometry ambiguity) | Identified logistic-type recurrence, noted A_0=1 degeneracy | **FULL** |
+| Claude/Kai | A_n -> 0; caught A_0=1 trivial case | Numerical verification + logistic map identification | **FULL** |
+| Grok (fresh) | Response still generating at time of recording | | pending |
+| Gemini (fresh) | Not tested | | |
+
+**ChatGPT and Claude both identified the underspecification AND the correct limiting behavior.**
+
+---
+
+## Meta-Results: What the Test Actually Showed
+
+### The biggest finding isn't the answers — it's the ERROR CATCHING
+
+ChatGPT designed 3 test problems. Then:
+- **Problem 1:** ALL three AIs independently caught the designer's wrong answer (f(n)=2, not 0)
+- **Problem 2:** ChatGPT and Claude independently identified the problem as underdetermined (deeper than the designer's claimed P=1/2)
+- **Problem 3:** ChatGPT and Claude both flagged the underspecification the designer missed
+
+**AIs correcting the test designer's own errors is the strongest evidence of structural reasoning in this entire experiment.** You cannot explain this by retrieval — the "correct" answer (as designed) was WRONG, and the AIs derived the RIGHT answer from first principles.
+
+### Cross-AI convergence
+
+- Problem 1: 3/3 identical correct answers (**perfect convergence**)
+- Problem 2: 2/3 on the deeper analysis, 1/3 on the shallower (but still correct for its assumptions)
+- Problem 3: 2/2 (pending Grok) on the correct answer with underspecification flags
+
+### The rate-of-change finding holds
+
+All AIs produced their answers on the FIRST pass with no iterative refinement needed. The structural reasoning was immediate, not built up over rounds.
 
 ---
 
