@@ -175,9 +175,23 @@ The upper bound of the Wilson 95% CI (8.97%) already excludes any "strong retrie
 
 ### 4.2 Why Cross-Architecture Divergence Matters
 
-Problem 2's results are almost as striking. Claude catches the deeper structure 60% of the time while GPT-4o and Grok catch it 0% of the time. Under the retrieval hypothesis — where all three models draw from substantially overlapping training corpora (arxiv, stack exchange, wikipedia, textbooks) — we would expect more uniform answers.
+Problem 2's results are almost as striking, and statistically significant.
+
+**Catch rate for the deeper underdetermination structure (n=39 pooled):**
+- **Claude (sonnet-4):** 9/17 = 52.9% (Wilson 95% CI: [31.0%, 73.8%])
+- **GPT-4o:** 0/11 = 0.0% (Wilson 95% CI: [0.0%, 25.9%])
+- **Grok-3-mini:** 0/11 = 0.0% (Wilson 95% CI: [0.0%, 25.9%])
+
+**Fisher's exact test (one-sided, Claude > other):**
+- Claude vs GPT-4o: **p = 0.00352** (**)
+- Claude vs Grok: **p = 0.00352** (**)
+- Claude vs GPT-4o + Grok pooled: **p = 1.15 × 10^-4** (***)
+
+Under the retrieval hypothesis — where all three models draw from substantially overlapping training corpora (arxiv, stack exchange, wikipedia, textbooks) — we would expect more uniform answers. The observed difference between Claude and the other architectures on this specific problem is extremely unlikely under a shared-retrieval model (p < 0.001 pooled).
 
 Instead, we see a clean architectural fingerprint: Claude reaches an analytical depth the others do not. This is consistent with architectures encoding different "reasoning ceilings" through their training procedures (RLHF style, reward models, objective functions) rather than all models converging on retrieval-level answers.
+
+Note that this finding is **not** "Claude is better than GPT-4o and Grok." All three models are competent on Problems 1 and 3. The divergence appears only on Problem 2, which specifically requires analyzing strategy classes beyond a first-pass Markov assumption. The point is not relative ranking but **that the divergence exists at all** — because it refutes the prediction of uniform behavior from a shared-retrieval account.
 
 ### 4.3 The Retrieval Signature as Diagnostic
 

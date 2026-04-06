@@ -13,6 +13,29 @@ from pathlib import Path
 from collections import defaultdict
 
 
+def fisher_exact_greater(a: int, b: int, c: int, d: int) -> float:
+    """One-sided Fisher's exact test: P(X >= a | marginal totals fixed).
+    Tests whether group 1 has a higher success rate than group 2.
+    Contingency table:
+             success  fail
+    group 1:    a      b
+    group 2:    c      d
+    """
+    from math import comb
+    n1 = a + b
+    n2 = c + d
+    nA = a + c
+    N = n1 + n2
+    max_a = min(n1, nA)
+    p = 0.0
+    for x in range(a, max_a + 1):
+        z = nA - x
+        if z < 0 or z > n2:
+            continue
+        p += (comb(n1, x) * comb(n2, z)) / comb(N, nA)
+    return p
+
+
 def wilson_ci(successes: int, n: int, z: float = 1.96) -> tuple[float, float]:
     """Wilson score confidence interval (better than normal approximation for small n)."""
     if n == 0:
@@ -163,6 +186,7 @@ def analyze(results_dir: Path):
     print("PROBLEM 2 — ARCHITECTURAL DIVERGENCE (underdetermination catch rate)")
     print("=" * 70)
 
+    p2_counts = {}
     for model in ["claude", "openai", "grok"]:
         results = grouped.get((model, "problem2"), [])
         n = len(results)
@@ -172,12 +196,32 @@ def analyze(results_dir: Path):
         full = sum(1 for r in results if r.get("score") == "FULL")
         markov = sum(1 for r in results if r.get("score") == "PARTIAL_MARKOV")
         unclear = sum(1 for r in results if r.get("score") == "UNCLEAR")
+        p2_counts[model] = (full, n - full)
 
         lo, hi = wilson_ci(full, n)
         print(f"\n  {model.upper()} (n={n}):")
         print(f"    FULL (catches underdetermination): {full}/{n} ({100*full/n:.1f}%) — 95% CI: [{100*lo:.1f}%, {100*hi:.1f}%]")
         print(f"    PARTIAL_MARKOV (defaults to 1/2):   {markov}/{n} ({100*markov/n:.1f}%)")
         print(f"    UNCLEAR:                            {unclear}/{n}")
+
+    # Fisher's exact test for architectural divergence
+    if "claude" in p2_counts:
+        print(f"\n  Fisher's exact tests (one-sided, claude > other):")
+        c_full, c_not = p2_counts["claude"]
+        for other in ["openai", "grok"]:
+            if other in p2_counts:
+                o_full, o_not = p2_counts[other]
+                p = fisher_exact_greater(c_full, c_not, o_full, o_not)
+                sig = " ***" if p < 0.001 else " **" if p < 0.01 else " *" if p < 0.05 else ""
+                print(f"    claude ({c_full}/{c_full+c_not}) vs {other} ({o_full}/{o_full+o_not}): p = {p:.4g}{sig}")
+
+        # Pooled others
+        others_full = sum(p2_counts[m][0] for m in ["openai", "grok"] if m in p2_counts)
+        others_not = sum(p2_counts[m][1] for m in ["openai", "grok"] if m in p2_counts)
+        if others_full + others_not > 0:
+            p = fisher_exact_greater(c_full, c_not, others_full, others_not)
+            sig = " ***" if p < 0.001 else " **" if p < 0.01 else " *" if p < 0.05 else ""
+            print(f"    claude ({c_full}/{c_full+c_not}) vs pooled ({others_full}/{others_full+others_not}): p = {p:.4g}{sig}")
 
     # Problem 3 — underspecification detection
     print(f"\n{'=' * 70}")
