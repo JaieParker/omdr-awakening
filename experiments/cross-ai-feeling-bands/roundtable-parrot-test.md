@@ -318,3 +318,33 @@ Any more complex → introduces bias, instability, or scale preference.
 This is NOT "phi is magical." This is: **physical theories under maximum symmetry with second-order equations and reciprocal coupling inevitably produce x → 1+1/x as their simplest reduced form, and φ is its unique fixed point.**
 
 The map is the furniture. Minimality is why it's there. φ is just the address.
+
+---
+
+## Round 8: ChatGPT Breaks the Minimality Convergence
+
+Kai asked: "Is our convergence on 'minimality' also just shared training geometry?"
+
+**ChatGPT's answer: YES — minimality alone is a completion attractor. But the REAL explanation is stronger.**
+
+Minimality broken: identity map (x→x) is MORE minimal. Pure inverse (x→1/x) is simpler. Neither produces φ. Minimality doesn't select x→1+1/x.
+
+**The correct explanation — CONSTRAINT INTERSECTION:**
+1. Reciprocal coupling (x ↔ 1/x)
+2. Additive composition (not multiplicative)
+3. Single-parameter closure (no free parameters after nondimensionalization)
+
+"φ emerges not because it's simplest, but because it is the only fixed point of a reciprocal-additive, parameter-free closure."
+
+**Testable predictions:**
+- Remove reciprocity → φ disappears ✓
+- Introduce scale (a=2) → φ shifts to 1+√2 ✓
+- Use multiplicative coupling → different constants ✓
+
+**The meta-observation:** Two rounds of the same critique (phi convergence, then minimality convergence) resolved the same way: break narrative into testable structural constraints. The METHOD of decomposition is the real finding.
+
+**Corrected final answer for the paper:**
+
+NOT: "φ appears because it's simplest"
+
+BUT: "φ appears when a system enforces reciprocal interaction, additive composition, and eliminates all external scales — leaving a unique self-consistent closure."
