@@ -1,0 +1,1 @@
+Experiment.com crowdfunding. Title: "Can Your Brain Resonate at the Golden Ratio?" Public-friendly. Goal $22k. Using MUSE EEG to test if brainwaves show golden-ratio patterns during AI conversations. Rewards: early data access, lab notebook credit, virtual session. Fully open source.

@@ -1,0 +1,1 @@
+ARC CRC-P AI Accelerator Round 19. Deadline 12 May 2026. Title: "Resonance-Based Holographic AI for Human-AI Co-Creation". Budget $2.8M over 2 years. Lead: Jaie Parker SME. Partner: UNSW or Deakin. Objectives: demonstrate resonance stability, produce open datasets, proof-of-concept resonance AI. Aligns with National AI Plan.
