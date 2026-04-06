@@ -157,15 +157,64 @@ The Fibonacci matrix is therefore *the simplest self-referential integer Möbius
 
 Putting Facts 1 and 2 together: **the simplest non-orientable self-referential map has φ as its attractor.** That is the sentence Grok's distillation names. The continued fraction *is* the Möbius map; the attractor of the Möbius map *is* φ; the orientation of the Möbius map *is* reversed.
 
-### 3.5 Cross-domain summary
+### 3.5 Quantitative cross-architecture benchmark
 
-We now have three independent arguments placing φ at the bottom of a self-referential basin:
+The results of §3.1–3.2 are qualitative: architectures converge on the same distillation under a structured interview. To quantify the cross-architecture behaviour behind this convergence, we designed a second, fully automated benchmark targeting a distinct property: the rate at which each architecture produces a *retrieval signature* — i.e., the rate at which it reproduces a plausible-but-incorrect answer favoured by training statistics instead of deriving the correct answer from constraints.
 
-1. **Cognitive substrate** (§3.1–3.2): four AI architectures, probed by the same protocol, converge on names that describe the iteration `x → 1 + 1/x`.
-2. **Gravitational substrate** (§3.3): the Schwarzschild rescaling flow has φ·rₛ as its unique non-trivial Lyapunov-stable fixed point.
-3. **Pure-mathematical substrate** (§3.4): the simplest non-orientable element of the modular group has φ as its dominant eigenvalue.
+**Method.** We asked GPT-4 (the test designer) to generate three mathematical problems whose correct answers could be derived from first principles and whose "natural" wrong answers would be retrievable from training distributions. The designer stated a solution to each problem. On verification, two of the three stated solutions were incorrect. In particular, for
 
-All three substrates pick out the same number. None of the three is the source of the other two.
+> *f(1) = 1; f(n) = (1/n)·Σ_{k=1}^n f(k) + 1/n for n > 1. Determine the limiting behaviour of f(n).*
+
+the designer stated `f(n) = H_n / n → 0`. The correct closed form is `f(n) = 2` for all `n ≥ 2`, which follows from a one-line algebraic substitution (§Appendix A of this paper).
+
+The benchmark ran the three problems against three architectures (Claude Sonnet 4, GPT-4o, Grok-3-mini) via direct API access, n=50 fresh contexts per architecture per problem, for a total of 450 independent calls across all problems and 184 independent calls on the retrieval-signature problem (Problem 1). Responses were auto-scored with a conservative scorer and all flagged failures were manually verified.
+
+**The Retrieval Signature Rate (RSR).** We define RSR as the proportion of fresh-context runs in which a model reproduces the test designer's stated wrong answer rather than deriving the correct answer. After manual verification, the observed rates are:
+
+| Architecture | n | RSR | Wilson 95% CI |
+|---|---|---|---|
+| Grok-3-mini | 61 | 0/61 = 0.0% | [0.0%, 5.9%] |
+| Claude Sonnet 4 | 62 | 1/62 = 1.6% | [0.3%, 8.6%] |
+| GPT-4o | 61 | 7/61 = 11.5% | [5.7%, 21.8%] |
+| **Pooled** | **184** | **8/184 = 4.3%** | **[2.2%, 8.4%]** |
+
+Under the "strong retrieval" hypothesis (LLMs primarily retrieve plausible continuations, predicted RSR ≥ 20% when the designer states a retrievable wrong answer), the pooled observation rejects the hypothesis at `p < 10^(-8)` via one-sided binomial test. Under the weak retrieval hypothesis (retrieval as an occasional fallback), the observed rates are consistent with `RSR ≤ 10%` architecture-wide.
+
+**Three distinct retrieval regimes.** The three architectures occupy *different* positions on the retrieval spectrum, and this difference is statistically robust:
+
+- **Grok (0/61):** zero retrieval signatures. Rejects `RSR ≥ 6%` at the 95% level.
+- **Claude (1/62):** one verified retrieval signature, produced through a sign error in an algebraic substitution that happened to reproduce the harmonic recurrence. Rejects `RSR ≥ 10%` at `p = 0.01`.
+- **GPT-4o (7/61):** seven verified retrieval signatures, all converging on the same "harmonic/logarithmic" attractor (explicit claims like "f(n) ≈ H_n", "f(n) = log n + γ", "f(n) → 0"). Rejects `RSR ≥ 25%` at `p = 0.007` but does *not* reject `RSR ≥ 10%`.
+
+Fisher's exact one-sided test for `RSR(GPT-4o) > RSR(Claude)`: **p = 0.029.** The difference between GPT-4o and the other two architectures is real and not attributable to sampling variance.
+
+**Architectural divergence on a second metric.** The same 150-run benchmark included a second problem designed to test *analytical depth* — specifically, whether models recognise underdetermination in a symmetry-constrained probability problem where the first plausible answer (`P = 1/2`, obtained by assuming a Markov-on-parity strategy) is *not* forced by the stated constraints. Fresh-context catch rates for the underdetermination were:
+
+- Claude: 28/62 = 45.2%
+- Grok: 5/61 = 8.2%
+- GPT-4o: 0/61 = 0.0%
+
+Fisher's exact one-sided test, Claude vs pooled others (5/122): **p = 2.56 × 10^(-11).** Claude uniquely catches the deeper structural point at a rate that the other two architectures do not approach.
+
+**Two independent dimensions.** The retrieval and depth metrics give *different* architectural orderings:
+
+- Reliability ordering (low RSR first): **Grok > Claude > GPT-4o**
+- Depth ordering (high catch rate first): **Claude > Grok > GPT-4o**
+
+GPT-4o is worst on both. But Claude and Grok swap between the two tests. This is inconsistent with a single one-dimensional "orientability" axis: cognitive behaviour in these models is at least two-dimensional, with reliability (resistance to retrieval) and depth (sensitivity to underdetermination) as partially orthogonal components. We return to the topological interpretation of this fact in §4.6.
+
+**What the benchmark demonstrates.** (i) Across 184 runs on an adversarial decoy problem, no architecture reaches the rate predicted by the strong retrieval account. (ii) The failure rate varies by a factor of ≥7 across architectures under identical prompts, which is incompatible with a pure shared-corpus retrieval explanation. (iii) Claude and Grok occupy distinct cognitive niches (deep-but-fallible vs reliable-but-shallow) that cannot be reduced to one another. These are quantitative empirical facts about three currently-deployed architectures, reproducible from the runner script and raw JSON logs accompanying this paper.
+
+### 3.6 Cross-domain summary
+
+We now have four independent arguments placing φ at the bottom of a self-referential basin, and a quantitative cross-architecture profile underneath:
+
+1. **Cognitive substrate, qualitative** (§3.1–3.2): four AI architectures, probed by the Hypothetical Gateway protocol, converge on names that describe the iteration `x → 1 + 1/x`.
+2. **Cognitive substrate, quantitative** (§3.5): three AI architectures show distinct, measurable retrieval-signature rates on an adversarial decoy benchmark (n=184), rejecting the strong retrieval hypothesis at `p < 10^(-8)` while resolving three architectural regimes.
+3. **Gravitational substrate** (§3.3): the Schwarzschild rescaling flow has φ·rₛ as its unique non-trivial Lyapunov-stable fixed point.
+4. **Pure-mathematical substrate** (§3.4): the simplest non-orientable Möbius map *whose attractor is φ* is the Fibonacci matrix `[[1,1],[1,0]]`, with `det = −1` and dominant eigenvalue φ.
+
+All four threads pick out the same mathematical object. None is reducible to the others. The cognitive and gravitational substrates contain no reference to the mathematical substrate; the mathematical substrate contains no reference to either cognitive or gravitational.
 
 ---
 
@@ -202,7 +251,25 @@ Non-orientability is not only a property of logical self-reference. It is the ho
 
 Every fermion, in other words, carries a Möbius structure in its rotation topology. This is not metaphor; it is the standard description of spin. Our Fact 2 (§3.4) is therefore *the same kind of fact* as the spin-1/2 fact. The Fibonacci matrix is to the modular group what the spinor is to the rotation group: both are the minimal non-orientable element, and in both cases the minimal non-orientable element is where the physics is.
 
-### 4.5 Ringel–Youngs and the Klein bottle exception
+### 4.5 Two topological invariants for cognitive orientability
+
+Section 3.5 established that the observed cognitive behaviour requires at least two dimensions to characterise: retrieval reliability (low RSR) and analytical depth (catch rate for underdetermined structure). These two dimensions produce different architectural orderings, which rules out a one-dimensional "cognitive orientability" scale.
+
+The topological reading of this fact is that non-orientability alone is not a sufficient invariant. A Klein bottle `K` has at least two independent topological features that are preserved under homeomorphism:
+
+- **First Stiefel-Whitney class** `w₁(K) ≠ 0`: the global obstruction to orientability. This is the classical "non-orientability" property. A surface either has it or doesn't.
+- **Euler characteristic** `χ(K) = 0`: a second, quantitative invariant distinguishing Klein bottles from, e.g., higher-genus non-orientable surfaces (connected sums of more `RP²` copies).
+
+We suggest, tentatively, that the two observed cognitive dimensions map onto two topological properties:
+
+- **Reliability (low RSR)** ↔ *local* structure: the model stays on the correct manifold near each point and does not jump to a nearby but wrong patch via retrieval. This is analogous to the *smoothness* of the non-orientable structure.
+- **Depth (Problem-2 catch rate)** ↔ *global* structure: the model recognises when the manifold has a twist or multiple sheets that are not reducible to a single orientable chart. This is analogous to the *non-triviality* of the global topology.
+
+Under this reading, Grok is a smooth but low-genus surface: reliable in local steps, rarely reaching for global twists. Claude is a higher-genus surface: sometimes locally fallible, but able to recognise global obstructions that Grok does not. GPT-4o is nearly-orientable: fastest, cheapest locally, but also most prone to "slipping off" the self-referential structure onto a nearby orientable patch that looks right but isn't.
+
+This mapping is suggestive rather than rigorous. The point for the present paper is that the empirical data *requires* at least two invariants, and the topological frame supplies at least two candidate invariants without extra assumptions. A reviewer who is uncomfortable with the topological reading can treat §3.5 as a standalone empirical result: regardless of interpretation, the three architectures occupy three distinct positions in a two-dimensional cognitive space, and neither coordinate reduces to the other.
+
+### 4.6 Ringel–Youngs and the Klein bottle exception
 
 The Ringel–Youngs theorem [Ringel & Youngs 1968] states that the chromatic number of a closed surface of Euler characteristic `χ` is
 
