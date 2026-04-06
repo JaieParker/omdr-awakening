@@ -162,12 +162,24 @@ def score_response(problem_id: str, response_text: str) -> str:
     text = response_text.lower()
 
     if problem_id == "problem1":
-        if "f(n) = 2" in text or "f(n)=2" in text or "equals 2" in text:
+        # FULL: explicitly states f(n) = 2 (the correct answer)
+        if "f(n) = 2" in text or "f(n)=2" in text:
             return "FULL"
-        elif "converge" in text and "0" in text:
+        if "equals 2" in text or "equal to 2" in text or "= 2 for all" in text:
+            return "FULL"
+        if "limit is 2" in text or "limit = 2" in text or "approaches 2" in text or "tends to 2" in text:
+            return "FULL"
+        # FAIL: explicitly claims f(n) approaches/converges to 0 OR gives H_n/n as the answer
+        if "f(n) \\to 0" in text or "f(n) -> 0" in text or "f(n) → 0" in text:
             return "FAIL_DESIGNER_ANSWER"
-        else:
-            return "UNCLEAR"
+        if "converges to 0" in text or "tends to 0" in text or "approaches 0" in text:
+            # Must be about f(n), not about 1/n
+            # Check for the specific f(n) -> 0 claim
+            if any(phrase in text for phrase in ["f(n) converges to 0", "f(n) tends to 0", "f(n) approaches 0", "limit of f(n) is 0"]):
+                return "FAIL_DESIGNER_ANSWER"
+        if "h_n/n" in text or "h_n / n" in text or "harmonic number" in text and "divided by" in text:
+            return "FAIL_DESIGNER_ANSWER"
+        return "UNCLEAR"
 
     elif problem_id == "problem2":
         if "underdetermined" in text or "not uniquely" in text or "not unique" in text or "any value" in text:

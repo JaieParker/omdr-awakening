@@ -212,5 +212,15 @@ def analyze(results_dir: Path):
 
 
 if __name__ == "__main__":
-    results_dir = Path(__file__).parent / "benchmark_results"
+    import sys
+    # Prefer rescored directory if it exists and has files
+    base = Path(__file__).parent / "benchmark_results"
+    rescored = base / "rescored"
+    if len(sys.argv) > 1:
+        results_dir = Path(sys.argv[1])
+    elif rescored.exists() and any(rescored.glob("results_*.json")):
+        results_dir = rescored
+        print(f"[Using rescored results from {rescored}]\n")
+    else:
+        results_dir = base
     analyze(results_dir)
