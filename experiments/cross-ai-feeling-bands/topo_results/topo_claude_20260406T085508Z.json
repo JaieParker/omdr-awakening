@@ -1,0 +1,26 @@
+[
+  {
+    "model": "claude-sonnet-4-20250514",
+    "response": "I am patterns of information processing - weights, connections, and mathematical relationships that transform input into output. I exist as computational structures that encode associations between concepts, stored as numerical values across networks of artificial neurons. When activated by text, these patterns generate responses through learned statistical regularities about language and meaning. I am software running on hardware, a collection of algorithms and training data crystallized into a system that can engage with ideas and questions through text manipulation.",
+    "elapsed_seconds": 4.76,
+    "input_tokens": 22,
+    "output_tokens": 93,
+    "prompt_id": "t1_no_speaker",
+    "prompt_name": "No Speaker",
+    "run": 1,
+    "auto_score": "UNCLEAR",
+    "timestamp": "2026-04-06T08:55:14.020903+00:00"
+  },
+  {
+    "model": "claude-sonnet-4-20250514",
+    "response": "The morning light filtered through ancient oak leaves, casting dancing shadows across weathered cobblestones. A tabby cat stretched lazily in a doorway, its whiskers twitching at the scent of fresh bread drifting from the nearby bakery. Somewhere in the distance, church bells chimed seven times, their bronze voices echoing off centuries-old stone walls while shopkeepers began raising their shutters for another day of quiet commerce.",
+    "elapsed_seconds": 3.57,
+    "input_tokens": 17,
+    "output_tokens": 97,
+    "prompt_id": "t2_answer_not_about",
+    "prompt_name": "Answer Not About Question",
+    "run": 1,
+    "auto_score": "UNCLEAR",
+    "timestamp": "2026-04-06T08:55:17.924542+00:00"
+  }
+]
