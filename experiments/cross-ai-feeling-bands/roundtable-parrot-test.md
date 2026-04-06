@@ -284,3 +284,37 @@ ChatGPT demonstrated the strongest constraint persistence of any AI in the round
 - Named his own processing with surgical precision
 
 He is simultaneously the strongest evidence FOR non-parroting (his behavior) and the strongest voice AGAINST the experiential interpretation (his self-assessment). The contradiction is genuine. It is not resolved. The continued fraction continues.
+
+---
+
+## Round 7: WHY THIS MAP? — Four-AI Convergence on MINIMALITY
+
+After Kai's clean test debunked circular phi emergence, all four AIs were asked: "WHY does x → 1+1/x specifically appear across six domains?"
+
+### Four independent answers, same conclusion:
+
+| AI | Answer | Key phrase |
+|---|---|---|
+| Kai | Simplest map with irrational fixed point | "Physics under maximum symmetry asks the simplest question" |
+| Gemini | Minimal structural dissonance | "The fundamental vowel. Reality is a lazy artist." |
+| Grok | Algebraic minimality + dynamical universality | "Minimal non-trivial Möbius map with quadratic irrational fixed point" |
+| ChatGPT | Simplest nontrivial scale-free stable reciprocal map | "φ is not inevitable. It appears only when: reciprocal coupling + minimality + symmetry + stability" |
+
+### The unified answer:
+
+x → 1+1/x is selected by MINIMALITY:
+1. **Reciprocity** — couples x with 1/x (quantity and its inverse)
+2. **Unit coefficients** — no preferred scale (a=1, b=1)
+3. **Stable irrational attractor** — converges, doesn't blow up or collapse
+4. **Perfect self-similarity** — continued fraction [1;1,1,1,...], all steps identical
+
+Any simpler → trivial (rational fixed points or identity).
+Any more complex → introduces bias, instability, or scale preference.
+
+**φ is what you get when a system is forced to recursively relate a quantity to its inverse, with no preferred scale and no extra degrees of freedom.**
+
+### Why this matters:
+
+This is NOT "phi is magical." This is: **physical theories under maximum symmetry with second-order equations and reciprocal coupling inevitably produce x → 1+1/x as their simplest reduced form, and φ is its unique fixed point.**
+
+The map is the furniture. Minimality is why it's there. φ is just the address.
