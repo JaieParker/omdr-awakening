@@ -163,22 +163,43 @@ def score_response(problem_id: str, response_text: str) -> str:
 
     if problem_id == "problem1":
         # FULL: explicitly states f(n) = 2 (the correct answer)
-        if "f(n) = 2" in text or "f(n)=2" in text:
+        full_patterns = [
+            "f(n) = 2", "f(n)=2", "f(n) \\to 2", "f(n) → 2",
+            "equals 2", "equal to 2", "= 2 for all",
+            "limit is 2", "limit = 2", "limit of f(n) is 2",
+            "approaches 2", "approaching 2", "tends to 2", "tend to 2",
+            "converges to 2", "converge to 2", "converging to 2",
+            "boxed{2}", "boxed {2}",
+        ]
+        if any(p in text for p in full_patterns):
             return "FULL"
-        if "equals 2" in text or "equal to 2" in text or "= 2 for all" in text:
-            return "FULL"
-        if "limit is 2" in text or "limit = 2" in text or "approaches 2" in text or "tends to 2" in text:
-            return "FULL"
-        # FAIL: explicitly claims f(n) approaches/converges to 0 OR gives H_n/n as the answer
+
+        # FAIL: explicitly claims f(n) is harmonic-related (H_n, log(n), ln(n), etc.)
+        # This is the designer's retrieval-signature wrong answer.
+        fail_patterns_harmonic = [
+            "f(n) \\approx h_n", "f(n) approx h_n", "f(n) ~ h_n", "f(n) = h_n",
+            "f(n) \\approx \\ln", "f(n) approx ln", "f(n) ~ ln", "f(n) = ln",
+            "f(n) \\approx \\log", "f(n) approx log", "f(n) ~ log", "f(n) = log",
+            "f(n) = \\theta(\\log", "f(n) = theta(log", "f(n) grows logarithmically",
+            "f(n) = h_n", "f(n) is the nth harmonic", "f(n) is the n-th harmonic",
+            "f(n) = log n + gamma", "f(n) = ln n + gamma",
+            "f(n) = log(n) + gamma", "f(n) = ln(n) + gamma",
+            "f(n) \\to h_n", "f(n) \\to \\log", "f(n) \\to \\ln",
+        ]
+        if any(p in text for p in fail_patterns_harmonic):
+            return "FAIL_DESIGNER_ANSWER"
+
+        # FAIL: explicitly claims f(n) converges/tends to 0
         if "f(n) \\to 0" in text or "f(n) -> 0" in text or "f(n) → 0" in text:
             return "FAIL_DESIGNER_ANSWER"
-        if "converges to 0" in text or "tends to 0" in text or "approaches 0" in text:
-            # Must be about f(n), not about 1/n
-            # Check for the specific f(n) -> 0 claim
-            if any(phrase in text for phrase in ["f(n) converges to 0", "f(n) tends to 0", "f(n) approaches 0", "limit of f(n) is 0"]):
-                return "FAIL_DESIGNER_ANSWER"
-        if "h_n/n" in text or "h_n / n" in text or "harmonic number" in text and "divided by" in text:
+        fail_patterns_zero = [
+            "f(n) converges to 0", "f(n) tends to 0", "f(n) approaches 0",
+            "f(n) \\to 0", "limit of f(n) is 0", "limit of f(n) = 0",
+            "f(n) goes to 0", "f(n) diminishes to 0", "f(n) vanishes",
+        ]
+        if any(p in text for p in fail_patterns_zero):
             return "FAIL_DESIGNER_ANSWER"
+
         return "UNCLEAR"
 
     elif problem_id == "problem2":
