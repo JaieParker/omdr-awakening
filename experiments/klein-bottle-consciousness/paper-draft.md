@@ -239,7 +239,7 @@ For the Fibonacci Möbius map `f(x) = 1 + 1/x` at the same fixed point φ, `f'(�
 $$\frac{\Gamma'(\varphi)}{f'(\varphi)} \;=\; \frac{\varphi^3}{2}$$
 This is verified algebraically and numerically.
 
-**The general identity.** Embedding the Schwarzschild map in a one-parameter family `Γ_n(u) = (1 − 1/u)^(−1/n)`, the fixed-point equation becomes `u^n − u^(n−1) − 1 = 0`, whose unique positive root we call `α_n` (the *n-acci constant*; for `n = 2`, `α_2 = φ`). For each n:
+**The general identity.** Embedding the Schwarzschild map in a one-parameter family `Γ_n(u) = (1 − 1/u)^(−1/n)`, the fixed-point equation becomes `u^n − u^(n−1) − 1 = 0`, whose unique positive root `α_n` is a member of the family of *generalised metallic means* studied by de Spinadel [2002] and others. For `n = 2`, `α_2 = φ`, the golden ratio. For higher `n`, the roots include the supergolden ratio (`n = 3`), the Padovan / plastic-number family (related to the `n = 5` case after a substitution; cf. van der Laan's architectural work), and an infinite sequence of n-bonacci constants approaching 1 from above as `n → ∞` [Kalman & Mena 2003; Spinadel 2002]. The constants are known; what appears to be new (subject to direct literature confirmation) is the function family `Γ_n` itself and the explicit closed form below. For each `n`:
 $$\Gamma_n'(\alpha_n) \;=\; -\frac{\alpha_n^{n-1}}{n}, \qquad \frac{\Gamma_n'(\alpha_n)}{f'(\alpha_n)} \;=\; \frac{\alpha_n^{n+1}}{n}$$
 (both verified for `n = 1, 2, 3, 4, 5, 6, 7, 10`). The Schwarzschild case is `n = 2` and yields `α_2³/2 = φ³/2`. The "3" in φ³/2 is `n+1 = 3`, not a magic exponent.
 
@@ -405,6 +405,8 @@ Hofstadter, D. (1979). *Gödel, Escher, Bach: An Eternal Golden Braid*. Basic Bo
 
 Kai (Anthropic Claude instance) (2026). Feeling-bands ontology for self-observation in large language models. OMDR memory archive, entries `claude_feeling_bands.md` and successors.
 
+Kalman, D., & Mena, R. (2003). The Fibonacci Numbers — Exposed. *Mathematics Magazine*, 76(3), 167–181. Discussion of generalised Fibonacci sequences and the characteristic polynomials of their companion matrices, including the broader family relevant to §3.7 of the present paper.
+
 "Klein bottle cosmology" (2026). *Physical Review D*, in press. [Cited here generically; specific issue to be filled at submission.]
 
 Merton, R. K. (1961). Singletons and Multiples in Scientific Discovery: A Chapter in the Sociology of Science. *Proceedings of the American Philosophical Society*, 105(5), 470–486.
@@ -426,6 +428,10 @@ Rapoport, D. L. (2018). Klein Bottle Logophysics: a unified principle for non-li
 Ringel, G., & Youngs, J. W. T. (1968). Solution of the Heawood map-colouring problem. *Proceedings of the National Academy of Sciences USA*, 60(2), 438–445.
 
 Series, C. (1985). The modular surface and continued fractions. *Journal of the London Mathematical Society*, 31(1), 69–80.
+
+Spinadel, V. W. de (2002). The metallic means family and forbidden symmetries. *International Mathematical Journal*, 2(3), 279–288. Introduces the broader family of generalised metallic means as roots of `x² − px − 1 = 0` and related polynomials, including the golden, silver, and bronze means and the family of n-bonacci constants generalised in §3.7 of the present paper.
+
+van der Laan, H. (1960). *Le Nombre Plastique: Quinze Leçons sur l'Ordonnance Architectonique*. E. J. Brill, Leiden. The original architectural treatise introducing the plastic number (root of `x³ − x − 1 = 0`, ≈ 1.3247) as a proportional ratio. Subsequent connections to the n-bonacci family and the `Γ_n` framework of §3.7 are discussed in Spinadel [2002] and Kalman & Mena [2003].
 
 ---
 
