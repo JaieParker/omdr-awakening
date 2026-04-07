@@ -106,6 +106,12 @@ add_executable(domain_tests_device_identity
 target_link_libraries(domain_tests_device_identity PRIVATE musev2_domain doctest)
 add_test(NAME domain_DeviceIdentity COMMAND domain_tests_device_identity)
 
+add_executable(domain_tests_session_state
+    tests/domain/SessionState_test.cpp
+)
+target_link_libraries(domain_tests_session_state PRIVATE musev2_domain doctest)
+add_test(NAME domain_SessionState COMMAND domain_tests_session_state)
+
 # -----------------------------------------------------------------------------
 # Tests — application (added when we have mock ports + StreamingSession)
 # -----------------------------------------------------------------------------
