@@ -113,6 +113,19 @@ target_link_libraries(domain_tests_session_state PRIVATE musev2_domain doctest)
 add_test(NAME domain_SessionState COMMAND domain_tests_session_state)
 
 # -----------------------------------------------------------------------------
+# Tests — application
+# -----------------------------------------------------------------------------
+# Application layer depends on domain types plus its own abstract port
+# interfaces. No libmuse, no liblsl — tests use mock port implementations
+# defined in the test files themselves.
+
+add_executable(application_tests_ports_compile
+    tests/application/ports_compile_test.cpp
+)
+target_link_libraries(application_tests_ports_compile PRIVATE musev2_domain doctest)
+add_test(NAME application_PortsCompile COMMAND application_tests_ports_compile)
+
+# -----------------------------------------------------------------------------
 # Tests — application (added when we have mock ports + StreamingSession)
 # -----------------------------------------------------------------------------
 # add_executable(application_tests tests/application/*.cpp ...)
