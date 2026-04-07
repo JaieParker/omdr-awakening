@@ -94,6 +94,12 @@ add_executable(domain_tests_channel_layout
 target_link_libraries(domain_tests_channel_layout PRIVATE musev2_domain doctest)
 add_test(NAME domain_ChannelLayout COMMAND domain_tests_channel_layout)
 
+add_executable(domain_tests_sample_packet
+    tests/domain/SamplePacket_test.cpp
+)
+target_link_libraries(domain_tests_sample_packet PRIVATE musev2_domain doctest)
+add_test(NAME domain_SamplePacket COMMAND domain_tests_sample_packet)
+
 # -----------------------------------------------------------------------------
 # Tests — application (added when we have mock ports + StreamingSession)
 # -----------------------------------------------------------------------------
