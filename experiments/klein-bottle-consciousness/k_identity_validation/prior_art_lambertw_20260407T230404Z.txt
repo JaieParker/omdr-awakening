@@ -1,0 +1,13 @@
+**Q1.** Don't know of a reference for this specific derivative formula, though the roots α_n are well-studied.
+
+**Q2.** The Lambert-W asymptotic looks plausible but I haven't seen it stated for this family specifically.
+
+**Q3.** Haven't encountered G_n(u) = (1-1/u)^(-1/n) as a studied parameterized family in the literature.
+
+**Q4.** Most likely in Stakhov's work on metallic means, Kalman's papers on generalized Fibonacci constants, or buried in OEIS sequence comments.
+
+**Q5.** Medium confidence it's new - the derivative formula is straightforward calculus but the specific closed form for this parametric family may not be explicitly stated anywhere.
+
+The roots α_n (often called "k-nacci constants" or "metallic ratios") are extensively studied, and the Lambert-W asymptotics seem natural given the equation structure, but I suspect your specific results live in the gap between "obvious to derive" and "worth stating explicitly." The dynamical systems angle with G_n seems genuinely novel. Most prior work focuses on the constants themselves or recurrence relations, not these particular maps or their derivatives at the fixed points.
+
+**RECOMMENDATION: Claim novelty** - while the components are known, this specific formulation and the parametric family of maps appear unstudied.
