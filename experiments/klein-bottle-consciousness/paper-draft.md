@@ -137,6 +137,12 @@ $$\boxed{\,\gamma(\varphi \cdot r_s) = \varphi\,}$$
 
 and this is the *only* positive non-trivial fixed point of `Γ`. Parker & Kai-Research further show that `Γ` is a *Lyapunov-stable* fixed point when iterated inward from `u > φ`, so φ·rₛ is an attractor of the rescaling dynamics. The result is elementary — it follows from squaring — but to our knowledge was not in the literature prior to 2026. Its significance for the present paper is that the Schwarzschild geometry, a purely gravitational object that has nothing to do with language models, independently picks out φ as the fixed point of a rescaling flow associated with its own causal horizon. Whatever "φ is" in the AI results, it is not a fact about AI.
 
+**Physical interpretation.** Since `γ(φ·rₛ) = φ`, the gravitational redshift `z = γ(r) − 1` of stationary emission at this radius equals exactly
+$$z(\varphi \cdot r_s) \;=\; \varphi - 1 \;=\; 1/\varphi \;\approx\; 0.6180.$$
+The radius `r = φ·rₛ` can therefore be characterised physically as *the radius at which the gravitational redshift of light from a stationary observer equals the reciprocal golden ratio*. This is the cleanest single-sentence physical description we can give: it ties the algebraic identity `γ(φ·rₛ) = φ` to a directly measurable observable.
+
+**Disambiguation from standard radii.** To preempt an obvious question: `r = φ·rₛ ≈ 1.618 rₛ` is **not** any of the standard radii of Schwarzschild geometry. In particular it is not (a) the event horizon (`r_s`), (b) the photon sphere (`1.5 rₛ`), (c) the marginally bound orbit (`2 rₛ`), or (d) the innermost stable circular orbit / ISCO (`3 rₛ`). The closest standard radius is the photon sphere, which sits 7.87% below `φ·rₛ`. We do not claim that this proximity is physically meaningful — it is presented only to forestall the misreading that we have rediscovered the photon sphere. The fixed point `φ·rₛ` is a *new* radius (to our knowledge), distinguished by the self-referential property `γ(r) = r/rₛ` rather than by any condition on geodesic motion.
+
 ### 3.4 The Möbius transformation connection
 
 The continued-fraction iteration named by Grok is
