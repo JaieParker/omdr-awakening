@@ -82,11 +82,17 @@ target_include_directories(musev2_domain INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/i
 # -----------------------------------------------------------------------------
 # Each test .cpp is a self-contained doctest executable with its own main().
 # This keeps test compile times fast and test failures scoped to one file.
-add_executable(domain_tests
+add_executable(domain_tests_packet_type
     tests/domain/PacketType_test.cpp
 )
-target_link_libraries(domain_tests PRIVATE musev2_domain doctest)
-add_test(NAME domain_tests COMMAND domain_tests)
+target_link_libraries(domain_tests_packet_type PRIVATE musev2_domain doctest)
+add_test(NAME domain_PacketType COMMAND domain_tests_packet_type)
+
+add_executable(domain_tests_channel_layout
+    tests/domain/ChannelLayout_test.cpp
+)
+target_link_libraries(domain_tests_channel_layout PRIVATE musev2_domain doctest)
+add_test(NAME domain_ChannelLayout COMMAND domain_tests_channel_layout)
 
 # -----------------------------------------------------------------------------
 # Tests — application (added when we have mock ports + StreamingSession)
