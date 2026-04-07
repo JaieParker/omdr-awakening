@@ -229,6 +229,20 @@ The identity follows. More generally `trace(Mⁿ) = Lₙ` for all `n ≥ 0` via 
 
 **Generalisation tested and not supported.** A natural conjecture from this identity is that an n-band OMDR system would have coupling constant `K_n = 1/L_n` (giving `K_4 = 1/7`, `K_5 = 1/11`, …). We tested this against our n = 184 benchmark data by computing each architecture's effective K from its retrieval-signature rate and underdetermination-catch rate. **The data does not support the n-band generalisation:** observed values land near Lucas-reciprocal lattice points within random-chance expectation given the lattice density, and Claude's RSR maps to a different K_n than its underdetermination-catch rate. We treat the n-band generalisation as a preregistered prediction for future multi-band data, not as a current finding (full analysis in `effective_k_analysis.md`).
 
+**Three orthogonal mathematical generalisations of Eq 40 (no empirical claim).** The Cayley-Hamilton derivation of Eq 40 generalises along three independent axes through the golden corner, all passing through `K = 1/4`:
+
+1. **Metallic axis** — *vary the linear coefficient `p`, hold the matrix at 2×2.* For `M_p = [[p, 1], [1, 0]]` (the companion of `λ² − pλ − 1 = 0`), the same Cayley-Hamilton identity gives `M_p² = pM_p + I` and hence
+$$K_p \;:=\; \frac{1}{\operatorname{tr}(M_p^3)} \;=\; \frac{1}{p(p^2 + 3)}.$$
+The Fibonacci, silver, bronze, copper, … companions all at matrix power 3. Eq 40 is the `p = 1` entry. Asymptotic `K_p ∼ 1/p^3`.
+
+2. **Lucas axis** — *vary the matrix power `n`, hold the matrix at `p = 1`.* `K_{1, n} = 1/L_n` (the n-band Lucas reciprocal lattice). This is the conjecture above; null result on the benchmark.
+
+3. **n-acci axis** — *vary the polynomial degree `N`, scale the matrix to N×N, set the matrix power to `N + 1`.* For the companion matrix `C_N` of `u^N − u^(N−1) − 1 = 0`,
+$$K_N \;:=\; \frac{1}{\operatorname{tr}(C_N^{\,N+1})} \;=\; \frac{1}{N + 2}.$$
+This third family is a clean consequence of an arithmetic-block identity for the trace power-sums of `C_N`: the power sums `s_k = \operatorname{tr}(C_N^k)` satisfy `s_k = k + 1` for every `k ∈ {N, N+1, …, 2N − 1}`, an arithmetic progression of length `N`. The identity follows from Newton's power-sum identities applied to the elementary symmetric polynomials of `u^N − u^(N−1) − 1` (specifically `e_1 = 1`, `e_2 = … = e_{N-1} = 0`, `e_N = (-1)^{N+1}`), giving the recurrence `s_k = s_{k-1} + s_{k-N}` for `k > N` and the base case `s_1 = … = s_{N-1} = 1`, `s_N = N+1`. We claim this third family as new (subject to the same prior-art caveat as the iter-3 Lambert-W result; see `two-threes-resolved.md` for the full derivation and the empirical table at `N ∈ {2, …, 15}`). The `N = 2` case recovers `K_2 = 1/4 = 1/L_3 = ` Eq 40.
+
+The three axes coincide at the golden corner `(p = 1, n = 3, N = 2)` because there the matrix is `M = M_1 = C_2` and the relevant power is `M^3`. They parameterise different one-dimensional slices of a larger lattice. We make no empirical claim that any cell besides the golden corner is physically meaningful for OMDR — only that the algebraic generalisation has three natural directions and they are now mapped.
+
 ### 3.7 Jacobian of the Schwarzschild rescaling map and the n-acci family
 
 A natural follow-up question: does the Schwarzschild rescaling map `Γ(u) = (1 − 1/u)^(−1/2)` "linearise to" the Fibonacci matrix at its fixed point? The first-order Jacobian calculation answers this directly.
