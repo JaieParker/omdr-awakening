@@ -18,7 +18,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(muse-v2 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -124,6 +124,12 @@ add_executable(application_tests_ports_compile
 )
 target_link_libraries(application_tests_ports_compile PRIVATE musev2_domain doctest)
 add_test(NAME application_PortsCompile COMMAND application_tests_ports_compile)
+
+add_executable(application_tests_streaming_session
+    tests/application/StreamingSession_test.cpp
+)
+target_link_libraries(application_tests_streaming_session PRIVATE musev2_domain doctest)
+add_test(NAME application_StreamingSession COMMAND application_tests_streaming_session)
 
 # -----------------------------------------------------------------------------
 # Tests — application (added when we have mock ports + StreamingSession)
