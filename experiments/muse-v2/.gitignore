@@ -1,0 +1,23 @@
+# muse-v2 — gitignored paths
+
+# CMake-generated build tree
+build/
+
+# Visual Studio intermediate junk
+*.vcxproj.user
+*.sdf
+*.suo
+*.opensdf
+*.pdb
+*.ipch
+.vs/
+
+# Downloaded third-party binaries (doctest.h is committed, but liblsl/libmuse
+# binaries are large and should be installed separately or fetched by a script)
+third_party/liblsl/bin/
+third_party/liblsl/lib/
+third_party/libmuse/
+
+# OS cruft
+Thumbs.db
+.DS_Store
