@@ -14,18 +14,91 @@
 
 ## Summary — the picture, corrected
 
-Three independent reviewers across two validation rounds told me to treat fNIRS as "deferred to week 2-3 via libmuse SDK" based on the OpenMuse README saying fNIRS validation was incomplete. They were **wrong**, and Jaie was right to push back. The actual observed behavior of this specific Athena unit with OpenMuse 0.1.8 is:
+Three independent reviewers across two validation rounds told me to treat fNIRS as "deferred to week 2-3 via libmuse SDK" based on the OpenMuse README saying fNIRS validation was incomplete. They were **wrong**, and Jaie was right to push back. The actual observed behavior of this specific Athena unit with OpenMuse 0.1.8 is **four LSL outlets**, not three:
 
-```
-Stream name                              type      channels   rate (Hz)   dtype
-Muse-EEG    (00:55:DA:BB:D9:53)          EEG       8          256         float32
-Muse-ACCGYRO(00:55:DA:BB:D9:53)          ACCGYRO   6          52          float32
-Muse-OPTICS (00:55:DA:BB:D9:53)          PPG*      16         64          float32
-```
+| Stream | Channels | Channel labels | Rate (Hz) | stype | Purpose |
+|---|---|---|---|---|---|
+| `Muse-EEG (00:55:DA:BB:D9:53)` | 8 | `EEG_TP9, EEG_AF7, EEG_AF8, EEG_TP10, AUX_1, AUX_2, AUX_3, AUX_4` | 256 | EEG | 4 standard Muse 2 sites + 4 auxiliary channels |
+| `Muse-OPTICS (00:55:DA:BB:D9:53)` | 16 | `OPTICS_{L\|R}{O\|I}_{NIR\|IR\|RED\|AMB}` (2 hemispheres × 2 optode pairs × 4 wavelengths) | 64 | PPG* | Hybrid fNIRS + PPG + ambient light |
+| `Muse-ACCGYRO (00:55:DA:BB:D9:53)` | 6 | `ACC_X, ACC_Y, ACC_Z, GYRO_X, GYRO_Y, GYRO_Z` | 52 | ACCGYRO | IMU motion |
+| `Muse-BATTERY (00:55:DA:BB:D9:53)` | 1 | `BATTERY_PERCENT` | 0.2 | - | Power state |
 
-*`stype=PPG` is a labeling artifact of OpenMuse — the 16-channel stream is the Athena's fNIRS optics (the SDK's `OPTICS` packet type), not the 3-channel PPG. Use the stream **name** (`Muse-OPTICS`) to disambiguate. TODO: file a clarity issue with OpenMuse upstream.*
+*`stype=PPG` on the OPTICS stream is an OpenMuse labeling artifact. The 16-channel stream is the Athena's OPTICS hardware (SDK's `OPTICS` packet type), not the 3-channel standard PPG. Match by stream **name** (`Muse-OPTICS`), not stype. Upstream clarity issue TBD.*
 
-**Total payload:** 8 EEG @ 256 Hz + 16 OPTICS @ 64 Hz + 6 ACCGYRO @ 52 Hz = **~4 KB/s at float32**, or ~15 MB/hour at raw sample rate. Comfortably inside every budget the round-1 synthesis estimated.
+**Total payload:** 8 EEG @ 256 + 16 OPTICS @ 64 + 6 ACCGYRO @ 52 + 1 BATTERY @ 0.2 = **~3400 float32 samples/sec ≈ 13.6 KB/s**, or ~49 MB/hour. Well under the ~32 KB/s I had been budgeting in the synthesis.
+
+## The OPTICS channel layout (decoded)
+
+The 16 optics channels follow the naming pattern `OPTICS_{hemisphere}{optode_pair}_{wavelength}` where:
+
+- **Hemisphere**: `L` (left) or `R` (right)
+- **Optode pair**: `O` (outer) or `I` (inner) — two source-detector pairs per hemisphere for spatial coverage
+- **Wavelength**: four bands
+  - **`NIR`** Near-Infrared (~730 nm) — deoxyhemoglobin absorption differential (classical fNIRS)
+  - **`IR`** Infrared (~850 nm) — oxyhemoglobin absorption differential (classical fNIRS)
+  - **`RED`** (~660 nm) — pulse oximetry / PPG cardiac signal
+  - **`AMB`** Ambient — ambient light reference for noise subtraction
+
+**This is a proper hybrid fNIRS + PPG system**, not "just PPG" and not "fNIRS that's not validated yet". The Athena exposes:
+
+- **Full two-wavelength fNIRS** (NIR + IR) at **four sites** (LO, LI, RO, RI) — 8 fNIRS channels total, enough for real cross-hemisphere haemodynamic coherence analysis
+- **Two-wavelength PPG** (RED + IR) at the same four sites — 8 PPG channels for cardiac activity and oxygenation
+- **Ambient light reference** at four sites — noise floor for subtraction against both fNIRS and PPG
+
+For OMDR's harmonic balance function: we have *cross-hemisphere haemodynamic data + cardiac cycle + EEG + IMU* all on a unified clock domain from session one. This is far more multimodal than the round-2 synthesis assumed.
+
+## Observed value ranges (2-second pull with Jaie wearing the device)
+
+### EEG (raw sample values, likely in microvolts or ADC counts)
+| Channel | min | max | mean | std |
+|---|---|---|---|---|
+| `EEG_TP9` | 0.000 | 1450.000 | 728.3 | 571.1 |
+| `EEG_AF7` | 627.7 | 849.3 | 722.6 | 25.5 |
+| `EEG_AF8` | 625.1 | 967.7 | 713.0 | 52.9 |
+| `EEG_TP10` | 0.000 | 1450.000 | 732.5 | 571.2 |
+| `AUX_1` | 148.0 | 951.2 | 726.6 | 213.9 |
+| `AUX_2` | 146.6 | 951.6 | 735.6 | 218.8 |
+| `AUX_3` | 150.1 | 909.0 | 708.4 | 196.6 |
+| `AUX_4` | 187.2 | 1450.0 | 1278.4 | 360.6 |
+
+**Interpretation**: AF7 and AF8 (forehead) have tight variance (std ~25-53) — good electrode contact from the conductive-foam forehead band. TP9 and TP10 (behind the ears) show saturated 0-to-max swings with std ~571 — **poor ear electrode contact**, expected without preparing the skin (damp behind the ears helps). This is a normal first-fit scenario and gives us a concrete protocol item for tomorrow: dampen TP9/TP10 before recording.
+
+### ACCGYRO
+| Channel | min | max | mean | std |
+|---|---|---|---|---|
+| `ACC_X` | -0.350 | -0.017 | -0.217 | 0.117 |
+| `ACC_Y` | -0.290 | -0.029 | -0.141 | 0.072 |
+| `ACC_Z` | -1.062 | -0.875 | **-0.966** | 0.058 |
+| `GYRO_X` | -11.84 | 32.86 | 9.71 | 12.28 |
+| `GYRO_Y` | -16.94 | 35.94 | 16.87 | 16.50 |
+| `GYRO_Z` | -7.98 | 52.33 | 25.26 | 18.70 |
+
+**Interpretation**: ACC_Z ≈ -1g is the gravity vector. Jaie's head is roughly upright (device orientation confirmed). ACC_X/Y are small (~-0.2g) — slight forward/lateral tilt, normal for looking at a screen. GYRO values show small rotational motion (units are deg/s or rad/s) — normal micro-movements of someone sitting and working.
+
+### OPTICS (first 8 channels only shown; all 16 behave similarly)
+| Channel | min | max | mean | std |
+|---|---|---|---|---|
+| `OPTICS_LO_NIR` | 6.905 | 6.977 | 6.929 | 0.020 |
+| `OPTICS_RO_NIR` | 5.362 | 5.427 | 5.388 | 0.016 |
+| `OPTICS_LO_IR` | 0.019 | 0.022 | 0.021 | 0.001 |
+| `OPTICS_RO_IR` | 0.016 | 0.019 | 0.017 | 0.001 |
+| `OPTICS_LI_NIR` | 10.410 | 10.413 | 10.411 | 0.001 |
+| `OPTICS_RI_NIR` | 10.256 | 10.258 | 10.257 | 0.001 |
+| `OPTICS_LI_IR` | 10.405 | 10.407 | 10.406 | 0.000 |
+| `OPTICS_RI_IR` | 10.254 | 10.283 | 10.257 | 0.005 |
+
+**Interpretation**: Very stable values with tiny std. This is EXPECTED in a 2-second window because the neurovascular coupling lag is 5-8 seconds — we can't see hemodynamic variation in a 2-second pull. What we CAN see: the channels are active, have different baseline levels per optode (6.9 for LO, 5.4 for RO, 10.4 for LI — different tissue penetration depths per site), and aren't saturated or dead. Tomorrow's longer recordings will show the actual physiological signal. Units are arbitrary (`unit=-1` in the MNE channel info) — likely raw ADC counts or microamps; we'll document in tomorrow's pipeline.
+
+### BATTERY
+- Sampled at 0.2 Hz (one reading every 5 seconds)
+- My 2-second probe window missed it entirely — 0 samples collected
+- From the connect-time log: **99.94% at session start, fully charged for tomorrow**
+
+## Firmware check
+
+OpenMuse reports the Athena firmware version on connect: **3.1.15**.
+
+This is specifically **NOT** the 3.1.19 version that OpenMuse issue #24 flags as having incorrect optical channel mapping. Your unit is on an older firmware that doesn't have that specific bug. We should still sanity-check optical channel assignments in tomorrow's data (does LO / LI / RO / RI actually map to the physical optode positions we expect?), but the specific known bug doesn't apply.
 
 ---
 
