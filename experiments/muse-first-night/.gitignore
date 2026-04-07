@@ -1,0 +1,13 @@
+# Python virtual environment — user recreates with `python -m venv .venv` and pip install
+.venv/
+__pycache__/
+*.pyc
+
+# Test sessions (synthetic data, no value to commit)
+sessions/*test-pipeline*
+sessions/*standalone*
+sessions/*quality_check*
+
+# Real session data IS committed (the alpha enhancement plots etc) — leave the
+# sessions/ folder itself trackable. Specific real-session subfolders can be
+# committed by hand or via `git add -f`.
