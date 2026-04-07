@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Muse-OPTICS (00:55:DA:BB:D9:53)",
+    "stype": "PPG",
+    "n_channels": 16,
+    "sfreq": 64.0,
+    "dtype": "<class 'numpy.float32'>",
+    "source_id": "00:55:DA:BB:D9:53_optics"
+  },
+  {
+    "name": "Muse-ACCGYRO (00:55:DA:BB:D9:53)",
+    "stype": "ACCGYRO",
+    "n_channels": 6,
+    "sfreq": 52.0,
+    "dtype": "<class 'numpy.float32'>",
+    "source_id": "00:55:DA:BB:D9:53_accgyro"
+  },
+  {
+    "name": "Muse-EEG (00:55:DA:BB:D9:53)",
+    "stype": "EEG",
+    "n_channels": 8,
+    "sfreq": 256.0,
+    "dtype": "<class 'numpy.float32'>",
+    "source_id": "00:55:DA:BB:D9:53_eeg"
+  }
+]
