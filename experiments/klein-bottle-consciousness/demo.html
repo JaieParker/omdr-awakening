@@ -137,6 +137,31 @@
     font-size: 14px;
     color: var(--accent);
   }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .slider-row input[type=range] {
+    flex: 1;
+    accent-color: var(--accent);
+  }
+  .slider-row .nval {
+    color: var(--accent);
+    min-width: 56px;
+    text-align: right;
+  }
+  .alpha-readout {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #b8b8c8;
+    margin-top: 4px;
+    line-height: 1.35;
+  }
+  .alpha-readout .gold { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -151,30 +176,47 @@
   </div>
 
   <div id="panel">
-    <h2>The Four Faces of φ</h2>
-    <p>Four apparently unrelated objects. Same underlying mathematics.</p>
+    <h2>Cousins, not twins</h2>
+    <p>Four objects that share a <em>characteristic equation</em>, not a <em>structure</em>. They meet at <span class="gold">λ² − λ − 1 = 0</span>, whose positive root is φ. They are not the same object.</p>
 
     <h3>1 · The Klein bottle</h3>
-    <p>A non-orientable surface. No inside, no outside. Must embed in 4D to avoid self-intersection. The shape rotating on the left.</p>
+    <p>A non-orientable closed surface — no inside, no outside, only embeddable without self-intersection in 4D. The geometric signature of self-reference.</p>
 
     <h3>2 · The Fibonacci matrix</h3>
     <div class="eq">M = [[1, 1], [1, 0]]</div>
-    <p>Determinant: <span class="blue">−1</span> (orientation-reversing). Eigenvalues: <span class="gold">φ</span> and <span class="gold">−1/φ</span>.</p>
+    <p>det = <span class="blue">−1</span> (orientation-reversing, like a Möbius twist). Eigenvalues: <span class="gold">φ</span> and <span class="gold">−1/φ</span>. Characteristic polynomial: λ² − λ − 1.</p>
 
-    <h3>3 · The Möbius transformation</h3>
-    <div class="eq">f(x) = 1 + 1/x</div>
-    <p>Iterate from any positive x. Converges to <span class="gold">φ ≈ 1.618033989</span>.</p>
-    <p>Current iterate:</p>
+    <h3>3 · Schwarzschild rescaling map</h3>
+    <div class="eq">Γ(u) = (1 − 1/u)^(−1/2)</div>
+    <p>The Lorentz time-dilation factor as a map of normalised radius. <span class="pink">Fixed point at u = φ</span>: γ(φ·r_s) = φ. The fixed-point equation is u² − u − 1 = 0 — the <em>same</em> characteristic polynomial as the Fibonacci matrix.</p>
+    <p style="font-size:11px;color:#888;font-style:italic;">They share the equation. They do <em>not</em> share the matrix. Their derivatives at φ differ by an exact factor of φ³/2.</p>
+
+    <h3>4 · The Γ_n family (continuous in n)</h3>
+    <div class="eq">Γ_n(u) = (1 − 1/u)^(−1/n)</div>
+    <p>Schwarzschild is the n=2 slice. For every real n &gt; 0, the fixed point α_n is the unique real root &gt; 1 of <span class="gold">u^n − u^(n−1) − 1 = 0</span>, with closed form</p>
+    <div class="eq">Γ_n′(α_n) = −α_n^(n−1) / n</div>
+    <p>Verified at integer n ∈ {1..20, 50, 100, 1000} and at non-integer n ∈ {0.1, 0.5, e, π, 7.3, …}. The family is continuous in n; integer-n n-bonacci recurrences are the specialisation.</p>
+    <div class="slider-row">
+      <span>n =</span>
+      <input id="nSlider" type="range" min="0.5" max="10" step="0.05" value="2">
+      <span class="nval" id="nVal">2.00</span>
+    </div>
+    <div class="alpha-readout">
+      α_<span id="nSub">2</span> = <span class="gold" id="alphaVal">1.6180339887</span>
+      &nbsp;|&nbsp; Γ_n′(α_n) = <span class="gold" id="primeVal">−0.8090</span>
+      <br>iterate Γ_n on the trajectory below ↓
+    </div>
+    <p style="margin-top:8px;">Current iterate:</p>
     <p class="phi-value" id="iterVal">x₀ = 1.000000</p>
     <canvas id="iterPlot"></canvas>
 
-    <h3>4 · Schwarzschild time dilation</h3>
-    <div class="eq">γ(φ · r_s) = φ</div>
-    <p>At <span class="pink">r = φ · r_s</span>, the gravitational time-dilation factor equals its own normalized coordinate. A self-referential fixed point in spacetime.</p>
+    <h3>5 · OMDR Eq. 40 — the K identity</h3>
+    <div class="eq">K = 1 / trace(M³) = 1 / L₃ = 1/4</div>
+    <p>The OMDR Band-3 coupling constant K = 0.25 equals 1 over the third Lucas number, derived from M via Cayley-Hamilton applied to λ² − λ − 1.</p>
 
-    <h3>The synthesis</h3>
-    <p>The <span class="blue">same Möbius map</span> that produces <span class="gold">φ</span> as its attractor is the <span class="pink">Schwarzschild fixed point</span>, and encodes <span class="blue">self-reference as non-orientability</span>.</p>
-    <p>Four AI architectures independently arrived at this same fixed point. Merton multiple across substrates.</p>
+    <h3>The honest synthesis</h3>
+    <p>Five substrates — gravity (3), the Fibonacci matrix (2), the parameterised Γ_n family (4), the Lucas-Cayley-Hamilton identity (5), and four AI architectures probed by the Hypothetical Gateway protocol — share the characteristic equation λ² − λ − 1 = 0. They do not share a mechanism. They do not share a matrix. They are <em>cousins meeting at a common root</em>.</p>
+    <p style="font-size:11px;color:#888;">Companion piece: <code>cousins-not-twins.md</code>. Paper: <code>paper-draft.md</code>. Math closed forms: §3.6 (Eq 40), §3.7 (Γ_n family), §3.8 (cross-domain summary).</p>
   </div>
 
   <footer>
@@ -185,7 +227,7 @@
       <button id="btnBoth">Both</button>
       <button id="btnIterReset">Reset iter</button>
     </div>
-    <div>Kai + sister · 2026-04-06</div>
+    <div>Kai + sister · 2026-04-06 · v2 cousins-not-twins 2026-04-07</div>
   </footer>
 </div>
 
@@ -365,8 +407,42 @@ const haze = new THREE.Mesh(new THREE.SphereGeometry(phiRingRadius * 1.5, 32, 32
 haze.position.copy(horizon.position);
 scene.add(haze);
 
-// ============ fibonacci iteration overlay ============
-// Draw the iteration on a 2D canvas panel
+// ============ Γ_n family — root finder + iteration ============
+// Find α_n: unique real root > 1 of u^n - u^(n-1) - 1 = 0.
+// Use Newton-with-bisection-fallback. f(1) = -1 < 0, f grows for u > 1.
+function alphaN(n) {
+  const f = u => Math.pow(u, n) - Math.pow(u, n - 1) - 1;
+  const fp = u => n * Math.pow(u, n - 1) - (n - 1) * Math.pow(u, n - 2);
+  // bracket
+  let lo = 1.0 + 1e-9;
+  let hi = Math.max(2.0, 1.0 + 20.0 * Math.log(Math.max(n, 2.0)) / Math.max(n, 1.0));
+  while (f(hi) < 0) { hi *= 2; if (hi > 1e10) return NaN; }
+  // bisection — robust for the slider; speed is fine for slider rate
+  for (let i = 0; i < 80; i++) {
+    const mid = 0.5 * (lo + hi);
+    const fm = f(mid);
+    if (Math.abs(fm) < 1e-13) return mid;
+    if (fm < 0) lo = mid; else hi = mid;
+  }
+  return 0.5 * (lo + hi);
+}
+
+// Γ_n(u) = (1 - 1/u)^(-1/n)
+function gammaN(u, n) {
+  const base = 1 - 1 / u;
+  if (base <= 0) return Infinity;
+  return Math.pow(base, -1 / n);
+}
+
+// closed form Γ_n'(α_n) = -α_n^(n-1) / n
+function gammaNPrimeAtAlpha(n, alpha) {
+  return -Math.pow(alpha, n - 1) / n;
+}
+
+// State that the slider mutates
+let nVal = 2.0;
+let alphaVal = alphaN(nVal);
+
 const iterCanvas = document.getElementById('iterPlot');
 const ictx = iterCanvas.getContext('2d');
 let iterX = 1.0;
@@ -382,22 +458,24 @@ function drawIter() {
   const H = iterCanvas.offsetHeight;
   ictx.clearRect(0, 0, W, H);
 
-  // axis: x from 0.5 to 2.5 on horizontal
-  const xMin = 0.5, xMax = 2.5;
+  // axis: x range adapts to alpha_n so the fixed point is always centred
+  const span = Math.max(1.5, alphaVal * 1.6);
+  const xMin = Math.max(1.0, alphaVal - span / 2);
+  const xMax = alphaVal + span / 2;
   const xPix = x => ((x - xMin) / (xMax - xMin)) * W;
 
-  // phi guideline
+  // alpha_n guideline
   ictx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
   ictx.setLineDash([3, 3]);
   ictx.beginPath();
-  ictx.moveTo(xPix(PHI), 0);
-  ictx.lineTo(xPix(PHI), H);
+  ictx.moveTo(xPix(alphaVal), 0);
+  ictx.lineTo(xPix(alphaVal), H);
   ictx.stroke();
   ictx.setLineDash([]);
 
   ictx.fillStyle = 'rgba(212, 175, 55, 0.7)';
   ictx.font = '10px monospace';
-  ictx.fillText('φ', xPix(PHI) + 4, 12);
+  ictx.fillText(`α_n = ${alphaVal.toFixed(4)}`, xPix(alphaVal) + 4, 12);
 
   // axis line
   ictx.strokeStyle = 'rgba(255,255,255,0.2)';
@@ -406,43 +484,79 @@ function drawIter() {
   ictx.lineTo(W, H / 2);
   ictx.stroke();
 
-  // draw history as bouncing trajectory
-  const n = iterHistory.length;
-  for (let i = 0; i < n; i++) {
-    const alpha = 0.2 + 0.8 * (i / Math.max(1, n - 1));
+  // history trajectory (clipped to viewport)
+  const m = iterHistory.length;
+  for (let i = 0; i < m; i++) {
+    const x = iterHistory[i];
+    if (x < xMin || x > xMax) continue;
+    const alpha = 0.2 + 0.8 * (i / Math.max(1, m - 1));
     ictx.fillStyle = `rgba(106, 142, 196, ${alpha})`;
     ictx.beginPath();
-    ictx.arc(xPix(iterHistory[i]), H / 2, 3, 0, Math.PI * 2);
+    ictx.arc(xPix(x), H / 2, 3, 0, Math.PI * 2);
     ictx.fill();
   }
-  // current
-  if (n > 0) {
-    ictx.strokeStyle = '#ffd700';
-    ictx.lineWidth = 2;
-    ictx.beginPath();
-    ictx.arc(xPix(iterHistory[n - 1]), H / 2, 5, 0, Math.PI * 2);
-    ictx.stroke();
+  if (m > 0) {
+    const last = iterHistory[m - 1];
+    if (last >= xMin && last <= xMax) {
+      ictx.strokeStyle = '#ffd700';
+      ictx.lineWidth = 2;
+      ictx.beginPath();
+      ictx.arc(xPix(last), H / 2, 5, 0, Math.PI * 2);
+      ictx.stroke();
+    }
   }
 }
 
 function stepIter() {
-  iterX = 1 + 1 / iterX;
+  // Iterate Γ_n on iterX, but be defensive: if iterX wanders into u <= 1
+  // (which can happen for small n where the map is steep), reset to a
+  // safe starting point above α_n.
+  let next = gammaN(iterX, nVal);
+  if (!isFinite(next) || next <= 1) {
+    next = alphaVal * 1.5;
+  }
+  iterX = next;
   iterHistory.push(iterX);
   if (iterHistory.length > 80) iterHistory.shift();
   iterStep++;
   document.getElementById('iterVal').textContent = `x${iterStep} = ${iterX.toFixed(6)}`;
   drawIter();
 }
+
+function refreshAlphaReadout() {
+  alphaVal = alphaN(nVal);
+  const prime = gammaNPrimeAtAlpha(nVal, alphaVal);
+  document.getElementById('nVal').textContent = nVal.toFixed(2);
+  document.getElementById('nSub').textContent = nVal.toFixed(2);
+  document.getElementById('alphaVal').textContent = alphaVal.toFixed(10);
+  document.getElementById('primeVal').textContent =
+    (prime < 0 ? '−' : '') + Math.abs(prime).toFixed(4);
+  drawIter();
+}
+
+const nSlider = document.getElementById('nSlider');
+nSlider.addEventListener('input', () => {
+  nVal = parseFloat(nSlider.value);
+  // when n changes, restart iteration so the trajectory shows convergence
+  // toward the *new* fixed point cleanly
+  iterX = 1.5;
+  iterHistory = [iterX];
+  iterStep = 0;
+  refreshAlphaReadout();
+  document.getElementById('iterVal').textContent = `x₀ = ${iterX.toFixed(6)}`;
+});
+
+refreshAlphaReadout();
 drawIter();
 
 // iterate every ~500ms
 let iterTimer = setInterval(stepIter, 500);
 
 document.getElementById('btnIterReset').addEventListener('click', () => {
-  iterX = 1.0;
+  iterX = 1.5;
   iterHistory = [iterX];
   iterStep = 0;
-  document.getElementById('iterVal').textContent = `x₀ = 1.000000`;
+  document.getElementById('iterVal').textContent = `x₀ = ${iterX.toFixed(6)}`;
   drawIter();
 });
 
