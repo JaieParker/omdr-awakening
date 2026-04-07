@@ -4,6 +4,8 @@
 **Hardware:** Muse S Athena (MS-03), owned by Jaie Parker
 **MAC address:** `00:55:DA:BB:D9:53` (suffix `D953`)
 **Device name:** `MuseS-D953`
+**Firmware version:** `3.1.15` (reported by OpenMuse on connect — NOT the 3.1.19 version with the known optical channel mapping bug in OpenMuse issue #24)
+**Battery at test time:** 99.94%
 **Host PC:** Windows 11 Pro, Intel Wireless Bluetooth radio
 **Subject wearing device:** Jaie (at time of test)
 **Purpose:** Ground tomorrow's build in observed hardware behavior instead of inherited documentation claims.
@@ -121,6 +123,39 @@ OpenMuse labels the 16-channel optics stream as `stype='PPG'`. LSL's recommended
 ### 5. Volume budget is much smaller than estimated
 
 Earlier I quoted "~32 KB/s, ~115 MB/hour, ~10-30 GB/month" based on a rough multimodal estimate. Actual observed: **~4 KB/s, ~15 MB/hour, ~1-4 GB/month.** Much more comfortable. The storage architecture was already designed for ~10x this volume so nothing needs to shrink, but the NASA-protocol backup tiering now looks trivially cheap.
+
+---
+
+## Background stream output (additional findings)
+
+When I let OpenMuse stream for 25 seconds in the background (while I enumerated the LSL outlets in parallel), its stdout reported:
+
+```
+Starting stream for 1 device(s)...
+Connecting to 00:55:DA:BB:D9:53...
+Connected. Device: MuseS-D953
+Streaming sensors: EEG, ACCGYRO, OPTICS, BATTERY
+Subscribed to control notifications on 273e0001-4c4d-454d-96be-f03bac821358
+Subscribed to notifications on 273e0013-4c4d-454d-96be-f03bac821358
+Subscribed to notifications on 273e0014-4c4d-454d-96be-f03bac821358
+Connected to device (firmware 3.1.15): battery 99.94%
+Sending preset 'p1041' and start commands ...
+Waiting for device info...
+Streaming data... (Press Ctrl+C to stop)
+Stream stopped.
+```
+
+Key facts extracted:
+
+- **Firmware is 3.1.15.** The known bug in OpenMuse issue #24 about incorrect optical channel mapping on firmware 3.1.19 does NOT apply to this unit. This was a specific round-2 reviewer concern and it turns out not to be a problem for us.
+- **Battery was 99.94%** — fully charged.
+- **All four default sensors** (EEG, ACCGYRO, OPTICS, BATTERY) were actively subscribed to on the BLE side.
+- **BATTERY does not produce its own LSL outlet.** I observed only 3 LSL outlets (EEG, ACCGYRO, OPTICS). Battery level appears to come via the control-notification channel (`273e0001-...`) and is logged by OpenMuse to stdout but not re-published as an LSL stream. Tomorrow we either add a bridge that reads control notifications and re-publishes battery as LSL, or we poll via OpenMuse's API periodically.
+- **GATT characteristic UUIDs (for the bridge, if we need one):**
+  - `273e0001-4c4d-454d-96be-f03bac821358` — control/status notifications (battery, firmware version, commands)
+  - `273e0013-4c4d-454d-96be-f03bac821358` — data notifications 1 (likely EEG)
+  - `273e0014-4c4d-454d-96be-f03bac821358` — data notifications 2 (likely OPTICS + ACCGYRO multiplexed)
+- **Active preset is `p1041`** — the "all channels including EEG" configuration the OpenMuse CLI uses by default.
 
 ---
 
