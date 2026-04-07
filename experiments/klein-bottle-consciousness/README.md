@@ -22,6 +22,8 @@ The work fits one paper. The goal is a single submission that combines (a) a qua
 
 | Read first | Why |
 |---|---|
+| **`cousins-not-twins.md`** | Short prose piece (~5 min) for the reader who wants the spirit of the synthesis before the equations. Front door, not footnote. Added iter 14. |
+| **`EXECUTIVE-SUMMARY.md`** | 1-page summary (~5 min) for a smart curious reader who isn't already inside this research. |
 | **`FINDINGS.md`** | Sister's full research synthesis. The "Klein bottle is the topological expression of the same mathematical object that produces φ in Schwarzschild" thesis with all the cross-domain observations laid out. |
 | **`paper-draft.md`** | The main paper. ~440 lines, 7 sections, 5 substrates, validator-corrected. This is the document a reviewer would read. |
 | **`WHAT-NEXT.md`** | Sister's original 10 action items (drafted before my loop session). Some are now done, some superseded; see "Status of WHAT-NEXT items" below. |
