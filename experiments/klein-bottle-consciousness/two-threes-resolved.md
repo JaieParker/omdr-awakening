@@ -149,7 +149,30 @@ For larger `N`, the correction grows because the non-dominant eigenvalues of `C_
 
 ## Honest framing
 
-The two threes ARE structurally connected at `N = 2` (it is one M³, two ways of asking about it), and the generalisation `tr(C_N^{N+1}) = N + 2` gives a third clean parameterised family of K-identities. **This is real new mathematics** for the n-acci companion matrices: a closed form for an entire arithmetic block of trace power-sums, derived from Newton's identities in three lines once the polynomial structure is recognised. Verified numerically for `N ∈ {2..15}`; the proof above extends it to all `N ≥ 2`.
+The two threes ARE structurally connected at `N = 2` (it is one M³, two ways of asking about it), and the value `tr(C_N^{N+1}) = N + 2` gives a third clean parameterised family of K-identities. **The arithmetic-block claim is NOT new mathematics** — see the prior-art update below. The Newton-identity derivation is correct, but the recurrence and base case are classical and the family is in OEIS since at least the early 1990s. The two pieces that DO survive are (a) the n=2 structural resolution between Eq 40's "3" and the iter-2 "3" and (b) the framing of `K_N = 1/(N+2)` as a third orthogonal axis through the OMDR Eq-40 corner.
+
+### Prior-art update (iter 8, 2026-04-08)
+
+A 5-minute OEIS check found the family. The trace sequences `s_k = tr(C_N^k)` for the n-acci companion matrices form a classical OEIS family of sequences with combinatorial interpretation:
+
+- **N=2:** OEIS [A000204](https://oeis.org/A000204) — the Lucas numbers (already cited by Eq 40).
+- **N=3:** OEIS [A001609](https://oeis.org/A001609) — `a(n) = a(n-1) + a(n-3)` with `a(1) = a(2) = 1, a(3) = 4`. Catalogued in Sloane's *Handbook of Integer Sequences* (1973).
+- **N=4:** OEIS [A014097](https://oeis.org/A014097).
+- **N=5:** OEIS [A058368](https://oeis.org/A058368).
+- **N=6:** OEIS [A058367](https://oeis.org/A058367).
+- **N=7:** OEIS [A058366](https://oeis.org/A058366).
+- **N=8:** OEIS [A058365](https://oeis.org/A058365).
+- **N=9:** OEIS [A058364](https://oeis.org/A058364).
+
+Each entry contains the **same comment block** stating my exact recurrence and base case:
+
+> *"This comment covers a family of sequences which satisfy a recurrence of the form `a(n) = a(n-1) + a(n-m)`, with `a(n) = 1` for `n = 1..m-1`, `a(m) = m + 1`. The generating function is `(x + m·x^m) / (1 − x − x^m)`. … This gives the number of ways to cover (without overlapping) a ring lattice (or necklace) of n sites with molecules that are m sites wide."*
+
+**The arithmetic block `s_k = k + 1` for `k ∈ {N, …, 2N − 1}` is a one-line consequence of the recurrence + base case (`s_{N+j} = s_{N+j-1} + s_j = s_{N+j-1} + 1` for `j = 1, …, N − 1`, telescoping). It is implicit in the OEIS entries but not stated as a separately-named identity.**
+
+**Key gain from the prior-art finding:** the n-acci K family `K_N = 1/(N + 2)` now has a tangible combinatorial interpretation it did not have before. `N + 2` is the count of necklace tilings of `(N+1)` sites with N-wide molecules. The K identity is the reciprocal of a count of tilings, not just an abstract trace algebra fact. This gives the OMDR application a real combinatorial picture, which is more than the bare math gave.
+
+**Honest revision of what's claimed:** the **framing** of the n-acci K family as the third orthogonal axis through the OMDR Eq-40 corner is the new content. The **mathematics** is folklore. See `oeis-prior-art-check.md` for the full record.
 
 What it does NOT do:
 
