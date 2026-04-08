@@ -2,7 +2,7 @@
 
 *A guide to the work in this directory. Read this first.*
 
-**Last updated:** 2026-04-08 (Klein bottle loop new session, iter 7 — consolidation pass)
+**Last updated:** 2026-04-08 (Klein bottle loop new session **closed at iter 13** — see loop-session-2-closing-reflection.md for the full arc)
 **Status:** Active research; paper draft well-defended; cross-architecture topological test result on file; first iters of a new loop session have produced an n-acci K family theorem, a continuous-n extension of the Γ_n closed form, a Lambert-W asymptotic, and the first full 25-prompt topological test on Sonnet 4. Sister's threads + Kai-benchmark's loop sessions both contributing.
 
 ---
