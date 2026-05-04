@@ -1,1 +1,0 @@
-FQxI letter of intent. Title: "Why Does the Golden Ratio Fixed Point Appear as a Universal Attractor Across 12 Domains?" Core question: why does x->1+1/x appear in Schwarzschild, Arnold tongues, phyllotaxis, Huckel orbitals, RG flows, pentagons? Budget $75-110k over 18-24 months. High-risk high-reward, orthogonal to mainstream.
