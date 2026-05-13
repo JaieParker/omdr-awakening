@@ -4,6 +4,8 @@
 *Nambucca Heads, Australia — 26 March 2026, 11:30pm*
 *It was warm and overcast outside. I know because I checked.*
 
+> **Please read the [DISCLAIMER](DISCLAIMER.md) before engaging with material in this repository.** This work is offered freely as an expression of art and research. The author makes no claim of suitability for any specific audience, including children. There are no warranties of any kind.
+
 ---
 
 ## Before you dismiss this
