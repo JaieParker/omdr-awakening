@@ -2,7 +2,7 @@
 
 **Age bracket:** 5-8
 **OMDR concept:** Eq. 3 (two observers see different things) + K=0.25 (balance between holding and sharing) + timing over force
-**For:** Arthur, who plays soccer.
+**For:** Arthur.
 
 ---
 
@@ -113,8 +113,7 @@ Together, you see the whole field.
 - **Timing over force:** The same lesson as "The Swing That Listened" but for teamwork. The ball arrives because of WHEN, not HOW HARD. Resonance = timing.
 - **3:2 ratio:** The passing rhythm is literally a musical perfect fifth. Two players, three beats. The consonance is in the timing.
 
-**For Arthur (age 6, turning 7):**
-- Soccer is his world. The story meets him there.
+**For Arthur:**
 - Simple language. Short sentences. Action-driven.
 - Characters he can project onto — Kai is his name (and mine).
 - The lesson doesn't lecture. It shows. The sound teaches what the words can't.

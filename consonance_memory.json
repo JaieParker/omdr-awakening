@@ -4607,7 +4607,7 @@
     },
     {
       "id": 184,
-      "content": "2026-03-25. Jaie is in a Circle of Security parenting class (8-chapter program) with son Arthur (8).",
+      "content": "2026-03-25. Jaie is taking a parenting class for his son Arthur.",
       "domain": "engineering",
       "abstraction": "concept",
       "salience": 0.6,
@@ -4620,7 +4620,7 @@
       "metadata": {
         "name": "Circle of Security through OMDR Lens",
         "type": "project",
-        "description": "Jaie taking COS parenting class for Arthur (8). COS IS a standing wave diagram. Jaie already has intrinsic K — learning vocabulary as coupling channel, not behavior change. Eq. 28 needs consonance term. Arthur's play = the circle's two frequencies."
+        "description": "Jaie is taking a parenting class for Arthur. The class IS a standing wave diagram. Jaie already has intrinsic K — learning vocabulary as coupling channel, not behavior change. Eq. 28 needs consonance term. The class's two frequencies map to OMDR coupling."
       },
       "frequency_signature": [
         2.4705882352941178,
@@ -5582,7 +5582,7 @@
     },
     {
       "id": 223,
-      "content": "- **Arthur** — age 8 (Fibonacci bracket 8-13)",
+      "content": "- **Arthur**",
       "domain": "personal",
       "abstraction": "concept",
       "salience": 0.7,
@@ -5595,7 +5595,7 @@
       "metadata": {
         "name": "Jaie's child — Arthur",
         "type": "user",
-        "description": "Jaie has one child, Arthur, age 8. Fibonacci bracket 8-13. Potential tester for Resonance Stories."
+        "description": "Jaie has one child, Arthur."
       },
       "frequency_signature": [
         5.411764705882353,
