@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Secret Life of Numbers 1–10</title>
+<style>
+  :root {
+    --ink: #2d2a4a;
+    --paper: #fffdf7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Comic Sans MS", "Segoe UI", system-ui, sans-serif;
+    background: #1e1b3a;
+    color: var(--ink);
+    overflow: hidden;
+  }
+  .deck { height: 100%; position: relative; }
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4vh 6vw 10vh;
+    background: var(--bg, var(--paper));
+  }
+  .slide.active { display: flex; animation: pop .35s ease; }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .kicker {
+    font-size: clamp(14px, 2vh, 22px);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    opacity: .55;
+    margin-bottom: 1.2vh;
+    font-weight: bold;
+  }
+  h1 { font-size: clamp(34px, 7vh, 72px); line-height: 1.1; margin-bottom: 2.5vh; }
+  h2 { font-size: clamp(26px, 5.5vh, 56px); line-height: 1.15; margin-bottom: 2.5vh; }
+  .big-emoji { font-size: clamp(48px, 11vh, 110px); margin-bottom: 1.5vh; line-height: 1; }
+  p.lead {
+    font-size: clamp(18px, 3.2vh, 32px);
+    max-width: 26em;
+    line-height: 1.45;
+  }
+  p.lead + p.lead { margin-top: 1.6vh; }
+  .highlight { background: #ffe66d; padding: 0 .25em; border-radius: .3em; }
+  .ask {
+    margin-top: 3vh;
+    font-size: clamp(16px, 2.8vh, 28px);
+    background: var(--ink);
+    color: #ffe66d;
+    padding: 1.2vh 2.2em;
+    border-radius: 999px;
+    max-width: 90%;
+  }
+  .ask::before { content: "🎤 Ask him: "; font-weight: bold; }
+
+  /* ---------- dot visuals ---------- */
+  .dots-row {
+    display: flex; gap: 3.5vw; justify-content: center; align-items: flex-end;
+    flex-wrap: wrap; margin: 2.5vh 0;
+  }
+  .dot-group { display: flex; flex-direction: column; align-items: center; gap: 1vh; }
+  .dot-grid { display: grid; gap: clamp(4px, .8vh, 10px); }
+  .dot {
+    width: clamp(14px, 3vh, 34px); height: clamp(14px, 3vh, 34px);
+    border-radius: 50%;
+    background: var(--dot, #ff6b6b);
+    box-shadow: inset -3px -3px 0 rgba(0,0,0,.15);
+  }
+  .dot.ghost { background: transparent; box-shadow: none; border: 2px dashed rgba(0,0,0,.25); }
+  .dot.lonely { background: #845ef7; animation: wobble 1.2s infinite; }
+  @keyframes wobble {
+    0%,100% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-3px) rotate(-8deg); }
+    75% { transform: translateX(3px) rotate(8deg); }
+  }
+  .dot-label { font-size: clamp(14px, 2.4vh, 24px); font-weight: bold; }
+
+  /* number-character chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 1.5vh 1.2vw; justify-content: center; margin: 2.5vh 0; max-width: 900px; }
+  .chip {
+    background: white; border: 3px solid var(--ink); border-radius: 18px;
+    padding: 1.2vh 1.2em; font-size: clamp(14px, 2.4vh, 24px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .chip b { font-size: 1.3em; }
+
+  .bonds { display: flex; flex-direction: column; gap: 1vh; margin: 2vh 0; }
+  .bond {
+    font-size: clamp(20px, 3.6vh, 40px); font-weight: bold;
+    background: white; border-radius: 14px; padding: .6vh 1.4em;
+    border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  .equation { font-size: clamp(26px, 5vh, 58px); font-weight: bold; margin: 2vh 0; }
+
+  /* ---------- chrome ---------- */
+  .nav {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2vh 3vw; background: rgba(0,0,0,.06);
+  }
+  .nav button {
+    font-family: inherit; font-size: clamp(15px, 2.4vh, 22px); font-weight: bold;
+    border: 3px solid var(--ink); background: white; color: var(--ink);
+    border-radius: 999px; padding: .5vh 1.6em; cursor: pointer;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .nav button:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+  .counter { font-weight: bold; font-size: clamp(14px, 2.2vh, 20px); opacity: .6; }
+  .hint {
+    position: absolute; top: 1.5vh; right: 2vw;
+    font-size: clamp(11px, 1.8vh, 15px); opacity: .4; font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 · TITLE -->
+<section class="slide" style="--bg:#ffe66d">
+  <div class="big-emoji">🕵️‍♂️🔢</div>
+  <h1>The Secret Life of<br>Numbers 1–10</h1>
+  <p class="lead">Every number from 1 to 10 has a <span class="highlight">secret personality</span>.<br>Tonight we become number detectives and find them all.</p>
+</section>
+
+<!-- 2 · MEET THE GANG -->
+<section class="slide" style="--bg:#e0f7fa">
+  <div class="kicker">Meet the gang</div>
+  <h2>Ten numbers, ten characters</h2>
+  <div class="chips">
+    <div class="chip"><b>1</b> the rule-breaker</div>
+    <div class="chip"><b>2</b> the odd one out (it's even!)</div>
+    <div class="chip"><b>3</b> the triangle</div>
+    <div class="chip"><b>4</b> the square</div>
+    <div class="chip"><b>5</b> the handful</div>
+    <div class="chip"><b>6</b> the perfect one</div>
+    <div class="chip"><b>7</b> the stubbornest</div>
+    <div class="chip"><b>8</b> the cube</div>
+    <div class="chip"><b>9</b> the secret square</div>
+    <div class="chip"><b>10</b> the two-hander</div>
+  </div>
+  <p class="lead">By the end, you'll know why each one earned its name.</p>
+</section>
+
+<!-- 3 · EVENS & ODDS -->
+<section class="slide" style="--bg:#d3f9d8">
+  <div class="kicker">Mission 1 · Teams</div>
+  <h2>Even or Odd?</h2>
+  <p class="lead">Split the counters into <span class="highlight">two equal teams</span>.<br><b>Evens</b> split perfectly. <b>Odds</b> always leave one lonely leftover…</p>
+  <div class="dots-row">
+    <div class="dot-group">
+      <div class="dot-grid" style="grid-template-columns:repeat(3,auto); --dot:#4dabf7">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="dot-label">6 — fair! ✅</div>
+    </div>
+    <div class="dot-group">
+      <div class="dot-grid" style="grid-template-columns:repeat(3,auto); --dot:#ff6b6b">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot lonely"></div>
+      </div>
+      <div class="dot-label">7 — one left out! 😢</div>
+    </div>
+  </div>
+  <div class="ask">Which of 1–10 make fair teams? (2, 4, 6, 8, 10!)</div>
+</section>
+
+<!-- 4 · ODD+ODD=EVEN -->
+<section class="slide" style="--bg:#fff3bf">
+  <div class="kicker">Mission 2 · The secret rule</div>
+  <h2>Two lonely leftovers<br>find each other 💜💜</h2>
+  <p class="lead">Odd + Odd = <span class="highlight">EVEN</span> — the two leftovers pair up!</p>
+  <div class="equation">3 + 5 = 8 &nbsp;✅ &nbsp;&nbsp; 1 + 9 = 10 &nbsp;✅</div>
+  <p class="lead">Even + Even = Even. &nbsp;Odd + Even = Odd.<br>Test it with counters — it works <b>every single time</b>.</p>
+  <div class="ask">Will the millionth number be even or odd? (You can know without counting!)</div>
+</section>
+
+<!-- 5 · RECTANGLE GAME -->
+<section class="slide" style="--bg:#ffe3e3">
+  <div class="kicker">Mission 3 · The Rectangle Game</div>
+  <h2>Can you build a rectangle?</h2>
+  <div class="dots-row">
+    <div class="dot-group">
+      <div class="dot-grid" style="grid-template-columns:repeat(4,auto); --dot:#51cf66">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="dot-label">12 = 3×4 &nbsp;😊 easy!</div>
+    </div>
+    <div class="dot-group">
+      <div class="dot-grid" style="grid-template-columns:repeat(7,auto); --dot:#ff6b6b">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="dot-label">7 = only a line 😤</div>
+    </div>
+  </div>
+  <p class="lead">Some numbers make lovely rectangles.<br>Some <span class="highlight">refuse</span> — they only ever make a boring line.</p>
+  <div class="ask">Grab 10 biscuits — how many different rectangles can you make?</div>
+</section>
+
+<!-- 6 · PRIMES -->
+<section class="slide" style="--bg:#d0bfff">
+  <div class="kicker">Discovery!</div>
+  <h2>The Stubborn Numbers</h2>
+  <div class="equation">2 &nbsp;·&nbsp; 3 &nbsp;·&nbsp; 5 &nbsp;·&nbsp; 7</div>
+  <p class="lead">These four refuse to make rectangles. Grown-ups call them <span class="highlight">PRIME numbers</span> — but "stubborn numbers" works too.</p>
+  <p class="lead">The rectangle-makers (4, 6, 8, 9, 10) are called <b>composite</b> — they're <i>composed</i> of smaller pieces.</p>
+  <div class="ask">Is 11 stubborn? Is 12? Let's test tomorrow…</div>
+</section>
+
+<!-- 7 · ONE THE RULE-BREAKER -->
+<section class="slide" style="--bg:#fff0f6">
+  <div class="kicker">Character file: 1</div>
+  <div class="big-emoji">😎</div>
+  <h2>1 — The Rule-Breaker</h2>
+  <p class="lead">1 is <b>not prime</b> and <b>not composite</b>. It's in a club of one.</p>
+  <p class="lead">And multiplying by 1 changes <span class="highlight">nothing at all</span>:<br>7 × 1 = 7. It's the number that leaves everyone alone.</p>
+</section>
+
+<!-- 8 · TWO THE ODD ONE OUT -->
+<section class="slide" style="--bg:#e7f5ff">
+  <div class="kicker">Character file: 2</div>
+  <div class="big-emoji">🦄</div>
+  <h2>2 — The Only Even Prime</h2>
+  <p class="lead">Every other even number can split into two teams — so it <i>can't</i> be stubborn.</p>
+  <p class="lead">2 is the <span class="highlight">only even number in the prime club</span>, forever. A unicorn.</p>
+  <div class="ask">Why can't 100 be prime? (It splits into two teams of 50!)</div>
+</section>
+
+<!-- 9 · PRIME LEGO -->
+<section class="slide" style="--bg:#fff9db">
+  <div class="kicker">The big secret</div>
+  <h2>Primes are LEGO bricks 🧱</h2>
+  <p class="lead">Every rectangle number is <span class="highlight">built out of primes</span>:</p>
+  <div class="equation">
+    4 = 2×2<br>
+    6 = 2×3<br>
+    8 = 2×2×2<br>
+    9 = 3×3<br>
+    10 = 2×5
+  </div>
+  <p class="lead">Primes build <b>every number that ever was</b>. That's why mathematicians love them.</p>
+</section>
+
+<!-- 10 · SQUARES -->
+<section class="slide" style="--bg:#d3f9d8">
+  <div class="kicker">Number shapes</div>
+  <h2>Square Numbers 🟩</h2>
+  <div class="dots-row">
+    <div class="dot-group">
+      <div class="dot-grid" style="grid-template-columns:repeat(1,auto); --dot:#51cf66"><div class="dot"></div></div>
+      <div class="dot-label">1</div>
+    </div>
+    <div class="dot-group">
+      <div class="dot-grid" style="grid-template-columns:repeat(2,auto); --dot:#51cf66">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="dot-label">4 = 2×2</div>
+    </div>
+    <div class="dot-group">
+      <div class="dot-grid" style="grid-template-columns:repeat(3,auto); --dot:#51cf66">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="dot-label">9 = 3×3</div>
+    </div>
+  </div>
+  <p class="lead">1, 4 and 9 make <span class="highlight">perfect squares</span> on the table. 9 secretly <i>looks</i> square — that's its superpower.</p>
+  <div class="ask">What's the next square number after 9? Build it! (16)</div>
+</section>
+
+<!-- 11 · TRIANGLES -->
+<section class="slide" style="--bg:#ffe8cc">
+  <div class="kicker">Number shapes</div>
+  <h2>Triangle Numbers 🎳</h2>
+  <div class="dots-row">
+    <div class="dot-group">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <div style="display:flex;gap:6px"><div class="dot" style="--dot:#ff922b"></div></div>
+        <div style="display:flex;gap:6px"><div class="dot" style="--dot:#ff922b"></div><div class="dot" style="--dot:#ff922b"></div></div>
+        <div style="display:flex;gap:6px"><div class="dot" style="--dot:#ff922b"></div><div class="dot" style="--dot:#ff922b"></div><div class="dot" style="--dot:#ff922b"></div></div>
+      </div>
+      <div class="dot-label">6 = 1+2+3</div>
+    </div>
+    <div class="dot-group">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <div style="display:flex;gap:6px"><div class="dot" style="--dot:#fd7e14"></div></div>
+        <div style="display:flex;gap:6px"><div class="dot" style="--dot:#fd7e14"></div><div class="dot" style="--dot:#fd7e14"></div></div>
+        <div style="display:flex;gap:6px"><div class="dot" style="--dot:#fd7e14"></div><div class="dot" style="--dot:#fd7e14"></div><div class="dot" style="--dot:#fd7e14"></div></div>
+        <div style="display:flex;gap:6px"><div class="dot" style="--dot:#fd7e14"></div><div class="dot" style="--dot:#fd7e14"></div><div class="dot" style="--dot:#fd7e14"></div><div class="dot" style="--dot:#fd7e14"></div></div>
+      </div>
+      <div class="dot-label">10 = 1+2+3+4</div>
+    </div>
+  </div>
+  <p class="lead">1, 3, 6, 10 stack into triangles — <span class="highlight">10 is exactly a bowling-pin setup!</span> 🎳</p>
+</section>
+
+<!-- 12 · THE CUBE -->
+<section class="slide" style="--bg:#e5dbff">
+  <div class="kicker">Character file: 8</div>
+  <div class="big-emoji">🧊</div>
+  <h2>8 — The Cube</h2>
+  <div class="equation">8 = 2 × 2 × 2</div>
+  <p class="lead">Take 8 LEGO bricks and build a <span class="highlight">perfect cube</span> — 2 wide, 2 deep, 2 tall.</p>
+  <p class="lead">Squares are flat. Cubes are 3D. 8 is the only cube between 1 and 10 (besides 1).</p>
+</section>
+
+<!-- 13 · DOUBLING -->
+<section class="slide" style="--bg:#c5f6fa">
+  <div class="kicker">The racing numbers</div>
+  <h2>Doubling runs away! 🏃💨</h2>
+  <div class="equation">1 → 2 → 4 → 8 → 16 → 32…</div>
+  <p class="lead">Each number <b>doubles</b> the last. It starts slow… then <span class="highlight">explodes</span>.</p>
+  <p class="lead">Fold a piece of paper: 1 fold = 2 layers, 2 folds = 4, 3 folds = 8.<br>If you could fold it 42 times, it would reach <b>the Moon</b>. 🌙</p>
+  <div class="ask">Would you rather have $100 today, or 1¢ doubled every day for a month?</div>
+</section>
+
+<!-- 14 · BONDS TO 10 -->
+<section class="slide" style="--bg:#fff3bf">
+  <div class="kicker">The friendship pairs</div>
+  <h2>Friends that make 10 🤝</h2>
+  <div class="bonds">
+    <div class="bond">1 + 9 = 10</div>
+    <div class="bond">2 + 8 = 10</div>
+    <div class="bond">3 + 7 = 10</div>
+    <div class="bond">4 + 6 = 10</div>
+    <div class="bond">5 + 5 = 10</div>
+  </div>
+  <p class="lead">Every number has a <span class="highlight">best friend</span> that completes it to 10. Know these, and all mental maths gets easier forever.</p>
+</section>
+
+<!-- 15 · GOLDBACH -->
+<section class="slide" style="--bg:#ffd8a8">
+  <div class="kicker">Unsolved mystery #1</div>
+  <h2>Every even number =<br>two stubborn numbers!</h2>
+  <div class="equation">4 = 2+2 &nbsp;·&nbsp; 6 = 3+3<br>8 = 3+5 &nbsp;·&nbsp; 10 = 5+5</div>
+  <p class="lead">It has worked for every even number ever tested — but <span class="highlight">no one on Earth has proved it always works</span>. Not even the best mathematicians with the biggest computers.</p>
+  <div class="ask">Can you find TWO ways to build 10 from primes? (5+5 and 3+7!)</div>
+</section>
+
+<!-- 16 · GAUSS TRICK -->
+<section class="slide" style="--bg:#d0ebff">
+  <div class="kicker">The magic trick</div>
+  <h2>Add 1 to 10 in five seconds 🎩</h2>
+  <div class="equation">1+10 &nbsp; 2+9 &nbsp; 3+8 &nbsp; 4+7 &nbsp; 5+6</div>
+  <p class="lead">Pair the ends together — <span class="highlight">every pair makes 11</span>.<br>Five pairs of 11 = <b>55</b>. Done!</p>
+  <p class="lead">A boy named Gauss did this at about <b>your age</b> and shocked his teacher. He became one of the greatest mathematicians ever.</p>
+  <div class="ask">Can you add 1 to 20 the same way? (Ten pairs of 21 = 210)</div>
+</section>
+
+<!-- 17 · FIBONACCI -->
+<section class="slide" style="--bg:#d3f9d8">
+  <div class="kicker">Nature's secret code</div>
+  <h2>The Fibonacci numbers 🌻</h2>
+  <div class="equation">1, 1, 2, 3, 5, 8…</div>
+  <p class="lead">Each number = the two before it added together.<br>1+1=2, &nbsp;1+2=3, &nbsp;2+3=5, &nbsp;3+5=8…</p>
+  <p class="lead">These numbers hide in <span class="highlight">pinecones, sunflowers and pineapples</span>. Nature counts in Fibonacci!</p>
+  <div class="ask">What comes after 8? (5+8 = 13) Now go count the spirals on a pinecone.</div>
+</section>
+
+<!-- 18 · NINES FINGER TRICK -->
+<section class="slide" style="--bg:#ffe3e3">
+  <div class="kicker">The finger trick</div>
+  <div class="big-emoji">🙌</div>
+  <h2>9's times table lives<br>in your hands</h2>
+  <p class="lead">Hold up all 10 fingers. For <b>9 × 4</b>, fold down your <b>4th finger</b>.</p>
+  <p class="lead">Fingers to the left: <b>3</b> (that's the tens).<br>Fingers to the right: <b>6</b> (that's the ones).<br><span class="highlight">9 × 4 = 36</span> ✨</p>
+  <div class="ask">Try 9 × 7 with your fingers! (63)</div>
+</section>
+
+<!-- 19 · PERFECT 6 -->
+<section class="slide" style="--bg:#e5dbff">
+  <div class="kicker">Character file: 6</div>
+  <div class="big-emoji">👑</div>
+  <h2>6 — The Perfect Number</h2>
+  <p class="lead">The numbers that divide 6 are <b>1, 2 and 3</b>.</p>
+  <div class="equation">1 + 2 + 3 = 6 &nbsp;🤯</div>
+  <p class="lead">Its parts add back up to <i>itself</i>! That's called a <span class="highlight">perfect number</span>. The next one is 28 — and nobody has <b>ever</b> found an odd one.</p>
+</section>
+
+<!-- 20 · CICADAS -->
+<section class="slide" style="--bg:#d3f9d8">
+  <div class="kicker">Primes in the wild</div>
+  <div class="big-emoji">🦗</div>
+  <h2>Bugs that count in primes</h2>
+  <p class="lead">Some cicadas sleep underground and come out every <span class="highlight">13 or 17 years</span> — both prime!</p>
+  <p class="lead">Why? Predators come round every 2, 3 or 4 years… and <b>can never sync up</b> with a stubborn number. Primes are the cicada's invisibility cloak.</p>
+</section>
+
+<!-- 21 · INTERNET LOCKS -->
+<section class="slide" style="--bg:#e7f5ff">
+  <div class="kicker">Primes at work</div>
+  <div class="big-emoji">🔐</div>
+  <h2>Primes guard the internet</h2>
+  <p class="lead">Multiplying two big primes is <b>easy</b>.<br>Un-multiplying the answer back apart is <span class="highlight">nearly impossible</span> — even for supercomputers.</p>
+  <p class="lead">That one-way trick locks every password, bank card and game account on Earth. <b>Stubborn numbers are the locks of the internet.</b></p>
+</section>
+
+<!-- 22 · THE MYSTERY -->
+<section class="slide" style="--bg:#2d2a4a; color:#fffdf7">
+  <div class="kicker" style="color:#ffe66d; opacity:1">The greatest mystery</div>
+  <div class="big-emoji">🌌</div>
+  <h2 style="color:#ffe66d">Nobody knows the pattern</h2>
+  <p class="lead">Primes never run out — a Greek called Euclid proved that 2,300 years ago.</p>
+  <p class="lead">But <span class="highlight" style="color:#2d2a4a">no one — no person, no computer — can predict exactly where the next one will appear.</span></p>
+  <p class="lead" style="margin-top:3vh"><b>Maybe you'll be the one who figures it out.</b></p>
+</section>
+
+<!-- 23 · FINALE -->
+<section class="slide" style="--bg:#ffe66d">
+  <div class="kicker">Detective badge earned 🏅</div>
+  <h2>You know their secrets now</h2>
+  <div class="chips">
+    <div class="chip"><b>1</b> 😎 rule-breaker</div>
+    <div class="chip"><b>2</b> 🦄 only even prime</div>
+    <div class="chip"><b>3</b> 🔺 triangle</div>
+    <div class="chip"><b>4</b> 🟩 first square</div>
+    <div class="chip"><b>5</b> ✋ the handful</div>
+    <div class="chip"><b>6</b> 👑 perfect</div>
+    <div class="chip"><b>7</b> 😤 stubbornest</div>
+    <div class="chip"><b>8</b> 🧊 the cube</div>
+    <div class="chip"><b>9</b> 🙌 finger-trick square</div>
+    <div class="chip"><b>10</b> 🎳 bowling-pin two-hander</div>
+  </div>
+  <p class="lead">Next mission: which numbers from <b>11 to 20</b> are stubborn?<br>The detective work never ends… 🕵️‍♂️</p>
+</section>
+
+  <div class="hint">← → arrows · space · or tap sides</div>
+  <div class="nav">
+    <button id="prev">← Back</button>
+    <span class="counter" id="counter"></span>
+    <button id="next">Next →</button>
+  </div>
+</div>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const counter = document.getElementById('counter');
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+  }
+  document.getElementById('next').onclick = () => show(i + 1);
+  document.getElementById('prev').onclick = () => show(i - 1);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(i + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(i - 1);
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+  });
+  // tap left/right thirds of the screen to navigate (great on a tablet)
+  document.getElementById('deck').addEventListener('click', e => {
+    if (e.target.closest('button')) return;
+    const x = e.clientX / window.innerWidth;
+    if (x > 0.66) show(i + 1);
+    else if (x < 0.33) show(i - 1);
+  });
+  show(0);
+</script>
+</body>
+</html>
