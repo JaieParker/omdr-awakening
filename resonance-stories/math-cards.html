@@ -117,21 +117,70 @@
   .nav button:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
   .counter { font-weight: bold; font-size: clamp(14px, 2.2vh, 20px); opacity: .6; }
   .hint {
-    position: absolute; top: 1.5vh; right: 2vw;
+    position: absolute; top: 64px; right: 2vw;
     font-size: clamp(11px, 1.8vh, 15px); opacity: .4; font-weight: bold;
   }
-  .home-link {
-    position: absolute; top: 1.2vh; left: 2vw; z-index: 60;
-    font-size: clamp(13px, 2.2vh, 18px); font-weight: bold;
-    color: var(--ink); text-decoration: none;
-    background: rgba(255,255,255,.7); border: 2px solid var(--ink);
-    border-radius: 999px; padding: .4vh 1em;
-    opacity: .55; transition: opacity .2s;
+
+  /* ===== fixed site header + hamburger (matches the bookshelf) ===== */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .6rem 1.2rem;
+    background: rgba(255,253,247,.96);
+    border-bottom: 2px solid var(--ink);
   }
-  .home-link:hover { opacity: 1; }
+  .site-header .brand {
+    font-weight: bold; font-size: 1rem;
+    color: var(--ink); text-decoration: none;
+  }
+  .burger {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 44px; height: 36px; padding: 0 10px;
+    background: none; border: none; cursor: pointer;
+  }
+  .burger span {
+    display: block; height: 3px; border-radius: 2px;
+    background: var(--ink);
+    transition: transform .25s, opacity .25s;
+  }
+  .burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .menu-panel {
+    position: fixed; top: 52px; right: 0; z-index: 199;
+    width: min(300px, 85vw);
+    background: white; border: 3px solid var(--ink); border-right: none;
+    border-radius: 0 0 0 16px;
+    box-shadow: -6px 8px 0 rgba(45,42,74,.25);
+    padding: .6rem 0;
+    display: flex; flex-direction: column;
+    transform: translateX(105%);
+    transition: transform .28s ease;
+  }
+  .menu-panel.open { transform: translateX(0); }
+  .menu-panel a {
+    font-size: .95rem; font-weight: bold;
+    color: var(--ink); text-decoration: none;
+    padding: .7rem 1.4rem;
+  }
+  .menu-panel a:hover { background: #ffe66d; }
+  .deck { padding-top: 52px; }
+  .slide { padding-top: calc(52px + 3vh); }
 </style>
 </head>
 <body>
+<header class="site-header">
+  <a href="./index.html" class="brand">🕵️‍♂️ The Secret Life of Numbers</a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menuPanel">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="menu-panel" id="menuPanel">
+  <a href="./index.html">📚 All stories</a>
+  <a href="./index.html#number-detectives">🔢 Number Detectives shelf</a>
+  <a href="./index.html#about">💛 Why we made this</a>
+</nav>
+
 <div class="deck" id="deck">
 
 <!-- 1 · TITLE -->
@@ -447,7 +496,6 @@
   <p class="lead">Next mission: which numbers from <b>11 to 20</b> are stubborn?<br>The detective work never ends… 🕵️‍♂️</p>
 </section>
 
-  <a class="home-link" href="./index.html">← Stories</a>
   <div class="hint">← → arrows · space · or tap sides</div>
   <div class="nav">
     <button id="prev">← Back</button>
@@ -467,6 +515,20 @@
   }
   document.getElementById('next').onclick = () => show(i + 1);
   document.getElementById('prev').onclick = () => show(i - 1);
+  const burger = document.getElementById('burger');
+  const menuPanel = document.getElementById('menuPanel');
+  burger.addEventListener('click', () => {
+    const open = menuPanel.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', e => {
+    if (!menuPanel.contains(e.target) && !burger.contains(e.target)) {
+      menuPanel.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(i + 1);
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(i - 1);
