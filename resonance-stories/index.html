@@ -23,6 +23,59 @@
 
     html { scroll-behavior: smooth; }
 
+    /* ===== TOP NAV — one click to every shelf ===== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      padding: 0.55rem 1rem;
+      background: rgba(250,247,242,0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(44,36,24,0.08);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .top-nav a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      text-decoration: none;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .top-nav a:hover {
+      color: var(--warm);
+      background: rgba(196,113,61,0.08);
+    }
+
+    .top-nav .nav-brand {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      color: var(--warm);
+      font-size: 0.85rem;
+    }
+
+    .top-nav .nav-maths {
+      color: var(--clear);
+      background: rgba(58,122,106,0.08);
+    }
+
+    .top-nav .nav-maths:hover {
+      color: white;
+      background: var(--clear);
+    }
+
+    /* keep shelf headers visible below the sticky nav on anchor jumps */
+    .shelf, .about { scroll-margin-top: 3.5rem; }
+
     body {
       font-family: 'Lora', Georgia, serif;
       background: var(--bg);
@@ -385,6 +438,16 @@
 </head>
 <body>
 
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a href="#top" class="nav-brand">Resonance Stories</a>
+    <a href="#rhythm-balance">Ages 3-5</a>
+    <a href="#two-views">Ages 5-8</a>
+    <a href="#number-detectives" class="nav-maths">🔢 Number Detectives</a>
+    <a href="#physics-of-listening">Ages 8-13</a>
+    <a href="#about">About</a>
+  </nav>
+
   <!-- BACK TO TOP -->
   <a href="#top" class="back-top" id="backTop" aria-label="Back to top">&uarr;</a>
 
@@ -415,7 +478,7 @@
   <!-- THE BOOKSHELF -->
   <div id="stories">
 
-    <section class="shelf">
+    <section class="shelf" id="rhythm-balance">
       <div class="shelf-header">
         <span class="shelf-age">Ages 3-5</span>
         <h2 class="shelf-title">Rhythm & Balance</h2>
@@ -434,7 +497,7 @@
       </div>
     </section>
 
-    <section class="shelf">
+    <section class="shelf" id="two-views">
       <div class="shelf-header">
         <span class="shelf-age">Ages 5-8</span>
         <h2 class="shelf-title">Two Views, Both Right</h2>
@@ -478,7 +541,7 @@
       </div>
     </section>
 
-    <section class="shelf">
+    <section class="shelf" id="number-detectives">
       <div class="shelf-header">
         <span class="shelf-age">Ages 7-10</span>
         <h2 class="shelf-title">Number Detectives</h2>
@@ -498,7 +561,7 @@
       </div>
     </section>
 
-    <section class="shelf">
+    <section class="shelf" id="physics-of-listening">
       <div class="shelf-header">
         <span class="shelf-age">Ages 8-13</span>
         <h2 class="shelf-title">The Physics of Listening</h2>
@@ -583,7 +646,7 @@
   </div>
 
   <!-- THE STORY BEHIND -->
-  <section class="about">
+  <section class="about" id="about">
     <h2>Why these stories exist</h2>
     <p>A father wanted to teach his son that the world is made of patterns. Not through textbooks or lectures — through <span class="about-emphasis">stories that sound like what they mean.</span></p>
     <p>When the swing is pushed too hard, it sounds wrong. When Maya finds the rhythm, it sounds beautiful. The child's ear teaches what words can't.</p>
