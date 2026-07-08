@@ -120,6 +120,15 @@
     position: absolute; top: 1.5vh; right: 2vw;
     font-size: clamp(11px, 1.8vh, 15px); opacity: .4; font-weight: bold;
   }
+  .home-link {
+    position: absolute; top: 1.2vh; left: 2vw; z-index: 60;
+    font-size: clamp(13px, 2.2vh, 18px); font-weight: bold;
+    color: var(--ink); text-decoration: none;
+    background: rgba(255,255,255,.7); border: 2px solid var(--ink);
+    border-radius: 999px; padding: .4vh 1em;
+    opacity: .55; transition: opacity .2s;
+  }
+  .home-link:hover { opacity: 1; }
 </style>
 </head>
 <body>
@@ -438,6 +447,7 @@
   <p class="lead">Next mission: which numbers from <b>11 to 20</b> are stubborn?<br>The detective work never ends… 🕵️‍♂️</p>
 </section>
 
+  <a class="home-link" href="./index.html">← Stories</a>
   <div class="hint">← → arrows · space · or tap sides</div>
   <div class="nav">
     <button id="prev">← Back</button>
@@ -465,7 +475,7 @@
   });
   // tap left/right thirds of the screen to navigate (great on a tablet)
   document.getElementById('deck').addEventListener('click', e => {
-    if (e.target.closest('button')) return;
+    if (e.target.closest('button, a')) return;
     const x = e.clientX / window.innerWidth;
     if (x > 0.66) show(i + 1);
     else if (x < 0.33) show(i - 1);
