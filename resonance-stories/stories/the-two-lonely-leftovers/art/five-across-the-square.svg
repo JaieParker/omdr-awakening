@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#3d3557"/>
+  <rect y="400" width="800" height="100" fill="#2c2740"/>
+  <!-- Three's side (left): pair + lone counter -->
+  <g opacity="0.85">
+    <circle cx="120" cy="330" r="26" fill="#3a7a6a"/><circle cx="174" cy="330" r="26" fill="#3a7a6a"/>
+    <line x1="144" y1="334" x2="152" y2="334" stroke="#fdf8ee" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="245" cy="345" r="32" fill="#845ef7"/>
+    <circle cx="235" cy="336" r="5" fill="#fdf8ee"/><circle cx="256" cy="336" r="5" fill="#fdf8ee"/>
+    <ellipse cx="245" cy="364" rx="7" ry="5" fill="#fdf8ee"/>
+  </g>
+  <!-- Five's side (right): two pairs + lone counter -->
+  <g opacity="0.85">
+    <circle cx="640 " cy="320" r="24" fill="#e8a06a"/><circle cx="690" cy="320" r="24" fill="#e8a06a"/>
+    <line x1="662" y1="324" x2="669" y2="324" stroke="#fdf8ee" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="655" cy="378" r="24" fill="#e8a06a"/><circle cx="705" cy="378" r="24" fill="#e8a06a"/>
+    <line x1="677" y1="382" x2="684" y2="382" stroke="#fdf8ee" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="560" cy="345" r="32" fill="#845ef7"/>
+    <circle cx="550" cy="336" r="5" fill="#fdf8ee"/><circle cx="571" cy="336" r="5" fill="#fdf8ee"/>
+    <ellipse cx="560" cy="364" rx="7" ry="5" fill="#fdf8ee"/>
+  </g>
+  <!-- the gaze between the two lone counters -->
+  <path d="M285 335 q115 -70 230 0" stroke="#ffd43b" stroke-width="3.5" stroke-dasharray="2 10" fill="none" stroke-linecap="round"/>
+  <!-- twin echoing rhythm marks above each -->
+  <g fill="#ffd43b" opacity="0.85">
+    <circle cx="205" cy="235" r="7"/><circle cx="231" cy="235" r="7"/>
+    <circle cx="530" cy="235" r="7"/><circle cx="556" cy="235" r="7"/>
+  </g>
+  <g stroke="#cbbfa5" stroke-width="2.5" stroke-dasharray="3 6" fill="none">
+    <circle cx="262" cy="235" r="7"/><circle cx="587" cy="235" r="7"/>
+  </g>
+  <text x="400" y="80" text-anchor="middle" font-size="25" fill="#cbbfa5" font-style="italic">another rhythm with a hole in it&#8230; just like hers</text>
+</svg>

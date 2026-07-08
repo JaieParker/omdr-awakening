@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <circle cx="680" cy="80" r="45" fill="#ffe066"/>
+  <rect y="360" width="800" height="140" fill="#f0e2c8"/>
+  <!-- village houses -->
+  <g>
+    <rect x="60" y="250" width="110" height="115" rx="6" fill="#e8a06a"/>
+    <polygon points="50,255 115,195 180,255" fill="#c4713d"/>
+    <rect x="100" y="310" width="32" height="55" rx="4" fill="#7a5230"/>
+    <rect x="300" y="265" width="100" height="100" rx="6" fill="#9fd8cb"/>
+    <polygon points="290,270 350,215 410,270" fill="#3a7a6a"/>
+    <rect x="332" y="315" width="30" height="50" rx="4" fill="#2c5a4e"/>
+    <rect x="560" y="255" width="120" height="110" rx="6" fill="#f2c9a0"/>
+    <polygon points="550,260 620,200 690,260" fill="#c4713d"/>
+    <rect x="602" y="312" width="32" height="53" rx="4" fill="#7a5230"/>
+  </g>
+  <!-- even numbers strolling in pairs: Two -->
+  <g>
+    <circle cx="180" cy="425" r="24" fill="#4dabf7"/>
+    <circle cx="232" cy="425" r="24" fill="#4dabf7"/>
+    <line x1="202" y1="428" x2="210" y2="428" stroke="#2c2418" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="173" cy="419" r="3.4" fill="#2c2418"/><circle cx="188" cy="419" r="3.4" fill="#2c2418"/>
+    <path d="M172 431 q8 7 16 0" stroke="#2c2418" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="225" cy="419" r="3.4" fill="#2c2418"/><circle cx="240" cy="419" r="3.4" fill="#2c2418"/>
+    <path d="M224 431 q8 7 16 0" stroke="#2c2418" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- Four marching in two pairs -->
+  <g>
+    <circle cx="420" cy="430" r="20" fill="#51cf66"/>
+    <circle cx="464" cy="430" r="20" fill="#51cf66"/>
+    <circle cx="516" cy="430" r="20" fill="#51cf66"/>
+    <circle cx="560" cy="430" r="20" fill="#51cf66"/>
+    <line x1="438" y1="433" x2="446" y2="433" stroke="#2c2418" stroke-width="4" stroke-linecap="round"/>
+    <line x1="534" y1="433" x2="542" y2="433" stroke="#2c2418" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <!-- heartbeat pulse line across the sky -->
+  <path d="M40 130 h150 l20 -38 l30 76 l20 -38 h160 l20 -38 l30 76 l20 -38 h250"
+        stroke="#c4713d" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.55"/>
+  <text x="400" y="60" text-anchor="middle" font-size="26" fill="#7a6b56" font-style="italic">the village walked like a heartbeat</text>
+</svg>

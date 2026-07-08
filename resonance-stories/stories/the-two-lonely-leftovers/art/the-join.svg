@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <rect y="390" width="800" height="110" fill="#f0e2c8"/>
+  <!-- glow at the join -->
+  <circle cx="400" cy="270" r="130" fill="#ffe066" opacity="0.28"/>
+  <circle cx="400" cy="270" r="75" fill="#ffe066" opacity="0.35"/>
+  <!-- the two once-lonely counters, holding hands, center stage -->
+  <g>
+    <circle cx="358" cy="270" r="40" fill="#845ef7"/>
+    <circle cx="442" cy="270" r="40" fill="#845ef7"/>
+    <line x1="394" y1="276" x2="406" y2="276" stroke="#2c2418" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="346" cy="259" r="5.5" fill="#fdf8ee"/><circle cx="370" cy="259" r="5.5" fill="#fdf8ee"/>
+    <path d="M344 285 q14 11 28 0" stroke="#fdf8ee" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <circle cx="430" cy="259" r="5.5" fill="#fdf8ee"/><circle cx="454" cy="259" r="5.5" fill="#fdf8ee"/>
+    <path d="M428 285 q14 11 28 0" stroke="#fdf8ee" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- the other three pairs flanking them -->
+  <g>
+    <circle cx="115" cy="330" r="27" fill="#3a7a6a"/><circle cx="171" cy="330" r="27" fill="#3a7a6a"/>
+    <line x1="139" y1="334" x2="147" y2="334" stroke="#2c2418" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="242" cy="345" r="27" fill="#3a7a6a"/><circle cx="298" cy="345" r="27" fill="#e8a06a"/>
+    <line x1="266" y1="349" x2="274" y2="349" stroke="#2c2418" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="502" cy="345" r="27" fill="#e8a06a"/><circle cx="558" cy="345" r="27" fill="#e8a06a"/>
+    <line x1="526" y1="349" x2="534" y2="349" stroke="#2c2418" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="629" cy="330" r="27" fill="#e8a06a"/><circle cx="685" cy="330" r="27" fill="#3a7a6a"/>
+    <line x1="653" y1="334" x2="661" y2="334" stroke="#2c2418" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- perfectly even footsteps, no gaps -->
+  <g fill="#c4713d" opacity="0.85">
+    <circle cx="200" cy="452" r="9"/><circle cx="250" cy="452" r="9"/>
+    <circle cx="300" cy="452" r="9"/><circle cx="350" cy="452" r="9"/>
+    <circle cx="400" cy="452" r="9"/><circle cx="450" cy="452" r="9"/>
+    <circle cx="500" cy="452" r="9"/><circle cx="550" cy="452" r="9"/>
+  </g>
+  <text x="400" y="70" text-anchor="middle" font-size="26" fill="#7a6b56" font-style="italic">no gap. no leftover. nobody alone.</text>
+  <text x="400" y="130" text-anchor="middle" font-size="34" fill="#c4713d" font-weight="bold">3 + 5 = 8</text>
+</svg>

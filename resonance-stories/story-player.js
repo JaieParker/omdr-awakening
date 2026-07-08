@@ -206,6 +206,7 @@ export class StoryPlayer {
       <div class="scene ${moodClass}" data-scene-id="${this._esc(scene.id)}">
         <div class="scene-visual">
           <div class="resonance-viz ${moodClass}"></div>
+          <img class="scene-art" src="stories/${this._esc(this.story?.id || '')}/art/${this._esc(scene.id)}.svg" alt="" onerror="this.remove()">
         </div>
         <div class="scene-text">
           <p class="narration">${this._formatNarration(scene.narration)}</p>

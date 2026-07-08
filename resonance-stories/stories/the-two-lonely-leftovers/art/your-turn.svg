@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <!-- wooden table -->
+  <rect y="200" width="800" height="300" fill="#e8d3ae"/>
+  <line x1="0" y1="200" x2="800" y2="200" stroke="#d9c091" stroke-width="4"/>
+  <!-- pile one: 3 biscuits -->
+  <g>
+    <text x="200" y="165" text-anchor="middle" font-size="28" fill="#7a6b56" font-style="italic">your first pile</text>
+    <circle cx="150" cy="280" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <circle cx="230" cy="280" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <circle cx="190" cy="355" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <g fill="#8a5a28">
+      <circle cx="140" cy="272" r="4"/><circle cx="160" cy="286" r="4"/><circle cx="152" cy="292" r="4"/>
+      <circle cx="222" cy="274" r="4"/><circle cx="240" cy="288" r="4"/>
+      <circle cx="182" cy="348" r="4"/><circle cx="200" cy="362" r="4"/>
+    </g>
+  </g>
+  <!-- pile two: 5 biscuits -->
+  <g>
+    <text x="590" y="165" text-anchor="middle" font-size="28" fill="#7a6b56" font-style="italic">your second pile</text>
+    <circle cx="530" cy="270" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <circle cx="610" cy="270" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <circle cx="690" cy="270" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <circle cx="570" cy="350" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <circle cx="650" cy="350" r="34" fill="#d9a05b" stroke="#b97f3c" stroke-width="4"/>
+    <g fill="#8a5a28">
+      <circle cx="522" cy="262" r="4"/><circle cx="540" cy="276" r="4"/>
+      <circle cx="602" cy="264" r="4"/><circle cx="620" cy="278" r="4"/>
+      <circle cx="682" cy="262" r="4"/><circle cx="700" cy="276" r="4"/>
+      <circle cx="562" cy="342" r="4"/><circle cx="580" cy="356" r="4"/>
+      <circle cx="642" cy="344" r="4"/><circle cx="660" cy="358" r="4"/>
+    </g>
+  </g>
+  <!-- arrow bringing the leftovers together -->
+  <path d="M250 355 q150 90 300 -3" stroke="#845ef7" stroke-width="5" stroke-dasharray="4 10" fill="none" stroke-linecap="round"/>
+  <polygon points="558,342 542,362 566,364" fill="#845ef7"/>
+  <text x="400" y="70" text-anchor="middle" font-size="30" fill="#2c2418" font-weight="bold">Your turn!</text>
+  <text x="400" y="110" text-anchor="middle" font-size="24" fill="#7a6b56" font-style="italic">find the leftovers &#8212; then let them find each other</text>
+  <text x="400" y="465" text-anchor="middle" font-size="24" fill="#845ef7" font-weight="bold">did the limp disappear?</text>
+</svg>

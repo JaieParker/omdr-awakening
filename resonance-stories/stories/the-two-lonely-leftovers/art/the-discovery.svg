@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <!-- three little experiment cards -->
+  <g>
+    <rect x="55" y="120" width="200" height="220" rx="16" fill="#ffffff" stroke="#3a7a6a" stroke-width="3"/>
+    <text x="155" y="165" text-anchor="middle" font-size="30" fill="#2c2418" font-weight="bold">3 + 7</text>
+    <g fill="#3a7a6a"><circle cx="105" cy="205" r="12"/><circle cx="135" cy="205" r="12"/><circle cx="165" cy="205" r="12"/></g>
+    <g fill="#e8a06a">
+      <circle cx="195" cy="205" r="12"/><circle cx="105" cy="240" r="12"/><circle cx="135" cy="240" r="12"/>
+      <circle cx="165" cy="240" r="12"/><circle cx="195" cy="240" r="12"/><circle cx="105" cy="275" r="12"/><circle cx="135" cy="275" r="12"/>
+    </g>
+    <text x="155" y="322" text-anchor="middle" font-size="26" fill="#3a7a6a" font-weight="bold">= 10 &#10003;</text>
+  </g>
+  <g>
+    <rect x="300" y="120" width="200" height="220" rx="16" fill="#ffffff" stroke="#c4713d" stroke-width="3"/>
+    <text x="400" y="165" text-anchor="middle" font-size="30" fill="#2c2418" font-weight="bold">1 + 9</text>
+    <g fill="#3a7a6a"><circle cx="350" cy="205" r="12"/></g>
+    <g fill="#e8a06a">
+      <circle cx="380" cy="205" r="12"/><circle cx="410" cy="205" r="12"/><circle cx="440" cy="205" r="12"/>
+      <circle cx="350" cy="240" r="12"/><circle cx="380" cy="240" r="12"/><circle cx="410" cy="240" r="12"/>
+      <circle cx="440" cy="240" r="12"/><circle cx="350" cy="275" r="12"/><circle cx="380" cy="275" r="12"/>
+    </g>
+    <text x="400" y="322" text-anchor="middle" font-size="26" fill="#c4713d" font-weight="bold">= 10 &#10003;</text>
+  </g>
+  <g>
+    <rect x="545" y="120" width="200" height="220" rx="16" fill="#ffffff" stroke="#845ef7" stroke-width="3"/>
+    <text x="645" y="165" text-anchor="middle" font-size="30" fill="#2c2418" font-weight="bold">5 + 5</text>
+    <g fill="#3a7a6a">
+      <circle cx="595" cy="205" r="12"/><circle cx="625" cy="205" r="12"/><circle cx="655" cy="205" r="12"/>
+      <circle cx="685" cy="205" r="12"/><circle cx="595" cy="240" r="12"/>
+    </g>
+    <g fill="#e8a06a">
+      <circle cx="625" cy="240" r="12"/><circle cx="655" cy="240" r="12"/><circle cx="685" cy="240" r="12"/>
+      <circle cx="595" cy="275" r="12"/><circle cx="625" cy="275" r="12"/>
+    </g>
+    <text x="645" y="322" text-anchor="middle" font-size="26" fill="#845ef7" font-weight="bold">= 10 &#10003;</text>
+  </g>
+  <text x="400" y="70" text-anchor="middle" font-size="27" fill="#7a6b56" font-style="italic">odd + odd = even&#8230; every single time!</text>
+  <text x="400" y="425" text-anchor="middle" font-size="24" fill="#2c2418">the leftover was never a flaw &#8212; it was a <tspan font-weight="bold" fill="#845ef7">half</tspan></text>
+</svg>

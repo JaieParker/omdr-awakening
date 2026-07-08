@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <rect y="380" width="800" height="120" fill="#f0e2c8"/>
+  <!-- Three walking from the left -->
+  <g>
+    <circle cx="150" cy="320" r="34" fill="#3a7a6a"/><circle cx="222" cy="320" r="34" fill="#3a7a6a"/>
+    <line x1="181" y1="325" x2="191" y2="325" stroke="#2c2418" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="300" cy="335" r="30" fill="#845ef7"/>
+    <circle cx="291" cy="327" r="4.5" fill="#fdf8ee"/><circle cx="310" cy="327" r="4.5" fill="#fdf8ee"/>
+    <path d="M291 349 q9 6 18 0" stroke="#fdf8ee" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- Five walking from the right -->
+  <g>
+    <circle cx="650" cy="320" r="30" fill="#e8a06a"/><circle cx="712" cy="320" r="30" fill="#e8a06a"/>
+    <line x1="677" y1="325" x2="686" y2="325" stroke="#2c2418" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="580" cy="352" r="26" fill="#e8a06a"/><circle cx="634" cy="368" r="26" fill="#e8a06a"/>
+    <circle cx="500" cy="335" r="30" fill="#845ef7"/>
+    <circle cx="491" cy="327" r="4.5" fill="#fdf8ee"/><circle cx="510" cy="327" r="4.5" fill="#fdf8ee"/>
+    <path d="M491 349 q9 6 18 0" stroke="#fdf8ee" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- two dotted footprint trails converging, gaps rotating toward alignment -->
+  <g fill="#3a7a6a" opacity="0.65">
+    <circle cx="90" cy="440" r="8"/><circle cx="122" cy="440" r="8"/>
+    <circle cx="186" cy="440" r="8"/><circle cx="218" cy="440" r="8"/>
+    <circle cx="282" cy="440" r="8"/><circle cx="314" cy="440" r="8"/>
+  </g>
+  <g fill="#c4713d" opacity="0.65">
+    <circle cx="710" cy="440" r="8"/><circle cx="678" cy="440" r="8"/>
+    <circle cx="614" cy="440" r="8"/><circle cx="582" cy="440" r="8"/>
+    <circle cx="518" cy="440" r="8"/><circle cx="486" cy="440" r="8"/>
+  </g>
+  <g stroke="#7a6b56" stroke-width="2.5" stroke-dasharray="3 6" fill="none" opacity="0.8">
+    <circle cx="154" cy="440" r="8"/><circle cx="250" cy="440" r="8"/><circle cx="346" cy="440" r="8"/>
+    <circle cx="646" cy="440" r="8"/><circle cx="550" cy="440" r="8"/><circle cx="454" cy="440" r="8"/>
+  </g>
+  <!-- the two gaps drifting toward each other -->
+  <path d="M346 425 q27 -22 54 -1" stroke="#845ef7" stroke-width="3" stroke-dasharray="2 8" fill="none"/>
+  <text x="400" y="70" text-anchor="middle" font-size="26" fill="#7a6b56" font-style="italic">like two puzzle pieces turning slowly in the air</text>
+</svg>
