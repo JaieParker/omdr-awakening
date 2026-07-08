@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <!-- the numbers 1-10 in a row -->
+  <g font-size="34" text-anchor="middle" font-weight="bold">
+    <text x="115" y="400" fill="#c4713d">1</text>
+    <text x="178" y="400" fill="#3a7a6a">2</text>
+    <text x="241" y="400" fill="#845ef7">3</text>
+    <text x="304" y="400" fill="#4dabf7">4</text>
+    <text x="367" y="400" fill="#e8590c">5</text>
+    <text x="430" y="400" fill="#e8590c">6</text>
+    <text x="493" y="400" fill="#4dabf7">7</text>
+    <text x="556" y="400" fill="#845ef7">8</text>
+    <text x="619" y="400" fill="#3a7a6a">9</text>
+    <text x="684" y="400" fill="#c4713d">10</text>
+  </g>
+  <!-- rainbow arcs pairing the ends -->
+  <g fill="none" stroke-width="6" stroke-linecap="round">
+    <path d="M115 370 q285 -290 569 0" stroke="#c4713d"/>
+    <path d="M178 370 q222 -224 441 0" stroke="#3a7a6a"/>
+    <path d="M241 370 q160 -160 315 0" stroke="#845ef7"/>
+    <path d="M304 370 q98 -100 189 0" stroke="#4dabf7"/>
+    <path d="M367 370 q32 -40 63 0" stroke="#e8590c"/>
+  </g>
+  <!-- each arc rings the same golden bell: 11 -->
+  <g>
+    <circle cx="400" cy="120" r="52" fill="#ffd43b"/>
+    <circle cx="400" cy="120" r="66" fill="none" stroke="#ffd43b" stroke-width="3" opacity="0.5"/>
+    <circle cx="400" cy="120" r="80" fill="none" stroke="#ffd43b" stroke-width="2" opacity="0.3"/>
+    <text x="400" y="134" text-anchor="middle" font-size="40" fill="#5c4326" font-weight="bold">11</text>
+  </g>
+  <g font-size="20" fill="#7a6b56" text-anchor="middle" font-style="italic">
+    <text x="130" y="455">1+10</text>
+    <text x="265" y="455">2+9</text>
+    <text x="400" y="455">3+8</text>
+    <text x="535" y="455">4+7</text>
+    <text x="670" y="455">5+6</text>
+  </g>
+  <text x="400" y="483" text-anchor="middle" font-size="24" fill="#c4713d" font-weight="bold">five pairs &#8212; five identical bells!</text>
+</svg>

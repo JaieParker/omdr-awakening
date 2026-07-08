@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#e8dcc4"/>
+  <!-- Carl, still and bright-eyed -->
+  <g>
+    <circle cx="400" cy="180" r="46" fill="#e8b48a"/>
+    <path d="M358 166 q42 -34 84 0 l-4 -22 q-38 -20 -76 0 z" fill="#c98d3c"/>
+    <circle cx="384" cy="176" r="7" fill="#2c2418"/><circle cx="416" cy="176" r="7" fill="#2c2418"/>
+    <circle cx="386" cy="173" r="2.5" fill="#ffd43b"/><circle cx="418" cy="173" r="2.5" fill="#ffd43b"/>
+    <path d="M386 202 q14 10 28 0" stroke="#2c2418" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="362" y="226" width="76" height="70" rx="14" fill="#3a7a6a"/>
+  </g>
+  <!-- the row of numbers, ends glowing and leaning toward each other -->
+  <rect x="60" y="360" width="680" height="70" rx="12" fill="#fffdf4" stroke="#8a6a44" stroke-width="3"/>
+  <g font-size="26" text-anchor="middle">
+    <text x="110" y="404" fill="#c4713d" font-weight="bold" font-size="32">1</text>
+    <text x="180" y="402" fill="#2c2418">2</text>
+    <text x="250" y="402" fill="#2c2418">3</text>
+    <text x="320" y="402" fill="#8d8677">&#8230;</text>
+    <text x="400" y="402" fill="#8d8677">&#8230;</text>
+    <text x="480" y="402" fill="#8d8677">&#8230;</text>
+    <text x="550" y="402" fill="#2c2418">98</text>
+    <text x="620" y="402" fill="#2c2418">99</text>
+    <text x="694" y="404" fill="#3a7a6a" font-weight="bold" font-size="32">100</text>
+  </g>
+  <circle cx="110" cy="395" r="34" fill="#c4713d" opacity="0.15"/>
+  <circle cx="694" cy="395" r="38" fill="#3a7a6a" opacity="0.15"/>
+  <!-- the reach: both ends at once -->
+  <path d="M130 352 q270 -110 540 0" stroke="#c4713d" stroke-width="4" stroke-dasharray="3 10" fill="none" stroke-linecap="round"/>
+  <path d="M200 356 q200 -76 400 0" stroke="#3a7a6a" stroke-width="4" stroke-dasharray="3 10" fill="none" stroke-linecap="round"/>
+  <!-- listening marks by Carl's ears -->
+  <g stroke="#845ef7" stroke-width="3.5" fill="none" stroke-linecap="round">
+    <path d="M330 168 q-14 12 0 26"/><path d="M316 160 q-22 18 0 40"/>
+    <path d="M470 168 q14 12 0 26"/><path d="M484 160 q22 18 0 40"/>
+  </g>
+  <text x="400" y="60" text-anchor="middle" font-size="26" fill="#5c5240" font-style="italic">Carl heard the numbers from both ends at once</text>
+</svg>

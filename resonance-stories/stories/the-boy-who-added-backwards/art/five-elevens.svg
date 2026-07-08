@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <!-- five 11-bells gathering into one answer -->
+  <g>
+    <g transform="translate(130,120)"><circle r="36" fill="#ffd43b"/><text y="12" text-anchor="middle" font-size="30" fill="#5c4326" font-weight="bold">11</text></g>
+    <g transform="translate(265,100)"><circle r="36" fill="#ffd43b"/><text y="12" text-anchor="middle" font-size="30" fill="#5c4326" font-weight="bold">11</text></g>
+    <g transform="translate(400,90)"><circle r="36" fill="#ffd43b"/><text y="12" text-anchor="middle" font-size="30" fill="#5c4326" font-weight="bold">11</text></g>
+    <g transform="translate(535,100)"><circle r="36" fill="#ffd43b"/><text y="12" text-anchor="middle" font-size="30" fill="#5c4326" font-weight="bold">11</text></g>
+    <g transform="translate(670,120)"><circle r="36" fill="#ffd43b"/><text y="12" text-anchor="middle" font-size="30" fill="#5c4326" font-weight="bold">11</text></g>
+  </g>
+  <g stroke="#c4713d" stroke-width="4" fill="none" stroke-dasharray="3 9" stroke-linecap="round">
+    <path d="M150 160 q120 90 220 110"/>
+    <path d="M275 140 q80 80 115 128"/>
+    <path d="M400 130 q0 70 0 130"/>
+    <path d="M525 140 q-80 80 -115 128"/>
+    <path d="M650 160 q-120 90 -220 110"/>
+  </g>
+  <!-- the single confident answer -->
+  <g>
+    <circle cx="400" cy="330" r="70" fill="#3a7a6a"/>
+    <circle cx="400" cy="330" r="84" fill="none" stroke="#3a7a6a" stroke-width="3" opacity="0.4"/>
+    <text x="400" y="348" text-anchor="middle" font-size="52" fill="#fdf8ee" font-weight="bold">55</text>
+  </g>
+  <text x="400" y="445" text-anchor="middle" font-size="26" fill="#5c5240" font-style="italic">five elevens. done. no staircase, no sore fingers.</text>
+  <text x="400" y="482" text-anchor="middle" font-size="21" fill="#7a6b56">(Carl's version: fifty pairs of 101 &#8594; 5050)</text>
+</svg>
