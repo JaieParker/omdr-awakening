@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#2c2740"/>
+  <!-- torchlight -->
+  <circle cx="400" cy="270" r="210" fill="#ffd43b" opacity="0.14"/>
+  <circle cx="400" cy="270" r="120" fill="#ffd43b" opacity="0.18"/>
+  <!-- the four stubborn numbers, glowing like keys -->
+  <g>
+    <g transform="translate(190,300)">
+      <circle r="40" fill="#4dabf7"/><text y="14" text-anchor="middle" font-size="40" fill="#fdf8ee" font-weight="bold">2</text>
+      <circle r="52" fill="none" stroke="#ffd43b" stroke-width="3" opacity="0.6"/>
+    </g>
+    <g transform="translate(330,300)">
+      <circle r="40" fill="#51cf66"/><text y="14" text-anchor="middle" font-size="40" fill="#fdf8ee" font-weight="bold">3</text>
+      <circle r="52" fill="none" stroke="#ffd43b" stroke-width="3" opacity="0.6"/>
+    </g>
+    <g transform="translate(470,300)">
+      <circle r="40" fill="#e8a06a"/><text y="14" text-anchor="middle" font-size="40" fill="#fdf8ee" font-weight="bold">5</text>
+      <circle r="52" fill="none" stroke="#ffd43b" stroke-width="3" opacity="0.6"/>
+    </g>
+    <!-- Seven stepping out of shadow, tallest glow -->
+    <g transform="translate(615,290)">
+      <circle r="66" fill="#ffd43b" opacity="0.3"/>
+      <circle r="46" fill="#845ef7"/><text y="16" text-anchor="middle" font-size="46" fill="#fdf8ee" font-weight="bold">7</text>
+      <circle r="60" fill="none" stroke="#ffd43b" stroke-width="4"/>
+    </g>
+  </g>
+  <!-- the resolving chord: notes landing -->
+  <g fill="#ffd43b">
+    <g transform="translate(320,130)"><ellipse rx="10" ry="8" transform="rotate(-20)"/><rect x="7" y="-46" width="4.5" height="46" rx="2"/></g>
+    <g transform="translate(400,110) scale(1.1)"><ellipse rx="10" ry="8" transform="rotate(-20)"/><rect x="7" y="-46" width="4.5" height="46" rx="2"/></g>
+    <g transform="translate(480,130)"><ellipse rx="10" ry="8" transform="rotate(-20)"/><rect x="7" y="-46" width="4.5" height="46" rx="2"/></g>
+  </g>
+  <text x="400" y="55" text-anchor="middle" font-size="26" fill="#e8dcc0" font-style="italic">&#8220;You can't be broken apart &#8212; and neither can any lock built from you.&#8221;</text>
+  <text x="400" y="440" text-anchor="middle" font-size="25" fill="#ffd43b">and Seven's chord finally landed &#8212; a new one. Seven's own.</text>
+</svg>

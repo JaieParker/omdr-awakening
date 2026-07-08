@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#eaf2fb"/>
+  <!-- 8 as 2x4 -->
+  <g>
+    <text x="140" y="80" text-anchor="middle" font-size="26" fill="#2c2418" font-weight="bold">8 = 2&#215;4</text>
+    <g fill="#4dabf7">
+      <circle cx="80" cy="120" r="15"/><circle cx="120" cy="120" r="15"/><circle cx="160" cy="120" r="15"/><circle cx="200" cy="120" r="15"/>
+      <circle cx="80" cy="160" r="15"/><circle cx="120" cy="160" r="15"/><circle cx="160" cy="160" r="15"/><circle cx="200" cy="160" r="15"/>
+    </g>
+    <text x="140" y="205" text-anchor="middle" font-size="22" fill="#3a7a6a" font-weight="bold">&#10003;</text>
+  </g>
+  <!-- 9 as glowing 3x3 -->
+  <g>
+    <circle cx="400" cy="140" r="95" fill="#ffd43b" opacity="0.25"/>
+    <text x="400" y="70" text-anchor="middle" font-size="26" fill="#2c2418" font-weight="bold">9 = 3&#215;3</text>
+    <g fill="#51cf66">
+      <circle cx="360" cy="110" r="15"/><circle cx="400" cy="110" r="15"/><circle cx="440" cy="110" r="15"/>
+      <circle cx="360" cy="150" r="15"/><circle cx="400" cy="150" r="15"/><circle cx="440" cy="150" r="15"/>
+      <circle cx="360" cy="190" r="15"/><circle cx="400" cy="190" r="15"/><circle cx="440" cy="190" r="15"/>
+    </g>
+    <text x="400" y="235" text-anchor="middle" font-size="20" fill="#c4713d" font-style="italic">a perfect square! the crowd gasped</text>
+  </g>
+  <!-- 10 as 2x5 -->
+  <g>
+    <text x="655" y="80" text-anchor="middle" font-size="26" fill="#2c2418" font-weight="bold">10 = 2&#215;5</text>
+    <g fill="#e8a06a">
+      <circle cx="575" cy="120" r="14"/><circle cx="615" cy="120" r="14"/><circle cx="655" cy="120" r="14"/><circle cx="695" cy="120" r="14"/><circle cx="735" cy="120" r="14"/>
+      <circle cx="575" cy="158" r="14"/><circle cx="615" cy="158" r="14"/><circle cx="655" cy="158" r="14"/><circle cx="695" cy="158" r="14"/><circle cx="735" cy="158" r="14"/>
+    </g>
+    <text x="655" y="205" text-anchor="middle" font-size="22" fill="#3a7a6a" font-weight="bold">&#10003;</text>
+  </g>
+  <!-- Seven hiding behind the fountain -->
+  <g>
+    <ellipse cx="400" cy="420" rx="120" ry="26" fill="#b8cbdd"/>
+    <path d="M355 420 q0 -70 45 -70 q45 0 45 70 z" fill="#9fb8cf"/>
+    <ellipse cx="400" cy="350" rx="60" ry="14" fill="#b8cbdd"/>
+    <g stroke="#7ba3c4" stroke-width="4" stroke-linecap="round" fill="none">
+      <path d="M400 340 q-2 -30 0 -40"/><path d="M385 342 q-10 -24 -6 -36"/><path d="M415 342 q10 -24 6 -36"/>
+    </g>
+    <!-- Seven peeking, knees hugged -->
+    <circle cx="510" cy="415" r="30" fill="#845ef7"/>
+    <circle cx="500" cy="407" r="4.5" fill="#fdf8ee"/><circle cx="518" cy="407" r="4.5" fill="#fdf8ee"/>
+    <path d="M501 430 q9 -6 18 0" stroke="#fdf8ee" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M540 390 q14 -8 18 6" stroke="#4dabf7" stroke-width="0" fill="none"/>
+  </g>
+  <text x="400" y="300" text-anchor="middle" font-size="25" fill="#5c6a7a" font-style="italic">chord after beautiful, finished chord&#8230;</text>
+  <text x="620" y="450" font-size="22" fill="#5c6a7a" font-style="italic">&#8220;I must be broken.&#8221;</text>
+</svg>

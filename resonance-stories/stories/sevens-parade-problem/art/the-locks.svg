@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#1d2b3a"/>
+  <!-- great gates -->
+  <g>
+    <rect x="140" y="90" width="240" height="360" rx="10" fill="#5c4326"/>
+    <rect x="420" y="90" width="240" height="360" rx="10" fill="#5c4326"/>
+    <g stroke="#3d2c17" stroke-width="5">
+      <line x1="200" y1="90" x2="200" y2="450"/><line x1="260" y1="90" x2="260" y2="450"/><line x1="320" y1="90" x2="320" y2="450"/>
+      <line x1="480" y1="90" x2="480" y2="450"/><line x1="540" y1="90" x2="540" y2="450"/><line x1="600" y1="90" x2="600" y2="450"/>
+    </g>
+  </g>
+  <!-- glowing prime locks down the seam -->
+  <g>
+    <g transform="translate(400,160)">
+      <circle r="34" fill="#ffd43b" opacity="0.25"/><rect x="-22" y="-12" width="44" height="36" rx="8" fill="#d9a83c"/>
+      <path d="M-12 -12 v-10 a12 12 0 0 1 24 0 v10" stroke="#d9a83c" stroke-width="7" fill="none"/>
+      <text y="14" text-anchor="middle" font-size="24" fill="#3d2c17" font-weight="bold">2</text>
+    </g>
+    <g transform="translate(400,250)">
+      <circle r="34" fill="#ffd43b" opacity="0.25"/><rect x="-22" y="-12" width="44" height="36" rx="8" fill="#d9a83c"/>
+      <path d="M-12 -12 v-10 a12 12 0 0 1 24 0 v10" stroke="#d9a83c" stroke-width="7" fill="none"/>
+      <text y="14" text-anchor="middle" font-size="24" fill="#3d2c17" font-weight="bold">5</text>
+    </g>
+    <g transform="translate(400,340)">
+      <circle r="40" fill="#ffd43b" opacity="0.3"/><rect x="-24" y="-13" width="48" height="40" rx="8" fill="#e8b84a"/>
+      <path d="M-13 -13 v-11 a13 13 0 0 1 26 0 v11" stroke="#e8b84a" stroke-width="7" fill="none"/>
+      <text y="16" text-anchor="middle" font-size="27" fill="#3d2c17" font-weight="bold">7</text>
+    </g>
+  </g>
+  <!-- circuit-board hint at the base: kingdom becomes the internet -->
+  <g stroke="#3a7a6a" stroke-width="2.5" fill="none" opacity="0.8">
+    <path d="M60 470 h120 v-14 h60 v14 h100"/>
+    <path d="M420 470 h90 v-14 h70 v14 h120"/>
+    <circle cx="180" cy="470" r="4" fill="#51cf66"/><circle cx="340" cy="470" r="4" fill="#51cf66"/>
+    <circle cx="510" cy="470" r="4" fill="#51cf66"/><circle cx="700" cy="470" r="4" fill="#51cf66"/>
+  </g>
+  <text x="400" y="55" text-anchor="middle" font-size="25" fill="#e8dcc0" font-style="italic">no enemy ever picked a stubborn-number lock</text>
+</svg>

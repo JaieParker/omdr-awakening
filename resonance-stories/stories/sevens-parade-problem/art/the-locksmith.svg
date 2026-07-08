@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#2c2740"/>
+  <!-- palace doorway, warm light spilling out -->
+  <rect x="280" y="80" width="240" height="420" rx="8" fill="#f2d98c"/>
+  <rect x="300" y="100" width="200" height="400" rx="6" fill="#ffe9b0"/>
+  <!-- the locksmith silhouette -->
+  <g fill="#3d3557">
+    <path d="M400 190 a42 42 0 1 1 -0.1 0 z"/>
+    <path d="M340 470 q0 -180 60 -180 q60 0 60 180 z"/>
+    <!-- hood -->
+    <path d="M358 175 q42 -50 84 0 q-10 -34 -42 -34 q-32 0 -42 34 z"/>
+  </g>
+  <!-- ring of golden keys -->
+  <g>
+    <circle cx="330" cy="360" r="26" fill="none" stroke="#d9a83c" stroke-width="5"/>
+    <g stroke="#d9a83c" stroke-width="6" stroke-linecap="round">
+      <line x1="330" y1="386" x2="330" y2="430"/>
+      <line x1="322" y1="424" x2="330" y2="424"/><line x1="320" y1="412" x2="330" y2="412"/>
+    </g>
+    <g stroke="#c99422" stroke-width="5" stroke-linecap="round">
+      <line x1="308" y1="378" x2="292" y2="414"/><line x1="292" y1="414" x2="284" y2="410"/>
+      <line x1="352" y1="380" x2="366" y2="416"/><line x1="366" y1="416" x2="374" y2="411"/>
+    </g>
+  </g>
+  <!-- whispering crowd of numbers at the edges -->
+  <g opacity="0.75">
+    <circle cx="90" cy="430" r="24" fill="#4dabf7"/><circle cx="150" cy="445" r="20" fill="#51cf66"/>
+    <circle cx="680" cy="435" r="24" fill="#e8a06a"/><circle cx="730" cy="450" r="19" fill="#51cf66"/>
+    <g fill="#fdf8ee">
+      <circle cx="83" cy="424" r="3.5"/><circle cx="97" cy="424" r="3.5"/>
+      <circle cx="144" cy="440" r="3"/><circle cx="156" cy="440" r="3"/>
+      <circle cx="673" cy="429" r="3.5"/><circle cx="687" cy="429" r="3.5"/>
+      <circle cx="724" cy="445" r="3"/><circle cx="736" cy="445" r="3"/>
+    </g>
+  </g>
+  <text x="400" y="55" text-anchor="middle" font-size="25" fill="#e8dcc0" font-style="italic">&#8220;I need numbers that CANNOT be broken apart.&#8221;</text>
+</svg>

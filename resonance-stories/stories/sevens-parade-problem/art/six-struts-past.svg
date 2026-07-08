@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#eaf2fb"/>
+  <rect y="330" width="800" height="170" fill="#d9e6f2"/>
+  <!-- confetti -->
+  <g>
+    <rect x="120" y="80" width="10" height="16" rx="2" fill="#e03131" transform="rotate(20 125 88)"/>
+    <rect x="240" y="60" width="10" height="16" rx="2" fill="#ffd43b" transform="rotate(-30 245 68)"/>
+    <rect x="380" y="90" width="10" height="16" rx="2" fill="#3a7a6a" transform="rotate(45 385 98)"/>
+    <rect x="520" y="55" width="10" height="16" rx="2" fill="#845ef7" transform="rotate(-15 525 63)"/>
+    <rect x="650" y="85" width="10" height="16" rx="2" fill="#e03131" transform="rotate(30 655 93)"/>
+    <circle cx="180" cy="130" r="6" fill="#ffd43b"/>
+    <circle cx="440" cy="120" r="6" fill="#845ef7"/>
+    <circle cx="600" cy="135" r="6" fill="#3a7a6a"/>
+  </g>
+  <!-- Six marching 2x3, proud -->
+  <g>
+    <g fill="#51cf66" stroke="#2f9e44" stroke-width="3">
+      <circle cx="300" cy="290" r="34"/><circle cx="400" cy="290" r="34"/><circle cx="500" cy="290" r="34"/>
+      <circle cx="300" cy="380" r="34"/><circle cx="400" cy="380" r="34"/><circle cx="500" cy="380" r="34"/>
+    </g>
+    <!-- marching hats on top row -->
+    <g fill="#2c2418">
+      <rect x="280" y="238" width="40" height="18" rx="4"/>
+      <rect x="380" y="238" width="40" height="18" rx="4"/>
+      <rect x="480" y="238" width="40" height="18" rx="4"/>
+    </g>
+    <!-- happy faces -->
+    <g fill="#fdf8ee">
+      <circle cx="290" cy="282" r="5"/><circle cx="310" cy="282" r="5"/>
+      <circle cx="390" cy="282" r="5"/><circle cx="410" cy="282" r="5"/>
+      <circle cx="490" cy="282" r="5"/><circle cx="510" cy="282" r="5"/>
+    </g>
+    <g stroke="#fdf8ee" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M288 300 q12 9 24 0"/><path d="M388 300 q12 9 24 0"/><path d="M488 300 q12 9 24 0"/>
+    </g>
+  </g>
+  <!-- resolved chord -->
+  <g fill="#3a7a6a">
+    <g transform="translate(660,200)"><ellipse rx="10" ry="8" transform="rotate(-20)"/><rect x="7" y="-48" width="4.5" height="48" rx="2"/></g>
+    <g transform="translate(700,180) scale(0.9)"><ellipse rx="10" ry="8" transform="rotate(-20)"/><rect x="7" y="-48" width="4.5" height="48" rx="2"/></g>
+  </g>
+  <text x="400" y="70" text-anchor="middle" font-size="30" fill="#2c2418" font-weight="bold">6 = 2 &#215; 3</text>
+  <text x="400" y="465" text-anchor="middle" font-size="25" fill="#5c6a7a" font-style="italic">flawless! the crowd cheered</text>
+</svg>
