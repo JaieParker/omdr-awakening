@@ -1,0 +1,149 @@
+{
+  "id": "the-two-lonely-leftovers",
+  "title": "The Two Lonely Leftovers",
+  "bracket": "7-10",
+  "concept": "Odd + odd = even — two remainders complete each other",
+  "duration_seconds": 290,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "the-village",
+      "title": "The Village of Numbers",
+      "narration": "In the village of numbers, everyone walked with their own rhythm. The number Two strolled two-by-two: da-da. Four marched da-da, da-da. Eight paraded past like a little drum line. When the even numbers walked, the whole village felt like a heartbeat.",
+      "sound": {
+        "type": "ambient",
+        "description": "Warm village morning — a steady, even two-beat pulse underneath, like a calm heartbeat",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.05, "release": 0.3 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.25, "attack": 0.05, "release": 0.3 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "A cosy village square at morning. Numbers as small round characters walking in tidy pairs, footsteps landing together.",
+      "duration_seconds": 20
+    },
+    {
+      "id": "threes-limp",
+      "title": "Three's Limp",
+      "narration": "But the number Three walked differently. Two of her counters held hands — and one trailed along behind, all by itself. Her rhythm had a hole in it: da-da... gap. Da-da... gap. Three heard the gap every single step. She was sure something about her was broken.",
+      "sound": {
+        "type": "dissonant",
+        "description": "A limping beat — two soft steps then an empty space; a gentle wrong-footed wobble, sad but not scary",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "7:5", "amplitude": 0.4, "attack": 0.02, "release": 0.15 },
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.05, "release": 0.2 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Three as a character: two counters hand in hand, one trailing behind looking back. Her shadow shows the gap in her stride.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "the-dance",
+      "title": "The Dance",
+      "narration": "On dance night, the whole village paired up. Two danced with two. Fours spun in little squares. Everyone had a partner... except the trailing counter behind Three. It stood at the edge of the square, watching. The music was lovely, but for Three, one note stayed stuck in the air, waiting.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Pretty waltz underneath, but one suspended note held unresolved above it — the sound of waiting",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.05, "release": 0.4 },
+          { "waveform": "sine", "frequency_ratio": "45:32", "amplitude": 0.3, "attack": 0.1, "release": 0.8 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "Lantern-lit village dance. Pairs everywhere. Three's lone counter at the edge, lit softly, small.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "five-across-the-square",
+      "title": "Five, Across the Square",
+      "narration": "Then, across the square, Three heard something. Another rhythm. Da-da, da-da... gap. A rhythm with a hole in it — just like hers! It was the number Five: four counters dancing in pairs, and one — one standing at the edge, exactly like Three's.",
+      "sound": {
+        "type": "emergence",
+        "description": "A second limping rhythm fades in from a distance, echoing the first — two incomplete patterns noticing each other",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.35, "attack": 0.1, "release": 0.4 },
+          { "waveform": "triangle", "frequency_ratio": "7:5", "amplitude": 0.25, "attack": 0.05, "release": 0.3 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Across the square, Five: two pairs dancing, one counter alone. The two lone counters see each other. Everything else blurs slightly.",
+      "duration_seconds": 20
+    },
+    {
+      "id": "walking-closer",
+      "title": "Walking Closer",
+      "narration": "Three and Five walked toward each other. Da-da... gap. Da-da... gap. And a strange thing happened: the closer they came, the more their gaps drifted toward each other — like two puzzle pieces turning slowly in the air.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "The two limping rhythms interleave; with each bar the gaps drift closer together, tension gently building toward resolution",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.4, "attack": 0.05, "release": 0.3 },
+          { "waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.3, "attack": 0.05, "release": 0.3 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The two groups approach in slow motion. Their footprints leave two dotted trails, the empty spaces in each trail rotating toward alignment.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "the-join",
+      "title": "The Join",
+      "narration": "Three's lonely counter reached out. Five's lonely counter took its hand. And the two holes... filled each other. Three and Five stood together — eight counters, four perfect pairs — and when they walked, the rhythm was whole: da-da, da-da, da-da, da-da. No gap. No leftover. Nobody alone.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Full warm resolution — octave and fifth locking in, a complete even heartbeat, the wobble gone",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.05, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.05, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.05, "release": 0.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The two lone counters join hands, glow. Wide shot: eight counters in four pairs, striding in perfect time. The village heartbeat swells.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-discovery",
+      "title": "The Discovery",
+      "narration": "Three and Five started laughing. They tried it with everyone. Three and Seven? Ten counters — all paired! One and Nine? Paired! Five and Five? Paired! Every odd number plus every odd number made an even number. Every single time. The leftover was never a flaw. It was a half, waiting for its other half.",
+      "sound": {
+        "type": "consonant",
+        "description": "Playful major arpeggios — experiment after experiment resolving happily, like laughter in chords",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.35, "attack": 0.03, "release": 0.3 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.03, "release": 0.3 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.25, "attack": 0.03, "release": 0.3 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "Quick joyful montage: odd numbers pairing up around the square — 3+7, 1+9, 5+5 — each join flashing into tidy pairs.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "your-turn",
+      "title": "Your Turn",
+      "narration": "Now it's your turn. Grab two odd handfuls of anything — biscuits, blocks, buttons. Find the leftover in each pile. Then put the two piles together, and pair everything up. Did the leftovers find each other? Did the limp disappear? Try it with different odd numbers. Does it work every time?",
+      "sound": {
+        "type": "invitation",
+        "description": "Gentle open-ended chime — warm, curious, handing the story to the child",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.1, "release": 1.2 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.1, "release": 1.2 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 330
+      },
+      "visual_direction": "A child's hands with two small piles of biscuits. The two lone leftovers slide together. Soft glow.",
+      "duration_seconds": 22
+    }
+  ]
+}

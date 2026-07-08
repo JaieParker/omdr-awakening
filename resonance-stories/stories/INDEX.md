@@ -24,6 +24,20 @@
 
 ---
 
+## Ages 7-10 — Number Detectives
+
+*The maths companion shelf: hear the numbers, then grab the biscuits.*
+*Card deck companion: [math-cards.html](../math-cards.html)*
+
+| Story | Concept | What the child feels |
+|-------|---------|---------------------|
+| [The Two Lonely Leftovers](the-two-lonely-leftovers/) | Odd + odd = even | Two limping rhythms join into one perfect heartbeat |
+| [The Drum That Hid From Tigers](the-drum-that-hid-from-tigers/) | Primes as non-syncing cycles (real cicadas!) | The 4-beat and the 13-beat slide past each other — being different keeps you safe |
+| [Seven's Parade Problem](sevens-parade-problem/) | Primes via factoring | Rectangle numbers resolve; Seven suspends… until the locksmith chooses the unbreakable |
+| [The Boy Who Added Backwards](the-boy-who-added-backwards/) | Pairing to equal sums (Gauss, true story) | Five pairs chime the identical note — the aha arrives by ear |
+
+---
+
 ## Ages 8-13 — The Physics of Listening
 
 | Story | Concept | What the child feels |

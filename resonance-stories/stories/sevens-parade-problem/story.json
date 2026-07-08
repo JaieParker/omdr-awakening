@@ -1,0 +1,167 @@
+{
+  "id": "sevens-parade-problem",
+  "title": "Seven's Parade Problem",
+  "bracket": "7-10",
+  "concept": "Primes via factoring — rectangle numbers vs. numbers that can't be broken apart",
+  "duration_seconds": 300,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "parade-day",
+      "title": "Parade Day",
+      "narration": "Once a year, in the kingdom of numbers, came Parade Day. Every number marched past the palace, and the rule was simple: march in a perfect rectangle. Neat rows, neat columns, every soldier in place. The crowd loved rectangles. The king loved rectangles. Everyone loved rectangles.",
+      "sound": {
+        "type": "ambient",
+        "description": "Festive brass-band warm-up, flags in the breeze, a marching pulse underneath",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.35, "attack": 0.03, "release": 0.3 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.25, "attack": 0.05, "release": 0.3 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 196
+      },
+      "visual_direction": "A storybook kingdom with bunting and a golden palace. Number characters lining up, adjusting little marching hats.",
+      "duration_seconds": 20
+    },
+    {
+      "id": "six-struts-past",
+      "title": "Six Struts Past",
+      "narration": "Six went first. Two rows of three — flawless! The crowd cheered. Six could even swap to three rows of two without missing a step. The trumpets played a proud, perfect chord as Six marched by, grinning.",
+      "sound": {
+        "type": "consonant",
+        "description": "A proud resolved chord — the perfect fifth of a number that fits together beautifully",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.03, "release": 0.4 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.03, "release": 0.4 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.25, "attack": 0.03, "release": 0.4 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "Six counters marching 2×3, then wheeling smoothly into 3×2 mid-stride. Confetti. The crowd roars.",
+      "duration_seconds": 20
+    },
+    {
+      "id": "sevens-first-try",
+      "title": "Seven Tries Two Rows",
+      "narration": "Then came Seven. Seven took a deep breath and called: two rows! Three soldiers... three soldiers... and — oh no. One soldier left over, sticking out the back like a loose tooth. The crowd tittered. The trumpets played a chord that didn't finish — a chord left hanging in the air.",
+      "sound": {
+        "type": "dissonant",
+        "description": "An almost-chord with one suspended note refusing to land — awkward, unresolved, hanging",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.03, "release": 0.4 },
+          { "waveform": "sine", "frequency_ratio": "45:32", "amplitude": 0.35, "attack": 0.05, "release": 0.8 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "Seven counters trying 2 rows: 3+3 and one poking out the back, hat askew. Freeze-frame on the awkward moment.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "worse-and-worse",
+      "title": "Worse and Worse",
+      "narration": "Three rows? Two soldiers, two soldiers, two soldiers... and one left over. Four rows? Even worse. Seven tried every arrangement in the book, and every time — one soldier, sticking out. The only thing Seven could do was march in one long, lonely, single-file line. The longest, thinnest parade anyone had ever seen.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Each attempt suspends higher and tighter — a rising ladder of unresolved notes, then a long thin lonely single tone",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "45:32", "amplitude": 0.4, "attack": 0.03, "release": 0.5 },
+          { "waveform": "triangle", "frequency_ratio": "16:15", "amplitude": 0.3, "attack": 0.03, "release": 0.4 }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 294
+      },
+      "visual_direction": "Rapid tries: 3 rows, 4 rows, 5 — always one loose counter. Finally seven counters in single file, stretching across the whole screen, tiny under the palace walls.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-others-roll-by",
+      "title": "The Others Roll By",
+      "narration": "Eight marched past in two proud rows of four. Nine made a perfect square — three by three, the crowd gasped! Ten rolled by in two rows of five. Chord after beautiful, finished chord. And Seven sat down behind the fountain, where nobody could see, and thought: I must be broken.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Three lovely resolved chords in a row for the others — then the music thins to a single sad note behind the fountain",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.35, "attack": 0.03, "release": 0.4 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.3, "attack": 0.03, "release": 0.4 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.2, "attack": 0.03, "release": 0.4 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "8 as 2×4, 9 as a glowing 3×3 square, 10 as 2×5 — each with fanfare. Cut to Seven, knees hugged, behind the fountain.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-locksmith",
+      "title": "The Locksmith",
+      "narration": "That evening, a stranger arrived at the palace: the royal locksmith. She wasn't looking for numbers that arranged beautifully. She was looking for the opposite. 'I need numbers that CANNOT be broken apart,' she announced. 'Numbers no enemy can split. I am building the locks for the kingdom's gates — and a lock made of a breakable number is a lock anyone can pick.'",
+      "sound": {
+        "type": "emergence",
+        "description": "A new theme enters — low, intriguing, keys jingling; the music of the story turning over",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "4:3", "amplitude": 0.35, "attack": 0.08, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.1, "release": 0.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "A cloaked locksmith with a ring of golden keys, silhouetted in the palace doorway. Numbers whisper in the crowd.",
+      "duration_seconds": 26
+    },
+    {
+      "id": "the-choosing",
+      "title": "The Choosing",
+      "narration": "The locksmith read from her list. 'Two.' Two stepped forward, amazed. 'Three. Five.' And then: 'Seven.' Seven peeked out from behind the fountain. 'Me? But I can't make a single rectangle.' The locksmith smiled. 'Exactly. That's the whole point. You can't be broken apart — and neither can any lock built from you.' And the chord that had hung unfinished over Seven all day... finally landed. Not Six's chord. A new one. Seven's own.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "THE resolution — the suspended note from Seven's scenes finally resolves into a new, rich, unexpected chord",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.05, "release": 0.6 },
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.35, "attack": 0.05, "release": 0.6 },
+          { "waveform": "sine", "frequency_ratio": "5:3", "amplitude": 0.3, "attack": 0.05, "release": 0.6 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Seven stepping into torchlight, standing tall. The stubborn numbers — 2, 3, 5, 7 — side by side, glowing like keys.",
+      "duration_seconds": 28
+    },
+    {
+      "id": "the-locks",
+      "title": "The Locks",
+      "narration": "From that day, the kingdom's gates sang with stubborn-number locks, and no enemy ever picked one. And here's a secret for the grown-ups listening: this is real. Right now, tonight, the passwords and bank cards of the whole world are guarded by giant stubborn numbers — primes too big for any computer to break apart. Seven's family guards everything.",
+      "sound": {
+        "type": "consonant",
+        "description": "Warm safe evening music — gates closing with harmonious clicks, the kingdom at peace",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.05, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.05, "release": 0.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 196
+      },
+      "visual_direction": "Great gates with glowing prime-number locks. Zoom out: the kingdom becomes a circuit board becomes the night-lit Earth.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "your-turn",
+      "title": "Your Turn",
+      "narration": "Your turn, detective. Take seven biscuits and try every rectangle you can. Rows of two, rows of three — go ahead, try. Then take twelve and count how MANY rectangles you can make. Which numbers between one and twenty are locksmith numbers? There are eight of them. Can you find them all?",
+      "sound": {
+        "type": "invitation",
+        "description": "Bright open chime — the detective badge handed over",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.1, "release": 1.2 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.1, "release": 1.2 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 330
+      },
+      "visual_direction": "A child's hands arranging biscuits into attempted rectangles. A detective magnifying glass hovers over the numbers 1 to 20.",
+      "duration_seconds": 24
+    }
+  ]
+}

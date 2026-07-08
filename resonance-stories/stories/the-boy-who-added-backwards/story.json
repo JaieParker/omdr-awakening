@@ -1,0 +1,148 @@
+{
+  "id": "the-boy-who-added-backwards",
+  "title": "The Boy Who Added Backwards",
+  "bracket": "7-10",
+  "concept": "Pairing to equal sums — Gauss's trick as identical chimes (a true story)",
+  "duration_seconds": 280,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "the-bored-classroom",
+      "title": "The Bored Classroom",
+      "narration": "More than two hundred years ago, in a small town in Germany, there was a classroom with scratchy slates, squeaky chalk, and one very tired teacher. The children were noisy. The teacher wanted quiet — a LOT of quiet. So he set the longest, most boring task he could think of: 'Add up every number from one to one hundred. Nobody speaks until it's done.'",
+      "sound": {
+        "type": "ambient",
+        "description": "An old classroom — clock ticking, chalk squeaks, restless shuffling; a dry, dusty little theme",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.05, "release": 0.3 },
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.2, "attack": 0.05, "release": 0.3 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 196
+      },
+      "visual_direction": "A 1780s schoolroom: wooden desks, slates, a stern teacher settling into his chair with a newspaper. Sunbeam full of chalk dust.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-groan",
+      "title": "The Groan",
+      "narration": "The whole class groaned and started the long climb. One plus two is three. Plus three is six. Plus four is ten. Plus five is... um... The numbers piled up like a staircase that kept getting steeper. Slates filled with scribbles. Fingers ran out. It was going to take ALL day.",
+      "sound": {
+        "type": "dissonant",
+        "description": "A slow climbing scale that keeps stumbling and restarting — the sound of trudging uphill",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "16:15", "amplitude": 0.35, "attack": 0.03, "release": 0.25 },
+          { "waveform": "sine", "frequency_ratio": "9:8", "amplitude": 0.3, "attack": 0.03, "release": 0.25 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Children hunched over slates, tongues out in concentration. A staircase of numbers growing steeper and wobblier.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "carl-listens",
+      "title": "Carl Listens",
+      "narration": "But one boy didn't start climbing. His name was Carl, and he was about your age. Carl looked at the numbers a different way. Not from the bottom up, like a staircase... but from BOTH ENDS AT ONCE. One... and one hundred. Two... and ninety-nine. Like the numbers were reaching toward each other across the page.",
+      "sound": {
+        "type": "emergence",
+        "description": "The trudging fades; two soft notes sound from opposite ends — low and high — reaching toward each other",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.35, "attack": 0.1, "release": 0.6 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.35, "attack": 0.1, "release": 0.6 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Carl, still, eyes bright. The row of numbers 1 to 100 stretches out; the two ends begin to glow and lean toward each other.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-first-chime",
+      "title": "The First Chime",
+      "narration": "Let's try Carl's trick with our numbers, one to ten. Listen carefully. One reaches for ten — together they make eleven. DING! Two reaches for nine... eleven again! The SAME chime! Three and eight? DING — eleven! Four and seven? Eleven! Five and six? ELEVEN! Five pairs. Five identical bells. Every pair sings exactly the same note.",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Five chimes, each IDENTICAL in pitch — different starting notes converging on the same bright bell, again and again",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.4, "attack": 0.02, "release": 0.8 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.3, "attack": 0.02, "release": 0.8 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 294
+      },
+      "visual_direction": "Numbers 1-10 in a row. Rainbow arcs connect 1-10, 2-9, 3-8, 4-7, 5-6. Each arc lights up and rings the same golden bell: 11.",
+      "duration_seconds": 26
+    },
+    {
+      "id": "five-elevens",
+      "title": "Five Elevens",
+      "narration": "And now the magic. Five pairs, each making eleven. Five elevens — that's fifty-five. Done! No staircase, no scribbles, no sore fingers. Carl did exactly this with his numbers: fifty pairs, each making one hundred and one. Fifty times one hundred and one... five thousand and fifty. He wrote ONE number on his slate and walked to the front of the room.",
+      "sound": {
+        "type": "consonant",
+        "description": "The five bells gather into one confident resolved chord — swift, elegant, effortless",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.03, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "5:4", "amplitude": 0.35, "attack": 0.03, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.3, "attack": 0.03, "release": 0.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "Carl writes 5050 on his slate — one clean number — stands, and walks past rows of still-scribbling classmates.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-teacher-stares",
+      "title": "The Teacher Stares",
+      "narration": "The teacher hadn't even finished his first page of newspaper. He looked at the slate. Five thousand and fifty. Correct. He looked at Carl. He looked at the slate again. The classroom went very, very quiet — but not the kind of quiet the teacher had planned.",
+      "sound": {
+        "type": "decay",
+        "description": "Everything drops away to near-silence — one small suspended note of astonishment, hanging in chalk dust",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.25, "attack": 0.2, "release": 1.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 330
+      },
+      "visual_direction": "Extreme close-up: the teacher's eyes over his spectacles, moving from slate to boy to slate. Chalk dust hangs frozen in the sunbeam.",
+      "duration_seconds": 20
+    },
+    {
+      "id": "the-real-ending",
+      "title": "The Real Ending",
+      "narration": "This really happened. The boy was Carl Friedrich Gauss, and he grew up to become one of the greatest mathematicians who ever lived. Not because he worked faster than everyone else — but because when everyone else started climbing, he stopped... and listened to what the numbers were already doing.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Warm, full, slightly awed — the sound of a small moment becoming a big life",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.08, "release": 0.7 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.08, "release": 0.7 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.08, "release": 0.7 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "The boy at his desk dissolves into a portrait of the grown Gauss among stars and orbits and equations — then back to the boy, smiling.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "your-turn",
+      "title": "Your Turn",
+      "narration": "Now you try Carl's trick. Write the numbers one to ten in a row. Draw a rainbow arc from one to ten. Another from two to nine. Keep going until every number has a partner. Add up each pair. What do you notice? And when you're ready for the big leagues... try one to twenty. What will every pair make then?",
+      "sound": {
+        "type": "invitation",
+        "description": "A bright bell repeating softly, inviting the child to make it ring themselves",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.1, "release": 1.2 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.1, "release": 1.2 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 330
+      },
+      "visual_direction": "A child's hand drawing rainbow arcs over 1-10 on paper. Each completed arc glows and chimes. The last frame: '1 to 20...?'",
+      "duration_seconds": 24
+    }
+  ]
+}

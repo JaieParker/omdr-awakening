@@ -1,0 +1,165 @@
+{
+  "id": "the-drum-that-hid-from-tigers",
+  "title": "The Drum That Hid From Tigers",
+  "bracket": "7-10",
+  "concept": "Primes as non-syncing cycles — the real cicada strategy",
+  "duration_seconds": 300,
+  "version": "1.0.0",
+  "narration_voice": "beckie",
+  "scenes": [
+    {
+      "id": "the-drummer-bug",
+      "title": "The Drummer-Bug",
+      "narration": "Deep in the forest lived a little cicada with a big drum. Her family had a strange way of living: they slept underground for years and years, all together, and then — one summer — they climbed into the sunlight and sang. One glorious, loud, drumming summer. Then back to sleep.",
+      "sound": {
+        "type": "ambient",
+        "description": "Forest ambience with a soft distant insect-drum pattern, warm and mysterious",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.35, "attack": 0.1, "release": 0.5 },
+          { "waveform": "triangle", "frequency_ratio": "2:1", "amplitude": 0.2, "attack": 0.1, "release": 0.4 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 196
+      },
+      "visual_direction": "A mossy forest floor at golden hour. A small round cicada with a tiny drum, peeking from a burrow entrance.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "the-tigers-drum",
+      "title": "The Tiger's Drum",
+      "narration": "But the forest had a tiger. And the tiger had a rhythm too. Every fourth year — BOOM — the tiger came hunting. You could set a calendar by it. Year one: quiet. Year two: quiet. Year three: quiet. Year four: BOOM. The animals who sang in a boom year... were never heard again.",
+      "sound": {
+        "type": "dissonant",
+        "description": "A low, heavy drum landing every fourth beat — patient, inevitable, menacing but not terrifying",
+        "oscillators": [
+          { "waveform": "sawtooth", "frequency_ratio": "1:1", "amplitude": 0.5, "attack": 0.01, "release": 0.4 },
+          { "waveform": "sine", "frequency_ratio": "16:15", "amplitude": 0.25, "attack": 0.02, "release": 0.3 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 110
+      },
+      "visual_direction": "Tiger stripes moving through shadow. Four moons cross the sky; on the fourth, a heavy paw lands. The forest holds its breath.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "grandmothers-twelve",
+      "title": "Grandmother Slept Twelve",
+      "narration": "Grandmother cicada used to sleep twelve years at a time. Twelve is a lovely number, she said — it makes such tidy rectangles. But listen: the tiger drums every four years... and twelve is four, three times over. Every single time grandmother's family woke up — BOOM. The tiger was already there. Every. Single. Time.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Two rhythms colliding on the same beat, again and again — a crash of alignment, the sound of always being found",
+        "oscillators": [
+          { "waveform": "sawtooth", "frequency_ratio": "7:5", "amplitude": 0.5, "attack": 0.01, "release": 0.2 },
+          { "waveform": "square", "frequency_ratio": "45:32", "amplitude": 0.3, "attack": 0.01, "release": 0.15 }
+        ],
+        "rhythm": "chaotic",
+        "base_frequency_hz": 147
+      },
+      "visual_direction": "A calendar wheel: cicada years ticking 12, tiger years ticking 4. Their marks land on the same spot, again and again. Crash frames on each collision.",
+      "duration_seconds": 26
+    },
+    {
+      "id": "trying-to-fit-in",
+      "title": "Trying to Fit In",
+      "narration": "The little cicada tried the friendly numbers everyone liked. Eight? The tiger's four fits inside eight — BOOM. Ten? She met the tiger on year twenty — too soon, too often. Twelve, like grandmother? BOOM, every time. All the tidy rectangle numbers had the same problem: the tiger's rhythm could climb inside them.",
+      "sound": {
+        "type": "dissonant",
+        "description": "Three attempts, three collisions — each try starts hopeful then lands on the same crashing beat as the low drum",
+        "oscillators": [
+          { "waveform": "triangle", "frequency_ratio": "5:4", "amplitude": 0.35, "attack": 0.03, "release": 0.2 },
+          { "waveform": "sawtooth", "frequency_ratio": "16:15", "amplitude": 0.4, "attack": 0.01, "release": 0.25 }
+        ],
+        "rhythm": "irregular",
+        "base_frequency_hz": 147
+      },
+      "visual_direction": "Quick montage: the cicada holds up 8, 10, 12 — each number splits into rectangles, and tiger stripes slide neatly into the gaps.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-stubborn-number",
+      "title": "The Stubborn Number",
+      "narration": "Then she thought of thirteen. Nobody liked thirteen. It made no rectangles. It couldn't be split, couldn't be shared, couldn't be broken into anything smaller. A stubborn number. She smiled a small, clever smile. If nothing fits inside thirteen... then the tiger's four can't fit inside it either.",
+      "sound": {
+        "type": "emergence",
+        "description": "A hush, then a new pattern rises — odd, angular, unbreakable, quietly confident",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "4:3", "amplitude": 0.35, "attack": 0.1, "release": 0.5 },
+          { "waveform": "triangle", "frequency_ratio": "5:3", "amplitude": 0.3, "attack": 0.08, "release": 0.4 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 196
+      },
+      "visual_direction": "The cicada chalks 13 dots on a stone and tries to rectangle them — impossible, only a long line. Her eyes light up.",
+      "duration_seconds": 24
+    },
+    {
+      "id": "the-sliding-beats",
+      "title": "The Beats That Never Met",
+      "narration": "So she slept thirteen years. Listen to what happened: the tiger drummed on four... and her song landed on thirteen. The beats slid past each other. And past. And past. Year after year, the two rhythms circled like dancers who never touch. Do you know how long until they finally landed together? Four times thirteen — fifty-two years!",
+      "sound": {
+        "type": "consonant_building",
+        "description": "Two patterns weaving past each other, near-misses stretching longer and longer — tension that keeps NOT landing, which is the safety",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "13:8", "amplitude": 0.35, "attack": 0.05, "release": 0.3 },
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.3, "attack": 0.05, "release": 0.3 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 165
+      },
+      "visual_direction": "Two orbiting dots on a great calendar wheel — one lapping every 4, one every 13 — always missing each other. The misses trace a beautiful star pattern.",
+      "duration_seconds": 26
+    },
+    {
+      "id": "fifty-two-years-of-song",
+      "title": "Fifty-Two Years of Song",
+      "narration": "By the time the two drums finally met, the old tiger was long gone. The little cicada's family sang every thirteenth summer, loud and safe and free. Her stubborn number — the number nobody wanted — was the best hiding place in the forest.",
+      "sound": {
+        "type": "consonant_full",
+        "description": "Full warm resolution — the cicada chorus in open consonant harmony, triumphant and sunny",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "1:1", "amplitude": 0.4, "attack": 0.05, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.35, "attack": 0.05, "release": 0.5 },
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.05, "release": 0.5 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 220
+      },
+      "visual_direction": "Summer canopy full of singing cicadas, sunlight streaming. Far below, old tiger stripes fade into the grass.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "the-real-forest",
+      "title": "The Real Forest",
+      "narration": "And here is the amazing part: this is TRUE. Real cicadas, in real forests, sleep for exactly thirteen years — some for seventeen. Both stubborn numbers. Both impossible for predators to sync with. The forest discovered prime numbers millions of years before people gave them a name.",
+      "sound": {
+        "type": "ambient",
+        "description": "Real-forest wonder — soft, wide, starlit ambience with a gentle cicada shimmer",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.15, "release": 0.8 },
+          { "waveform": "triangle", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.15, "release": 0.8 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 262
+      },
+      "visual_direction": "Pull back from the storybook forest to a photoreal summer forest at dusk, alive with cicada song. Text overlay: 13 years. 17 years. Both prime.",
+      "duration_seconds": 22
+    },
+    {
+      "id": "your-turn",
+      "title": "Your Turn",
+      "narration": "Now it's your turn — and you need a partner. One of you claps every four beats. The other claps every thirteen. Count out loud together and see how long it takes to clap at the same time. Then try four and twelve. Feel how fast the tiger finds you? That's why the cicada picked the stubborn number.",
+      "sound": {
+        "type": "invitation",
+        "description": "Gentle open chime handing the game to the child — playful, ready",
+        "oscillators": [
+          { "waveform": "sine", "frequency_ratio": "2:1", "amplitude": 0.3, "attack": 0.1, "release": 1.2 },
+          { "waveform": "sine", "frequency_ratio": "3:2", "amplitude": 0.2, "attack": 0.1, "release": 1.2 }
+        ],
+        "rhythm": "steady",
+        "base_frequency_hz": 330
+      },
+      "visual_direction": "Two pairs of hands clapping, counting numbers floating up like fireflies. The numbers 4 and 13 circle each other, never touching.",
+      "duration_seconds": 24
+    }
+  ]
+}
