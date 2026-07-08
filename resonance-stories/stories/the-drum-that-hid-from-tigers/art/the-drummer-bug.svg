@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#f3ecd8"/>
+  <!-- golden hour light -->
+  <circle cx="650" cy="90" r="60" fill="#ffd43b" opacity="0.8"/>
+  <circle cx="650" cy="90" r="95" fill="#ffd43b" opacity="0.2"/>
+  <!-- forest floor -->
+  <rect y="330" width="800" height="170" fill="#7a9455"/>
+  <ellipse cx="400" cy="330" rx="420" ry="40" fill="#8aa863"/>
+  <!-- tree trunks -->
+  <rect x="80" y="60" width="46" height="280" rx="18" fill="#8a6a44"/>
+  <rect x="620" y="90" width="40" height="250" rx="16" fill="#7a5c3a"/>
+  <ellipse cx="103" cy="60" rx="95" ry="55" fill="#5d7a42"/>
+  <ellipse cx="640" cy="86" rx="85" ry="50" fill="#54703c"/>
+  <!-- burrow -->
+  <ellipse cx="400" cy="392" rx="95" ry="46" fill="#4c3a26"/>
+  <ellipse cx="400" cy="384" rx="78" ry="34" fill="#2e2318"/>
+  <!-- the cicada peeking out with her drum -->
+  <g>
+    <ellipse cx="400" cy="352" rx="46" ry="40" fill="#c9a13b"/>
+    <ellipse cx="378" cy="322" rx="18" ry="26" fill="#e6d2a0" opacity="0.75" transform="rotate(-25 378 322)"/>
+    <ellipse cx="422" cy="322" rx="18" ry="26" fill="#e6d2a0" opacity="0.75" transform="rotate(25 422 322)"/>
+    <circle cx="386" cy="344" r="7" fill="#2c2418"/><circle cx="414" cy="344" r="7" fill="#2c2418"/>
+    <path d="M388 368 q12 9 24 0" stroke="#2c2418" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- her little drum -->
+    <ellipse cx="470" cy="378" rx="26" ry="10" fill="#c4713d"/>
+    <rect x="444" y="378" width="52" height="26" rx="4" fill="#a85a2e"/>
+    <line x1="452" y1="360" x2="466" y2="374" stroke="#5c4326" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="451" cy="358" r="5" fill="#e8d3ae"/>
+  </g>
+  <text x="400" y="60" text-anchor="middle" font-size="26" fill="#5c5240" font-style="italic">a little cicada with a big drum</text>
+</svg>

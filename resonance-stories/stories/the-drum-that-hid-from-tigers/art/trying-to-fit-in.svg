@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#f3ecd8"/>
+  <!-- three tried numbers, each with tiger stripes sliding into the gaps -->
+  <g>
+    <rect x="60" y="140" width="200" height="230" rx="16" fill="#fffdf4" stroke="#c9a13b" stroke-width="3"/>
+    <text x="160" y="185" text-anchor="middle" font-size="34" fill="#2c2418" font-weight="bold">8</text>
+    <g fill="#c9a13b">
+      <circle cx="115" cy="225" r="13"/><circle cx="145" cy="225" r="13"/><circle cx="175" cy="225" r="13"/><circle cx="205" cy="225" r="13"/>
+      <circle cx="115" cy="262" r="13"/><circle cx="145" cy="262" r="13"/><circle cx="175" cy="262" r="13"/><circle cx="205" cy="262" r="13"/>
+    </g>
+    <path d="M96 214 h128 v22 h-128 z" fill="#d97b29" opacity="0.45"/>
+    <text x="160" y="330" text-anchor="middle" font-size="24" fill="#e03131" font-weight="bold">4 fits inside &#10007;</text>
+  </g>
+  <g>
+    <rect x="300" y="140" width="200" height="230" rx="16" fill="#fffdf4" stroke="#c9a13b" stroke-width="3"/>
+    <text x="400" y="185" text-anchor="middle" font-size="34" fill="#2c2418" font-weight="bold">10</text>
+    <g fill="#c9a13b">
+      <circle cx="345" cy="225" r="13"/><circle cx="372" cy="225" r="13"/><circle cx="400" cy="225" r="13"/><circle cx="428" cy="225" r="13"/><circle cx="455" cy="225" r="13"/>
+      <circle cx="345" cy="262" r="13"/><circle cx="372" cy="262" r="13"/><circle cx="400" cy="262" r="13"/><circle cx="428" cy="262" r="13"/><circle cx="455" cy="262" r="13"/>
+    </g>
+    <path d="M330 214 h70 v22 h-70 z" fill="#d97b29" opacity="0.45"/>
+    <text x="400" y="330" text-anchor="middle" font-size="24" fill="#e03131" font-weight="bold">meets it too soon &#10007;</text>
+  </g>
+  <g>
+    <rect x="540" y="140" width="200" height="230" rx="16" fill="#fffdf4" stroke="#c9a13b" stroke-width="3"/>
+    <text x="640" y="185" text-anchor="middle" font-size="34" fill="#2c2418" font-weight="bold">12</text>
+    <g fill="#c9a13b">
+      <circle cx="585" cy="218" r="12"/><circle cx="612" cy="218" r="12"/><circle cx="640" cy="218" r="12"/><circle cx="667" cy="218" r="12"/>
+      <circle cx="585" cy="250" r="12"/><circle cx="612" cy="250" r="12"/><circle cx="640" cy="250" r="12"/><circle cx="667" cy="250" r="12"/>
+      <circle cx="585" cy="282" r="12"/><circle cx="612" cy="282" r="12"/><circle cx="640" cy="282" r="12"/><circle cx="667" cy="282" r="12"/>
+    </g>
+    <path d="M570 207 h140 v22 h-140 z" fill="#d97b29" opacity="0.45"/>
+    <path d="M570 271 h140 v22 h-140 z" fill="#d97b29" opacity="0.45"/>
+    <text x="640" y="330" text-anchor="middle" font-size="24" fill="#e03131" font-weight="bold">like grandmother &#10007;</text>
+  </g>
+  <text x="400" y="70" text-anchor="middle" font-size="26" fill="#5c5240" font-style="italic">all the tidy numbers had the same problem&#8230;</text>
+  <text x="400" y="440" text-anchor="middle" font-size="25" fill="#2c2418">the tiger's rhythm could <tspan font-weight="bold" fill="#d97b29">climb inside</tspan> them</text>
+</svg>

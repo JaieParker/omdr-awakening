@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#1d2b3a"/>
+  <!-- dusk gradient sky -->
+  <rect width="800" height="220" fill="#2e4460"/>
+  <rect width="800" height="120" fill="#48607e"/>
+  <circle cx="660" cy="80" r="34" fill="#f2e9d8"/>
+  <circle cx="646" cy="72" r="30" fill="#48607e"/>
+  <!-- stars -->
+  <g fill="#f2e9d8">
+    <circle cx="90" cy="50" r="2.5"/><circle cx="200" cy="90" r="2"/><circle cx="330" cy="45" r="2.5"/>
+    <circle cx="470" cy="75" r="2"/><circle cx="560" cy="40" r="2.5"/><circle cx="740" cy="140" r="2"/>
+  </g>
+  <!-- real forest silhouettes -->
+  <g fill="#0f1822">
+    <polygon points="40,420 110,180 180,420"/>
+    <polygon points="150,420 230,140 310,420"/>
+    <polygon points="290,420 360,200 430,420"/>
+    <polygon points="410,420 500,120 590,420"/>
+    <polygon points="560,420 640,190 720,420"/>
+    <polygon points="680,420 760,230 800,420 800,420"/>
+  </g>
+  <rect y="410" width="800" height="90" fill="#0b111a"/>
+  <!-- cicada song shimmer rising -->
+  <g stroke="#ffd43b" stroke-width="2.5" fill="none" opacity="0.7" stroke-linecap="round">
+    <path d="M140 400 q8 -30 -4 -60 q-8 -25 4 -50"/>
+    <path d="M360 400 q8 -30 -4 -60 q-8 -25 4 -50"/>
+    <path d="M520 400 q8 -30 -4 -60 q-8 -25 4 -50"/>
+    <path d="M660 400 q8 -30 -4 -60 q-8 -25 4 -50"/>
+  </g>
+  <text x="400" y="470" text-anchor="middle" font-size="24" fill="#b8c4d4" font-style="italic">this is true &#8212; real cicadas really do this</text>
+  <text x="400" y="250" text-anchor="middle" font-size="38" fill="#ffd43b" font-weight="bold">13 years. 17 years.</text>
+  <text x="400" y="290" text-anchor="middle" font-size="26" fill="#f2e9d8">both prime.</text>
+</svg>

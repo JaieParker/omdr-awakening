@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#f3ecd8"/>
+  <rect y="360" width="800" height="140" fill="#7a9455"/>
+  <!-- big flat stone -->
+  <ellipse cx="400" cy="330" rx="270" ry="110" fill="#b8b2a4"/>
+  <ellipse cx="400" cy="318" rx="250" ry="95" fill="#cdc7b8"/>
+  <!-- 13 chalk dots: tries to rectangle, only a line works -->
+  <g fill="#fffdf4" stroke="#8d8677" stroke-width="1.5">
+    <circle cx="205" cy="318" r="11"/><circle cx="238" cy="318" r="11"/><circle cx="271" cy="318" r="11"/>
+    <circle cx="304" cy="318" r="11"/><circle cx="337" cy="318" r="11"/><circle cx="370" cy="318" r="11"/>
+    <circle cx="403" cy="318" r="11"/><circle cx="436" cy="318" r="11"/><circle cx="469" cy="318" r="11"/>
+    <circle cx="502" cy="318" r="11"/><circle cx="535" cy="318" r="11"/><circle cx="568" cy="318" r="11"/>
+    <circle cx="601" cy="318" r="11"/>
+  </g>
+  <!-- crossed-out failed rectangle sketches -->
+  <g opacity="0.65">
+    <rect x="250" y="235" width="120" height="52" rx="6" fill="none" stroke="#8d8677" stroke-width="3" stroke-dasharray="6 6"/>
+    <line x1="250" y1="235" x2="370" y2="287" stroke="#e03131" stroke-width="4" stroke-linecap="round"/>
+    <line x1="370" y1="235" x2="250" y2="287" stroke="#e03131" stroke-width="4" stroke-linecap="round"/>
+    <rect x="430" y="235" width="90" height="52" rx="6" fill="none" stroke="#8d8677" stroke-width="3" stroke-dasharray="6 6"/>
+    <line x1="430" y1="235" x2="520" y2="287" stroke="#e03131" stroke-width="4" stroke-linecap="round"/>
+    <line x1="520" y1="235" x2="430" y2="287" stroke="#e03131" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <!-- the cicada, eyes lighting up -->
+  <g>
+    <ellipse cx="140" cy="395" rx="42" ry="36" fill="#c9a13b"/>
+    <ellipse cx="120" cy="368" rx="15" ry="22" fill="#e6d2a0" opacity="0.75" transform="rotate(-25 120 368)"/>
+    <ellipse cx="160" cy="368" rx="15" ry="22" fill="#e6d2a0" opacity="0.75" transform="rotate(25 160 368)"/>
+    <circle cx="128" cy="388" r="7" fill="#2c2418"/><circle cx="152" cy="388" r="7" fill="#2c2418"/>
+    <circle cx="130" cy="386" r="2.5" fill="#ffd43b"/><circle cx="154" cy="386" r="2.5" fill="#ffd43b"/>
+    <path d="M128 408 q12 10 24 0" stroke="#2c2418" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+  <text x="400" y="70" text-anchor="middle" font-size="40" fill="#2c2418" font-weight="bold">13</text>
+  <text x="400" y="112" text-anchor="middle" font-size="25" fill="#5c5240" font-style="italic">no rectangles. can't be split. can't be broken.</text>
+  <text x="400" y="470" text-anchor="middle" font-size="24" fill="#fffdf4">then the tiger's four can't fit inside it either&#8230;</text>
+</svg>

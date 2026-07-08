@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#28243c"/>
+  <!-- great wheel of years -->
+  <circle cx="400" cy="260" r="190" fill="none" stroke="#5b5478" stroke-width="3"/>
+  <circle cx="400" cy="260" r="140" fill="none" stroke="#5b5478" stroke-width="2" stroke-dasharray="4 8"/>
+  <!-- star pattern traced by the near-misses (13-point star chords) -->
+  <g stroke="#ffd43b" stroke-width="2" opacity="0.5" fill="none">
+    <path d="M400 70 L575 355 L215 165 L585 165 L225 355 Z"/>
+    <path d="M400 70 L225 355 L585 165 L215 165 L575 355 Z" opacity="0.5"/>
+  </g>
+  <!-- tiger dot (4-cycle, outer) -->
+  <circle cx="560" cy="130" r="20" fill="#d97b29"/>
+  <g fill="#221c12">
+    <rect x="548" y="118" width="5" height="24" rx="2"/><rect x="558" y="116" width="5" height="28" rx="2"/><rect x="568" y="118" width="5" height="24" rx="2"/>
+  </g>
+  <!-- cicada dot (13-cycle, inner) — far away from the tiger -->
+  <circle cx="285" cy="365" r="18" fill="#c9a13b"/>
+  <circle cx="279" cy="361" r="3" fill="#2c2418"/><circle cx="291" cy="361" r="3" fill="#2c2418"/>
+  <path d="M280 372 q5 4 10 0" stroke="#2c2418" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- their orbits' motion arrows -->
+  <path d="M600 180 q30 40 20 90" stroke="#d97b29" stroke-width="3" fill="none" stroke-dasharray="3 8" stroke-linecap="round"/>
+  <path d="M240 330 q-20 -50 10 -95" stroke="#c9a13b" stroke-width="3" fill="none" stroke-dasharray="3 8" stroke-linecap="round"/>
+  <text x="400" y="252" text-anchor="middle" font-size="34" fill="#ffd43b" font-weight="bold">4 &#215; 13 = 52</text>
+  <text x="400" y="288" text-anchor="middle" font-size="21" fill="#b8ac8e">years until the drums meet</text>
+  <text x="400" y="474" text-anchor="middle" font-size="24" fill="#b8ac8e" font-style="italic">two dancers who never touch</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fdf8ee"/>
+  <!-- two pairs of clapping hands -->
+  <g fill="#e8b48a">
+    <path d="M150 260 q-30 -35 -8 -58 q18 -16 38 4 l40 42 q14 16 0 30 q-16 14 -32 -2 z"/>
+    <path d="M285 260 q30 -35 8 -58 q-18 -16 -38 4 l-40 42 q-14 16 0 30 q16 14 32 -2 z"/>
+  </g>
+  <g fill="#c98d5f">
+    <path d="M515 260 q-30 -35 -8 -58 q18 -16 38 4 l40 42 q14 16 0 30 q-16 14 -32 -2 z"/>
+    <path d="M650 260 q30 -35 8 -58 q-18 -16 -38 4 l-40 42 q-14 16 0 30 q16 14 32 -2 z"/>
+  </g>
+  <!-- clap sparks -->
+  <g stroke="#c4713d" stroke-width="4" stroke-linecap="round">
+    <line x1="218" y1="200" x2="210" y2="182"/><line x1="238" y1="204" x2="246" y2="186"/><line x1="228" y1="196" x2="228" y2="176"/>
+  </g>
+  <g stroke="#3a7a6a" stroke-width="4" stroke-linecap="round">
+    <line x1="583" y1="200" x2="575" y2="182"/><line x1="603" y1="204" x2="611" y2="186"/><line x1="593" y1="196" x2="593" y2="176"/>
+  </g>
+  <text x="228" y="330" text-anchor="middle" font-size="30" fill="#c4713d" font-weight="bold">every 4 beats</text>
+  <text x="593" y="330" text-anchor="middle" font-size="30" fill="#3a7a6a" font-weight="bold">every 13 beats</text>
+  <!-- counting numbers floating like fireflies -->
+  <g font-size="21" fill="#7a6b56">
+    <text x="120" y="410">1</text><text x="180" y="435">2</text><text x="245" y="415">3</text>
+    <text x="310" y="440">4!</text><text x="380" y="418">5</text><text x="440" y="438">6</text>
+    <text x="500" y="414">7</text><text x="565" y="440">8!</text><text x="630" y="418">9</text>
+    <text x="690" y="436">&#8230;</text>
+  </g>
+  <g fill="#ffd43b" opacity="0.6">
+    <circle cx="130" cy="395" r="10"/><circle cx="320" cy="425" r="12"/><circle cx="575" cy="425" r="12"/>
+  </g>
+  <text x="400" y="70" text-anchor="middle" font-size="30" fill="#2c2418" font-weight="bold">Your turn &#8212; grab a partner!</text>
+  <text x="400" y="110" text-anchor="middle" font-size="23" fill="#7a6b56" font-style="italic">how long until you clap together? now try 4 and 12&#8230;</text>
+</svg>

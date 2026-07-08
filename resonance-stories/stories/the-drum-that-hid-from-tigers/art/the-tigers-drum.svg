@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#2b2f26"/>
+  <rect y="380" width="800" height="120" fill="#1e2119"/>
+  <!-- tiger emerging from shadow -->
+  <g>
+    <ellipse cx="270" cy="330" rx="180" ry="88" fill="#d97b29"/>
+    <circle cx="430" cy="290" r="62" fill="#d97b29"/>
+    <!-- stripes -->
+    <g fill="#221c12">
+      <path d="M150 265 q14 55 2 118 l-26 0 q10 -60 0 -114 z"/>
+      <path d="M215 252 q16 62 4 150 l-28 0 q12 -72 0 -146 z"/>
+      <path d="M285 248 q16 66 4 160 l-28 0 q12 -78 0 -156 z"/>
+      <path d="M350 255 q14 58 4 140 l-26 0 q10 -68 0 -136 z"/>
+      <path d="M415 246 q10 20 6 38 l-22 4 q6 -22 0 -38 z"/>
+      <path d="M448 260 q10 18 6 34 l-20 4 q4 -20 0 -34 z"/>
+    </g>
+    <!-- face -->
+    <circle cx="448" cy="278" r="7" fill="#ffd43b"/>
+    <circle cx="412" cy="278" r="7" fill="#ffd43b"/>
+    <circle cx="449" cy="279" r="3" fill="#16120a"/><circle cx="413" cy="279" r="3" fill="#16120a"/>
+    <ellipse cx="430" cy="308" rx="9" ry="6" fill="#16120a"/>
+    <circle cx="398" cy="238" r="14" fill="#d97b29"/><circle cx="462" cy="238" r="14" fill="#d97b29"/>
+  </g>
+  <!-- four moons: three quiet, fourth BOOM -->
+  <g>
+    <circle cx="180" cy="95" r="24" fill="none" stroke="#8d94a8" stroke-width="3"/>
+    <circle cx="300" cy="95" r="24" fill="none" stroke="#8d94a8" stroke-width="3"/>
+    <circle cx="420" cy="95" r="24" fill="none" stroke="#8d94a8" stroke-width="3"/>
+    <circle cx="560" cy="95" r="34" fill="#ffd43b"/>
+    <g stroke="#ffd43b" stroke-width="4" stroke-linecap="round">
+      <line x1="560" y1="42" x2="560" y2="26"/><line x1="560" y1="148" x2="560" y2="164"/>
+      <line x1="507" y1="95" x2="491" y2="95"/><line x1="613" y1="95" x2="629" y2="95"/>
+      <line x1="522" y1="57" x2="510" y2="45"/><line x1="598" y1="57" x2="610" y2="45"/>
+      <line x1="522" y1="133" x2="510" y2="145"/><line x1="598" y1="133" x2="610" y2="145"/>
+    </g>
+    <text x="560" y="103" text-anchor="middle" font-size="22" fill="#16120a" font-weight="bold">BOOM</text>
+  </g>
+  <text x="400" y="460" text-anchor="middle" font-size="25" fill="#b8ac8e" font-style="italic">every fourth year, the tiger came hunting</text>
+</svg>

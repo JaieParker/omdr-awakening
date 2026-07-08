@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+  <rect width="800" height="500" fill="#fff4d6"/>
+  <!-- sunbeams -->
+  <g stroke="#ffd43b" stroke-width="26" opacity="0.35" stroke-linecap="round">
+    <line x1="400" y1="-40" x2="180" y2="500"/>
+    <line x1="400" y1="-40" x2="400" y2="520"/>
+    <line x1="400" y1="-40" x2="620" y2="500"/>
+  </g>
+  <!-- canopy -->
+  <ellipse cx="120" cy="90" rx="180" ry="90" fill="#7a9455"/>
+  <ellipse cx="680" cy="80" rx="190" ry="95" fill="#6b854a"/>
+  <ellipse cx="400" cy="40" rx="200" ry="80" fill="#8aa863"/>
+  <!-- singing cicadas in the canopy -->
+  <g>
+    <g transform="translate(180,120)">
+      <ellipse rx="20" ry="17" fill="#c9a13b"/><circle cx="-6" cy="-3" r="3" fill="#2c2418"/><circle cx="6" cy="-3" r="3" fill="#2c2418"/>
+      <ellipse cx="0" cy="7" rx="5" ry="4" fill="#2c2418"/>
+    </g>
+    <g transform="translate(420,80)">
+      <ellipse rx="20" ry="17" fill="#c9a13b"/><circle cx="-6" cy="-3" r="3" fill="#2c2418"/><circle cx="6" cy="-3" r="3" fill="#2c2418"/>
+      <ellipse cx="0" cy="7" rx="5" ry="4" fill="#2c2418"/>
+    </g>
+    <g transform="translate(630,120)">
+      <ellipse rx="20" ry="17" fill="#c9a13b"/><circle cx="-6" cy="-3" r="3" fill="#2c2418"/><circle cx="6" cy="-3" r="3" fill="#2c2418"/>
+      <ellipse cx="0" cy="7" rx="5" ry="4" fill="#2c2418"/>
+    </g>
+  </g>
+  <!-- music notes filling the air -->
+  <g fill="#c4713d">
+    <g transform="translate(260,200)"><ellipse rx="9" ry="7" transform="rotate(-20)"/><rect x="6" y="-42" width="4" height="42" rx="2"/></g>
+    <g transform="translate(370,170) scale(0.85)"><ellipse rx="9" ry="7" transform="rotate(-20)"/><rect x="6" y="-42" width="4" height="42" rx="2"/></g>
+    <g transform="translate(500,210) scale(1.1)"><ellipse rx="9" ry="7" transform="rotate(-20)"/><rect x="6" y="-42" width="4" height="42" rx="2"/></g>
+    <g transform="translate(590,250) scale(0.8)"><ellipse rx="9" ry="7" transform="rotate(-20)"/><rect x="6" y="-42" width="4" height="42" rx="2"/></g>
+    <g transform="translate(210,280) scale(0.9)"><ellipse rx="9" ry="7" transform="rotate(-20)"/><rect x="6" y="-42" width="4" height="42" rx="2"/></g>
+  </g>
+  <!-- old stripes fading in the grass -->
+  <rect y="400" width="800" height="100" fill="#8aa863"/>
+  <g fill="#5c5240" opacity="0.25">
+    <path d="M600 430 q10 25 4 60 l-18 0 q8 -30 0 -58 z"/>
+    <path d="M645 425 q10 28 4 68 l-18 0 q8 -34 0 -66 z"/>
+    <path d="M690 430 q10 25 4 60 l-18 0 q8 -30 0 -58 z"/>
+  </g>
+  <text x="400" y="350" text-anchor="middle" font-size="27" fill="#5c5240" font-style="italic">loud and safe and free, every thirteenth summer</text>
+</svg>
