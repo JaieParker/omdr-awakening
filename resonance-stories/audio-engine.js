@@ -30,10 +30,15 @@ export class AudioEngine {
     this.masterGain.gain.value = 0.8;
     this.masterGain.connect(this.ctx.destination);
 
+    // Bed gain — the musical bed ducks under narration (see playScene)
+    this.bedGain = this.ctx.createGain();
+    this.bedGain.gain.value = 0.9;
+    this.bedGain.connect(this.masterGain);
+
     // Dry path
     this.dryGain = this.ctx.createGain();
     this.dryGain.gain.value = 0.7;
-    this.dryGain.connect(this.masterGain);
+    this.dryGain.connect(this.bedGain);
 
     // Reverb path (simulated with delay feedback)
     this._createReverb();
@@ -46,7 +51,7 @@ export class AudioEngine {
    */
   _createReverb() {
     this.reverbGain = this.ctx.createGain();
-    this.reverbGain.gain.value = 0.7;
+    this.reverbGain.gain.value = 0.45;
 
     // Two delay lines at different times for spatial width
     const delay1 = this.ctx.createDelay(1.0);
@@ -55,9 +60,9 @@ export class AudioEngine {
     delay2.delayTime.value = 0.53;
 
     const fb1 = this.ctx.createGain();
-    fb1.gain.value = 0.35;
+    fb1.gain.value = 0.22;
     const fb2 = this.ctx.createGain();
-    fb2.gain.value = 0.28;
+    fb2.gain.value = 0.18;
 
     // Tone shaping — roll off highs for warmth
     const lpf = this.ctx.createBiquadFilter();
@@ -73,8 +78,8 @@ export class AudioEngine {
     fb2.connect(lpf);
     lpf.connect(delay1);
     lpf.connect(delay2);
-    delay1.connect(this.masterGain);
-    delay2.connect(this.masterGain);
+    delay1.connect(this.bedGain);
+    delay2.connect(this.bedGain);
   }
 
   async resume() {
@@ -89,6 +94,13 @@ export class AudioEngine {
   playScene(sound, durationSeconds) {
     this.stopAll();
     if (!sound || !this.isInitialized) return;
+
+    // Let the music state its mood for ~2s, then duck out of the
+    // narration's way. The bed stays felt, not heard.
+    const now = this.ctx.currentTime;
+    this.bedGain.gain.cancelScheduledValues(now);
+    this.bedGain.gain.setValueAtTime(0.9, now);
+    this.bedGain.gain.linearRampToValueAtTime(0.35, now + 3.0);
 
     const baseFreq = sound.base_frequency_hz || 220;
     const oscillators = sound.oscillators || [];
@@ -144,7 +156,7 @@ export class AudioEngine {
    * A very soft background drone — just enough to feel, not hear.
    */
   _playDrone(freq, duration, amp) {
-    this._playNote(freq, 'sine', amp, duration, 3.0, 3.0);
+    this._playNote(freq, 'sine', amp * 0.6, duration, 3.0, 3.0);
   }
 
   /**
@@ -159,28 +171,28 @@ export class AudioEngine {
       if (elapsed >= duration) return;
 
       for (const note of notes) {
-        // Irregular timing — notes arrive too early or too late
-        const jitter = isIrregular ? (Math.random() - 0.5) * 0.3 : 0;
-        const noteLen = 0.15 + Math.random() * 0.2;
-        const amp = note.amplitude * 0.5;
+        // Irregular timing — notes arrive too early or too late.
+        // Wobbly and off-kilter, never harsh: this is "uh-oh", not "ouch".
+        const jitter = isIrregular ? (Math.random() - 0.5) * 0.4 : 0;
+        const noteLen = 0.12 + Math.random() * 0.12;
+        const amp = Math.min(note.amplitude * 0.3, 0.12);
 
         setTimeout(() => {
           if (this.melodyInterval === null) return;
-          this._playNote(note.freq, 'triangle', amp, noteLen, 0.02, 0.08);
+          this._playNote(note.freq, 'triangle', amp, noteLen, 0.02, 0.12);
         }, jitter * 1000);
       }
 
-      // Add a harsh metallic ping occasionally
-      if (Math.random() > 0.5) {
-        const harshFreq = baseFreq * (1 + Math.random() * 0.1);
-        this._playNote(harshFreq, 'sawtooth', 0.12, 0.08, 0.005, 0.05);
+      // Occasionally, a soft low "wobble" — a cartoon stumble, not a metallic ping
+      if (Math.random() > 0.75) {
+        this._playNote(baseFreq * 0.5 * (1 + Math.random() * 0.06), 'triangle', 0.06, 0.3, 0.02, 0.25);
       }
 
-      elapsed += 0.6 + Math.random() * 0.4;
+      elapsed += 1.5 + Math.random() * 0.5;
     };
 
     step();
-    this.melodyInterval = setInterval(step, 700 + Math.random() * 300);
+    this.melodyInterval = setInterval(step, 1600 + Math.random() * 500);
   }
 
   /**
@@ -188,12 +200,12 @@ export class AudioEngine {
    */
   _playEmergence(notes, baseFreq, duration) {
     // Very long fade-in of the fundamental
-    this._playNote(baseFreq, 'sine', 0.3, duration, duration * 0.6, 2.0);
+    this._playNote(baseFreq, 'sine', 0.18, duration, duration * 0.6, 2.0);
 
     // After halfway, add a gentle octave whisper
     setTimeout(() => {
       if (this.melodyInterval === null) return;
-      this._playNote(baseFreq * 2, 'sine', 0.15, duration * 0.4, 3.0, 2.0);
+      this._playNote(baseFreq * 2, 'sine', 0.09, duration * 0.4, 3.0, 2.0);
     }, duration * 500);
 
     // Placeholder interval to keep tracking active
@@ -215,16 +227,16 @@ export class AudioEngine {
     this.melodyInterval = setInterval(() => {
       // Soft arpeggio
       const freq = arpNotes[arpIndex % arpNotes.length];
-      this._playNote(freq, 'sine', 0.2, 1.2, 0.3, 0.8);
+      this._playNote(freq, 'sine', 0.13, 1.2, 0.3, 0.8);
       arpIndex++;
 
       // Every few beats, add a new harmony note from the config
       if (arpIndex % 3 === 0 && noteIndex < notes.length) {
         const note = notes[noteIndex];
-        this._playNote(note.freq, 'sine', 0.18, 2.0, 0.8, 1.5);
+        this._playNote(note.freq, 'sine', 0.12, 2.0, 0.8, 1.5);
         noteIndex++;
       }
-    }, interval);
+    }, Math.max(interval, 1600));
   }
 
   /**
@@ -249,18 +261,25 @@ export class AudioEngine {
     // Gentle arpeggio up and down — the swing's rhythm
     let direction = 1;
     let index = 0;
-    const swingPeriod = isFull ? 1200 : 1500; // ms between notes
+    let beat = 0;
+    const swingPeriod = isFull ? 1700 : 2000; // ms between notes — unhurried
 
     // Soft pad underneath
-    this._playNote(baseFreq, 'sine', 0.2, duration, 2.0, 2.0);
+    this._playNote(baseFreq, 'sine', 0.11, duration, 2.0, 2.0);
     if (isFull) {
-      this._playNote(baseFreq * 1.5, 'sine', 0.15, duration, 3.0, 2.0);
+      this._playNote(baseFreq * 1.5, 'sine', 0.08, duration, 3.0, 2.0);
     }
 
     this.melodyInterval = setInterval(() => {
       const freq = freqs[index];
-      const amp = isFull ? 0.25 : 0.2;
-      this._playNote(freq, 'triangle', amp, 0.8, 0.15, 0.6);
+      const amp = isFull ? 0.15 : 0.12;
+      this._playNote(freq, 'triangle', amp, 0.7, 0.1, 0.55);
+
+      // Every fourth note, a tiny high sparkle — the fun bit
+      beat++;
+      if (beat % 4 === 0) {
+        this._playNote(freq * 2, 'sine', 0.06, 0.5, 0.02, 0.45);
+      }
 
       // Move up and down the scale like a swing
       index += direction;
@@ -283,12 +302,12 @@ export class AudioEngine {
 
       setTimeout(() => {
         if (this.melodyInterval === null) return;
-        this._playNote(note.freq, 'sine', 0.25 - i * 0.05, noteDuration, 0.5, noteDuration * 0.6);
+        this._playNote(note.freq, 'sine', 0.16 - i * 0.04, noteDuration, 0.5, noteDuration * 0.6);
       }, startDelay * 1000);
     });
 
     // The fundamental lingers longest — a single gentle tone
-    this._playNote(baseFreq, 'sine', 0.25, duration, 1.0, duration * 0.4);
+    this._playNote(baseFreq, 'sine', 0.16, duration, 1.0, duration * 0.4);
 
     this.melodyInterval = setInterval(() => {}, duration * 1000);
   }
@@ -298,13 +317,13 @@ export class AudioEngine {
    */
   _playInvitation(notes, baseFreq, duration) {
     // A gentle bell-like tone
-    this._playNote(baseFreq, 'sine', 0.25, duration * 0.6, 2.0, duration * 0.3);
-    this._playNote(baseFreq * 2, 'sine', 0.12, duration * 0.4, 3.0, duration * 0.2);
+    this._playNote(baseFreq, 'sine', 0.16, duration * 0.6, 2.0, duration * 0.3);
+    this._playNote(baseFreq * 2, 'sine', 0.08, duration * 0.4, 3.0, duration * 0.2);
 
     // A single soft chime after a pause
     setTimeout(() => {
       if (this.melodyInterval === null) return;
-      this._playNote(baseFreq * 1.5, 'triangle', 0.18, 1.5, 0.1, 1.2);
+      this._playNote(baseFreq * 1.5, 'triangle', 0.12, 1.5, 0.1, 1.2);
     }, duration * 400);
 
     this.melodyInterval = setInterval(() => {}, duration * 1000);
@@ -376,6 +395,13 @@ export class AudioEngine {
     if (this.melodyInterval !== null) {
       clearInterval(this.melodyInterval);
       this.melodyInterval = null;
+    }
+
+    // Reset the narration duck for the next scene
+    if (this.bedGain) {
+      const t = this.ctx.currentTime;
+      this.bedGain.gain.cancelScheduledValues(t);
+      this.bedGain.gain.setValueAtTime(0.9, t);
     }
 
     // Fade out active notes
