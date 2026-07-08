@@ -29,12 +29,16 @@
 *The maths companion shelf: hear the numbers, then grab the biscuits.*
 *Card deck companion: [math-cards.html](../math-cards.html)*
 
-| Story | Concept | What the child feels |
-|-------|---------|---------------------|
-| [The Two Lonely Leftovers](the-two-lonely-leftovers/) | Odd + odd = even | Two limping rhythms join into one perfect heartbeat |
-| [The Drum That Hid From Tigers](the-drum-that-hid-from-tigers/) | Primes as non-syncing cycles (real cicadas!) | The 4-beat and the 13-beat slide past each other — being different keeps you safe |
-| [Seven's Parade Problem](sevens-parade-problem/) | Primes via factoring | Rectangle numbers resolve; Seven suspends… until the locksmith chooses the unbreakable |
-| [The Boy Who Added Backwards](the-boy-who-added-backwards/) | Pairing to equal sums (Gauss, true story) | Five pairs chime the identical note — the aha arrives by ear |
+| Story | Concept | What the child feels | Video |
+|-------|---------|---------------------|-------|
+| [The Two Lonely Leftovers](the-two-lonely-leftovers/) | Odd + odd = even | Two limping rhythms join into one perfect heartbeat | [🎬 mp4](the-two-lonely-leftovers/the-two-lonely-leftovers.mp4) |
+| [The Drum That Hid From Tigers](the-drum-that-hid-from-tigers/) | Primes as non-syncing cycles (real cicadas!) | The 4-beat and the 13-beat slide past each other — being different keeps you safe | [🎬 mp4](the-drum-that-hid-from-tigers/the-drum-that-hid-from-tigers.mp4) |
+| [Seven's Parade Problem](sevens-parade-problem/) | Primes via factoring | Rectangle numbers resolve; Seven suspends… until the locksmith chooses the unbreakable | [🎬 mp4](sevens-parade-problem/sevens-parade-problem.mp4) |
+| [The Boy Who Added Backwards](the-boy-who-added-backwards/) | Pairing to equal sums (Gauss, true story) | Five pairs chime the identical note — the aha arrives by ear | [🎬 mp4](the-boy-who-added-backwards/the-boy-who-added-backwards.mp4) |
+
+Every story is fully illustrated (SVG scene art shown in the player), narrated
+(Microsoft Catherine en-AU), and rendered as a standalone MP4 (scene art +
+narration) for offline / cast-to-TV viewing.
 
 ---
 
