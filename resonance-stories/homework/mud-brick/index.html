@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mud Brick Homes of the World — Arthur's Homework</title>
+<style>
+  /* ---- Page setup ---- */
+  @page { size: A4 portrait; margin: 14mm 14mm 16mm 14mm; }
+  @page { @bottom-center { content: "Mud Brick Homes of the World"; } }
+
+  :root{
+    --terracotta:#b5651d;
+    --clay:#7a4a2b;
+    --sand:#efe0c4;
+    --sand-deep:#e6d2ab;
+    --straw:#d29a3d;
+    --ink:#3a2a1a;
+    --sky:#cfe3ef;
+    --leaf:#6f8f4e;
+    --paper:#fbf6ec;
+    --line:#c9a678;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:"Trebuchet MS","Segoe UI",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    font-size:12.5pt;
+    line-height:1.5;
+  }
+
+  h1,h2,h3{ font-family:"Trebuchet MS","Segoe UI",sans-serif; margin:0 0 .3em 0; }
+
+  .page{ page-break-after:always; position:relative; }
+  .page:last-child{ page-break-after:auto; }
+
+  /* ---- Cover ---- */
+  .cover{
+    height:262mm;
+    background:linear-gradient(180deg,#f4e7cd 0%, #ecd6ac 55%, #d9a441 100%);
+    border:3px solid var(--clay);
+    border-radius:10px;
+    padding:24mm 18mm;
+    text-align:center;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .cover .eyebrow{ letter-spacing:.22em; text-transform:uppercase; color:var(--clay); font-weight:bold; font-size:13pt; }
+  .cover h1{ font-size:40pt; color:var(--clay); line-height:1.05; margin-top:8mm; text-shadow:1px 1px 0 #fff4; }
+  .cover .sub{ font-size:16pt; color:var(--ink); margin-top:6mm; }
+  .cover .byline{ font-size:14pt; color:var(--ink); }
+  .cover .byline b{ color:var(--terracotta); }
+  .cover .motto{ font-style:italic; color:var(--clay); font-size:15pt; }
+
+  /* ---- Section divider ---- */
+  .divider{
+    height:262mm;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    background:radial-gradient(circle at 50% 40%, #f4e7cd, #e2c690);
+    border-radius:10px;
+    border:2px dashed var(--line);
+  }
+  .divider h2{ font-size:30pt; color:var(--clay); }
+  .divider p{ font-size:15pt; max-width:130mm; }
+
+  /* ---- Generic content ---- */
+  .band{
+    background:var(--terracotta); color:#fff;
+    padding:6px 14px; border-radius:8px 8px 0 0;
+    font-size:18pt; font-weight:bold;
+  }
+  .intro h2{ color:var(--clay); font-size:24pt; border-bottom:3px solid var(--straw); padding-bottom:6px; }
+  .intro p{ margin:.55em 0; }
+  .callout{
+    background:#fff8ec; border:2px solid var(--straw); border-left:8px solid var(--straw);
+    border-radius:8px; padding:10px 14px; margin:10px 0;
+  }
+  .callout b{ color:var(--terracotta); }
+
+  /* ---- Technique cards ---- */
+  .tech{
+    border:2px solid var(--line); border-radius:12px; overflow:hidden;
+    margin-bottom:8mm; background:#fff;
+    display:flex; break-inside:avoid;
+  }
+  .tech .art{ width:52mm; min-width:52mm; background:var(--sand); display:flex; align-items:center; justify-content:center; padding:6px; }
+  .tech .art svg{ width:100%; height:auto; }
+  .tech .txt{ padding:8px 12px; }
+  .tech .txt h3{ color:var(--terracotta); font-size:15pt; margin-bottom:2px; }
+  .tech .txt .say{ font-style:italic; color:var(--clay); font-size:10.5pt; margin-bottom:4px; }
+  .tech .txt p{ margin:.25em 0; font-size:11pt; }
+
+  /* ---- Dwelling cards ---- */
+  .dwell{ break-inside:avoid; border:2px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; }
+  .dwell .head{ background:var(--clay); color:#fff; padding:8px 14px; }
+  .dwell .head h2{ font-size:20pt; margin:0; }
+  .dwell .head .loc{ font-size:12pt; opacity:.95; }
+  .dwell .head .no{ float:right; background:#fff; color:var(--clay); font-weight:bold; border-radius:50%; width:30px; height:30px; text-align:center; line-height:30px; }
+  .dwell .visuals{ display:flex; gap:0; border-bottom:2px solid var(--sand-deep); }
+  .dwell .visuals .photo{ width:50%; background:var(--sand); display:flex; align-items:center; justify-content:center; }
+  .dwell .visuals .photo img{ width:100%; height:62mm; object-fit:cover; display:block; }
+  .dwell .visuals .photo .noimg{ font-size:10pt; color:var(--clay); padding:10mm; text-align:center; }
+  .dwell .visuals .diagram{ width:50%; background:var(--sand); display:flex; align-items:center; justify-content:center; padding:6px; border-left:2px solid var(--sand-deep); }
+  .dwell .visuals .diagram svg{ width:100%; height:auto; max-height:62mm; }
+  .dwell .cap{ font-size:9.5pt; color:var(--clay); padding:3px 14px; background:#fff8ec; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:0 16px; padding:8px 14px 4px; }
+  .fact{ margin:2px 0; font-size:11pt; }
+  .fact .k{ font-weight:bold; color:var(--terracotta); }
+  .wow{ margin:2px 14px 12px; background:#eef6e6; border:1.5px solid var(--leaf); border-radius:8px; padding:6px 10px; font-size:11pt; }
+  .wow .k{ color:var(--leaf); font-weight:bold; }
+
+  .credits{ font-size:10pt; }
+  .credits li{ margin:4px 0; }
+  .small{ font-size:9.5pt; color:#6b5638; }
+
+  /* ---- Dwelling card extras (letter callouts + story) ---- */
+  .dwell .head .era{ font-size:11pt; opacity:.95; float:right; margin-right:8px; font-style:italic; }
+  .marker-defs circle{ fill:#fff; stroke:#7a4a2b; stroke-width:2; }
+  svg .mk-c{ fill:#b5651d; stroke:#fff; stroke-width:1.5; }
+  svg .mk-t{ fill:#fff; font-weight:bold; font-family:"Trebuchet MS",sans-serif; }
+  svg .lead{ stroke:#7a4a2b; stroke-width:1; stroke-dasharray:2 2; }
+  svg .lbl{ fill:#3a2a1a; font-size:8px; font-family:"Trebuchet MS",sans-serif; }
+
+  .midrow{ display:flex; gap:0; }
+  .spot{ width:44%; padding:6px 12px 4px; }
+  .spot h3, .story h3{ font-size:13pt; color:var(--clay); margin:2px 0 4px; }
+  .spot ul{ list-style:none; margin:0; padding:0; }
+  .spot li{ margin:3px 0; font-size:10.5pt; display:flex; align-items:flex-start; gap:6px; line-height:1.3; }
+  .mk{ display:inline-block; min-width:17px; height:17px; line-height:17px; text-align:center;
+       background:var(--terracotta); color:#fff; border-radius:50%; font-size:9.5pt; font-weight:bold; flex:0 0 auto; margin-top:1px; }
+  .story{ width:56%; padding:6px 12px 4px; border-left:2px solid var(--sand-deep); background:#fffdf8; }
+  .story p{ margin:.3em 0; font-size:10.5pt; line-height:1.4; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 12px; padding:4px 14px; background:#f6ecd6; border-top:2px solid var(--sand-deep); }
+  .fact2{ font-size:9.8pt; margin:2px 0; }
+  .fact2 .k{ font-weight:bold; color:var(--terracotta); }
+
+  /* ---- Timeline ---- */
+  .timeline{ padding:2mm 0; }
+  .tl-row{ display:flex; align-items:center; margin:5px 0; font-size:10.5pt; }
+  .tl-era{ width:40mm; text-align:right; padding-right:8px; color:var(--clay); font-weight:bold; }
+  .tl-bar{ flex:1; height:14px; background:linear-gradient(90deg,#e6d2ab,#d29a3d); border-radius:7px; position:relative; }
+  .tl-dot{ position:absolute; top:-4px; width:22px; height:22px; background:var(--terracotta); color:#fff; border-radius:50%; text-align:center; line-height:22px; font-weight:bold; font-size:9pt; border:2px solid #fff; }
+  .tl-name{ width:58mm; padding-left:8px; line-height:1.25; }
+  .tlnew{ color:var(--terracotta); font-weight:bold; font-size:9pt; }
+
+  /* ---- Comparison table ---- */
+  table.cmp{ width:100%; border-collapse:collapse; font-size:9pt; }
+  table.cmp th{ background:var(--clay); color:#fff; padding:5px 6px; text-align:left; font-size:9pt; }
+  table.cmp td{ padding:4px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.cmp tr:nth-child(even) td{ background:#f6ecd6; }
+  table.cmp .n{ font-weight:bold; color:var(--terracotta); text-align:center; }
+  table.cmp .grp td{ background:var(--straw); color:#3a2a1a; font-weight:bold; font-size:9pt; }
+  .methodtag{ display:inline-block; padding:1px 5px; border-radius:6px; font-size:8pt; color:#fff; white-space:nowrap; }
+  .m-adobe{ background:#b5651d; } .m-rammed{ background:#7a4a2b; } .m-cob{ background:#a06a2b; }
+  .m-vault{ background:#96632c; } .m-plaster{ background:#c07a2b; } .m-cave{ background:#6b5a34; }
+  .m-sod{ background:#6f7a3a; } .m-puddled{ background:#9a6a3a; }
+
+  /* ---- Glossary ---- */
+  .glo{ column-count:2; column-gap:14px; font-size:10.5pt; }
+  .glo dt{ font-weight:bold; color:var(--terracotta); margin-top:6px; break-after:avoid; }
+  .glo dd{ margin:0 0 2px 0; }
+  .glo dl{ margin:0; }
+
+  /* ---- Build helper ---- */
+  .pick{ border:2px solid var(--leaf); border-radius:10px; padding:8px 12px; margin-bottom:7px; background:#eef6e6; break-inside:avoid; }
+  .pick h3{ color:#4c6b2e; font-size:14pt; margin:0 0 3px; }
+  .stars{ color:var(--straw); font-size:12pt; }
+</style>
+<style>
+  /* ---- Web adaptation (screen) ---- */
+  body{ background:#e6d2ab; padding-top:52px; }
+  .page{ max-width:840px; margin:0 auto 20px; background:var(--paper);
+         box-shadow:0 4px 20px rgba(44,36,24,0.14); border-radius:10px;
+         padding:16px 18px; }
+  .cover{ height:auto !important; padding:30px 22px; }
+  .divider{ height:auto !important; min-height:auto; padding:34px 22px; }
+  .page:last-child{ margin-bottom:40px; }
+
+  /* site-matching top bar */
+  .hw-bar{ position:fixed; top:0; left:0; right:0; z-index:200;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.55rem 1.1rem; background:rgba(250,247,242,0.97);
+    backdrop-filter:blur(8px); border-bottom:1px solid rgba(44,36,24,0.10);
+    font-family:'Trebuchet MS',sans-serif; }
+  .hw-bar a.back{ color:#c4713d; text-decoration:none; font-weight:bold; font-size:0.95rem; }
+  .hw-bar a.back:hover{ text-decoration:underline; }
+  .hw-bar .t{ color:#7a4a2b; font-size:0.85rem; font-weight:bold; }
+  .hw-foot{ max-width:840px; margin:0 auto 50px; text-align:center;
+    font-family:'Trebuchet MS',sans-serif; color:#7a4a2b; font-size:0.85rem; }
+  .hw-foot a{ color:#c4713d; text-decoration:none; }
+
+  /* ---- Responsive ---- */
+  @media (max-width:700px){
+    .dwell .visuals{ flex-direction:column; }
+    .dwell .visuals .photo, .dwell .visuals .diagram{ width:100%; border-left:none; }
+    .dwell .visuals .photo img{ height:auto; }
+    .midrow{ flex-direction:column; }
+    .spot, .story{ width:100%; border-left:none; }
+    .tech{ flex-direction:column; }
+    .tech .art{ width:100%; min-width:0; }
+    .grid2{ grid-template-columns:1fr 1fr; }
+    .glo{ column-count:1; }
+    table.cmp{ display:block; overflow-x:auto; white-space:nowrap; }
+    .tl-era{ width:32mm; }
+    .tl-name{ width:auto; }
+  }
+</style>
+</head>
+<body>
+<div class="hw-bar">
+  <a class="back" href="../../index.html">&larr; Resonance Stories</a>
+  <span class="t">&#127968; Homework</span>
+</div>
+
+<!-- ============================ COVER ============================ -->
+<div class="page">
+  <div class="cover">
+    <div>
+      <div class="eyebrow">Great Builders of Earth</div>
+      <h1>Mud Brick Homes<br>of the World</h1>
+      <div class="sub">A traveller's field-guide to earth houses<br>through history &mdash; and the many ways to build them</div>
+    </div>
+    <div>
+      <svg viewBox="0 0 300 120" width="70%" style="margin:0 auto;display:block">
+        <!-- little row of earth houses -->
+        <rect x="10" y="60" width="60" height="45" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+        <polygon points="6,60 40,38 74,60" fill="#8a5a2b" stroke="#7a4a2b" stroke-width="2"/>
+        <rect x="32" y="80" width="16" height="25" fill="#5a3a1e"/>
+        <!-- domed nubian -->
+        <path d="M95 105 L95 78 Q125 48 155 78 L155 105 Z" fill="#cf9a58" stroke="#7a4a2b" stroke-width="2"/>
+        <rect x="118" y="84" width="14" height="21" fill="#5a3a1e"/>
+        <!-- tower house -->
+        <rect x="175" y="30" width="34" height="75" fill="#d3a566" stroke="#7a4a2b" stroke-width="2"/>
+        <rect x="182" y="42" width="8" height="10" fill="#5a3a1e"/><rect x="196" y="42" width="8" height="10" fill="#5a3a1e"/>
+        <rect x="182" y="62" width="8" height="10" fill="#5a3a1e"/><rect x="196" y="62" width="8" height="10" fill="#5a3a1e"/>
+        <!-- round tulou -->
+        <ellipse cx="255" cy="88" rx="38" ry="18" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+        <path d="M217 88 Q255 66 293 88" fill="#8a5a2b" stroke="#7a4a2b" stroke-width="2"/>
+        <line x1="230" y1="105" x2="280" y2="105" stroke="#7a4a2b" stroke-width="2"/>
+      </svg>
+    </div>
+    <div>
+      <div class="motto">&ldquo;Look. Listen. Imagine. Plan. Then build.&rdquo;</div>
+      <div class="byline" style="margin-top:8mm">Researched for <b>Arthur Parker</b>, Class 3 Great Builder</div>
+      <div class="small">A research companion &mdash; the choosing, planning and building stay Arthur's own work.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ INTRO ============================ -->
+<div class="page intro">
+  <h2>Half the world lives in earth</h2>
+  <p>When you dig in the garden, you are touching one of the oldest building
+  materials on Earth. For more than <b>10,000 years</b>, people everywhere have
+  reached down, scooped up the ground beneath their feet, and turned it into a
+  home. Even today, about <b>one in every three people</b> in the world lives in
+  a house made of earth.</p>
+
+  <p>Why mud? Because it is <b>everywhere</b>, it is <b>free</b>, and it is
+  clever. Thick earth walls do something magical: in the daytime they soak up
+  the sun's heat and stay cool inside, and at night they slowly let that warmth
+  back out. A mud house is cool in the desert afternoon and cosy in the cold
+  night. It muffles noise, it doesn't burn, and when a mud house is no longer
+  needed, it simply melts back into the ground it came from.</p>
+
+  <div class="callout">
+    <b>The Great Builder's secret:</b> there is no single &ldquo;best&rdquo; way
+    to build. A good home listens to four things &mdash; the <b>people</b> who
+    live in it, the <b>land</b> around it, the <b>weather</b> it must stand up
+    to, and the <b>materials</b> the Earth gives nearby. Every home in this book
+    is a different answer to those same four questions.
+  </div>
+
+  <h3 style="color:var(--clay);margin-top:8mm">How to use this book</h3>
+  <p>First, meet the <b>eight ways of making an earth home</b> &mdash; the
+  builder's toolkit. Then travel the world and visit <b>24 real earth homes</b>,
+  from the very oldest villages to a mud-brick house built in Australia. Each one
+  tells you where it is, who lived there, what the weather is like, and how its
+  builders were clever. At the end, there's a page to help you choose which kind
+  of home <i>you</i> might build as your model.</p>
+
+  <p class="small">Every fact in this book was checked against real sources
+  (listed at the back). The photographs are all freely-shared pictures, with
+  their photographers credited on the credits page.</p>
+</div>
+
+<!-- ================== DIVIDER: WAYS OF MAKING ================== -->
+<div class="page">
+  <div class="divider">
+    <h2>Part One<br>The Eight Ways<br>of Making an Earth Home</h2>
+    <p>Before you can build, you need to know the builder's tricks. Every mud
+    home in the world is made using one (or a mix) of these eight methods.</p>
+  </div>
+</div>
+
+<!-- ==================== TECHNIQUE CARDS ==================== -->
+<div class="page">
+  <div class="band">The Builder's Toolkit &mdash; 1 to 4</div>
+
+  <!-- 1 ADOBE -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- brick mould -->
+        <rect x="18" y="20" width="52" height="26" fill="none" stroke="#7a4a2b" stroke-width="3"/>
+        <rect x="20" y="22" width="48" height="22" fill="#c98a4b"/>
+        <!-- sun -->
+        <circle cx="112" cy="30" r="12" fill="#f2b705"/>
+        <g stroke="#f2b705" stroke-width="2"><line x1="112" y1="8" x2="112" y2="14"/><line x1="132" y1="30" x2="126" y2="30"/><line x1="126" y1="16" x2="122" y2="20"/></g>
+        <!-- drying bricks -->
+        <rect x="20" y="66" width="30" height="14" fill="#c98a4b" stroke="#7a4a2b"/>
+        <rect x="56" y="66" width="30" height="14" fill="#cf9a58" stroke="#7a4a2b"/>
+        <rect x="92" y="66" width="30" height="14" fill="#c98a4b" stroke="#7a4a2b"/>
+        <!-- wall -->
+        <rect x="20" y="92" width="30" height="14" fill="#c98a4b" stroke="#7a4a2b"/>
+        <rect x="56" y="92" width="30" height="14" fill="#cf9a58" stroke="#7a4a2b"/>
+        <rect x="92" y="92" width="30" height="14" fill="#c98a4b" stroke="#7a4a2b"/>
+        <rect x="38" y="106" width="30" height="14" fill="#cf9a58" stroke="#7a4a2b"/>
+        <rect x="74" y="106" width="30" height="14" fill="#c98a4b" stroke="#7a4a2b"/>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>1. Adobe &mdash; sun-dried bricks</h3>
+      <div class="say">stacked</div>
+      <p>Mud and straw are pressed into a wooden mould to make a brick, then tipped
+      out and left in the <b>sun</b> to bake hard &mdash; no oven needed. The dry
+      bricks are stacked into walls and glued with more mud. This is the most
+      common earth method on Earth. <i>Adobe</i> is an old Arabic-Spanish word for
+      mud brick.</p>
+    </div>
+  </div>
+
+  <!-- 2 COB -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- lumps of cob stacked as a wavy wall -->
+        <path d="M20 110 Q30 96 44 104 Q58 92 72 102 Q86 90 100 100 Q116 90 128 102 L128 110 Z" fill="#b07a44" stroke="#7a4a2b" stroke-width="2"/>
+        <path d="M20 96 Q34 84 48 92 Q64 80 78 90 Q94 80 110 90 Q120 84 128 92 L128 96 Z" fill="#c08a50" stroke="#7a4a2b" stroke-width="2"/>
+        <path d="M22 82 Q36 72 52 80 Q68 70 84 80 Q100 72 118 80 L120 82 Z" fill="#b07a44" stroke="#7a4a2b" stroke-width="2"/>
+        <!-- straw bits -->
+        <g stroke="#e0b352" stroke-width="1.4"><line x1="40" y1="100" x2="48" y2="96"/><line x1="80" y1="98" x2="88" y2="94"/><line x1="60" y1="88" x2="68" y2="84"/></g>
+        <!-- hands / feet motif -->
+        <text x="74" y="40" font-size="26" text-anchor="middle">🦶</text>
+        <text x="74" y="62" font-size="11" text-anchor="middle" fill="#7a4a2b">mixed by foot!</text>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>2. Cob &mdash; mud loaves, no bricks</h3>
+      <div class="say">shaped</div>
+      <p>No bricks at all. Sticky mud, straw and water are trodden together
+      (often by <b>bare feet</b>!) into big lumps called <i>cobs</i>. The builder
+      stacks the lumps by hand and squishes them into one thick, curvy wall, then
+      trims it smooth with a spade. Slow, but wonderfully strong.</p>
+    </div>
+  </div>
+
+  <!-- 3 RAMMED EARTH -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- formwork boxes -->
+        <rect x="30" y="30" width="90" height="80" fill="none" stroke="#5a3a1e" stroke-width="4"/>
+        <!-- rammed layers -->
+        <rect x="34" y="86" width="82" height="20" fill="#b98a52"/>
+        <rect x="34" y="66" width="82" height="20" fill="#c99a62"/>
+        <rect x="34" y="48" width="82" height="18" fill="#b98a52"/>
+        <line x1="34" y1="86" x2="116" y2="86" stroke="#7a4a2b"/>
+        <line x1="34" y1="66" x2="116" y2="66" stroke="#7a4a2b"/>
+        <!-- tamper -->
+        <rect x="70" y="10" width="8" height="34" fill="#7a4a2b"/>
+        <rect x="62" y="42" width="24" height="10" fill="#5a3a1e"/>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>3. Rammed earth (pis&eacute;)</h3>
+      <div class="say">packed</div>
+      <p>Slightly damp earth is poured into a strong wooden box (a <i>form</i>)
+      and then <b>pounded down hard</b> with a heavy tamper, layer by layer, until
+      it is as solid as soft rock. Lift the box away and the wall stands on its
+      own. You can often see the stripey layers. Some rammed-earth walls have
+      lasted over a thousand years.</p>
+    </div>
+  </div>
+
+  <!-- 4 WATTLE & DAUB -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- woven lattice (left half) -->
+        <g stroke="#7a4a2b" stroke-width="3">
+          <line x1="34" y1="24" x2="34" y2="110"/><line x1="50" y1="24" x2="50" y2="110"/><line x1="66" y1="24" x2="66" y2="110"/>
+        </g>
+        <g stroke="#9a6a3a" stroke-width="3">
+          <line x1="26" y1="40" x2="74" y2="40"/><line x1="26" y1="60" x2="74" y2="60"/><line x1="26" y1="80" x2="74" y2="80"/><line x1="26" y1="100" x2="74" y2="100"/>
+        </g>
+        <!-- daub (right half) -->
+        <rect x="80" y="24" width="46" height="86" fill="#c08a50" stroke="#7a4a2b" stroke-width="2"/>
+        <text x="103" y="70" font-size="10" text-anchor="middle" fill="#3a2a1a">mud</text>
+        <text x="50" y="122" font-size="9" text-anchor="middle" fill="#7a4a2b">woven sticks</text>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>4. Wattle and daub</h3>
+      <div class="say">woven &amp; layered</div>
+      <p>First a lattice of thin sticks or bamboo is <b>woven</b> between wooden
+      posts (the <i>wattle</i>). Then sticky mud mixed with straw and even animal
+      dung is smeared all over it and left to dry (the <i>daub</i>). The sticks
+      hold the mud; the mud fills the gaps. One of the oldest tricks of all.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="band">The Builder's Toolkit &mdash; 5 to 8</div>
+
+  <!-- 5 CEB -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- press machine -->
+        <rect x="34" y="40" width="60" height="40" fill="#8a5a2b" stroke="#5a3a1e" stroke-width="2"/>
+        <rect x="44" y="52" width="40" height="18" fill="#c98a4b" stroke="#7a4a2b"/>
+        <!-- lever -->
+        <line x1="94" y1="46" x2="132" y2="24" stroke="#5a3a1e" stroke-width="5"/>
+        <circle cx="94" cy="46" r="4" fill="#3a2a1a"/>
+        <!-- finished blocks -->
+        <rect x="34" y="92" width="26" height="12" fill="#c98a4b" stroke="#7a4a2b"/>
+        <rect x="64" y="92" width="26" height="12" fill="#cf9a58" stroke="#7a4a2b"/>
+        <rect x="94" y="92" width="26" height="12" fill="#c98a4b" stroke="#7a4a2b"/>
+        <rect x="49" y="106" width="26" height="12" fill="#cf9a58" stroke="#7a4a2b"/>
+        <rect x="79" y="106" width="26" height="12" fill="#c98a4b" stroke="#7a4a2b"/>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>5. Compressed earth block</h3>
+      <div class="say">pressed</div>
+      <p>A newer, modern cousin of adobe. Instead of drying in the sun, damp
+      earth is <b>squeezed very hard</b> in a metal press (worked by a lever) to
+      make a neat, dense block straightaway. The blocks are so even they stack
+      like toy bricks. Strong, fast, and still just earth.</p>
+    </div>
+  </div>
+
+  <!-- 6 MUD PLASTER -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- wall with plaster being applied -->
+        <rect x="24" y="24" width="70" height="86" fill="#b07a44" stroke="#7a4a2b" stroke-width="2"/>
+        <rect x="24" y="24" width="70" height="30" fill="#d8b070"/>
+        <line x1="24" y1="54" x2="94" y2="54" stroke="#7a4a2b" stroke-dasharray="3 3"/>
+        <!-- trowel -->
+        <rect x="98" y="40" width="30" height="8" fill="#b0b0b0" stroke="#555"/>
+        <rect x="126" y="36" width="6" height="16" fill="#7a4a2b"/>
+        <text x="59" y="80" font-size="9" text-anchor="middle" fill="#3a2a1a">brick wall</text>
+        <text x="59" y="42" font-size="9" text-anchor="middle" fill="#3a2a1a">smooth coat</text>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>6. Mud plaster &amp; render</h3>
+      <div class="say">layered</div>
+      <p>Almost every earth home wears a <b>coat</b>. A smooth layer of fine mud
+      (sometimes mixed with dung or lime) is spread over the walls like icing on
+      a cake. It fills cracks, keeps rain from washing the wall away, and can be
+      re-smeared every year. In many places re-plastering the house is a job for
+      the whole village.</p>
+    </div>
+  </div>
+
+  <!-- 7 NUBIAN VAULT -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- leaning arch of bricks, no formwork -->
+        <path d="M28 110 L28 70 Q75 26 122 70 L122 110" fill="none" stroke="#7a4a2b" stroke-width="2"/>
+        <g stroke="#7a4a2b" stroke-width="1.2" fill="#cf9a58">
+          <path d="M30 70 q45 -42 90 0 l0 8 q-45 -42 -90 0 Z"/>
+          <path d="M31 82 q44 -40 88 0 l0 8 q-44 -40 -88 0 Z"/>
+          <path d="M31 94 q44 -38 88 0 l0 8 q-44 -38 -88 0 Z"/>
+        </g>
+        <line x1="28" y1="110" x2="122" y2="110" stroke="#7a4a2b" stroke-width="2"/>
+        <text x="75" y="124" font-size="9" text-anchor="middle" fill="#7a4a2b">no wooden mould needed!</text>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>7. The Nubian vault</h3>
+      <div class="say">fitted</div>
+      <p>A brilliant desert trick from Sudan, where there is almost no wood. The
+      builder leans sun-dried bricks against a back wall at a <b>slight angle</b>,
+      so each brick holds up the next, and builds a curved roof that supports
+      itself &mdash; <b>with no wooden frame at all</b>. The result is a cool,
+      cave-like vaulted home.</p>
+    </div>
+  </div>
+
+  <!-- 8 PUDDLED / SOD -->
+  <div class="tech">
+    <div class="art">
+      <svg viewBox="0 0 150 130">
+        <rect x="8" y="8" width="134" height="114" fill="#f6ecd6" stroke="#c9a678" stroke-width="1"/>
+        <!-- sod blocks with grass on top -->
+        <g stroke="#7a4a2b" stroke-width="1.5">
+          <rect x="24" y="96" width="34" height="16" fill="#8a5a2b"/>
+          <rect x="60" y="96" width="34" height="16" fill="#7a4a2b"/>
+          <rect x="96" y="96" width="26" height="16" fill="#8a5a2b"/>
+          <rect x="30" y="78" width="34" height="16" fill="#7a4a2b"/>
+          <rect x="66" y="78" width="34" height="16" fill="#8a5a2b"/>
+          <rect x="36" y="60" width="34" height="16" fill="#8a5a2b"/>
+          <rect x="72" y="60" width="30" height="16" fill="#7a4a2b"/>
+        </g>
+        <!-- grass tufts -->
+        <g stroke="#6f8f4e" stroke-width="2">
+          <line x1="40" y1="60" x2="40" y2="52"/><line x1="46" y1="60" x2="44" y2="52"/><line x1="80" y1="60" x2="80" y2="52"/><line x1="86" y1="60" x2="88" y2="52"/>
+        </g>
+      </svg>
+    </div>
+    <div class="txt">
+      <h3>8. Puddled mud &amp; sod (turf)</h3>
+      <div class="say">packed &amp; piled</div>
+      <p>The simplest of all. <b>Puddled mud</b> means piling wet earth up by hand
+      in courses, letting each layer dry before adding the next &mdash; a wall
+      with no bricks and no mould. <b>Sod</b> (or turf) goes further: the builder
+      slices the grassy ground itself into heavy blocks, roots and all, and stacks
+      them like bricks. Used where the earth is held together by grass roots.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================== DIVIDER: THE HOMES ================== -->
+<div class="page">
+  <div class="divider">
+    <h2>Part Two<br>24 Earth Homes<br>Around the World</h2>
+    <p>Now we travel. Each home is a Great Builder's answer to one place, one
+    climate, and one set of materials. Watch how the same humble mud becomes a
+    round tower, a painted palace, a desert skyscraper and a cosy cottage.</p>
+  </div>
+</div>
+
+<!-- ================== TIMELINE ================== -->
+<div class="page">
+  <h2 style="color:var(--clay);font-size:24pt;border-bottom:3px solid var(--straw);padding-bottom:6px">A journey through 10,000 years</h2>
+  <p>People have built with earth for a <b>very, very</b> long time &mdash; longer
+  than castles, longer than writing, longer than the wheel. Here is when the homes
+  in this book were first built. Many are <b>still lived in or still being built
+  today</b>, so earth building never really stopped!</p>
+
+  <p class="small" style="margin-top:2mm">Each new age of builders discovered a
+  <b>new trick</b>. Watch how the ideas add up over ten thousand years &mdash;
+  the <span style="color:var(--terracotta);font-weight:bold">orange note</span>
+  shows what was <i>new</i>.</p>
+
+  <div class="timeline">
+    <div class="tl-row"><div class="tl-era">~11,000 yrs ago<br><span class="small">Stone Age</span></div><div class="tl-bar"><div class="tl-dot" style="left:1%">1</div><div class="tl-dot" style="left:9%">2</div></div><div class="tl-name">Jericho &amp; &Ccedil;atalh&ouml;y&uuml;k<br><span class="tlnew">NEW: the very first mud-brick homes</span></div></div>
+    <div class="tl-row"><div class="tl-era">~4,500 yrs ago<br><span class="small">First cities</span></div><div class="tl-bar"><div class="tl-dot" style="left:20%">3</div><div class="tl-dot" style="left:29%">13</div></div><div class="tl-name">Mesopotamia &amp; Mohenjo-daro<br><span class="tlnew">NEW: brick moulds, the arch &amp; matching-size bricks</span></div></div>
+    <div class="tl-row"><div class="tl-era">~3,400 yrs ago<br><span class="small">Pharaohs</span></div><div class="tl-bar"><div class="tl-dot" style="left:36%">4</div><div class="tl-dot" style="left:44%">5</div></div><div class="tl-name">Egypt &amp; the first Nubian vaults<br><span class="tlnew">NEW: white walls for shade &amp; roofs with no wooden frame</span></div></div>
+    <div class="tl-row"><div class="tl-era">~2,500 yrs ago<br><span class="small">Ancient empires</span></div><div class="tl-bar"><div class="tl-dot" style="left:52%">10</div><div class="tl-dot" style="left:58%">11</div><div class="tl-dot" style="left:64%">15</div></div><div class="tl-name">Yazd, Bam &amp; the yaodong caves<br><span class="tlnew">NEW: wind-catcher cooling &amp; homes dug into the earth</span></div></div>
+    <div class="tl-row"><div class="tl-era">~1,000&ndash;700 yrs ago<br><span class="small">Medieval</span></div><div class="tl-bar"><div class="tl-dot" style="left:66%">6</div><div class="tl-dot" style="left:73%">14</div><div class="tl-dot" style="left:80%">17</div><div class="tl-dot" style="left:86%">23</div></div><div class="tl-name">Djenn&eacute;, tulou, pueblos &amp; Alhambra<br><span class="tlnew">NEW: rammed-earth walls &amp; giant shared clan houses</span></div></div>
+    <div class="tl-row"><div class="tl-era">~500&ndash;150 yrs ago<br><span class="small">Early modern</span></div><div class="tl-bar"><div class="tl-dot" style="left:82%">9</div><div class="tl-dot" style="left:88%">20</div><div class="tl-dot" style="left:94%">21</div></div><div class="tl-name">Shibam towers, Devon cob &amp; prairie soddies<br><span class="tlnew">NEW: mud "skyscrapers" &amp; houses cut from grassy turf</span></div></div>
+    <div class="tl-row"><div class="tl-era">Living memory<br><span class="small">Modern</span></div><div class="tl-bar"><div class="tl-dot" style="left:96%">24</div></div><div class="tl-name">Eltham mud-brick homes, Australia (1947)<br><span class="tlnew">NEW: earth homes chosen to live gently with nature</span></div></div>
+  </div>
+
+  <div class="callout" style="margin-top:6mm">
+    <b>The very first mud-brick home?</b> <span id="firstfact">The oldest ones we know
+    of were the <b>round houses of Jericho</b>, built by the world's first farmers
+    about <b>11,000 years ago</b> (around <b>9,000 BC</b>) &mdash; older than the
+    pyramids, older than writing, older than the wheel. Their bricks were
+    <b>shaped by hand</b> like little loaves of clay, long before anyone invented the
+    brick mould. Two other very early villages, <b>&Ccedil;ay&ouml;n&uuml;</b> in Turkey and
+    <b>Tell Aswad</b> in Syria, are almost as old.</span>
+  </div>
+</div>
+
+<!-- ================== NEAR EAST CARDS ================== -->
+
+<!-- CARD 1: JERICHO -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">1</span><span class="era">about 10,500 years ago</span><h2>Jericho Round House</h2><div class="loc">&#128205; Jordan Valley, Palestine &mdash; the world's oldest town</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/a1-jericho.jpg" alt="Jericho ruins"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <!-- ground -->
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- round house dome/cone -->
+          <path d="M40 128 L40 92 Q100 40 160 92 L160 128 Z" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- brushwood roof lines -->
+          <path d="M40 92 Q100 44 160 92" fill="#8a5a2b" stroke="#7a4a2b" stroke-width="2"/>
+          <g stroke="#6b4423" stroke-width="1"><line x1="60" y1="74" x2="66" y2="66"/><line x1="90" y1="60" x2="96" y2="52"/><line x1="120" y1="62" x2="126" y2="54"/></g>
+          <!-- brick courses -->
+          <g stroke="#9a6a3a" stroke-width="1"><line x1="42" y1="106" x2="158" y2="106"/><line x1="41" y1="117" x2="159" y2="117"/></g>
+          <!-- low doorway -->
+          <path d="M86 128 L86 112 Q100 102 114 112 L114 128 Z" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="150" cy="112" r="8"/><text class="mk-t" x="150" y="115" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="55" r="8"/><text class="mk-t" x="100" y="58" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="100" cy="120" r="8"/><text class="mk-t" x="100" y="123" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="55" cy="100" r="8"/><text class="mk-t" x="55" y="103" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real dried-mud and stone ruins at Tell es-Sultan, Jericho. &nbsp; <b>Right:</b> what one round home looked like.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Walls of hand-shaped mud bricks, dried in the sun</li>
+          <li><span class="mk">B</span> Roof of brushwood smeared with mud</li>
+          <li><span class="mk">C</span> One small, low doorway</li>
+          <li><span class="mk">D</span> Round shape &mdash; strong and easy to build</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Jericho is one of the <b>oldest towns on Earth</b>. Its people were some of
+        the first farmers ever &mdash; they had just learned to grow wheat, so instead
+        of following the animals they hunted, they stayed in one place and needed
+        homes that lasted.</p>
+        <p>They had no brick moulds yet, so they <b>squeezed clay and straw into
+        bricks by hand</b> and baked them in the hot sun. Round walls were quick to
+        build and didn't need strong corners. The thick mud kept the house cool in
+        the blazing valley heat.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the world's first farmers</div>
+      <div class="fact2"><span class="k">Climate:</span> hot, dry desert oasis</div>
+      <div class="fact2"><span class="k">Built with:</span> hand-shaped mud bricks</div>
+      <div class="fact2"><span class="k">Land:</span> a green spring in dry hills</div>
+      <div class="fact2"><span class="k">Roof:</span> brushwood + mud</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Jericho's people built a huge stone tower over 8 metres tall more than 10,000 years ago &mdash; long before metal tools or writing existed!</div>
+  </div>
+</div>
+
+<!-- CARD 2: CATALHOYUK -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">2</span><span class="era">about 9,000 years ago</span><h2>&Ccedil;atalh&ouml;y&uuml;k Roof-Door House</h2><div class="loc">&#128205; Konya Plain, Turkey &mdash; a town with no streets</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/a2-catalhoyuk.jpg" alt="Catalhoyuk ruins"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <!-- cluster of cubic houses -->
+          <g stroke="#7a4a2b" stroke-width="2">
+            <rect x="20" y="70" width="60" height="58" fill="#c98a4b"/>
+            <rect x="80" y="58" width="64" height="70" fill="#cf9a58"/>
+            <rect x="144" y="78" width="42" height="50" fill="#c98a4b"/>
+          </g>
+          <!-- flat roofs -->
+          <g stroke="#7a4a2b" stroke-width="1.5" fill="#b98a52">
+            <rect x="20" y="66" width="60" height="6"/><rect x="80" y="54" width="64" height="6"/><rect x="144" y="74" width="42" height="6"/>
+          </g>
+          <!-- roof hole + ladder -->
+          <rect x="100" y="54" width="16" height="6" fill="#3a2a1a"/>
+          <line x1="104" y1="60" x2="100" y2="96" stroke="#5a3a1e" stroke-width="2"/>
+          <line x1="112" y1="60" x2="108" y2="96" stroke="#5a3a1e" stroke-width="2"/>
+          <g stroke="#5a3a1e" stroke-width="1.4"><line x1="103" y1="70" x2="111" y2="68"/><line x1="102" y1="80" x2="110" y2="78"/><line x1="101" y1="90" x2="109" y2="88"/></g>
+          <!-- little person on roof -->
+          <circle cx="55" cy="58" r="4" fill="#5a3a1e"/><line x1="55" y1="62" x2="55" y2="70" stroke="#5a3a1e" stroke-width="2"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="50" cy="69" r="8"/><text class="mk-t" x="50" y="72" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="122" cy="57" r="8"/><text class="mk-t" x="122" y="60" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="82" cy="100" r="8"/><text class="mk-t" x="82" y="103" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="165" cy="104" r="8"/><text class="mk-t" x="165" y="107" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the excavated mud-brick walls, packed together with no gaps. &nbsp; <b>Right:</b> how you entered &mdash; through the roof!</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Flat roofs were the streets &mdash; people walked on top</li>
+          <li><span class="mk">B</span> A hole + ladder to climb down inside</li>
+          <li><span class="mk">C</span> No doors on the ground at all</li>
+          <li><span class="mk">D</span> Houses share walls, packed like a honeycomb</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Thousands of people lived here squeezed together with <b>no streets between
+        the houses</b>. To get home you climbed onto the rooftops, walked across town
+        along the roofs, and dropped down a ladder through a hole into your house.</p>
+        <p>Why build so strangely? Packing the mud houses tightly made them <b>strong
+        and warm</b>, and having no low doors kept out the cold wind, floods and wild
+        animals. The roof hole also let the cooking smoke escape.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> early farming families</div>
+      <div class="fact2"><span class="k">Climate:</span> hot summers, cold winters</div>
+      <div class="fact2"><span class="k">Built with:</span> mud bricks + plaster</div>
+      <div class="fact2"><span class="k">Land:</span> a flat grassy plain</div>
+      <div class="fact2"><span class="k">Door:</span> a hole in the roof!</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Families painted pictures on their walls and even buried loved ones under the floors of their own homes.</div>
+  </div>
+</div>
+
+<!-- CARD 3: MESOPOTAMIA -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">3</span><span class="era">about 5,000 years ago</span><h2>Sumerian Mud &amp; Reed House</h2><div class="loc">&#128205; Southern Iraq &mdash; the land between two rivers</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/a3-mesopotamia.jpg" alt="Marsh reed house"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="126" width="200" height="24" fill="#bfa877"/>
+          <!-- reed arched house -->
+          <path d="M30 126 Q30 50 60 46 L140 46 Q170 50 170 126" fill="#d9b96b" stroke="#7a4a2b" stroke-width="2"/>
+          <path d="M60 46 L140 46 Q170 50 170 126 L150 126 Q150 60 132 58 L60 58 Z" fill="#c99a52" opacity=".5"/>
+          <!-- reed bundle ribs -->
+          <g stroke="#8a5a2b" stroke-width="1.5" fill="none">
+            <path d="M45 126 Q45 60 70 56"/><path d="M70 126 Q70 54 92 52"/><path d="M100 126 Q100 52 100 50"/><path d="M130 126 Q130 54 108 52"/><path d="M155 126 Q155 60 130 56"/>
+          </g>
+          <!-- woven mat lines -->
+          <g stroke="#a5793c" stroke-width="1"><line x1="40" y1="78" x2="160" y2="78"/><line x1="36" y1="98" x2="164" y2="98"/></g>
+          <!-- arched doorway -->
+          <path d="M84 126 L84 92 Q100 78 116 92 L116 126 Z" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="60" cy="70" r="8"/><text class="mk-t" x="60" y="73" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="90" r="8"/><text class="mk-t" x="100" y="93" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="140" cy="82" r="8"/><text class="mk-t" x="140" y="85" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="100" cy="52" r="8"/><text class="mk-t" x="100" y="55" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> a real reed guesthouse in the Iraqi marshes, built the same way for 5,000 years. &nbsp; <b>Right:</b> the reed-arch shape.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Giant reed bundles bent into arches</li>
+          <li><span class="mk">B</span> Walls of woven reed mats</li>
+          <li><span class="mk">C</span> Thick mud-brick homes nearby for winter</li>
+          <li><span class="mk">D</span> A curved reed roof &mdash; the first archways!</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>The Sumerians built some of the world's first cities, like Ur and Uruk.
+        There were <b>few trees and no stone</b>, but two things were everywhere:
+        <b>river clay</b> and <b>tall marsh reeds</b>. So they used both.</p>
+        <p>Richer families pressed clay into mud bricks and built rooms around a shady
+        courtyard. Marsh families tied bundles of reeds and bent them into arches.
+        People think bending those reeds into curves may have given humans the very
+        first idea for the <b>arch</b> &mdash; a shape we still build with today.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Sumerians</div>
+      <div class="fact2"><span class="k">Climate:</span> very hot, dry + marshes</div>
+      <div class="fact2"><span class="k">Built with:</span> mud brick &amp; reeds</div>
+      <div class="fact2"><span class="k">Land:</span> flat river plains</div>
+      <div class="fact2"><span class="k">Shape:</span> courtyard + reed arch</div>
+      <div class="fact2"><span class="k">Method:</span> adobe + reed</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The Marsh Arabs of Iraq still build these tall reed houses today &mdash; almost exactly as the Sumerians did 5,000 years ago.</div>
+  </div>
+</div>
+
+<!-- CARD 4: EGYPT -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">4</span><span class="era">about 3,400 years ago</span><h2>Egyptian Tomb-Builder's House</h2><div class="loc">&#128205; Deir el-Medina, Egypt &mdash; by the Valley of the Kings</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/a4-egypt.jpg" alt="Deir el-Medina village"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- white plastered row house -->
+          <rect x="40" y="52" width="120" height="76" fill="#f2ead8" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- stone foundation -->
+          <rect x="38" y="120" width="124" height="10" fill="#a99a7a" stroke="#7a4a2b"/>
+          <!-- flat roof line -->
+          <rect x="38" y="48" width="124" height="6" fill="#b98a52" stroke="#7a4a2b"/>
+          <!-- high small windows -->
+          <rect x="60" y="60" width="12" height="9" fill="#6b8ca5"/><rect x="128" y="60" width="12" height="9" fill="#6b8ca5"/>
+          <!-- door -->
+          <rect x="92" y="92" width="18" height="36" fill="#4a2f18"/>
+          <!-- inside stairs hint (dashed) -->
+          <path d="M120 120 L120 108 L128 108 L128 98 L136 98 L136 88" fill="none" stroke="#7a4a2b" stroke-dasharray="2 2"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="100" cy="76" r="8"/><text class="mk-t" x="100" y="79" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="66" cy="64" r="8"/><text class="mk-t" x="66" y="67" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="50" cy="124" r="8"/><text class="mk-t" x="50" y="127" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="140" cy="90" r="8"/><text class="mk-t" x="140" y="93" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real mud-brick village walls still standing in the desert near Luxor. &nbsp; <b>Right:</b> one whitewashed home.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Mud-brick walls painted white to bounce off the sun</li>
+          <li><span class="mk">B</span> Small windows set up high for shade</li>
+          <li><span class="mk">C</span> A stone base to keep out damp</li>
+          <li><span class="mk">D</span> Inside stairs up to a flat roof for sleeping</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>This tidy walled village was home to the <b>craftsmen who carved and painted
+        the pharaohs' secret tombs</b>, and their families. The government even built
+        the houses for them in neat rows.</p>
+        <p>In the fierce Egyptian sun, they were clever: <b>white paint</b> reflected
+        the heat, and <b>windows up high</b> let in light without the harsh glare. On
+        hot nights the whole family climbed the inside stairs to sleep up on the cool
+        flat roof under the stars.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> royal tomb craftsmen</div>
+      <div class="fact2"><span class="k">Climate:</span> hot desert, cool nights</div>
+      <div class="fact2"><span class="k">Built with:</span> sun-dried mud bricks</div>
+      <div class="fact2"><span class="k">Land:</span> a bowl in bare hills</div>
+      <div class="fact2"><span class="k">Walls:</span> plastered + painted white</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> These villagers left so many notes on stone that we know their names and arguments &mdash; and they went on one of history's first-ever workers' strikes!</div>
+  </div>
+</div>
+
+<!-- ================== AFRICA CARDS ================== -->
+
+<!-- CARD 5: NUBIAN VAULT -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">5</span><span class="era">a 3,000-year-old idea</span><h2>Nubian Vault House</h2><div class="loc">&#128205; Sudan &amp; southern Egypt &mdash; along the River Nile</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/b1-nubian.jpg" alt="Nubian vault"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- catenary vault -->
+          <path d="M34 128 L34 92 Q100 34 166 92 L166 128 Z" fill="#cf9a58" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- leaning brick courses (arcs) -->
+          <g stroke="#7a4a2b" stroke-width="1" fill="none">
+            <path d="M40 96 Q100 44 160 96"/><path d="M44 104 Q100 56 156 104"/><path d="M48 112 Q100 66 152 112"/><path d="M52 120 Q100 78 148 120"/>
+          </g>
+          <!-- doorway -->
+          <path d="M86 128 L86 104 Q100 92 114 104 L114 128 Z" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="70" cy="88" r="8"/><text class="mk-t" x="70" y="91" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="50" r="8"/><text class="mk-t" x="100" y="53" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="140" cy="100" r="8"/><text class="mk-t" x="140" y="103" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="100" cy="118" r="8"/><text class="mk-t" x="100" y="121" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> a real curved Nubian vault at the Nubia Museum, Aswan. &nbsp; <b>Right:</b> the leaning-brick roof shape.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Bricks leaned at a slant, each holding the next</li>
+          <li><span class="mk">B</span> A special curve (like a hanging chain) &mdash; super strong</li>
+          <li><span class="mk">C</span> A thick earth roof that stays cool inside</li>
+          <li><span class="mk">D</span> Built with <b>no wooden frame at all</b></li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>In the Nubian desert there is almost <b>no wood</b>, so builders couldn't
+        make a wooden frame to hold up a roof while it dried. They invented a genius
+        trick instead: lean the mud bricks against a back wall at a slight angle, so
+        each new brick rests on the one before, curving up and over until the roof
+        <b>closes itself</b>.</p>
+        <p>The curve they use is called a <i>catenary</i> &mdash; the exact shape a
+        chain makes when it hangs. It carries its own weight perfectly, which is why
+        some of these vaults have stood for over <b>3,000 years</b>.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> Nubian master masons</div>
+      <div class="fact2"><span class="k">Climate:</span> hot, dry desert</div>
+      <div class="fact2"><span class="k">Built with:</span> sun-dried mud bricks</div>
+      <div class="fact2"><span class="k">Land:</span> sandy Nile riverbanks</div>
+      <div class="fact2"><span class="k">Roof:</span> self-supporting vault</div>
+      <div class="fact2"><span class="k">Method:</span> Nubian vault</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The oldest Nubian vault still standing in Egypt is about 3,300 years old &mdash; older than most castles in the world!</div>
+  </div>
+</div>
+
+<!-- CARD 6: DJENNE -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">6</span><span class="era">rebuilt 1907, style is 700+ yrs</span><h2>Djenn&eacute; Earth Buildings</h2><div class="loc">&#128205; Djenn&eacute;, Mali &mdash; West Africa, by the Bani River</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/b2-djenne.jpg" alt="Great Mosque of Djenne"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- tapering earth wall with towers -->
+          <path d="M30 128 L36 60 L52 60 L58 128 Z" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+          <rect x="58" y="72" width="84" height="56" fill="#cf9a58" stroke="#7a4a2b" stroke-width="2"/>
+          <path d="M142 128 L148 60 L164 60 L170 128 Z" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- pinnacle caps -->
+          <circle cx="44" cy="58" r="4" fill="#8a5a2b"/><circle cx="156" cy="58" r="4" fill="#8a5a2b"/>
+          <!-- toron sticks poking out -->
+          <g stroke="#5a3a1e" stroke-width="2.5">
+            <line x1="58" y1="84" x2="48" y2="84"/><line x1="142" y1="84" x2="152" y2="84"/>
+            <line x1="58" y1="100" x2="48" y2="100"/><line x1="142" y1="100" x2="152" y2="100"/>
+            <line x1="90" y1="72" x2="90" y2="64"/><line x1="110" y1="72" x2="110" y2="64"/>
+          </g>
+          <!-- door -->
+          <rect x="92" y="98" width="16" height="30" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="49" cy="92" r="8"/><text class="mk-t" x="49" y="95" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="86" r="8"/><text class="mk-t" x="100" y="89" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="44" cy="110" r="8"/><text class="mk-t" x="44" y="113" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="156" cy="110" r="8"/><text class="mk-t" x="156" y="113" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the Great Mosque of Djenn&eacute; &mdash; the largest mud-brick building in the world. &nbsp; <b>Right:</b> the wall shape.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Wooden <i>toron</i> sticks poking out of the walls</li>
+          <li><span class="mk">B</span> Smooth mud plaster (called <i>banco</i>)</li>
+          <li><span class="mk">C</span> Thick walls that taper thinner near the top</li>
+          <li><span class="mk">D</span> Tall towers topped with little pinnacles</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Djenn&eacute;'s homes and its famous mosque are built from mud bricks called
+        <i>ferey</i>, coated in smooth mud plaster. The town has a short but very
+        heavy rainy season, and each year the rain washes a little of the mud away.</p>
+        <p>So the builders had a brilliant idea: leave <b>wooden sticks sticking out</b>
+        all over the walls. They aren't just decoration &mdash; they are a
+        <b>permanent ladder</b>. Once a year the whole town holds a festival and
+        climbs the sticks to <b>re-plaster the building together</b>, keeping it
+        strong for another year.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the whole community</div>
+      <div class="fact2"><span class="k">Climate:</span> hot, dry + heavy rains</div>
+      <div class="fact2"><span class="k">Built with:</span> <i>ferey</i> mud bricks</div>
+      <div class="fact2"><span class="k">Land:</span> a flat river floodplain</div>
+      <div class="fact2"><span class="k">Trick:</span> toron sticks = a ladder</div>
+      <div class="fact2"><span class="k">Method:</span> adobe + mud plaster</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The Great Mosque of Djenn&eacute; is the biggest mud-brick building on the whole planet, and became a World Heritage treasure in 1988.</div>
+  </div>
+</div>
+
+<!-- CARD 7: MUSGUM -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">7</span><span class="era">a very old tradition</span><h2>Musgum "Shell" Mud Hut</h2><div class="loc">&#128205; Northern Cameroon &mdash; near Lake Maga</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/b3-musgum.jpg" alt="Musgum tolek hut"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="132" width="200" height="18" fill="#cdb488"/>
+          <!-- tall conical shell -->
+          <path d="M62 132 Q60 40 100 24 Q140 40 138 132 Z" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- herringbone ridges -->
+          <g stroke="#7a4a2b" stroke-width="1.2" fill="none">
+            <path d="M70 120 Q100 112 130 120"/><path d="M70 104 Q100 96 130 104"/><path d="M72 88 Q100 80 128 88"/><path d="M76 72 Q100 64 124 72"/><path d="M82 56 Q100 50 118 56"/>
+            <line x1="100" y1="26" x2="100" y2="126"/>
+          </g>
+          <!-- top hole -->
+          <ellipse cx="100" cy="26" rx="7" ry="3" fill="#3a2a1a"/>
+          <!-- low door -->
+          <path d="M90 132 L90 116 Q100 108 110 116 L110 132 Z" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="122" cy="96" r="8"/><text class="mk-t" x="122" y="99" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="22" r="8"/><text class="mk-t" x="100" y="25" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="70" cy="124" r="8"/><text class="mk-t" x="70" y="127" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="100" cy="124" r="8"/><text class="mk-t" x="100" y="127" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> a real Musgum <i>tolek</i> in Cameroon with its ridged mud walls. &nbsp; <b>Right:</b> the tall shell shape.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Herringbone ridges &mdash; footholds <b>and</b> rain-drains</li>
+          <li><span class="mk">B</span> A hole at the top for smoke &amp; cool air</li>
+          <li><span class="mk">C</span> Extra-thick walls at the bottom, thinner up high</li>
+          <li><span class="mk">D</span> A tall dome shape up to 9 metres high</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>The Musgum people build these tall, pointed homes from just <b>mud, water
+        and thatch</b> &mdash; no bricks and almost no wood. They pile the mud up in
+        rings, thick at the bottom for strength and thinner toward the top, curving
+        into a shape like a giant shell or artillery shell (its nickname is
+        <i>case obus</i>).</p>
+        <p>Those criss-cross ridges running up the outside are the clever part: they
+        <b>help rain run off quickly</b> so it doesn't soak the wall, and they work as
+        <b>footholds</b> so people can climb up to re-smooth the mud each year.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Musgum people</div>
+      <div class="fact2"><span class="k">Climate:</span> hot, with flooding rains</div>
+      <div class="fact2"><span class="k">Built with:</span> mud, water &amp; thatch</div>
+      <div class="fact2"><span class="k">Land:</span> flat grassy plains</div>
+      <div class="fact2"><span class="k">Shape:</span> tall pointed shell</div>
+      <div class="fact2"><span class="k">Method:</span> puddled mud coils</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The hole at the very top isn't just for smoke &mdash; it can be an emergency escape hatch if floodwater rises inside!</div>
+  </div>
+</div>
+
+<!-- CARD 8: KASSENA -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">8</span><span class="era">painting since the 1500s</span><h2>Kassena Painted House</h2><div class="loc">&#128205; Ti&eacute;b&eacute;l&eacute;, Burkina Faso &mdash; West African savanna</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/b4-kassena.jpg" alt="Tiebele painted houses"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- low house body -->
+          <rect x="36" y="66" width="128" height="62" fill="#b07a44" stroke="#7a4a2b" stroke-width="2"/>
+          <rect x="34" y="60" width="132" height="8" fill="#8a5a2b" stroke="#7a4a2b"/>
+          <!-- painted geometric patterns -->
+          <g stroke="#f2ead8" stroke-width="2" fill="none">
+            <path d="M44 78 L60 88 L44 98"/><path d="M64 78 L80 88 L64 98"/>
+            <rect x="92" y="76" width="14" height="14"/><rect x="112" y="80" width="10" height="10" fill="#5a3a1e"/>
+            <path d="M132 78 L148 88 L132 98"/>
+          </g>
+          <g stroke="#8a2b1e" stroke-width="3"><line x1="40" y1="110" x2="160" y2="110"/></g>
+          <!-- tiny windows + low door -->
+          <rect x="70" y="104" width="8" height="7" fill="#3a2a1a"/><rect x="120" y="104" width="8" height="7" fill="#3a2a1a"/>
+          <path d="M96 128 L96 112 L112 112 L112 128 Z" fill="#3a2a1a"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="52" cy="88" r="8"/><text class="mk-t" x="52" y="91" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="74" cy="107" r="7"/><text class="mk-t" x="74" y="110" font-size="9" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="104" cy="120" r="8"/><text class="mk-t" x="104" y="123" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="150" cy="100" r="8"/><text class="mk-t" x="150" y="103" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> real painted patterns on a Kassena house in Ti&eacute;b&eacute;l&eacute;. &nbsp; <b>Right:</b> the low, decorated wall.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Bold black, white &amp; red painted patterns</li>
+          <li><span class="mk">B</span> Tiny windows to keep out heat and light</li>
+          <li><span class="mk">C</span> A very low, small doorway</li>
+          <li><span class="mk">D</span> Walls polished smooth and varnished</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>In this village the men build the thick mud walls in the dry season, and the
+        <b>women do all the painting</b> &mdash; passing the patterns down from mother
+        to daughter for hundreds of years. The colours come from the earth itself:
+        red from <i>laterite</i> soil, white from chalk, black from charcoal.</p>
+        <p>After painting, they <b>polish the walls with smooth stones</b> and brush on
+        a natural varnish made from néré-bean pods, which helps the rain slide off.
+        The tiny windows and low doors keep the fierce savanna heat out and the
+        inside cool and dark.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Kassena people</div>
+      <div class="fact2"><span class="k">Climate:</span> hot savanna + rains</div>
+      <div class="fact2"><span class="k">Built with:</span> earth, straw &amp; dung</div>
+      <div class="fact2"><span class="k">Land:</span> flat, dry grassland</div>
+      <div class="fact2"><span class="k">Colours:</span> from soil, chalk &amp; charcoal</div>
+      <div class="fact2"><span class="k">Method:</span> painted mud plaster</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The patterns aren't just pretty &mdash; each shape tells a story, and the colours have meanings: red for courage, white for honesty, black for the night.</div>
+  </div>
+</div>
+
+<!-- ================== MIDDLE EAST CARDS ================== -->
+
+<!-- CARD 9: SHIBAM -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">9</span><span class="era">towers mostly after 1533</span><h2>Shibam Mud Towers</h2><div class="loc">&#128205; Wadi Hadhramaut, Yemen &mdash; the "Manhattan of the Desert"</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/c1-shibam.jpg" alt="Shibam tower houses"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="132" width="200" height="18" fill="#cdb488"/>
+          <!-- three tower houses -->
+          <g stroke="#7a4a2b" stroke-width="2">
+            <rect x="40" y="46" width="34" height="86" fill="#d3a566"/>
+            <rect x="82" y="30" width="36" height="102" fill="#cf9a58"/>
+            <rect x="126" y="54" width="34" height="78" fill="#d3a566"/>
+          </g>
+          <!-- white tops (lime plaster) -->
+          <rect x="82" y="30" width="36" height="8" fill="#f2ead8" stroke="#7a4a2b"/>
+          <rect x="40" y="46" width="34" height="6" fill="#f2ead8" stroke="#7a4a2b"/>
+          <rect x="126" y="54" width="34" height="6" fill="#f2ead8" stroke="#7a4a2b"/>
+          <!-- windows grid -->
+          <g fill="#5a3a1e">
+            <rect x="47" y="60" width="6" height="8"/><rect x="61" y="60" width="6" height="8"/><rect x="47" y="80" width="6" height="8"/><rect x="61" y="80" width="6" height="8"/><rect x="47" y="100" width="6" height="8"/><rect x="61" y="100" width="6" height="8"/>
+            <rect x="90" y="46" width="7" height="9"/><rect x="103" y="46" width="7" height="9"/><rect x="90" y="70" width="7" height="9"/><rect x="103" y="70" width="7" height="9"/><rect x="90" y="94" width="7" height="9"/><rect x="103" y="94" width="7" height="9"/>
+            <rect x="133" y="68" width="6" height="8"/><rect x="147" y="68" width="6" height="8"/><rect x="133" y="90" width="6" height="8"/><rect x="147" y="90" width="6" height="8"/>
+          </g>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="100" cy="40" r="8"/><text class="mk-t" x="100" y="43" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="118" cy="80" r="8"/><text class="mk-t" x="118" y="83" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="57" cy="34" r="8"/><text class="mk-t" x="57" y="37" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="143" cy="124" r="8"/><text class="mk-t" x="143" y="127" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real mud-brick skyscrapers of Shibam. &nbsp; <b>Right:</b> tall towers packed side by side.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Mud towers 5 to 11 storeys tall &mdash; up to 30 m!</li>
+          <li><span class="mk">B</span> Small windows to keep out the desert sun</li>
+          <li><span class="mk">C</span> White lime tops that protect the mud from rain</li>
+          <li><span class="mk">D</span> Built <b>up, not out</b>, to save space and stay safe</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Shibam sits on a trade route in a flat desert valley. Long ago, families
+        needed to be safe from raiders and from the floods that sometimes rushed down
+        the valley &mdash; so instead of spreading out, they built <b>straight up</b>.</p>
+        <p>Every tower is made entirely of mud bricks, some as tall as an
+        <b>11-storey building</b>. The thick earth walls keep the rooms cool in the
+        baking heat, and the lower floors (with no windows) were used for storing
+        grain and keeping animals, while families lived up high where it was cooler
+        and safer.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> Hadhrami trading families</div>
+      <div class="fact2"><span class="k">Climate:</span> very hot, almost no rain</div>
+      <div class="fact2"><span class="k">Built with:</span> mud bricks + plaster</div>
+      <div class="fact2"><span class="k">Land:</span> a flat valley by cliffs</div>
+      <div class="fact2"><span class="k">Height:</span> up to 11 storeys</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Shibam has some of the <b>oldest skyscrapers in the world</b> &mdash; and every single one is made of mud! It became a World Heritage Site in 1982.</div>
+  </div>
+</div>
+
+<!-- CARD 10: YAZD -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">10</span><span class="era">2,000+ years old</span><h2>Yazd Desert House</h2><div class="loc">&#128205; Yazd, Iran &mdash; between two great deserts</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/c2-yazd.jpg" alt="Yazd windcatchers"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- house block -->
+          <rect x="34" y="70" width="132" height="58" fill="#cf9a58" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- dome -->
+          <path d="M120 70 Q140 44 160 70 Z" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- windcatcher tower -->
+          <rect x="56" y="30" width="30" height="42" fill="#d3a566" stroke="#7a4a2b" stroke-width="2"/>
+          <g stroke="#5a3a1e" stroke-width="2"><line x1="63" y1="34" x2="63" y2="60"/><line x1="71" y1="34" x2="71" y2="60"/><line x1="79" y1="34" x2="79" y2="60"/></g>
+          <!-- arrows: breeze down -->
+          <g stroke="#3b6ea5" stroke-width="2" fill="none"><path d="M71 20 L71 30"/><path d="M67 26 L71 30 L75 26"/></g>
+          <path d="M71 60 L71 110" stroke="#3b6ea5" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <!-- door + small high windows -->
+          <rect x="92" y="98" width="18" height="30" fill="#4a2f18"/>
+          <rect x="124" y="82" width="10" height="8" fill="#6b8ca5"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="71" cy="46" r="8"/><text class="mk-t" x="71" y="49" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="50" cy="98" r="8"/><text class="mk-t" x="50" y="101" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="140" cy="58" r="8"/><text class="mk-t" x="140" y="61" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="129" cy="86" r="7"/><text class="mk-t" x="129" y="89" font-size="9" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> real wind-catcher towers rising above Yazd's rooftops. &nbsp; <b>Right:</b> how a <i>badgir</i> cools the house.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> A <i>badgir</i> wind-catcher tower &mdash; natural cooling</li>
+          <li><span class="mk">B</span> Thick mud walls that block the heat</li>
+          <li><span class="mk">C</span> Domed roofs that shed the sun's rays</li>
+          <li><span class="mk">D</span> Small windows set high up for shade</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Yazd is one of the biggest cities on Earth built almost entirely of
+        <b>mud brick (adobe)</b>. Summers here roar past 40&deg;C with almost no rain,
+        so staying cool is everything.</p>
+        <p>Long before electric fans, the Yazdi people invented <b>air-conditioning
+        made of mud</b>. Tall towers called <i>badgirs</i> stand above the roofs and
+        catch even the smallest breeze, funnelling it <b>down into the rooms below</b>
+        to cool the family. The thick earth walls do the rest, keeping the fierce
+        daytime heat outside.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Yazdi people</div>
+      <div class="fact2"><span class="k">Climate:</span> scorching desert, no rain</div>
+      <div class="fact2"><span class="k">Built with:</span> adobe mud bricks</div>
+      <div class="fact2"><span class="k">Land:</span> flat desert plains</div>
+      <div class="fact2"><span class="k">Cooling:</span> wind-catcher towers</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> A wind-catcher is like a chimney working in reverse &mdash; it grabs the breeze from the sky and pours cool air down onto the family below.</div>
+  </div>
+</div>
+
+<!-- CARD 11: BAM -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">11</span><span class="era">up to 2,000 years old</span><h2>Arg-e Bam Citadel</h2><div class="loc">&#128205; Bam, Iran &mdash; a whole city made of mud</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/c3-bam.jpg" alt="Bam citadel"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- big outer wall -->
+          <rect x="22" y="96" width="156" height="32" fill="#c98a4b" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- battlements -->
+          <g fill="#c98a4b" stroke="#7a4a2b" stroke-width="1.5">
+            <rect x="24" y="90" width="8" height="8"/><rect x="40" y="90" width="8" height="8"/><rect x="56" y="90" width="8" height="8"/><rect x="152" y="90" width="8" height="8"/><rect x="168" y="90" width="8" height="8"/>
+          </g>
+          <!-- watchtowers -->
+          <rect x="26" y="70" width="20" height="58" fill="#d3a566" stroke="#7a4a2b" stroke-width="2"/>
+          <rect x="154" y="70" width="20" height="58" fill="#d3a566" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- inner buildings on a rise -->
+          <g stroke="#7a4a2b" stroke-width="1.5" fill="#cf9a58">
+            <rect x="74" y="60" width="24" height="36"/><rect x="102" y="52" width="26" height="44"/><rect x="132" y="66" width="18" height="30"/>
+          </g>
+          <!-- gate -->
+          <path d="M90 128 L90 108 Q100 100 110 108 L110 128 Z" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="60" cy="112" r="8"/><text class="mk-t" x="60" y="115" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="36" cy="80" r="8"/><text class="mk-t" x="36" y="83" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="114" cy="62" r="8"/><text class="mk-t" x="114" y="65" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="100" cy="118" r="8"/><text class="mk-t" x="100" y="121" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the great mud citadel of Bam, photographed before the 2003 earthquake. &nbsp; <b>Right:</b> its walls and towers.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Enormous outer walls up to 7 m high</li>
+          <li><span class="mk">B</span> 38 watchtowers to guard the city</li>
+          <li><span class="mk">C</span> A whole town of mud homes inside</li>
+          <li><span class="mk">D</span> One strong gateway in and out</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Arg-e Bam isn't one house &mdash; it's an <b>entire walled city built of
+        mud</b>, standing on the old Silk Road where traders passed through. Inside its
+        giant walls were homes, stables, army barracks and even a ruler's palace, all
+        made of earth.</p>
+        <p>Before 2003 it was probably the <b>largest mud-brick building in the whole
+        world</b>. Sadly a big earthquake shook much of it down in 2003 &mdash; and
+        people have been carefully rebuilding this earthen city ever since, using the
+        very same mud methods as the ancient builders.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> traders, soldiers &amp; rulers</div>
+      <div class="fact2"><span class="k">Climate:</span> hot, dry desert</div>
+      <div class="fact2"><span class="k">Built with:</span> mud brick &amp; mud layers</div>
+      <div class="fact2"><span class="k">Land:</span> a desert plain on a rise</div>
+      <div class="fact2"><span class="k">Size:</span> an entire city!</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Arg-e Bam was once the <b>biggest mud-brick building on the whole planet</b> &mdash; a giant city made completely of earth.</div>
+  </div>
+</div>
+
+<!-- CARD 12: AIT BENHADDOU -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">12</span><span class="era">a fortified village since the 1600s</span><h2>A&iuml;t Benhaddou Kasbahs</h2><div class="loc">&#128205; Southern Morocco &mdash; on the edge of the Sahara</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/c4-aitbenhaddou.jpg" alt="Ait Benhaddou"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="130" width="200" height="20" fill="#cdb488"/>
+          <!-- hillside slope -->
+          <path d="M0 130 L200 130 L200 120 L40 120 Z" fill="#bfa877"/>
+          <!-- climbing kasbahs -->
+          <g stroke="#7a4a2b" stroke-width="2">
+            <rect x="34" y="88" width="34" height="42" fill="#c08a50"/>
+            <rect x="74" y="70" width="38" height="60" fill="#cf9a58"/>
+            <rect x="118" y="54" width="40" height="76" fill="#c08a50"/>
+          </g>
+          <!-- tapering tower tops with notches -->
+          <g fill="#8a5a2b" stroke="#7a4a2b" stroke-width="1"><rect x="118" y="48" width="8" height="8"/><rect x="130" y="48" width="8" height="8"/><rect x="142" y="48" width="8" height="8"/></g>
+          <!-- decorative motifs -->
+          <g stroke="#7a4a2b" stroke-width="1.4" fill="none"><rect x="128" y="70" width="18" height="18"/><line x1="137" y1="70" x2="137" y2="88"/><line x1="128" y1="79" x2="146" y2="79"/></g>
+          <!-- small windows -->
+          <g fill="#5a3a1e"><rect x="44" y="100" width="6" height="8"/><rect x="86" y="86" width="6" height="8"/><rect x="126" y="100" width="6" height="8"/></g>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="92" cy="104" r="8"/><text class="mk-t" x="92" y="107" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="137" cy="46" r="8"/><text class="mk-t" x="137" y="49" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="137" cy="79" r="8"/><text class="mk-t" x="137" y="82" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="48" cy="120" r="8"/><text class="mk-t" x="48" y="123" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real earthen kasbahs of A&iuml;t Benhaddou climbing the hill. &nbsp; <b>Right:</b> rammed-earth towers.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Walls of <i>pis&eacute;</i> &mdash; earth pounded hard in moulds</li>
+          <li><span class="mk">B</span> Tall corner towers with notched tops</li>
+          <li><span class="mk">C</span> Patterns pressed into the upper walls</li>
+          <li><span class="mk">D</span> A whole fortified village climbing a hillside</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>A&iuml;t Benhaddou is a <i>ksar</i> &mdash; a fortified village of tall earthen
+        houses called <b>kasbahs</b>, built where a caravan route crossed the river
+        below the Atlas Mountains. Merchants needed their homes to be safe, so they
+        built thick, tower-topped walls.</p>
+        <p>The walls are <b>rammed earth</b>: damp earth and straw pounded hard inside
+        wooden moulds until solid. It's a hot, dry place, but when the rare rain does
+        come it slowly wears the earth away &mdash; so families must <b>repair the walls
+        again and again</b> to keep the village standing.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> merchants &amp; traders</div>
+      <div class="fact2"><span class="k">Climate:</span> hot &amp; dry, edge of Sahara</div>
+      <div class="fact2"><span class="k">Built with:</span> rammed earth + adobe</div>
+      <div class="fact2"><span class="k">Land:</span> a dry mountain river valley</div>
+      <div class="fact2"><span class="k">Shape:</span> fortified hillside village</div>
+      <div class="fact2"><span class="k">Method:</span> rammed earth (pis&eacute;)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> This earthen village is a real movie star &mdash; it's been the backdrop for <i>Gladiator</i>, <i>Lawrence of Arabia</i> and <i>Game of Thrones</i>!</div>
+  </div>
+</div>
+
+<!-- ================== ASIA CARDS ================== -->
+
+<!-- CARD 13: MOHENJO-DARO -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">13</span><span class="era">about 4,500 years ago</span><h2>Mohenjo-daro City House</h2><div class="loc">&#128205; Sindh, Pakistan &mdash; beside the Indus River</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/d1-mohenjodaro.jpg" alt="Mohenjo-daro ruins"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- two-storey courtyard house, plan-ish elevation -->
+          <rect x="40" y="52" width="120" height="76" fill="#cf9a58" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- brick coursing (even) -->
+          <g stroke="#a5793c" stroke-width="0.8">
+            <line x1="40" y1="66" x2="160" y2="66"/><line x1="40" y1="80" x2="160" y2="80"/><line x1="40" y1="94" x2="160" y2="94"/><line x1="40" y1="108" x2="160" y2="108"/>
+            <line x1="70" y1="52" x2="70" y2="128"/><line x1="100" y1="52" x2="100" y2="128"/><line x1="130" y1="52" x2="130" y2="128"/>
+          </g>
+          <!-- open courtyard gap -->
+          <rect x="86" y="70" width="28" height="40" fill="#efe0c4" stroke="#7a4a2b"/>
+          <text x="100" y="94" font-size="7" text-anchor="middle" fill="#7a4a2b">yard</text>
+          <!-- covered drain -->
+          <rect x="40" y="122" width="120" height="6" fill="#8a5a2b"/>
+          <!-- door -->
+          <rect x="48" y="104" width="14" height="24" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="130" cy="73" r="8"/><text class="mk-t" x="130" y="76" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="90" r="8"/><text class="mk-t" x="100" y="93" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="150" cy="60" r="8"/><text class="mk-t" x="150" y="63" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="150" cy="125" r="7"/><text class="mk-t" x="150" y="128" font-size="9" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real brick ruins of Mohenjo-daro, over 4,000 years old. &nbsp; <b>Right:</b> a courtyard house.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Every brick made the <b>same size</b> across the city</li>
+          <li><span class="mk">B</span> An open <i>courtyard</i> (yard) in the middle for shade</li>
+          <li><span class="mk">C</span> Homes up to two storeys tall</li>
+          <li><span class="mk">D</span> Covered drains &mdash; an early sewer system!</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Mohenjo-daro was one of the world's <b>first carefully planned cities</b>,
+        built by the Indus Valley people. Their streets were laid out in a neat grid,
+        and their houses turned inward around a private courtyard to stay cool and
+        quiet.</p>
+        <p>They were amazing brick-makers. They used sun-dried mud bricks and tough
+        <i>fired</i> bricks (baked hard in a fire so water can't wash them away), and
+        made every brick almost the <b>same size</b> &mdash; like a giant ancient LEGO
+        set. The city even had over 700 wells and covered drains along the streets.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Indus Valley people</div>
+      <div class="fact2"><span class="k">Climate:</span> hot, dry river plain</div>
+      <div class="fact2"><span class="k">Built with:</span> mud + fired bricks</div>
+      <div class="fact2"><span class="k">Land:</span> a flat ridge by the river</div>
+      <div class="fact2"><span class="k">Clever bit:</span> drains &amp; 700 wells</div>
+      <div class="fact2"><span class="k">Method:</span> adobe + fired brick</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Every brick was made almost exactly the same size across the whole city &mdash; like a giant ancient LEGO set with matching pieces!</div>
+  </div>
+</div>
+
+<!-- CARD 14: TULOU -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">14</span><span class="era">oldest from 1371</span><h2>Fujian Tulou Roundhouse</h2><div class="loc">&#128205; Fujian, China &mdash; green mountain country</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/d2-tulou.jpg" alt="Fujian tulou"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#8f9a5a"/>
+          <!-- big round earth building (elevation) -->
+          <ellipse cx="100" cy="120" rx="80" ry="18" fill="#b98a52" stroke="#7a4a2b" stroke-width="2"/>
+          <path d="M20 120 L20 74 Q100 46 180 74 L180 120" fill="#cf9a58" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- grey tiled roof ring -->
+          <path d="M20 74 Q100 46 180 74 L172 82 Q100 56 28 82 Z" fill="#6b6b6b" stroke="#4a4a4a"/>
+          <!-- windows only up high -->
+          <g fill="#5a3a1e"><rect x="46" y="86" width="7" height="9"/><rect x="76" y="78" width="7" height="9"/><rect x="112" y="78" width="7" height="9"/><rect x="142" y="86" width="7" height="9"/></g>
+          <!-- one big gate -->
+          <path d="M88 120 L88 98 Q100 90 112 98 L112 120 Z" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="40" cy="100" r="8"/><text class="mk-t" x="40" y="103" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="115" r="8"/><text class="mk-t" x="100" y="118" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="120" cy="80" r="8"/><text class="mk-t" x="120" y="83" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="100" cy="62" r="8"/><text class="mk-t" x="100" y="65" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> real round tulou earth buildings in Fujian. &nbsp; <b>Right:</b> one giant roundhouse for a whole clan.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Rammed-earth walls up to 1.8 m thick</li>
+          <li><span class="mk">B</span> One big strong gate &mdash; the only way in</li>
+          <li><span class="mk">C</span> Windows only high up (to keep out bandits)</li>
+          <li><span class="mk">D</span> A giant ring around a shared courtyard</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>A tulou is not one home &mdash; it's a <b>whole village in a single round
+        building</b>! The Hakka people built these huge earthen rings so that an entire
+        family clan &mdash; sometimes up to <b>800 people</b> &mdash; could all live
+        together and stay safe.</p>
+        <p>The walls are <b>rammed earth</b> (damp earth pounded hard between wooden
+        boards), so thick and strong that bandits couldn't break in. Everyone's rooms
+        face a friendly shared courtyard in the middle, and every family's rooms are
+        the <b>same size</b> &mdash; so nobody is above anyone else.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Hakka people</div>
+      <div class="fact2"><span class="k">Climate:</span> warm, wet, subtropical</div>
+      <div class="fact2"><span class="k">Built with:</span> rammed earth + wood</div>
+      <div class="fact2"><span class="k">Land:</span> green hills &amp; rice terraces</div>
+      <div class="fact2"><span class="k">Holds:</span> up to 800 people!</div>
+      <div class="fact2"><span class="k">Method:</span> rammed earth</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Builders sometimes mixed <b>sticky rice</b> into the earth to help the walls set as hard as rock &mdash; a cake recipe that makes a fortress!</div>
+  </div>
+</div>
+
+<!-- CARD 15: YAODONG -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">15</span><span class="era">3,000+ years old</span><h2>Yaodong Cave Home</h2><div class="loc">&#128205; Loess Plateau, Northern China</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/d3-yaodong.jpg" alt="Yaodong cave houses"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="60" fill="#cfe3ef"/>
+          <!-- loess cliff -->
+          <path d="M0 60 Q60 40 200 55 L200 150 L0 150 Z" fill="#d8b878" stroke="#a5793c" stroke-width="2"/>
+          <!-- grass on top -->
+          <g stroke="#6f8f4e" stroke-width="2"><line x1="30" y1="52" x2="30" y2="44"/><line x1="50" y1="50" x2="50" y2="42"/><line x1="150" y1="52" x2="150" y2="44"/></g>
+          <!-- arched cave openings cut into cliff -->
+          <g stroke="#7a4a2b" stroke-width="2" fill="#4a3418">
+            <path d="M28 128 L28 100 Q48 78 68 100 L68 128 Z"/>
+            <path d="M84 128 L84 98 Q104 76 124 98 L124 128 Z"/>
+            <path d="M140 128 L140 102 Q158 82 176 102 L176 128 Z"/>
+          </g>
+          <!-- paper-lattice windows in the arches -->
+          <g stroke="#d8b878" stroke-width="1"><line x1="40" y1="100" x2="56" y2="100"/><line x1="48" y1="90" x2="48" y2="126"/><line x1="96" y1="98" x2="112" y2="98"/><line x1="104" y1="86" x2="104" y2="126"/></g>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="104" cy="86" r="8"/><text class="mk-t" x="104" y="89" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="150" cy="118" r="8"/><text class="mk-t" x="150" y="121" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="40" cy="70" r="8"/><text class="mk-t" x="40" y="73" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="70" cy="112" r="8"/><text class="mk-t" x="70" y="115" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> real yaodong cave homes cut into a Chinese hillside. &nbsp; <b>Right:</b> arched rooms dug into the cliff.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Arched rooms dug <b>into</b> the hillside &mdash; the home <i>is</i> the hill</li>
+          <li><span class="mk">B</span> Thick earth all around keeps it warm &amp; cool</li>
+          <li><span class="mk">C</span> Soft yellow <i>loess</i> soil (easy to dig, holds its shape)</li>
+          <li><span class="mk">D</span> A pretty lattice window &amp; door at the front</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Here the builders didn't stack anything up at all &mdash; they <b>dug their
+        home into the ground!</b> Northern China's Loess Plateau is made of deep, soft
+        yellow soil called <i>loess</i> (say "luss") &mdash; a big word meaning dusty
+        earth blown into place by the wind long ago. It's soft enough to dig, but firm
+        enough to hold its shape.</p>
+        <p>Diggers carve an arched room straight into a cliff, or dig a square sunken
+        yard and cut rooms into its sides. The thick earth all around works like a cosy
+        blanket (called <b>insulation</b>) &mdash; warm in freezing winters, cool in hot
+        summers, with almost no heating needed.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> country families</div>
+      <div class="fact2"><span class="k">Climate:</span> cold winters, hot summers</div>
+      <div class="fact2"><span class="k">Built with:</span> the earth itself &mdash; no bricks</div>
+      <div class="fact2"><span class="k">Land:</span> soft yellow loess cliffs</div>
+      <div class="fact2"><span class="k">Clever bit:</span> earth = free heating</div>
+      <div class="fact2"><span class="k">Method:</span> dug-out cave (loess)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Tens of millions of people still live in cosy cave homes like these &mdash; snug as a hobbit house, and cool as air-conditioning in summer!</div>
+  </div>
+</div>
+
+<!-- CARD 16: LADAKH -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">16</span><span class="era">a living Himalayan tradition</span><h2>Ladakhi Mountain House</h2><div class="loc">&#128205; Ladakh, India &mdash; high in the Himalaya</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/d4-ladakh.jpg" alt="Ladakh houses"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="70" fill="#cfe3ef"/>
+          <!-- mountains -->
+          <path d="M0 70 L40 30 L80 70 Z" fill="#b9b9c9" stroke="#8a8a9a"/>
+          <path d="M60 70 L110 24 L160 70 Z" fill="#c9c9d6" stroke="#8a8a9a"/>
+          <path d="M30 40 L50 40 L40 30 Z" fill="#fff"/><path d="M96 40 L124 40 L110 24 Z" fill="#fff"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- house: battered (sloping) walls, flat roof, whitewashed -->
+          <path d="M54 128 L60 66 L140 66 L146 128 Z" fill="#f2ead8" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- stone base -->
+          <path d="M50 128 L54 118 L146 118 L150 128 Z" fill="#a99a7a" stroke="#7a4a2b"/>
+          <!-- flat roof with stacked hay -->
+          <rect x="58" y="60" width="84" height="8" fill="#b98a52" stroke="#7a4a2b"/>
+          <g stroke="#c9a34a" stroke-width="1.5"><line x1="70" y1="60" x2="70" y2="54"/><line x1="76" y1="60" x2="78" y2="54"/><line x1="120" y1="60" x2="120" y2="54"/></g>
+          <!-- windows outlined dark (typical Ladakhi) -->
+          <g fill="#5a3a1e" stroke="#3a2a1a"><rect x="74" y="84" width="14" height="14"/><rect x="112" y="84" width="14" height="14"/></g>
+          <rect x="92" y="98" width="16" height="30" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="64" cy="96" r="8"/><text class="mk-t" x="64" y="99" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="60" r="8"/><text class="mk-t" x="100" y="63" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="132" cy="78" r="8"/><text class="mk-t" x="132" y="81" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="150" cy="123" r="7"/><text class="mk-t" x="150" y="126" font-size="9" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> real flat-roofed mountain houses at Lamayuru, Ladakh. &nbsp; <b>Right:</b> a whitewashed home.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Thick mud walls that lean in as they rise (a "batter")</li>
+          <li><span class="mk">B</span> A flat earth roof for drying hay &amp; sleeping</li>
+          <li><span class="mk">C</span> Walls whitewashed bright white</li>
+          <li><span class="mk">D</span> A strong stone base under the mud</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Ladakh is a <b>cold desert</b> high in the mountains &mdash; above 3,000
+        metres, freezing in winter, with hardly any rain and very few trees. So people
+        build with what there is: <b>sun-dried mud bricks and rammed earth</b>, on a
+        base of stone.</p>
+        <p>The thick earth walls insulate so well that a room can stay warm and cosy
+        (near 20&deg;C) even when it's <b>&minus;20&deg;C outside!</b> The walls slope
+        gently inward &mdash; a "batter" &mdash; to make them stronger, and the flat
+        roof becomes an extra outdoor room for stacking winter hay and sleeping under
+        the stars.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> Ladakhi mountain people</div>
+      <div class="fact2"><span class="k">Climate:</span> freezing cold desert</div>
+      <div class="fact2"><span class="k">Built with:</span> adobe + rammed earth</div>
+      <div class="fact2"><span class="k">Land:</span> dry, treeless high valleys</div>
+      <div class="fact2"><span class="k">Roof:</span> flat, for hay &amp; sleeping</div>
+      <div class="fact2"><span class="k">Method:</span> adobe + rammed earth</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The mud walls are such good insulators that it can be cosy inside at 20&deg;C while it's a freezing &minus;20&deg;C outside &mdash; a 40-degree difference!</div>
+  </div>
+</div>
+
+<!-- ================== AMERICAS CARDS ================== -->
+
+<!-- CARD 17: TAOS PUEBLO -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">17</span><span class="era">about 1,000 years old</span><h2>Taos Pueblo</h2><div class="loc">&#128205; New Mexico, USA &mdash; below the Rocky Mountains</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/e1-taos.jpg" alt="Taos Pueblo"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- stepped/terraced adobe blocks -->
+          <g stroke="#7a4a2b" stroke-width="2" fill="#c98a4b">
+            <rect x="30" y="98" width="140" height="30"/>
+            <rect x="46" y="74" width="108" height="24"/>
+            <rect x="64" y="52" width="72" height="22"/>
+            <rect x="80" y="34" width="40" height="18"/>
+          </g>
+          <!-- viga beams poking out -->
+          <g stroke="#5a3a1e" stroke-width="2.5">
+            <line x1="30" y1="104" x2="24" y2="104"/><line x1="170" y1="104" x2="176" y2="104"/>
+            <line x1="46" y1="80" x2="40" y2="80"/><line x1="154" y1="80" x2="160" y2="80"/>
+            <line x1="64" y1="58" x2="58" y2="58"/><line x1="136" y1="58" x2="142" y2="58"/>
+          </g>
+          <!-- ladder -->
+          <line x1="150" y1="98" x2="150" y2="128" stroke="#5a3a1e" stroke-width="2"/>
+          <line x1="158" y1="98" x2="158" y2="128" stroke="#5a3a1e" stroke-width="2"/>
+          <g stroke="#5a3a1e" stroke-width="1.4"><line x1="150" y1="106" x2="158" y2="106"/><line x1="150" y1="116" x2="158" y2="116"/></g>
+          <!-- doors -->
+          <g fill="#4a2f18"><rect x="60" y="108" width="12" height="20"/><rect x="110" y="108" width="12" height="20"/><rect x="90" y="82" width="10" height="16"/></g>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="100" cy="43" r="8"/><text class="mk-t" x="100" y="46" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="154" cy="112" r="8"/><text class="mk-t" x="154" y="115" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="44" cy="80" r="7"/><text class="mk-t" x="44" y="83" font-size="9" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="40" cy="112" r="8"/><text class="mk-t" x="40" y="115" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real many-storeyed adobe homes of Taos Pueblo, lived in for 1,000 years. &nbsp; <b>Right:</b> the terraced shape.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Adobe rooms stacked up to <b>five storeys</b> high</li>
+          <li><span class="mk">B</span> Wooden ladders to climb between levels</li>
+          <li><span class="mk">C</span> Roof beams (<i>vigas</i>) poking out of the walls</li>
+          <li><span class="mk">D</span> Thick mud walls, re-plastered by hand each year</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>The Taos people have lived in this adobe town for about <b>a thousand years
+        &mdash; right up to today</b>, making it one of the oldest lived-in homes in all
+        of America. It's built of adobe: earth and straw mixed with water and dried
+        hard in the sun.</p>
+        <p>The rooms are piled side by side and on top of each other like giant earthy
+        building blocks. Long ago the bottom rooms had <b>no doors at all</b> &mdash;
+        families climbed ladders and went in through the roof, pulling the ladders up
+        to stay safe. The roof beams, called <i>vigas</i> (a big word for the wooden
+        poles that hold up the roof), still poke out of the walls.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Taos (Puebloan) people</div>
+      <div class="fact2"><span class="k">Climate:</span> hot summers, snowy winters</div>
+      <div class="fact2"><span class="k">Built with:</span> adobe + wooden vigas</div>
+      <div class="fact2"><span class="k">Land:</span> a dry valley by mountains</div>
+      <div class="fact2"><span class="k">Height:</span> up to 5 storeys</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> To keep the old village just as it was, the Taos people still don't allow electricity or running water in the ancient houses &mdash; it's a World Heritage Site.</div>
+  </div>
+</div>
+
+<!-- CARD 18: PUEBLO BONITO -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">18</span><span class="era">built 828&ndash;1126 CE</span><h2>Pueblo Bonito Great House</h2><div class="loc">&#128205; Chaco Canyon, New Mexico, USA</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/e2-pueblobonito.jpg" alt="Pueblo Bonito aerial"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <!-- big D-shape plan seen from above -->
+          <path d="M40 128 L40 40 Q120 20 168 60 Q182 128 168 128 Z" fill="#d3a566" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- straight front wall -->
+          <line x1="40" y1="128" x2="168" y2="128" stroke="#7a4a2b" stroke-width="3"/>
+          <!-- inner room grid -->
+          <g stroke="#7a4a2b" stroke-width="0.8" fill="none">
+            <path d="M52 118 L52 48"/><path d="M66 116 L66 42"/><path d="M84 114 L86 36"/><path d="M104 114 L108 34"/><path d="M124 116 L130 40"/><path d="M144 120 L150 52"/>
+            <line x1="42" y1="98" x2="166" y2="98"/><line x1="42" y1="78" x2="170" y2="78"/><line x1="46" y1="58" x2="168" y2="58"/>
+          </g>
+          <!-- round kivas -->
+          <circle cx="88" cy="106" r="10" fill="#c08a50" stroke="#7a4a2b"/><circle cx="122" cy="104" r="12" fill="#c08a50" stroke="#7a4a2b"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="70" cy="70" r="8"/><text class="mk-t" x="70" y="73" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="122" cy="104" r="8"/><text class="mk-t" x="122" y="107" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="150" cy="90" r="8"/><text class="mk-t" x="150" y="93" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="100" cy="126" r="7"/><text class="mk-t" x="100" y="129" font-size="9" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> a real bird's-eye view of the huge D-shaped Pueblo Bonito. &nbsp; <b>Right:</b> its plan, seen from above.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> About <b>800 rooms</b> in one giant building</li>
+          <li><span class="mk">B</span> Round underground rooms called <i>kivas</i></li>
+          <li><span class="mk">C</span> Stone blocks glued with adobe (mud) mortar</li>
+          <li><span class="mk">D</span> A huge "D" shape with a long straight front</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Pueblo Bonito was a <b>"great house"</b> &mdash; an enormous building with
+        around <b>800 rooms</b>, rising four or five storeys, made by the Ancestral
+        Puebloan people about a thousand years ago in a dry desert canyon.</p>
+        <p>They built it with a clever "core-and-veneer" method: a rubble core faced
+        with neat sandstone, all held together with <b>adobe (mud) mortar</b> &mdash;
+        the earthy "glue" between the stones. (<i>Mortar</i> is a big word for the soft
+        paste that fills the gaps and sticks the blocks together.) It grew into a giant
+        "D" shape over hundreds of years.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> the Ancestral Puebloans</div>
+      <div class="fact2"><span class="k">Climate:</span> very dry high desert</div>
+      <div class="fact2"><span class="k">Built with:</span> sandstone + adobe mortar</div>
+      <div class="fact2"><span class="k">Land:</span> a rocky sandstone canyon</div>
+      <div class="fact2"><span class="k">Size:</span> around 800 rooms</div>
+      <div class="fact2"><span class="k">Method:</span> stone + adobe mortar</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Building Pueblo Bonito took an estimated <b>805,000 hours</b> of work &mdash; and in one room, diggers found eight ancient wooden flutes!</div>
+  </div>
+</div>
+
+<!-- CARD 19: SANTA FE ADOBE -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">19</span><span class="era">Spanish colonial, from the 1600s</span><h2>Spanish-Mexican Adobe Casa</h2><div class="loc">&#128205; Santa Fe, New Mexico &amp; Mexico</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/e3-santafe.jpg" alt="Palace of the Governors Santa Fe"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="128" width="200" height="22" fill="#cdb488"/>
+          <!-- single-storey adobe with flat roof + porch -->
+          <rect x="30" y="66" width="140" height="62" fill="#d3a566" stroke="#7a4a2b" stroke-width="2"/>
+          <rect x="28" y="60" width="144" height="8" fill="#b98a52" stroke="#7a4a2b"/>
+          <!-- vigas + canales (water spouts) -->
+          <g stroke="#5a3a1e" stroke-width="2.5"><line x1="30" y1="72" x2="24" y2="72"/><line x1="170" y1="72" x2="176" y2="72"/><line x1="100" y1="72" x2="100" y2="66"/></g>
+          <rect x="96" y="60" width="8" height="4" fill="#3a2a1a"/>
+          <!-- porch posts -->
+          <g stroke="#7a4a2b" stroke-width="3"><line x1="46" y1="100" x2="46" y2="128"/><line x1="154" y1="100" x2="154" y2="128"/></g>
+          <rect x="40" y="96" width="120" height="6" fill="#8a5a2b"/>
+          <!-- door + windows -->
+          <rect x="94" y="104" width="16" height="24" fill="#4a2f18"/>
+          <g fill="#6b8ca5"><rect x="64" y="106" width="14" height="14"/><rect x="122" y="106" width="14" height="14"/></g>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="140" cy="86" r="8"/><text class="mk-t" x="140" y="89" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="58" r="8"/><text class="mk-t" x="100" y="61" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="46" cy="72" r="7"/><text class="mk-t" x="46" y="75" font-size="9" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="154" cy="114" r="8"/><text class="mk-t" x="154" y="117" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real adobe front of Santa Fe's Palace of the Governors (built 1610). &nbsp; <b>Right:</b> a flat-roofed casa.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Thick adobe walls, coated in mud plaster or stucco</li>
+          <li><span class="mk">B</span> A flat roof with little water-spouts (<i>canales</i>)</li>
+          <li><span class="mk">C</span> Wooden roof beams (<i>vigas</i>) across the top</li>
+          <li><span class="mk">D</span> A shady covered porch along the front</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>When Spanish settlers came to the dry American Southwest, they <b>learned
+        adobe building from the Pueblo peoples</b> already living there, and mixed it
+        with their own ideas from Spain. The result is the cosy flat-roofed
+        <i>casa</i> (Spanish for "house").</p>
+        <p>Sun-dried adobe bricks make thick walls that stay cool in the day and warm
+        at night. A coat of plaster or <i>stucco</i> (a hard outer coating) protects the
+        mud from rain, and little spouts called <i>canales</i> let rainwater shoot off
+        the flat roof so it doesn't soak in. Santa Fe's Palace of the Governors has
+        been used since <b>1610</b>!</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> Spanish &amp; Mexican settlers</div>
+      <div class="fact2"><span class="k">Climate:</span> dry &mdash; hot days, cold nights</div>
+      <div class="fact2"><span class="k">Built with:</span> adobe + wooden vigas</div>
+      <div class="fact2"><span class="k">Land:</span> dusty desert river valleys</div>
+      <div class="fact2"><span class="k">Roof:</span> flat, with water spouts</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The Palace of the Governors has been in use since <b>1610</b> &mdash; that makes it older than almost every other public building in the whole USA!</div>
+  </div>
+</div>
+
+<!-- CARD 20: SOD HOUSE -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">20</span><span class="era">pioneer days, 1800s</span><h2>Prairie Sod House ("Soddy")</h2><div class="loc">&#128205; The Great Plains, USA &mdash; Nebraska &amp; Kansas</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/e4-sodhouse.jpg" alt="Nebraska sod house 1886"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="150" fill="#efe0c4"/>
+          <rect x="0" y="120" width="200" height="30" fill="#8f9a5a"/>
+          <!-- sod block walls -->
+          <g stroke="#5a3a1e" stroke-width="1.4">
+            <rect x="40" y="94" width="30" height="13" fill="#7a5a34"/><rect x="70" y="94" width="30" height="13" fill="#6b4f2e"/><rect x="100" y="94" width="30" height="13" fill="#7a5a34"/><rect x="130" y="94" width="30" height="13" fill="#6b4f2e"/>
+            <rect x="44" y="107" width="30" height="13" fill="#6b4f2e"/><rect x="74" y="107" width="30" height="13" fill="#7a5a34"/><rect x="104" y="107" width="30" height="13" fill="#6b4f2e"/><rect x="134" y="107" width="26" height="13" fill="#7a5a34"/>
+          </g>
+          <!-- brush + sod roof -->
+          <path d="M34 94 L100 70 L166 94 Z" fill="#7a5a34" stroke="#5a3a1e" stroke-width="2"/>
+          <path d="M34 94 L100 70 L166 94" fill="none" stroke="#6f8f4e" stroke-width="3"/>
+          <g stroke="#6f8f4e" stroke-width="1.5"><line x1="70" y1="82" x2="70" y2="76"/><line x1="100" y1="72" x2="100" y2="66"/><line x1="130" y1="82" x2="130" y2="76"/></g>
+          <!-- door + window -->
+          <rect x="92" y="100" width="16" height="20" fill="#4a2f18"/>
+          <rect x="120" y="100" width="12" height="10" fill="#5a3a1e"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="55" cy="100" r="8"/><text class="mk-t" x="55" y="103" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="145" cy="113" r="7"/><text class="mk-t" x="145" y="116" font-size="9" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="100" cy="76" r="8"/><text class="mk-t" x="100" y="79" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="150" cy="90" r="8"/><text class="mk-t" x="150" y="93" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> a real Nebraska family in front of their sod house in 1886. &nbsp; <b>Right:</b> stacked turf blocks.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Walls of <i>sod</i> &mdash; blocks of grass with its roots &amp; soil</li>
+          <li><span class="mk">B</span> Blocks stacked grass-side down, like heavy bricks</li>
+          <li><span class="mk">C</span> A roof of branches, brush and more sod on top</li>
+          <li><span class="mk">D</span> Very thick walls &mdash; warm, cool, and won't burn</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>When pioneer families moved onto the wide American prairie, there were
+        <b>almost no trees and no stone</b> to build with &mdash; just endless grass.
+        So they built with the grass itself! <i>Sod</i> (also called <i>turf</i>) is a
+        big word for a slab of earth held together by thick, tangled grass roots.</p>
+        <p>Settlers cut the sod into heavy blocks and stacked them <b>grass-side down</b>,
+        like bricks, to make walls. The thick earthy walls kept the little house cosy
+        in blizzards and cool in summer, and sod doesn't catch fire. The trouble was
+        rain &mdash; a sod roof could <b>leak muddy water</b>, so it needed constant
+        repair.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> pioneer homesteaders</div>
+      <div class="fact2"><span class="k">Climate:</span> hot summers, icy winters</div>
+      <div class="fact2"><span class="k">Built with:</span> blocks of grassy turf</div>
+      <div class="fact2"><span class="k">Land:</span> flat, treeless prairie</div>
+      <div class="fact2"><span class="k">Good bits:</span> warm &amp; fireproof</div>
+      <div class="fact2"><span class="k">Method:</span> sod / turf blocks</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Sod walls were so thick and cosy that families stayed warm in blizzards &mdash; but sometimes bugs, mice, and even snakes lived right inside the earthy walls!</div>
+  </div>
+</div>
+
+<!-- ================== EUROPE & AUSTRALIA CARDS ================== -->
+
+<!-- CARD 21: DEVON COB -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">21</span><span class="era">some over 500 years old</span><h2>Devon Cob Cottage</h2><div class="loc">&#128205; Devon, England &mdash; the green West Country</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/f1-devoncob.jpg" alt="Devon cob cottage"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="70" fill="#cfe3ef"/>
+          <rect x="0" y="128" width="200" height="22" fill="#7f9a4e"/>
+          <!-- thick curvy cob walls -->
+          <path d="M44 128 Q42 84 50 82 L150 82 Q158 84 156 128 Z" fill="#d9b98a" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- thatched roof -->
+          <path d="M36 84 Q100 40 164 84 Q160 92 156 90 L44 90 Q40 92 36 84 Z" fill="#cf9a52" stroke="#7a4a2b" stroke-width="2"/>
+          <g stroke="#a5793c" stroke-width="1"><path d="M60 74 Q100 50 140 74"/><path d="M52 82 Q100 58 148 82"/></g>
+          <!-- stone base -->
+          <rect x="42" y="120" width="116" height="8" fill="#a99a7a" stroke="#7a4a2b"/>
+          <!-- door + windows -->
+          <rect x="92" y="100" width="16" height="28" fill="#4a2f18"/>
+          <g fill="#6b8ca5" stroke="#7a4a2b"><rect x="60" y="100" width="16" height="16"/><rect x="124" y="100" width="16" height="16"/></g>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="60" cy="104" r="8"/><text class="mk-t" x="60" y="107" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="56" r="8"/><text class="mk-t" x="100" y="59" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="150" cy="124" r="7"/><text class="mk-t" x="150" y="127" font-size="9" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="146" cy="100" r="8"/><text class="mk-t" x="146" y="103" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> a real thatched cob cottage in Dawlish, Devon. &nbsp; <b>Right:</b> its thick walls and straw roof.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Very thick <i>cob</i> walls (mud + straw), often 60 cm!</li>
+          <li><span class="mk">B</span> A <i>thatched</i> roof &mdash; bundled straw or reed &mdash; the "good hat"</li>
+          <li><span class="mk">C</span> A stone base &mdash; the "good pair of shoes"</li>
+          <li><span class="mk">D</span> Soft, curvy walls shaped by hand</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>In rainy Devon, good stone and timber were hard to get, so country families
+        built with the earth under their feet. <i>Cob</i> is a mix of clay, straw and
+        water, piled up in layers by hand and trodden firm &mdash; no bricks, no
+        moulds. The walls come out lovely and curvy.</p>
+        <p>There's an old Devon saying: <b>"All cob wants is a good hat and a good pair
+        of shoes."</b> The "hat" is a wide <i>thatched</i> roof (a thick roof made of
+        bundled straw) to keep rain off the top, and the "shoes" are a stone base to
+        keep the wall off the wet ground. Kept dry like that, cob lasts for
+        <b>centuries</b>.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> English country families</div>
+      <div class="fact2"><span class="k">Climate:</span> cool, wet and rainy</div>
+      <div class="fact2"><span class="k">Built with:</span> cob (clay + straw)</div>
+      <div class="fact2"><span class="k">Land:</span> green rolling farmland</div>
+      <div class="fact2"><span class="k">Roof:</span> thatched straw/reed</div>
+      <div class="fact2"><span class="k">Method:</span> cob</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> There are still around <b>20,000 cob cottages</b> standing in Devon today &mdash; and some are over 500 years old!</div>
+  </div>
+</div>
+
+<!-- CARD 22: PISE FRANCE -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">22</span><span class="era">1800s farmhouses</span><h2>French Pis&eacute; Farmhouse</h2><div class="loc">&#128205; Near Lyon, France &mdash; the Rh&ocirc;ne valley</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/f2-pise.jpg" alt="Pise rammed earth house France"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="70" fill="#cfe3ef"/>
+          <rect x="0" y="128" width="200" height="22" fill="#7f9a4e"/>
+          <!-- farmhouse block -->
+          <rect x="38" y="66" width="124" height="62" fill="#c9a066" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- rammed-earth stripey layers -->
+          <g stroke="#8a5a2b" stroke-width="0.8"><line x1="38" y1="82" x2="162" y2="82"/><line x1="38" y1="98" x2="162" y2="98"/><line x1="38" y1="114" x2="162" y2="114"/></g>
+          <!-- tiled pitched roof + overhang -->
+          <path d="M30 66 L100 38 L170 66 Z" fill="#a5553a" stroke="#7a4a2b" stroke-width="2"/>
+          <line x1="26" y1="66" x2="174" y2="66" stroke="#7a4a2b" stroke-width="3"/>
+          <!-- stone base -->
+          <rect x="36" y="120" width="128" height="8" fill="#a99a7a" stroke="#7a4a2b"/>
+          <!-- door + windows w shutters -->
+          <rect x="92" y="98" width="18" height="30" fill="#4a2f18"/>
+          <g fill="#6b8ca5" stroke="#5a3a1e"><rect x="56" y="86" width="16" height="18"/><rect x="128" y="86" width="16" height="18"/></g>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="100" cy="90" r="8"/><text class="mk-t" x="100" y="93" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="40" cy="60" r="8"/><text class="mk-t" x="40" y="63" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="150" cy="124" r="7"/><text class="mk-t" x="150" y="127" font-size="9" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="146" cy="95" r="8"/><text class="mk-t" x="146" y="98" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> a real rammed-earth (pis&eacute;) farmhouse near Lyon. &nbsp; <b>Right:</b> notice the stripey earth layers.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Rammed-earth walls with faint <b>stripey layers</b></li>
+          <li><span class="mk">B</span> A wide roof overhang to keep rain off the walls</li>
+          <li><span class="mk">C</span> A stone base to stop damp rising up</li>
+          <li><span class="mk">D</span> Wooden shutters over the windows</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Around the French city of Lyon, farmers found their soil was a <b>perfect mix
+        of gravel, sand and clay</b> &mdash; just right for building. So they made
+        <i>pis&eacute;</i> (rammed earth): they poured damp earth into a wooden mould and
+        <b>pounded it hard</b>, layer by layer, until it set as solid as soft rock.</p>
+        <p>You can often still see the faint stripes where each pounded layer sits on
+        the one below. Like cob, pis&eacute; needs a stone base and a good roof overhang to
+        stay dry. Earth was dug from right beside the house &mdash; and the holes left
+        behind sometimes filled with water to become <b>farm ponds!</b></p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> French farming families</div>
+      <div class="fact2"><span class="k">Climate:</span> warm summers, cool winters</div>
+      <div class="fact2"><span class="k">Built with:</span> gravelly rammed earth</div>
+      <div class="fact2"><span class="k">Land:</span> farmland &amp; river valleys</div>
+      <div class="fact2"><span class="k">Look:</span> stripey pounded layers</div>
+      <div class="fact2"><span class="k">Method:</span> rammed earth (pis&eacute;)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Lyon is one of the only big cities in Europe with rammed-earth buildings dotted all over town &mdash; even in the suburbs!</div>
+  </div>
+</div>
+
+<!-- CARD 23: ALHAMBRA TAPIA -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">23</span><span class="era">built 1238&ndash;1358</span><h2>Alhambra Rammed-Earth Walls</h2><div class="loc">&#128205; Granada, Spain &mdash; "the red one"</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/f4-tapia.jpg" alt="Alcazaba Alhambra rammed earth"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="70" fill="#cfe3ef"/>
+          <rect x="0" y="128" width="200" height="22" fill="#bfa877"/>
+          <!-- rocky hill -->
+          <path d="M0 128 L20 118 L200 122 L200 128 Z" fill="#a99a7a"/>
+          <!-- big reddish rammed-earth fortress wall + tower -->
+          <rect x="30" y="78" width="120" height="50" fill="#c56a44" stroke="#7a4a2b" stroke-width="2"/>
+          <rect x="140" y="52" width="34" height="76" fill="#bd6040" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- battlements -->
+          <g fill="#c56a44" stroke="#7a4a2b" stroke-width="1"><rect x="32" y="72" width="9" height="8"/><rect x="50" y="72" width="9" height="8"/><rect x="68" y="72" width="9" height="8"/><rect x="140" y="46" width="9" height="8"/><rect x="158" y="46" width="9" height="8"/></g>
+          <!-- rammed layer lines -->
+          <g stroke="#8a3a24" stroke-width="0.8"><line x1="30" y1="94" x2="150" y2="94"/><line x1="30" y1="110" x2="150" y2="110"/><line x1="140" y1="70" x2="174" y2="70"/><line x1="140" y1="92" x2="174" y2="92"/></g>
+          <!-- gate -->
+          <path d="M76 128 L76 106 Q90 94 104 106 L104 128 Z" fill="#4a2f18"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="60" cy="102" r="8"/><text class="mk-t" x="60" y="105" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="120" cy="90" r="8"/><text class="mk-t" x="120" y="93" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="157" cy="70" r="8"/><text class="mk-t" x="157" y="73" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="90" cy="122" r="7"/><text class="mk-t" x="90" y="125" font-size="9" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> the real rammed-earth walls of the Alhambra's fortress in Granada. &nbsp; <b>Right:</b> its red earth walls &amp; tower.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> <i>Tapia</i> walls &mdash; earth pounded hard in moulds</li>
+          <li><span class="mk">B</span> Lime mixed in to make them super strong</li>
+          <li><span class="mk">C</span> Tall, thick fortress towers</li>
+          <li><span class="mk">D</span> Reddish earth &mdash; it gave the palace its name</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>High on a rocky hill above Granada stands the famous Alhambra palace-fortress,
+        built by Spain's Moorish rulers about 800 years ago. Its mighty walls are
+        <b>rammed earth</b>, called <i>tapia</i> &mdash; but with a secret ingredient.</p>
+        <p>The builders mixed in <b>lime</b> (a white powder made from heated
+        limestone), which made this "royal" earth so tough it didn't even need a
+        plaster coat. The reddish colour of the local earth is why the whole place is
+        called <i>Alhambra</i> &mdash; Arabic for <b>"the red one."</b> Those earthen
+        walls have survived for nearly <b>800 years</b>.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> Spain's Moorish rulers</div>
+      <div class="fact2"><span class="k">Climate:</span> warm, dry Mediterranean</div>
+      <div class="fact2"><span class="k">Built with:</span> earth + lime (tapia)</div>
+      <div class="fact2"><span class="k">Land:</span> a rocky hilltop</div>
+      <div class="fact2"><span class="k">Secret:</span> lime makes it rock-hard</div>
+      <div class="fact2"><span class="k">Method:</span> rammed earth (tapia)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> The famous red walls of the Alhambra are made of <b>rammed earth</b> &mdash; and millions of people visit this World Heritage wonder every year.</div>
+  </div>
+</div>
+
+<!-- CARD 24: ELTHAM -->
+<div class="page">
+  <div class="dwell">
+    <div class="head"><span class="no">24</span><span class="era">from 1947 &mdash; and still built!</span><h2>Eltham Mud-Brick Home</h2><div class="loc">&#128205; Eltham, Victoria, Australia &mdash; our local one!</div></div>
+    <div class="visuals">
+      <div class="photo"><img src="images/f3-eltham.jpg" alt="Montsalvat Eltham mud brick"></div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 150">
+          <rect x="0" y="0" width="200" height="70" fill="#cfe3ef"/>
+          <rect x="0" y="128" width="200" height="22" fill="#7f9a4e"/>
+          <!-- gum trees -->
+          <g stroke="#6b5a3a" stroke-width="3"><line x1="24" y1="128" x2="24" y2="96"/><line x1="180" y1="128" x2="180" y2="92"/></g>
+          <circle cx="24" cy="90" r="14" fill="#8fa86a"/><circle cx="180" cy="86" r="16" fill="#8fa86a"/>
+          <!-- mud-brick house with wide eaves -->
+          <rect x="52" y="76" width="96" height="52" fill="#b5714a" stroke="#7a4a2b" stroke-width="2"/>
+          <!-- brick coursing -->
+          <g stroke="#7a4a2b" stroke-width="0.6"><line x1="52" y1="90" x2="148" y2="90"/><line x1="52" y1="104" x2="148" y2="104"/><line x1="52" y1="118" x2="148" y2="118"/><line x1="76" y1="76" x2="76" y2="128"/><line x1="100" y1="76" x2="100" y2="128"/><line x1="124" y1="76" x2="124" y2="128"/></g>
+          <!-- big timber beam + wide eaves roof -->
+          <path d="M40 76 L100 52 L160 76 Z" fill="#8a5a2b" stroke="#5a3a1e" stroke-width="2"/>
+          <line x1="34" y1="76" x2="166" y2="76" stroke="#5a3a1e" stroke-width="4"/>
+          <!-- door + big window -->
+          <rect x="92" y="100" width="18" height="28" fill="#4a2f18"/>
+          <rect x="60" y="96" width="20" height="20" fill="#6b8ca5" stroke="#5a3a1e"/>
+          <!-- markers -->
+          <g><circle class="mk-c" cx="112" cy="96" r="8"/><text class="mk-t" x="112" y="99" font-size="10" text-anchor="middle">A</text></g>
+          <g><circle class="mk-c" cx="100" cy="60" r="8"/><text class="mk-t" x="100" y="63" font-size="10" text-anchor="middle">B</text></g>
+          <g><circle class="mk-c" cx="40" cy="72" r="8"/><text class="mk-t" x="40" y="75" font-size="10" text-anchor="middle">C</text></g>
+          <g><circle class="mk-c" cx="180" cy="104" r="8"/><text class="mk-t" x="180" y="107" font-size="10" text-anchor="middle">D</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cap"><b>Left:</b> real mud-brick artist houses at Montsalvat in Eltham, the colony that started it all. &nbsp; <b>Right:</b> a bush home.</div>
+    <div class="midrow">
+      <div class="spot">
+        <h3>&#128269; Spot it!</h3>
+        <ul>
+          <li><span class="mk">A</span> Walls of mud bricks (adobe) from local soil</li>
+          <li><span class="mk">B</span> Wide roof <i>eaves</i> (overhangs) to shelter the walls</li>
+          <li><span class="mk">C</span> Big <b>recycled</b> timber beams</li>
+          <li><span class="mk">D</span> Nestled among Australian gum trees &amp; bush</li>
+        </ul>
+      </div>
+      <div class="story">
+        <h3>&#128214; The story</h3>
+        <p>Here's one from <b>right here in Australia!</b> After World War II, a
+        self-taught builder named <b>Alistair Knox</b> started making mud-brick homes
+        around Eltham, near Melbourne &mdash; inspired by a nearby artists' colony
+        called <b>Montsalvat</b>. It began a whole Australian mud-brick movement.</p>
+        <p>Knox made his bricks from <b>local soil</b> and used lots of <b>recycled</b>
+        timber, brick and slate. He believed a house should sit <b>gently and naturally
+        in the bush</b> around it, with wide eaves to shade the earth walls from sun and
+        rain. He designed over <b>1,000 buildings</b> &mdash; and mud-brick homes are
+        still built in Eltham today.</p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="fact2"><span class="k">Who:</span> Alistair Knox &amp; friends</div>
+      <div class="fact2"><span class="k">Climate:</span> warm-dry summers, cool winters</div>
+      <div class="fact2"><span class="k">Built with:</span> adobe + recycled timber</div>
+      <div class="fact2"><span class="k">Land:</span> the Australian bush</div>
+      <div class="fact2"><span class="k">Idea:</span> live gently with nature</div>
+      <div class="fact2"><span class="k">Method:</span> adobe (sun-dried)</div>
+    </div>
+    <div class="wow"><span class="k">Wow!</span> Alistair Knox designed more than <b>1,000 buildings</b>, and there's even a park named after him in Eltham &mdash; earth building is alive right near us!</div>
+  </div>
+</div>
+
+<!-- ================== COMPARISON GUIDE ================== -->
+<div class="page">
+  <div class="divider" style="height:auto;padding:14mm 8mm;margin-bottom:6mm">
+    <h2 style="font-size:26pt">Part Three<br>Compare the Homes</h2>
+    <p>All 24 homes side by side. Great for spotting what they share &mdash; and what
+    makes each one special. Perfect for planning your presentation!</p>
+  </div>
+</div>
+
+<div class="page">
+  <h2 style="color:var(--clay);font-size:20pt;border-bottom:3px solid var(--straw);padding-bottom:5px">Quick-compare chart (1&ndash;12)</h2>
+  <table class="cmp">
+    <tr><th class="n">#</th><th>Home</th><th>Where</th><th>How old</th><th>Way of building</th><th>What makes it special</th></tr>
+    <tr class="grp"><td colspan="6">&#127758; THE CRADLE &mdash; where mud building began</td></tr>
+    <tr><td class="n">1</td><td><b>Jericho round house</b></td><td>Palestine</td><td>~11,000 yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td>The <b>first</b> mud-brick homes; bricks shaped by hand</td></tr>
+    <tr><td class="n">2</td><td><b>&Ccedil;atalh&ouml;y&uuml;k</b></td><td>Turkey</td><td>~9,000 yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td>You entered through a <b>hole in the roof</b></td></tr>
+    <tr><td class="n">3</td><td><b>Sumerian house</b></td><td>Iraq</td><td>~5,000 yrs</td><td><span class="methodtag m-adobe">adobe</span>+reed</td><td>Reed arches may be the <b>first archways</b></td></tr>
+    <tr><td class="n">4</td><td><b>Egyptian house</b></td><td>Egypt</td><td>~3,400 yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td><b>White walls</b> bounce off the sun; roof for sleeping</td></tr>
+    <tr class="grp"><td colspan="6">&#127757; AFRICA &mdash; clever tricks against sun and rain</td></tr>
+    <tr><td class="n">5</td><td><b>Nubian vault</b></td><td>Sudan</td><td>~3,000 yrs</td><td><span class="methodtag m-vault">vault</span></td><td>A curved roof with <b>no wooden frame</b></td></tr>
+    <tr><td class="n">6</td><td><b>Djenn&eacute; buildings</b></td><td>Mali</td><td>700+ yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td><i>Toron</i> sticks = a <b>built-in ladder</b> for repairs</td></tr>
+    <tr><td class="n">7</td><td><b>Musgum shell hut</b></td><td>Cameroon</td><td>very old</td><td><span class="methodtag m-puddled">puddled</span></td><td>Ridges help <b>rain run off</b> &amp; give footholds</td></tr>
+    <tr><td class="n">8</td><td><b>Kassena house</b></td><td>Burkina Faso</td><td>1500s</td><td><span class="methodtag m-plaster">plaster</span></td><td><b>Painted patterns</b> that tell stories</td></tr>
+    <tr class="grp"><td colspan="6">&#127759; THE DESERTS &mdash; staying cool in fierce heat</td></tr>
+    <tr><td class="n">9</td><td><b>Shibam towers</b></td><td>Yemen</td><td>~500 yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td>Mud <b>skyscrapers</b> up to 11 storeys</td></tr>
+    <tr><td class="n">10</td><td><b>Yazd house</b></td><td>Iran</td><td>2,000+ yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td><b>Wind-catcher</b> towers = natural cooling</td></tr>
+    <tr><td class="n">11</td><td><b>Arg-e Bam</b></td><td>Iran</td><td>~2,000 yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td>Once the <b>biggest mud building</b> on Earth</td></tr>
+    <tr><td class="n">12</td><td><b>A&iuml;t Benhaddou</b></td><td>Morocco</td><td>1600s</td><td><span class="methodtag m-rammed">rammed earth</span></td><td>A fortified <b>movie-star</b> village</td></tr>
+  </table>
+</div>
+
+<div class="page">
+  <h2 style="color:var(--clay);font-size:20pt;border-bottom:3px solid var(--straw);padding-bottom:5px">Quick-compare chart (13&ndash;24)</h2>
+  <table class="cmp">
+    <tr><th class="n">#</th><th>Home</th><th>Where</th><th>How old</th><th>Way of building</th><th>What makes it special</th></tr>
+    <tr class="grp"><td colspan="6">&#127756; ASIA &mdash; cities, clans and caves</td></tr>
+    <tr><td class="n">13</td><td><b>Mohenjo-daro</b></td><td>Pakistan</td><td>~4,500 yrs</td><td><span class="methodtag m-adobe">adobe</span>+fired</td><td>Every brick the <b>same size</b>; had drains &amp; wells</td></tr>
+    <tr><td class="n">14</td><td><b>Fujian tulou</b></td><td>China</td><td>from 1371</td><td><span class="methodtag m-rammed">rammed earth</span></td><td>A <b>whole village</b> in one round building</td></tr>
+    <tr><td class="n">15</td><td><b>Yaodong cave</b></td><td>China</td><td>3,000+ yrs</td><td><span class="methodtag m-cave">cave-cut</span></td><td>The home is <b>dug into</b> the hillside</td></tr>
+    <tr><td class="n">16</td><td><b>Ladakhi house</b></td><td>India</td><td>living</td><td><span class="methodtag m-rammed">rammed</span>+<span class="methodtag m-adobe">adobe</span></td><td>Cosy at 20&deg;C inside when &minus;20&deg;C outside</td></tr>
+    <tr class="grp"><td colspan="6">&#127758; THE AMERICAS &mdash; adobe and prairie earth</td></tr>
+    <tr><td class="n">17</td><td><b>Taos Pueblo</b></td><td>USA</td><td>~1,000 yrs</td><td><span class="methodtag m-adobe">adobe</span></td><td>Adobe stacked <b>5 storeys</b>; still lived in</td></tr>
+    <tr><td class="n">18</td><td><b>Pueblo Bonito</b></td><td>USA</td><td>~1,100 yrs</td><td><span class="methodtag m-adobe">adobe</span>+stone</td><td>A giant <b>D-shape</b> with ~800 rooms</td></tr>
+    <tr><td class="n">19</td><td><b>Adobe casa</b></td><td>USA / Mexico</td><td>from 1600s</td><td><span class="methodtag m-adobe">adobe</span></td><td>Flat roof with <b>water-spouts</b> (canales)</td></tr>
+    <tr><td class="n">20</td><td><b>Sod house</b></td><td>USA</td><td>1800s</td><td><span class="methodtag m-sod">sod / turf</span></td><td>Built from blocks of <b>grassy turf</b></td></tr>
+    <tr class="grp"><td colspan="6">&#127760; EUROPE &amp; AUSTRALIA &mdash; cottages to modern homes</td></tr>
+    <tr><td class="n">21</td><td><b>Devon cob cottage</b></td><td>England</td><td>500+ yrs</td><td><span class="methodtag m-cob">cob</span></td><td>"A good hat and a good pair of shoes"</td></tr>
+    <tr><td class="n">22</td><td><b>Pis&eacute; farmhouse</b></td><td>France</td><td>1800s</td><td><span class="methodtag m-rammed">rammed earth</span></td><td>You can see the <b>stripey</b> pounded layers</td></tr>
+    <tr><td class="n">23</td><td><b>Alhambra walls</b></td><td>Spain</td><td>~800 yrs</td><td><span class="methodtag m-rammed">rammed earth</span></td><td><b>Red</b> earth + lime; lasted 800 years</td></tr>
+    <tr><td class="n">24</td><td><b>Eltham mud-brick</b></td><td>Australia</td><td>from 1947</td><td><span class="methodtag m-adobe">adobe</span></td><td><b>Our local one</b> &mdash; earth homes live gently in the bush</td></tr>
+  </table>
+  <div class="callout" style="margin-top:6mm">
+    <b>Notice a pattern?</b> Look down the "way of building" column. <b>Adobe</b>
+    (sun-dried bricks) is the most common of all &mdash; used on almost every
+    continent. <b>Rammed earth</b> turns up wherever people wanted really strong,
+    long-lasting walls. And clever cooling tricks (thick walls, small windows,
+    wind-catchers, white paint) appear again and again in <b>hot places</b>.
+  </div>
+</div>
+
+<!-- ================== GLOSSARY ================== -->
+<div class="page">
+  <h2 style="color:var(--clay);font-size:22pt;border-bottom:3px solid var(--straw);padding-bottom:6px">&#128218; The Builder's Word List</h2>
+  <p>Some grown-up building words appear in this book. Here's what they all mean, in
+  plain English. Point to any word you meet and check it here!</p>
+  <div class="glo">
+    <dl>
+      <dt>Adobe</dt><dd>A brick made of mud and straw, dried hard in the sun (not in an oven).</dd>
+      <dt>Badgir</dt><dd>A "wind-catcher" tower that catches the breeze and sends cool air down into a house.</dd>
+      <dt>Banco</dt><dd>The smooth mud plaster used to coat buildings in Mali.</dd>
+      <dt>Batter</dt><dd>When a wall leans gently inward as it goes up, to make it stronger.</dd>
+      <dt>Canales</dt><dd>Little spouts that let rainwater shoot off a flat roof.</dd>
+      <dt>Catenary</dt><dd>The special curve a chain makes when it hangs &mdash; a very strong shape for arches and roofs.</dd>
+      <dt>Cob</dt><dd>A mix of clay, straw and water, stacked by hand into thick walls &mdash; no bricks.</dd>
+      <dt>Compressed earth block</dt><dd>A modern earth brick squeezed hard in a press instead of dried in the sun.</dd>
+      <dt>Courtyard</dt><dd>An open, roofless space in the middle of a house, for shade and fresh air.</dd>
+      <dt>Daub</dt><dd>Sticky mud smeared over woven sticks to make a wall (see <i>wattle</i>).</dd>
+      <dt>Eaves</dt><dd>The edge of a roof that sticks out past the walls, to keep rain off them.</dd>
+      <dt>Ferey</dt><dd>The name for the sun-dried mud bricks used in Djenn&eacute;, Mali.</dd>
+      <dt>Fired brick</dt><dd>A brick baked hard in a very hot fire, so water can't wash it away.</dd>
+      <dt>Foundation</dt><dd>The strong base a building stands on, often made of stone.</dd>
+      <dt>Insulation</dt><dd>Anything that keeps heat in or out &mdash; thick mud walls are great insulation.</dd>
+      <dt>Kasbah</dt><dd>A tall earthen house or small fort in North Africa.</dd>
+      <dt>Kiva</dt><dd>A round room, often underground, used by Puebloan people for gatherings.</dd>
+      <dt>Ksar</dt><dd>A walled village of earthen houses in North Africa.</dd>
+      <dt>Laterite</dt><dd>A reddish soil used to make red paint.</dd>
+      <dt>Lime</dt><dd>A white powder made from heated limestone; mixed into earth or plaster to make it tougher.</dd>
+      <dt>Loess</dt><dd>Soft yellow soil blown into place by wind long ago &mdash; easy to dig, holds its shape.</dd>
+      <dt>Mortar</dt><dd>The soft paste (often mud) that fills the gaps and glues bricks or stones together.</dd>
+      <dt>Nubian vault</dt><dd>A curved mud-brick roof built with no wooden frame, by leaning the bricks.</dd>
+      <dt>Pis&eacute;</dt><dd>The French word for rammed earth.</dd>
+      <dt>Plaster / render</dt><dd>A smooth coat spread over a wall to protect it and make it neat.</dd>
+      <dt>Puddled mud</dt><dd>Wet earth piled up by hand in layers, with no bricks and no mould.</dd>
+      <dt>Rammed earth</dt><dd>Damp earth poured into a mould and pounded hard until it sets solid.</dd>
+      <dt>Sod / turf</dt><dd>A slab of earth held together by thick grass roots, cut and stacked like a brick.</dd>
+      <dt>Stucco</dt><dd>A hard outer coating spread over walls to guard them from rain.</dd>
+      <dt>Thatch</dt><dd>A thick roof made of bundled straw or reed.</dd>
+      <dt>Toron</dt><dd>The wooden sticks that poke out of Djenn&eacute;'s walls, used as a permanent ladder.</dd>
+      <dt>Viga</dt><dd>A wooden beam that holds up a flat earth roof (used in the American Southwest).</dd>
+      <dt>Wattle</dt><dd>A lattice of woven sticks that gets covered in mud (see <i>daub</i>).</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- ================== WHICH COULD YOU BUILD ================== -->
+<div class="page">
+  <h2 style="color:var(--clay);font-size:22pt;border-bottom:3px solid var(--straw);padding-bottom:6px">&#128296; Which could YOU build?</h2>
+  <p>Every home in this book could become a wonderful model on your 50&nbsp;cm &times;
+  50&nbsp;cm base. Here are four that work especially well with real earth and natural
+  materials &mdash; but the choice is <b>all yours</b>, Great Builder. Remember Anik's
+  words: <i>Look. Listen. Imagine. Plan. Then build.</i></p>
+
+  <div class="pick">
+    <h3>&#127968; Egyptian or Pueblo adobe house <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> easiest</h3>
+    <p>Make lots of tiny mud bricks in an ice-cube tray or by hand (mud + a little
+    straw), dry them in the sun, then <b>stack them into walls</b> with mud as glue.
+    You learn exactly what real adobe builders do. Add a flat cardboard-and-mud roof.
+    <b>Best for:</b> learning brick-making; a neat, strong result.</p>
+  </div>
+  <div class="pick">
+    <h3>&#127962; Musgum shell hut or a round house <span class="stars">&#9733;&#9733;&#9733;&#9733;</span></h3>
+    <p>No bricks needed &mdash; build up rings of stiff mud (like cob) into a tall dome,
+    thick at the bottom. Press in <b>herringbone ridges</b> with a stick while it's
+    wet. <b>Best for:</b> sculpting with your hands; a real "wow" shape.</p>
+  </div>
+  <div class="pick">
+    <h3>&#127794; Devon cob cottage <span class="stars">&#9733;&#9733;&#9733;&#9733;</span></h3>
+    <p>Build thick, curvy walls from mud mixed with straw on a base of little stones
+    (its "shoes"), then add a roof of dried grass or straw thatch (its "hat").
+    <b>Best for:</b> a cosy, forgiving build &mdash; cob doesn't mind being bumpy.</p>
+  </div>
+  <div class="pick">
+    <h3>&#127963; Nubian vault house <span class="stars">&#9733;&#9733;&#9733;</span> a challenge!</h3>
+    <p>Make mud bricks and lean them to build a <b>curved roof with no frame</b>. Trickier
+    &mdash; but if it stands, it's amazing, and you'll have learned the secret of the
+    arch. <b>Best for:</b> a builder who loves a puzzle. (Tip: build against a firm
+    back wall.)</p>
+  </div>
+
+  <div class="callout">
+    <b>A Great Builder's promise:</b> your first idea might not work &mdash; a wall may
+    fall, a roof may sag. That's not failing, that's building! Just like Anik:
+    <b>Try. Watch what happens. Change something. Try again.</b>
+  </div>
+</div>
+
+<!-- ================== CREDITS ================== -->
+<div class="page">
+  <h2 style="color:var(--clay);font-size:20pt;border-bottom:3px solid var(--straw);padding-bottom:6px">Photo credits &amp; thank-yous</h2>
+  <p class="small">Every photograph in this book is a freely-shared picture (public
+  domain or a Creative Commons licence) from Wikimedia Commons. A big thank-you to the
+  photographers who share their work so children can learn. Each is credited below with
+  its licence.</p>
+  <ul class="credits" style="columns:2;column-gap:16px">
+    <li><b>1. Jericho</b> &mdash; Deror avi, CC BY-SA 3.0</li>
+    <li><b>2. &Ccedil;atalh&ouml;y&uuml;k</b> &mdash; Ziggurat, CC BY-SA 3.0</li>
+    <li><b>3. Sumerian reed house</b> &mdash; Hassan Al-Jarrah, CC BY-SA 4.0</li>
+    <li><b>4. Deir el-Medina</b> &mdash; Roland Unger, CC BY-SA 3.0</li>
+    <li><b>5. Nubian vault</b> &mdash; Alain Guilleux, CC BY-SA 3.0</li>
+    <li><b>6. Djenn&eacute;</b> &mdash; upyernoz, CC BY 2.0</li>
+    <li><b>7. Musgum hut</b> &mdash; J. et M.F. Ostorero, CC BY-SA 3.0</li>
+    <li><b>8. Kassena / Ti&eacute;b&eacute;l&eacute;</b> &mdash; c.hug, CC BY-SA 2.0</li>
+    <li><b>9. Shibam</b> &mdash; Jialiang Gao, CC BY-SA 3.0</li>
+    <li><b>10. Yazd</b> &mdash; Ms96, CC BY-SA 4.0</li>
+    <li><b>11. Arg-e Bam</b> &mdash; Arad Mojtahedi, CC BY-SA 3.0</li>
+    <li><b>12. A&iuml;t Benhaddou</b> &mdash; Marek Kubica, CC BY-SA 2.0</li>
+    <li><b>13. Mohenjo-daro</b> &mdash; Saqib Qayyum, CC BY-SA 3.0</li>
+    <li><b>14. Fujian tulou</b> &mdash; Zhangzhugang, CC BY-SA 3.0</li>
+    <li><b>15. Yaodong</b> &mdash; Meier&amp;Poehlmann, CC BY 3.0</li>
+    <li><b>16. Ladakh (Lamayuru)</b> &mdash; Vyacheslav Argenberg, CC BY 4.0</li>
+    <li><b>17. Taos Pueblo</b> &mdash; Christopher Nicol, CC BY-SA 3.0</li>
+    <li><b>18. Pueblo Bonito</b> &mdash; Bob Adams, CC BY-SA 3.0</li>
+    <li><b>19. Santa Fe (Palace of the Governors)</b> &mdash; Einar E. Kvaran, CC BY-SA 3.0</li>
+    <li><b>20. Sod house (1886)</b> &mdash; Solomon D. Butcher, Public domain</li>
+    <li><b>21. Devon cob cottage</b> &mdash; Rosser1954, CC BY-SA 4.0</li>
+    <li><b>22. Pis&eacute; (Chassignieu)</b> &mdash; Patafisik, CC BY-SA 4.0</li>
+    <li><b>23. Alhambra Alcazaba</b> &mdash; Jebulon, CC0 (public domain)</li>
+    <li><b>24. Montsalvat, Eltham</b> &mdash; Nick Carson, Public domain</li>
+  </ul>
+  <hr style="border:none;border-top:1px solid var(--line);margin:6mm 0">
+  <p class="small"><b>For grown-ups:</b> This is a <b>research companion</b> made to help
+  Arthur learn about the history and styles of earth building. Every fact was checked
+  against reputable sources (Wikipedia, UNESCO World Heritage listings, the US National
+  Park Service, World History Encyclopedia and others). The choosing, planning, drawing
+  and building of Arthur's own model are his own work, as his teacher asks. The
+  hand-drawn diagrams were made just for this book.</p>
+  <p class="small" style="text-align:center;margin-top:8mm;color:var(--clay)">
+  &mdash; Made with care for Arthur Parker, Class 3 Great Builder, August 2026 &mdash;</p>
+</div>
+
+<div class="hw-foot">
+  <p>Made with care for Arthur Parker, Class 3 Great Builder &mdash; a research companion.<br>
+  The choosing, planning and building of the model are Arthur's own work. &#127968;</p>
+  <p><a href="../../index.html">&larr; Back to Resonance Stories</a></p>
+</div>
+</body>
+</html>
